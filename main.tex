@@ -146,6 +146,17 @@ Následuje sled základních operací které provedou separaci od ostatních age
 	\item Vydělení výsledku kroku č. 2 podle vzorce \textit{vRes = vNorm / d}, kde \textit{d} je vzdálenost těchto agentů mezi sebou a \textit{vRes} je celkový výsledek těchto základních operací, které se následně využívají v dalších krocích \textit{(ty budou popsány v implementaci výsledné aplikace)}.
 \end{enumerate}
 
+\begin{figure}[H]\centering\includegraphics[width=0.5\textwidth]{Figures/separation.jpg}
+	\caption{Separace - vyhýbání se ostatním agentům (Zdroj: \cite{link2})}
+\end{figure}
+
+\subsubsection{Zarovnání}
+Dalším důležitým pravidlem pro fungování boidova algoritmu je zarovnání. Spolu se separací bez koheze má dav již základní podobu chování. 
+
+Funguje na principu spojení okolních agentů \textit{(a následně vytvoření skupiny)}, kteří zasahují do dalšího pomyslného kruhu zarovnání. Aby fungovalo toto pravidlo a nekolidovalo s podmínkami separace musí platit \textit{constAlign > constSep}, kde \textit{constSep} je maximální průměr kružnice ve které se při překročení tohoto průměru řeší podmínky separace a \textit{constAlign} je maximální průměr kružnice u zarovnání. Pokud by podmínka byla opačná, zarovnání se nikdy neprovede.
+
+
+
 %\begin{lstlisting}[label=src:Cpp,caption=Program Hello world v jazyce C++]
 %// My first program in C++
 %#include <iostream>

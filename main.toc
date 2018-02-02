@@ -13,5 +13,6 @@
 \contentsline {subsubsection}{\numberline {2.1.2}Simulace na b\IeC {\'a}zi AI (Artificial Intelligence)}{5}{subsubsection.2.1.2}
 \contentsline {subsection}{\numberline {2.2}Craig Reynold\IeC {\r u}v algoritmus}{6}{subsection.2.2}
 \contentsline {subsubsection}{\numberline {2.2.1}Separace}{7}{subsubsection.2.2.1}
-\contentsline {section}{\numberline {3}Z\IeC {\'a}v\IeC {\v e}r}{8}{section.3}
-\contentsline {section}{Reference}{9}{section.3}
+\contentsline {subsubsection}{\numberline {2.2.2}Zarovn\IeC {\'a}n\IeC {\'\i }}{8}{subsubsection.2.2.2}
+\contentsline {section}{\numberline {3}Z\IeC {\'a}v\IeC {\v e}r}{9}{section.3}
+\contentsline {section}{Reference}{10}{section.3}

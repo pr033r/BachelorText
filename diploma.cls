@@ -113,6 +113,7 @@
 \RequirePackage[nottoc,notindex,section]{tocbibind}
 \RequirePackage{totcount}
 \RequirePackage{xcolor}
+\RequirePackage{float}
 \RequirePackage[a-1b]{pdfx}
 \RequirePackage[utf8]{inputenc}
 \DeclareOption{czech}
