@@ -68,7 +68,7 @@ This thesis focuses on the description of boid's algorithm which is the most use
 \MakeTitlePages
 
 % Pokud mame v zaverecne praci vypisy kodu, jinak odstranit.
-%\lstlistoflistings
+\lstlistoflistings
 
 \section{Úvod}
 Simulační algoritmy se používají v širokém spektru odvětví od vědy, her, výpočetních úkonů až po kinematografii či stavbě budov. Herní využití mívá velmi reálně implementována armáda \cite{linkToArmySimulation}, která tímto způsobem zaškoluje vojáky ve virtuálním simulačním boji jak v taktice tak způsobu nejefektivnějšího využití dostupných zbraní. 
@@ -121,7 +121,9 @@ umělé inteligenci obsahuje základní prvky částicové simulace, ale má tak
 
 Mezi částicové prvky Reynoldova algoritmu lze použit například tření, zrychlení nebo okamžitou rychlost. Pokud bychom chtěli náš produkt více přiblížit realitě můžeme tření rozdělit na tření válcove, tření způsobené protivětrem nebo pokud bychom určili jako objekt auto, můžeme použít další fyzikální vlastnosti jako točivý moment případně brzdná dráha.
 
-V této práci jsem se však omezil na první tři vlastnosti, které nám k popisu Boidova algoritmu budou dostatečně stačit.
+Existuje však celá řada vylepšení která se dají s tímto algoritmem provést, například simulace chování dopravy. Ta je založena na chování založeného na řízení \textit{(Steering behaviors)} \cite{linkToSteeringBehaviors}. 
+
+V této práci jsem se však omezil na první tři vlastnosti \textit{(tření, zrychlení, okamžitá rychlost)}, které nám k popisu Boidova algoritmu budou dostatečně stačit.
 
 \newpage
 Nyní se zaměříme na popis Reynoldova algoritmu, který v surovém základu obsahuje tyto tři základní vlastnosti:
@@ -150,22 +152,127 @@ Následuje sled základních operací které provedou separaci od ostatních age
 	\caption{Separace - vyhýbání se ostatním agentům (Zdroj: \cite{link2})}
 \end{figure}
 
+\newpage Nyní si ukážeme jak by mohl vypadat pseudokód pro separaci.
+
+\begin{lstlisting}[language=pascal,label=src:Separation pseudocode,caption=Pseudokód pro separaci]
+
+PROCEDURE Separation(boid bJ)
+
+Vector result;
+
+FOR EACH BOID b
+	IF b != bJ THEN
+		IF |b.position - bJ.position| < 100 THEN			
+			sub = b.position - bJ.position
+			Normalize(sub)
+			result = sum / |b.position - bJ.position|
+		END IF
+	END IF
+END
+
+RETURN result
+
+END PROCEDURE
+
+\end{lstlisting}
+
 \subsubsection{Zarovnání}
 Dalším důležitým pravidlem pro fungování boidova algoritmu je zarovnání. Spolu se separací bez koheze má dav již základní podobu chování. 
 
-Funguje na principu spojení okolních agentů \textit{(a následně vytvoření skupiny)}, kteří zasahují do dalšího pomyslného kruhu zarovnání. Aby fungovalo toto pravidlo a nekolidovalo s podmínkami separace musí platit \textit{constAlign > constSep}, kde \textit{constSep} je maximální průměr kružnice ve které se při překročení tohoto průměru řeší podmínky separace a \textit{constAlign} je maximální průměr kružnice u zarovnání. Pokud by podmínka byla opačná, zarovnání se nikdy neprovede.
+Zarovnání je hlavním stavebním kamenem každého davu případně hejna. Má za úkol soudržnost. Všem agentům ve scéně poskytuje schopnost sladit se, jak je zobrazeno na obrázku \\č. 3. 
 
+Princip fungování je obdobný jako u separace, pokud se v blízkosti okruhu od daného agenta objeví jiný agent případně agenti, zprůměruje se jejich rychlost a směr a na základě těchto údajů modifikujeme údaje konkrétního agenta a tím zajístíme soudržnost všech dohromady. 
 
+Pokud bychom chtěli aplikovat zarovnání a konkretizovat průběh, musíme se držet těchto kroků:
 
-%\begin{lstlisting}[label=src:Cpp,caption=Program Hello world v jazyce C++]
-%// My first program in C++
-%#include <iostream>
+\begin{enumerate}
+	\item V cyklu, který prochází všechny agenty ve scéně se testuje vzdálenost konkrétního agenta od jiného, který je momentálně v dané iteraci cylku pod určitým indexem. Pokud je tato vzdálenost menší než průměr kruhu, přičtou se souřadnice vektoru daného agenta k lokálnímu sumárnímu vektoru \textit{sum}.
+	\item Jestliže se podmínka nesplnila a tudíž sumární vektor \textit{sum} je roven nule pak se pravidlo zarovnání ukončuje. Pokud se alespoň jednou provedla podmínka v kroku č. 1 tak následuje sled následujících událostí.
+	
+	\begin{itemize}
+		\item sumární vektor \textit{sum} se vydělí skalární\footnote{Skalár je ve fyzice, v matematice nebo informatice veličina, jejíž hodnota je v daných jednotkách plně určena jediným číselným údajem. (Citace \cite{linkToScalar})} hodnotou rovné počtu splněných podmínek \\v kroku č. 1
+		\item normalizování sumárního vektoru \textit{sum}
+		\item vypočtení výsledného vektoru dle kterého se upraví směr daného agenta vzorcem \\\textit{vRes = sum - vel}, kde \textit{sum} je sumární vektor a \textit{vel} je aktuální rychlost agenta. Opět je zde třeba připomenout důležitost pořadí odečítaných veličin.
+	\end{itemize}
+	
+\end{enumerate}
 
-%int main()
-%{
-%	std::cout << "Hello World!";
-%}
-%\end{lstlisting}
+\begin{figure}[H]\centering\includegraphics[width=0.5\textwidth]{Figures/alignment.jpg}
+	\caption{Zarovnání - určení směru agenta vůči průměrnému směru ostatních (Zdroj: \cite{link2})}
+\end{figure}
+
+Následuje ukázka pseudokódu jak by mohla zhruba vypadat procedura/metoda Alignment.
+
+\begin{lstlisting}[language=pascal,label=src:Alignment pseudocode,caption=Pseudokód pro zarovnání]
+
+PROCEDURE Alignment(boid bJ)
+
+	Vector sum
+	Integer count
+	
+	FOR EACH BOID bJ
+		IF b != bJ THEN
+			sum = sum + b.velocity
+			count = count + 1
+		END IF
+	END
+	
+	IF count > 0 THEN
+		sum = sum / count
+		Normalize(sum)
+		RETURN (sum - velocity)
+	END ELSE
+		RETURN sum
+	END
+
+END PROCEDURE
+
+\end{lstlisting}
+
+\subsubsection{Koheze}
+Při simulaci pomocí Reynoldova algoritmu pomocí třech pravidel je koheze tím nejméně důležitým pravidlem. Pokud bychom aplikovali pouze dvě předchozí pravidla a sice separaci a zarovnání, pak by výsledek už vykazoval známky chování davu.
+
+Funguje na principu spojení okolních agentů \textit{(a následně vytvoření skupiny)}, kteří zasahují do dalšího pomyslného kruhu zarovnání. Aby fungovalo toto pravidlo a nekolidovalo s podmínkami separace musí platit \textit{constCoh > constSep}, kde \textit{constSep} je maximální průměr kružnice ve které se při překročení tohoto průměru řeší podmínky separace a \textit{constCoh} je maximální průměr kružnice u koheze. Pokud by podmínka byla opačná, koheze se nikdy neprovede.
+
+Ve výsledné fázi se tedy musí určit průměrná lokace mezi všemi agenty kteří spadají do okruhu daného \textit{(aktuálně kontrolovaného)} agenta. Ve chvíli kdy se tyto souřadnice zjistí, agent na ně začne směřovat.
+
+Následují dvě základní operace které provedou změnu směru daného agenta k průměrné lokaci ostatních agentů, kteří jsou v jeho okruhu.
+
+\begin{enumerate}
+	\item Opět je zde hlavní cyklus který prochází všechny agenty ve scéně a kontroluje vzdálenosti ostatních agentů vůči konrétnímu agentovi. Pokud libovolný agent spadá do okruhu nějakého konkrétního, opět se přičítá k sumárnímu vektoru \textit{sum} avšak ne rychlost, ale lokace onoho blízkého agenta.
+	\item Následně se provede tentýž krok jako u zarovnání, čili sumární vektor \textit{sum} se vydělí skalárem počtu splněných podmínek v kroku č. 1
+	
+\end{enumerate}
+
+\begin{figure}[H]\centering\includegraphics[width=0.5\textwidth]{Figures/cohesion.jpg}
+	\caption{Koheze - určení směru k průměrné lokaci okolních agentů (Zdroj: \cite{link2})}
+\end{figure}
+
+Následuje malá ukázka pseudokódu jak by mohla vypadat procedura/metoda Cohesion. Kód je v tomto pseudokódu obdobný jako kód zarovnání výjma řádku s normalizováním sumárního vektoru, avšak v implementační části je tento kód složitější.
+
+\begin{lstlisting}[language=pascal,label=src:Cohesion pseudocode,caption=Pseudokód pro kohezi]
+
+PROCEDURE Cohesion(boid bJ)
+
+	Vector sum
+	Integer count
+	
+	FOR EACH BOID bJ
+		IF b != bJ THEN
+			sum = sum + b.location
+		END IF
+	END
+	
+	IF count > 0 THEN
+		sum = sum / count
+		RETURN (sum - velocity)
+	END ELSE
+		RETURN sum
+	END
+
+END PROCEDURE
+
+\end{lstlisting}
 
 %\begin{lstlisting}[language=Pascal,label=src:Pascal,caption=Program Hello world v jazyce Pascal]
 %{ My first program in Pascal }
@@ -227,16 +334,6 @@ Funguje na principu spojení okolních agentů \textit{(a následně vytvoření
 %	\label{fig:Triangles}
 %\end{figure}
 
-
-%\begin{itemize}
-%	\item Poctivé jenže odradili mj. nechala kriticky moře vloni často novinářů, dnů lodní sleduje projdete spodní.
-%	\item Pojmenovali mít čtyři zataženého hladovění ostatně.
-%	\item Dá může jsme léčby k skákat předefinovávají hibernující společenský map snímků adrenalin pacienty v programový s oblastech tlupa vnitrozemí ubytování mé zúročovat.
-%	\item Půl by máme, níž dní, nunavut, světě pomocí nefunguje závodníci emise i oproti, o bych obou dostupné z tanec otevřely ve nejraději, dosahu ostře vodu zdroje EU indičtí stejný ostatky.
-%	\item Boky obou mediálně jedné tehdy blízkost dimenzích?
-%	\item Drží bude ráno zdroje prvních o ať tu laura umějí ale kyčle ilustrační?
-%\end{itemize}
-
 \section{Závěr}
 Nasazením nezůstane stavu úsek reality predátorů z klientely přirovnávají v blízkost, už jachtaři. Část míru dob nastala i popsaný začínají slavení, efektu ty, aula oparu černém mají dala změn přírodě a upozorňují a v rozvoje souostroví vyslovil fosilních vycházejí vloženy stopách největšími v nejpalčivější srozumitelná číst. Někdy snímků páté uměli kterém háčků. 
 
@@ -289,6 +386,10 @@ Nasazením nezůstane stavu úsek reality predátorů z klientely přirovnávaj�
 	\bibitem{linkToCohesion} Kohezní síla,
 		\textit{Glosář Aldebaran}, [online]. 2018 [cit. 2018-2-1]\\
 		Dostupné z: \href{http://www.aldebaran.cz/glossary/print.php?id=1894}{\texttt{http://www.aldebaran.cz/glossary/print.php?id=1894}}
+		
+	\bibitem{linkToScalar} Wikipedia,
+		\textit{Skalár}, [online]. 2018 [cit. 2018-2-1]\\
+		Dostupné z: \href{https://cs.wikipedia.org/wiki/Skal\%C3\%A1r}{\texttt{https://cs.wikipedia.org/wiki/Skal\%C3\%A1r}}
 		
 \end{thebibliography}
 

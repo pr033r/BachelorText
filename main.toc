@@ -1,18 +1,20 @@
-\babel@toc {slovak}{}
-\babel@toc {czech}{}
-\babel@toc {czech}{}
-\babel@toc {czech}{}
-\babel@toc {english}{}
-\babel@toc {czech}{}
+\select@language {slovak}
+\select@language {czech}
+\select@language {czech}
+\select@language {czech}
+\select@language {english}
+\select@language {czech}
 \contentsline {section}{Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek a symbol\IeC {\r u}}{2}{Doc-Start}
 \contentsline {section}{Seznam obr\'azk\r {u}}{3}{Doc-Start}
-\contentsline {section}{\numberline {1}\IeC {\'U}vod}{4}{section.1}
-\contentsline {section}{\numberline {2}Simulace}{5}{section.2}
-\contentsline {subsection}{\numberline {2.1}Typy simulac\IeC {\'\i } davu}{5}{subsection.2.1}
-\contentsline {subsubsection}{\numberline {2.1.1}\IeC {\v C}\IeC {\'a}sticov\IeC {\'a} simulace}{5}{subsubsection.2.1.1}
-\contentsline {subsubsection}{\numberline {2.1.2}Simulace na b\IeC {\'a}zi AI (Artificial Intelligence)}{5}{subsubsection.2.1.2}
-\contentsline {subsection}{\numberline {2.2}Craig Reynold\IeC {\r u}v algoritmus}{6}{subsection.2.2}
-\contentsline {subsubsection}{\numberline {2.2.1}Separace}{7}{subsubsection.2.2.1}
-\contentsline {subsubsection}{\numberline {2.2.2}Zarovn\IeC {\'a}n\IeC {\'\i }}{8}{subsubsection.2.2.2}
-\contentsline {section}{\numberline {3}Z\IeC {\'a}v\IeC {\v e}r}{9}{section.3}
-\contentsline {section}{Reference}{10}{section.3}
+\contentsline {section}{Seznam v\IeC {\'y}pis\IeC {\r u} zdrojov\IeC {\'e}ho k\IeC {\'o}du}{4}{Doc-Start}
+\contentsline {section}{\numberline {1}\IeC {\'U}vod}{5}{section.1}
+\contentsline {section}{\numberline {2}Simulace}{6}{section.2}
+\contentsline {subsection}{\numberline {2.1}Typy simulac\IeC {\'\i } davu}{6}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}\IeC {\v C}\IeC {\'a}sticov\IeC {\'a} simulace}{6}{subsubsection.2.1.1}
+\contentsline {subsubsection}{\numberline {2.1.2}Simulace na b\IeC {\'a}zi AI (Artificial Intelligence)}{6}{subsubsection.2.1.2}
+\contentsline {subsection}{\numberline {2.2}Craig Reynold\IeC {\r u}v algoritmus}{7}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Separace}{8}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}Zarovn\IeC {\'a}n\IeC {\'\i }}{9}{subsubsection.2.2.2}
+\contentsline {subsubsection}{\numberline {2.2.3}Koheze}{11}{subsubsection.2.2.3}
+\contentsline {section}{\numberline {3}Z\IeC {\'a}v\IeC {\v e}r}{13}{section.3}
+\contentsline {section}{Reference}{14}{section.3}
