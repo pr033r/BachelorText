@@ -54,12 +54,15 @@ This thesis focuses on the description of boid's algorithm which is the most use
 
 \AddAcronym{ACM}{Association for Computing Machinery - vědecky-vzdělávací instituce pro výpočetní technologie}
 \AddAcronym{SIGGRAPH}{Special Interest Group on Computer GRAPHics and Interactive Techniques - výroční konference v počítačové grafice}
-\AddAcronym{FPS}{Unified Modeling Language}
+\AddAcronym{FPS}{Frames per seconds - počet s nímku za jednu sekundu}
 \AddAcronym{GPU}{graphics processing unit – grafická karta, má svůj procesor i výpočetní paměť}
-\AddAcronym{OS}{Operační Systém}
+\AddAcronym{IDE}{Integrated Development Environment - program usnadňující práci programátorům}
 \AddAcronym{Realtime}{Vykreslování v reálném čase – snaha vykreslovat co nejrychleji}
 \AddAcronym{AI}{Artificial Intelligence - umělá inteligence}
-
+\AddAcronym{GLFW}{Graphics Library Framework - Multiplatformní technologie rozšiřující OpenGL o vytváření aplikačních oken}
+\AddAcronym{GLEW}{OpenGL Extension Wrangler Library - poskytuje realtime prostředky pro danou platformu}
+\AddAcronym{GLM}{OpenGL Mathematics - poskytuje širokou škálu matematických operací pro OpenGL}
+\AddAcronym{DDS}{DirectDraw Surface - formát pro ukládání komprimovaných dat vytvořený firmou Microsoft}
 
 % Zacatek dokumentu
 \begin{document}
@@ -93,10 +96,10 @@ V této práci se však dá tato věta ještě zkrátit a konkretizovat na \text
 \subsection{Typy simulací davu}
 Simulačních typů pro dav, případně hejno jsou dva typy. Částicová simulace a simulace založená na umělé inteligenci. \cite{linkToBachelor1}
 
-\subsubsection{Částicová simulace}
+\subsection{Částicová simulace}
 První zmíněná simulace je založena na principu přiřazení hmotného bodu každému prvku z množiny všech prvků které mají spolu iterovat\footnote{Základním principem iterace je opakování určitého procesu v měnícím se kontextu. Uplatňuje se především v dynamických jevech.\cite{linkToIteration}}. Hlavní výhodou využití tohoto typu simulace je možnost použití velkého množství prvků z celkové množiny, neboť výpočty základních sil nejsou příliš náročné na výpočetní výkon. Příklady pro využití jsou typy založené na: magnetických silách, buněčném modelu a sociálních silách. \cite{linkToBachelor1}
 
-\subsubsection{Simulace na bázi AI (Artificial Intelligence)}\label{sec:simulace-na-bazi-ai-artificial-intelligence}
+\subsection{Simulace na bázi AI (Artificial Intelligence)}\label{sec:simulace-na-bazi-ai-artificial-intelligence}
 Druhý zmíněný typ je založen na bázi Agentů. Ti už nejsou reprezentováni jen obyčejnými silami \textit{(i přesto že se jedná o diametrálně odlišný typ simulace davu, určité fyzikální vlastostni agenti stále musí mít)} ale také přidanými vlastnostmi, kterými předchozí typ tolik nedisponoval. Mají hlavně přidané senzory, díky nímž dokáží vyhodnocovat danou situaci v reálném čase a následně se rozhodovat k dalšímu nejvýhodnějšímu kroku. Pokud do scény vložíme dva a více agentů kteří budou na sebe reagovat, můžeme říci že každý z nich má v jisté míře svůj mozek. Ať už jednodušší \textit{(rozhodování dalšího kroku mezi zdmi)} či složitějšího \textit{(např.: agent může v danou chvíli reagovat zda-li má jít rychleji či pomaleji aby nezpůsobil kolizi s jiným agentem či agenty)}.
 
 Tento typ simulace hojně využívá herní průmysl kdy v nějaké scéně - herní mapě, jsou nasazeny desítky agentů kteří se ve své podstatě starají sami o sebe a přímo či nepřímo komunikují s uživatelem. Obecně však platí že ve hrách je tato implementace mnohonásobně složitější než částicová simulace kvůli mnoha vlastnostem agentů. Konkrétními případy může být třeba hra Crysis \textit{(leden 2007 - stáda jelenů)} a FarCry \textit{(2004 - hejna tropických papoušků)}.
@@ -135,7 +138,7 @@ Nyní se zaměříme na popis Reynoldova algoritmu, který v surovém základu o
 		kapalného a pevného tělesa), pozn. upraveno \cite{linkToCohesion}}\textit{(Cohesion)}
 \end{enumerate}
 
-\subsubsection{Separace}
+\subsection{Separace}
 Separace slouží k tomu, aby se dva a více agentů nepřiblížili příliš blízko sebe a tím vyvolali kolizi mezi sebou. Je to první a nejzákladnější vlastnost Reynoldova algoritmu bez které by nebylo možné vytvořit kompletní simulaci. 
 
 Oddělení od ostatních agentů funguje na principu základních operací s vektory \textit{(2D nebo 3D)} a vytvoření pomyslného kruhu kolem každého agenta, který jej upozorní zda-li není příliš blízko jiného agenta. 
@@ -176,7 +179,7 @@ END PROCEDURE
 
 \end{lstlisting}
 
-\subsubsection{Zarovnání}
+\subsection{Zarovnání}
 Dalším důležitým pravidlem pro fungování boidova algoritmu je zarovnání. Spolu se separací bez koheze má dav již základní podobu chování. 
 
 Zarovnání je hlavním stavebním kamenem každého davu případně hejna. Má za úkol soudržnost. Všem agentům ve scéně poskytuje schopnost sladit se, jak je zobrazeno na obrázku \\č. 3. 
@@ -229,7 +232,7 @@ END PROCEDURE
 
 \end{lstlisting}
 
-\subsubsection{Koheze}
+\subsection{Koheze}
 Při simulaci pomocí Reynoldova algoritmu pomocí třech pravidel je koheze tím nejméně důležitým pravidlem. Pokud bychom aplikovali pouze dvě předchozí pravidla a sice separaci a zarovnání, pak by výsledek už vykazoval známky chování davu.
 
 Funguje na principu spojení okolních agentů \textit{(a následně vytvoření skupiny)}, kteří zasahují do dalšího pomyslného kruhu zarovnání. Aby fungovalo toto pravidlo a nekolidovalo s podmínkami separace musí platit \textit{constCoh > constSep}, kde \textit{constSep} je maximální průměr kružnice ve které se při překročení tohoto průměru řeší podmínky separace a \textit{constCoh} je maximální průměr kružnice u koheze. Pokud by podmínka byla opačná, koheze se nikdy neprovede.
@@ -274,14 +277,54 @@ END PROCEDURE
 
 \end{lstlisting}
 
-%\begin{lstlisting}[language=Pascal,label=src:Pascal,caption=Program Hello world v jazyce Pascal]
-%{ My first program in Pascal }
-%program Hello;
-%begin
-%  writeln ('Hello, world.')
-%end.
-%\end{lstlisting}
+\subsection{Aplikování tří pravidel}
+Ke kompletní simulaci dojde ve chvíli spojením třech výše zmíněných pravidel. Technicky vzato se jedná o sečtení všech třech výsledných vektorů z každé ze tří procedur a rychlosti daného agenta který je aktuálně v iteraci. Nejdříve se sčítají rychlosti a poté se z této sumy spočítá výsledná pozice (Výpis pseudokódu č. 4).
 
+Avšak pravidel je možné použít více, jak je popsáno v publikaci od Craiga Reynolda, Steering Behaviors For Autonomous Characters \cite{linkToSteeringBehaviors}. Tudíž nemusí být nutně tři fixní pravidla, ale můžeme k sčítání výsledných vektorů jednotlivých pravidel připsat i pravidla jiná. Kombinacemi těchto pravidel lze dosáhnout různého výsledného chování agentů.
+
+Následující pseudokód ukazuje, jak lze tato pravidla aplikovat.
+
+\begin{lstlisting}[language=pascal,label=src:Flocking pseudocode,caption=Pseudokód pro aplikování třech pravidel]
+
+PROCEDURE AllBoidsToNewPosition()
+
+	Vector v1, v2, v3
+	Boid b
+	
+	FOR EACH BOID b
+		v1 = Separation(b)
+		v2 = Alignment(b)
+		v3 = Cohesion(b)
+		
+		b.velocity = b.velocity + v1 + v2 + v3
+		b.position = b.position + b.velocity
+	END
+
+END PROCEDURE
+
+\end{lstlisting}
+
+Nyní lze přistoupit k implementační části, je však zapotřebí zmínit, že tento algoritmus se v reálu musí aplikovat do tzv. Flocking algoritmu, který všechny agenty ve scéně vytváří a koordinuje jejich průběh s vizualizací.
+
+\newpage
+\section{Implementace}
+
+\subsection{Použité technologie}
+Jako hlavní nástroj jsem použil IDE\footnote{Integrated Development Environment - program, který usnadňuje práci programátorům \cite{linkToIDE})} Visual Studio verze 2017 od firmy Microsoft. Ten poskytuje nástroj NuGet, který nastavuje a konfiguruje potřebné knihovny nebo balíčky pro daný projekt, nicméně se v mém případě příliš neosvědčil a tak jsem pomocí něj úspěšně nainstaloval a nakonfiguroval pouze jednu knihovnu \textit{(Assimp)}, zbytek jsem musel konfigurovat ručně.
+
+Jako hlavní vykreslovací knihovu jsem použil OpenGL \cite{linkToOpenGL} verze 3.3.1 a jako nastavbu pro aplikační okna jsem použil knihovnu GLFW \cite{linkToGLFW} verze 3.2.1, která byla v průběhu mé práce velice stabilní. 
+
+Následuje knihovna GLEW \cite{linkToGLew} ve verzi 2.1.0, která slouží v pozadí aplikace jako rozšiřující nástroj OpenGL pro realtime mechanismy. 
+
+K načítání objektů různých formátů jsem použil knihovnu Assimp \cite{linkToAssimp} verze 3.2, kterou se mi jako jedinou podařilo nakonfigurovat pomocí instalačního nástroje NuGet. S touto knihovnou jsem měl hodně problémů, zejména co se verzí týče. Původně jsem použil starší verzi 3.0 která však nepodporovala novější formáty souborů jenž měli v sobě zahrnuté i animace objektů.
+
+Pro matematické funkce, zejména operace s maticemi jsem použil knihovnu GLM \cite{linkToGLM} verze 0.9.8.5. Ruční instalace této knihovny ze všech výše uvedených byla pro mne nejméně komplikovaná.
+
+Jako poslední knihovnu jsem použil stb\_image z projektu Stb \cite{linkToStb} ve verzi 2.18. Po pročtení několika internetových diskusí jsem dospěl k této, pro mne spolehlivé, knihovně. Narozdíl od OpenCV \cite{linkToOpenCV} se kterou jsem měl velké problémy jak při konfiguraci tak s načítám určitých typů rastrových\footnote{Rastrová grafika je jeden ze dvou základních způsobů, jakým počítače ukládají a zpracovávají obrazové informace. \cite{linkToRastr}} dat, zejména s formátem DDS \cite{linkToDDS}, tak knihovna stb\_image tento formát bez problémů načetla.
+
+\begin{figure}[H]\centering\includegraphics[width=0.62\textwidth]{Figures/screen3.png}
+	\caption{Ukázka ruční konfigurace knihoven pomocí systémových proměnných}
+\end{figure}
 
 %\begin{table}
 %	\centering
@@ -390,6 +433,50 @@ Nasazením nezůstane stavu úsek reality predátorů z klientely přirovnávaj�
 	\bibitem{linkToScalar} Wikipedia,
 		\textit{Skalár}, [online]. 2018 [cit. 2018-2-1]\\
 		Dostupné z: \href{https://cs.wikipedia.org/wiki/Skal\%C3\%A1r}{\texttt{https://cs.wikipedia.org/wiki/Skal\%C3\%A1r}}
+		
+	\bibitem{linkToIDE} Wikipedia,
+		\textit{IDE}, [online]. 2018 [cit. 2018-2-4]\\
+		Dostupné z: \href{https://cs.wikipedia.org/wiki/V\%C3\%BDvojov\%C3\%A9\_prost\%C5\%99ed\%C3\%AD}{\texttt{https://cs.wikipedia.org/wiki/V\%C3\%BDvojov\%C3\%A9\_prost\%C5\%99ed\%C3\%AD}}
+		
+	\bibitem{linkToRastr} Wikipedia,
+		\textit{Rastrová grafika}, [online]. 2018 [cit. 2018-2-4]\\
+		Dostupné z: \href{https://cs.wikipedia.org/wiki/Rastrov\%C3\%A1\_grafika}{\texttt{https://cs.wikipedia.org/wiki/Rastrov\%C3\%A1\_grafika}}
+		
+	\bibitem{linkToDDS} Wikipedia,
+		\textit{DirectDraw Surface}, [online]. 2018 [cit. 2018-2-4]\\
+		Dostupné z: \href{https://en.wikipedia.org/wiki/DirectDraw\_Surface}{\texttt{https://en.wikipedia.org/wiki/DirectDraw\_Surface}}
+		
+	\bibitem{linkToVisualStudio} Visual Studio IDE,
+		[online]. 2018 [cit. 2018-2-4]\\
+		Dostupné z: \href{https://www.visualstudio.com}{\texttt{https://www.visualstudio.com}}
+		
+	\bibitem{linkToOpenGL} OpenGL,
+		[online]. 2018 [cit. 2018-2-4]\\
+		Dostupné z: \href{https://www.opengl.org/}{\texttt{https://www.opengl.org/}}
+		
+	\bibitem{linkToGLFW} GLFW,
+		[online]. 2018 [cit. 2018-2-4]\\
+		Dostupné z: \href{http://www.glfw.org/}{\texttt{http://www.glfw.org/}}
+		
+	\bibitem{linkToGLew} GLEW,
+		[online]. 2018 [cit. 2018-2-4]\\
+		Dostupné z: \href{http://glew.sourceforge.net/}{\texttt{http://glew.sourceforge.net//}}
+		
+	\bibitem{linkToGLM} GLM,
+		[online]. 2018 [cit. 2018-2-4]\\
+		Dostupné z: \href{https://glm.g-truc.net/0.9.8/index.html}{\texttt{https://glm.g-truc.net/0.9.8/index.html}}
+		
+	\bibitem{linkToAssimp} Assimp,
+		[online]. 2018 [cit. 2018-2-4]\\
+		Dostupné z: \href{http://assimp.sourceforge.net/}{\texttt{http://assimp.sourceforge.net/}}
+		
+	\bibitem{linkToStb} Stb image,
+		[online]. 2018 [cit. 2018-2-4]\\
+		Dostupné z: \href{https://github.com/nothings/stb}{\texttt{https://github.com/nothings/stb}}
+		
+	\bibitem{linkToOpenCV} OpenCV,
+		[online]. 2018 [cit. 2018-2-4]\\
+		Dostupné z: \href{https://opencv.org/}{\texttt{https://opencv.org/}}
 		
 \end{thebibliography}
 

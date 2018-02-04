@@ -10,11 +10,14 @@
 \contentsline {section}{\numberline {1}\IeC {\'U}vod}{5}{section.1}
 \contentsline {section}{\numberline {2}Simulace}{6}{section.2}
 \contentsline {subsection}{\numberline {2.1}Typy simulac\IeC {\'\i } davu}{6}{subsection.2.1}
-\contentsline {subsubsection}{\numberline {2.1.1}\IeC {\v C}\IeC {\'a}sticov\IeC {\'a} simulace}{6}{subsubsection.2.1.1}
-\contentsline {subsubsection}{\numberline {2.1.2}Simulace na b\IeC {\'a}zi AI (Artificial Intelligence)}{6}{subsubsection.2.1.2}
-\contentsline {subsection}{\numberline {2.2}Craig Reynold\IeC {\r u}v algoritmus}{7}{subsection.2.2}
-\contentsline {subsubsection}{\numberline {2.2.1}Separace}{8}{subsubsection.2.2.1}
-\contentsline {subsubsection}{\numberline {2.2.2}Zarovn\IeC {\'a}n\IeC {\'\i }}{9}{subsubsection.2.2.2}
-\contentsline {subsubsection}{\numberline {2.2.3}Koheze}{11}{subsubsection.2.2.3}
-\contentsline {section}{\numberline {3}Z\IeC {\'a}v\IeC {\v e}r}{13}{section.3}
-\contentsline {section}{Reference}{14}{section.3}
+\contentsline {subsection}{\numberline {2.2}\IeC {\v C}\IeC {\'a}sticov\IeC {\'a} simulace}{6}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Simulace na b\IeC {\'a}zi AI (Artificial Intelligence)}{6}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Craig Reynold\IeC {\r u}v algoritmus}{7}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Separace}{8}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Zarovn\IeC {\'a}n\IeC {\'\i }}{9}{subsection.2.6}
+\contentsline {subsection}{\numberline {2.7}Koheze}{11}{subsection.2.7}
+\contentsline {subsection}{\numberline {2.8}Aplikov\IeC {\'a}n\IeC {\'\i } t\IeC {\v r}\IeC {\'\i } pravidel}{13}{subsection.2.8}
+\contentsline {section}{\numberline {3}Implementace}{14}{section.3}
+\contentsline {subsection}{\numberline {3.1}Pou\IeC {\v z}it\IeC {\'e} technologie}{14}{subsection.3.1}
+\contentsline {section}{\numberline {4}Z\IeC {\'a}v\IeC {\v e}r}{15}{section.4}
+\contentsline {section}{Reference}{16}{section.4}
