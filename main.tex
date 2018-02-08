@@ -54,8 +54,8 @@ This thesis focuses on the description of boid's algorithm which is the most use
 
 \AddAcronym{ACM}{Association for Computing Machinery - vědecky-vzdělávací instituce pro výpočetní technologie}
 \AddAcronym{SIGGRAPH}{Special Interest Group on Computer GRAPHics and Interactive Techniques - výroční konference v počítačové grafice}
-\AddAcronym{FPS}{Frames per seconds - počet s nímku za jednu sekundu}
-\AddAcronym{GPU}{graphics processing unit – grafická karta, má svůj procesor i výpočetní paměť}
+\AddAcronym{FPS}{Frames per seconds - počet snímku za jednu sekundu}
+\AddAcronym{GPU}{Graphics processing unit – grafická karta, má svůj procesor i výpočetní paměť}
 \AddAcronym{IDE}{Integrated Development Environment - program usnadňující práci programátorům}
 \AddAcronym{Realtime}{Vykreslování v reálném čase – snaha vykreslovat co nejrychleji}
 \AddAcronym{AI}{Artificial Intelligence - umělá inteligence}
@@ -189,7 +189,7 @@ Princip fungování je obdobný jako u separace, pokud se v blízkosti okruhu od
 Pokud bychom chtěli aplikovat zarovnání a konkretizovat průběh, musíme se držet těchto kroků:
 
 \begin{enumerate}
-	\item V cyklu, který prochází všechny agenty ve scéně se testuje vzdálenost konkrétního agenta od jiného, který je momentálně v dané iteraci cylku pod určitým indexem. Pokud je tato vzdálenost menší než průměr kruhu, přičtou se souřadnice vektoru daného agenta k lokálnímu sumárnímu vektoru \textit{sum}.
+	\item V cyklu, který prochází všechny agenty ve scéně se testuje vzdálenost konkrétního agenta od jiného, který je momentálně v dané iteraci cyklu pod určitým indexem. Pokud je tato vzdálenost menší než průměr kruhu, přičtou se souřadnice vektoru daného agenta k lokálnímu sumárnímu vektoru \textit{sum}.
 	\item Jestliže se podmínka nesplnila a tudíž sumární vektor \textit{sum} je roven nule pak se pravidlo zarovnání ukončuje. Pokud se alespoň jednou provedla podmínka v kroku č. 1 tak následuje sled následujících událostí.
 	
 	\begin{itemize}
@@ -242,7 +242,7 @@ Ve výsledné fázi se tedy musí určit průměrná lokace mezi všemi agenty k
 Následují dvě základní operace které provedou změnu směru daného agenta k průměrné lokaci ostatních agentů, kteří jsou v jeho okruhu.
 
 \begin{enumerate}
-	\item Opět je zde hlavní cyklus který prochází všechny agenty ve scéně a kontroluje vzdálenosti ostatních agentů vůči konrétnímu agentovi. Pokud libovolný agent spadá do okruhu nějakého konkrétního, opět se přičítá k sumárnímu vektoru \textit{sum} avšak ne rychlost, ale lokace onoho blízkého agenta.
+	\item Opět je zde hlavní cyklus který prochází všechny agenty ve scéně a kontroluje vzdálenosti ostatních agentů vůči konkrétnímu agentovi. Pokud libovolný agent spadá do okruhu nějakého konkrétního, opět se přičítá k sumárnímu vektoru \textit{sum} avšak ne rychlost, ale lokace onoho blízkého agenta.
 	\item Následně se provede tentýž krok jako u zarovnání, čili sumární vektor \textit{sum} se vydělí skalárem počtu splněných podmínek v kroku č. 1
 	
 \end{enumerate}
