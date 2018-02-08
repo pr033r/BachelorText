@@ -1,15 +1,15 @@
-\select@language {slovak}
-\select@language {czech}
-\select@language {czech}
-\select@language {czech}
-\select@language {english}
-\select@language {czech}
+\babel@toc {slovak}{}
+\babel@toc {czech}{}
+\babel@toc {czech}{}
+\babel@toc {czech}{}
+\babel@toc {english}{}
+\babel@toc {czech}{}
 \contentsline {section}{Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek a symbol\IeC {\r u}}{2}{Doc-Start}
 \contentsline {section}{Seznam obr\'azk\r {u}}{3}{Doc-Start}
 \contentsline {section}{Seznam v\IeC {\'y}pis\IeC {\r u} zdrojov\IeC {\'e}ho k\IeC {\'o}du}{4}{Doc-Start}
 \contentsline {section}{\numberline {1}\IeC {\'U}vod}{5}{section.1}
 \contentsline {section}{\numberline {2}Simulace}{6}{section.2}
-\contentsline {subsection}{\numberline {2.1}Typy simulac\IeC {\'\i } davu}{6}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.1}Simulace davu}{6}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}\IeC {\v C}\IeC {\'a}sticov\IeC {\'a} simulace}{6}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Simulace na b\IeC {\'a}zi AI (Artificial Intelligence)}{6}{subsection.2.3}
 \contentsline {subsection}{\numberline {2.4}Craig Reynold\IeC {\r u}v algoritmus}{7}{subsection.2.4}

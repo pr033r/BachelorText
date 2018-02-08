@@ -62,7 +62,6 @@ This thesis focuses on the description of boid's algorithm which is the most use
 \AddAcronym{GLFW}{Graphics Library Framework - Multiplatformní technologie rozšiřující OpenGL o vytváření aplikačních oken}
 \AddAcronym{GLEW}{OpenGL Extension Wrangler Library - poskytuje realtime prostředky pro danou platformu}
 \AddAcronym{GLM}{OpenGL Mathematics - poskytuje širokou škálu matematických operací pro OpenGL}
-\AddAcronym{DDS}{DirectDraw Surface - formát pro ukládání komprimovaných dat vytvořený firmou Microsoft}
 
 % Zacatek dokumentu
 \begin{document}
@@ -74,12 +73,11 @@ This thesis focuses on the description of boid's algorithm which is the most use
 \lstlistoflistings
 
 \section{Úvod}
-Simulační algoritmy se používají v širokém spektru odvětví od vědy, her, výpočetních úkonů až po kinematografii či stavbě budov. Herní využití mívá velmi reálně implementována armáda \cite{linkToArmySimulation}, která tímto způsobem zaškoluje vojáky ve virtuálním simulačním boji jak v taktice tak způsobu nejefektivnějšího využití dostupných zbraní. 
+Simulační algoritmy se používají v širokém spektru odvětví od vědy, her, výpočetních úkonů až po kinematografii či stavbě budov \cite{linkToBuildingSimulation}. Herní využití mívá velmi reálně implementována armáda \cite{linkToArmySimulation}, která tímto způsobem zaškoluje vojáky ve virtuálním simulačním boji jak v taktice tak způsobu nejefektivnějšího využití dostupných zbraní. 
 
-Pokud vememe v potaz poslední zmíněné využití a sice stavba či projektování budov, nabízí se další subspektra  druhů simulačních programů. Například projektant potřebuje nasimulovat jak velkou zátěž udrží hlavní nosníky, testování a simulování různých druhů materiálů či ve kterém bodě sloupoví bude největší tlak.
+Pokud vememe v potaz stavbu či projektování budov, nabízí se další subspektra  druhů simulačních programů. Například projektant potřebuje nasimulovat jak velkou zátěž udrží hlavní nosníky, testování a simulování různých druhů materiálů či jak velké budou úniky tepla.
 
-Avšak po této základní konstrukční stránce, se musí také navrhnout optimální velikost budovy a kolik bude schopna pojmout lidí v jednom okamžiku. Kde bude vést úniková cesta v případě požáru a kolik času zabere davu, než se z budovy dostane ven. A zrovna co se bezpečnosti týče, mají simulační algoritmy nejširší využítí. V jistém slova smyslu by se dalo řici,
-že byly vytvořeny primárně pro tento účel \cite{link1}.
+Avšak po této základní konstrukční stránce, se musí také navrhnout optimální velikost budovy a kolik bude schopna pojmout lidí v jednom okamžiku. Kde bude vést úniková cesta v případě požáru a kolik času zabere davu, než se z budovy dostane ven. A zrovna co se bezpečnosti týče, mají simulační algoritmy nejširší využítí. V jistém slova smyslu by se dalo řici, že byly vytvořeny primárně pro tento účel \cite{link1}.
 
 Při těchto simulacích se tak navrhují nejlepší varianty šířky chodeb, dostupnosti k únikovým východům, přístupu k požárnímu schodišti nebo vyladění ukazatelů směru
 úniku.
@@ -89,11 +87,11 @@ Pokročilejší algoritmy také reagují na různé překážky, jak horizontál
 V této práci se seznámíme se základy simulování davu a hejna. Popíšeme nejpoužívanější algoritmus \cite{link2} pro tento druh simulace a realizaci výsledné aplikace.
 
 \section{Simulace}
-Pojem simulace lze shrnout do obecné věty: \textit{"Simulace se používá v mnoha souvislostech, zahrnujících modelování přírodních systémů nebo lidských systémů s cílem získat poznatky o jejich fungování. Jiné souvislosti zahrnují technologické simulace pro optimalizaci výkonu, bezpečnostní inženýrství, testování, školení a vzdělávání."} (Citace \cite{linkToSimulation})
+Pojem simulace lze shrnout do obecné věty: \textit{"Počítačová simulace je napodobení skutečnosti pomocí numerického výpočtu, nezbytná součást modelování fyzikálních procesů. Dokáže předpovědět jak kvantitativní, tak kvalitativní výsledky pokusů při různých počátečních podmínkách. Umožňuje omezit výběr jevů, které celý pokus ovlivňují nejvíce a tím vysvětlit příčiny a podstatu procesů."} (Citace \cite{linkToSimulation})
 
-V této práci se však dá tato věta ještě zkrátit a konkretizovat na \textit{"simulační algoritmy se primárně využívají pro simulaci něčeho u čehož se dá pomocí různých matematických vzorců předpovědět průběh budoucího chování daného objektu\footnote{Objektem je zde myšlen jakýkoliv útvar, od modelu letadla až po komplexní model budovy, na nějž nebo v němž se dají provádět simulace.} a tím vyhodnotit kritické situace které mohou nastat"}. Touto větou se budume nadále řídit.
 
-\subsection{Typy simulací davu}
+
+\subsection{Simulace davu}
 Simulačních typů pro dav, případně hejno jsou dva typy. Částicová simulace a simulace založená na umělé inteligenci. \cite{linkToBachelor1}
 
 \subsection{Částicová simulace}
@@ -106,7 +104,7 @@ Tento typ simulace hojně využívá herní průmysl kdy v nějaké scéně - he
 
 Je třeba také zminit kinematografický průmysl, který simuluje davy lidí. Tím pádem animátorům odpadne kus práce kdy by museli každého agenta animovat zvlášť.
 
-Jelikož jsem využil tento typ simulace, tak v dalších kapitolách tedy budeme každý bod ve scéně nazývat agentem.
+Jelikož jsem využil tento typ simulace, tak v dalších kapitolách budeme každý bod ve scéně nazývat agentem.
 
 \begin{figure}\centering\includegraphics[width=0.8\textwidth]{Figures/flock_fish.png}
 	\caption{
@@ -398,25 +396,33 @@ Nasazením nezůstane stavu úsek reality predátorů z klientely přirovnávaj�
 		[online]. 2018 [cit. 2018-2-1]\\
 		Dostupné z: \href{http://www.kfish.org/boids/pseudocode.html}{\texttt{http://www.kfish.org/boids/pseudocode.html}}
 		
-	\bibitem{linkToArmySimulation} Wikipedia,
-		\textit{Military simulation}, [online]. 2018 [cit. 2018-2-1]\\
-		Dostupné z: \href{https://en.wikipedia.org/wiki/Military\_simulation}{\texttt{https://en.wikipedia.org/wiki/Military\_simulation}}
+	\bibitem{linkToSimulation} Simulace,
+		\textit{Glosář Aldebaran}, [online]. 2018 [cit. 2018-2-1]\\
+		Dostupné z: \href{http://www.aldebaran.cz/glossary/print.php?id=1299}{\texttt{http://www.aldebaran.cz/glossary/print.php?id=1299}}
 		
-	\bibitem{linkToSimulation} Wikipedia,
-		\textit{Simulace}, [online]. 2018 [cit. 2018-2-1]\\
-		Dostupné z: \href{https://cs.wikipedia.org/wiki/Simulace}{\texttt{https://cs.wikipedia.org/wiki/Simulace}}
+	\bibitem{linkToBuildingSimulation} Oasys,
+		\textit{Crowd Simulation}, [online]. 2018 [cit. 2018-2-1]\\
+		Dostupné z: \href{http://www.oasys-software.com/products/engineering/massmotion.html}{\texttt{http://www.oasys-software.com/products/engineering/massmotion.html}}
 		
-	\bibitem{linkToIteration} Wikipedia,
-		\textit{Iterace}, [online]. 2018 [cit. 2018-2-1]\\
-		Dostupné z: \href{https://cs.wikipedia.org/wiki/Iterace}{\texttt{https://cs.wikipedia.org/wiki/Iterace}}
+	\bibitem{linkToSimulationSpace} Earthlight,
+		\textit{Spacewalk}, [online]. 2018 [cit. 2018-2-1]\\
+		Dostupné z: \href{http://www.earthlightvr.com/spacewalk/}{\texttt{http://www.earthlightvr.com/spacewalk/}}
 		
-	\bibitem{linkToACM} Wikipedia,
+	\bibitem{linkToArmySimulation} FAAC Military,
+		, [online]. 2018 [cit. 2018-2-1]\\
+		Dostupné z: \href{https://www.faac.com/military/}{\texttt{https://www.faac.com/military/}}
+		
+	\bibitem{linkToIteration} Techopedia,
+		\textit{Iteration}, [online]. 2018 [cit. 2018-2-1]\\
+		Dostupné z: \href{https://www.techopedia.com/definition/3821/iteration}{\texttt{https://www.techopedia.com/definition/3821/iteration}}
+		
+	\bibitem{linkToACM} ACM,
 		\textit{Association for Computing Machinery}, [online]. 2018 [cit. 2018-2-1]\\
-		Dostupné z: \href{https://en.wikipedia.org/wiki/Association\_for\_Computing\_Machinery}{\texttt{https://en.wikipedia.org/wiki/Association\_for\_Computing\_Machinery}}
+		Dostupné z: \href{https://www.acm.org/about-acm/what-is-acm}{\texttt{https://www.acm.org/about-acm/what-is-acm}}
 		
-	\bibitem{linkToSIGGRAPH} Wikipedia,
-		\textit{SIGGRAPH}, [online]. 2018 [cit. 2018-2-1]\\
-		Dostupné z: \href{https://en.wikipedia.org/wiki/SIGGRAPH}{\texttt{https://en.wikipedia.org/wiki/SIGGRAPH}}
+	\bibitem{linkToSIGGRAPH} SIGGRAPH,
+		, [online]. 2018 [cit. 2018-2-1]\\
+		Dostupné z: \href{https://www.siggraph.org/about/what-is-acm-siggraph}{\texttt{https://www.siggraph.org/about/what-is-acm-siggraph}}
 		
 	\bibitem{linkToBachelor1} Simulace davu, Mgr. Jan Stria,\\
 		\textit{Matematicko-fyzikální fakulta (MFF)}, [online]. 2018 [cit. 2018-2-1]\\
@@ -430,9 +436,9 @@ Nasazením nezůstane stavu úsek reality predátorů z klientely přirovnávaj�
 		\textit{Glosář Aldebaran}, [online]. 2018 [cit. 2018-2-1]\\
 		Dostupné z: \href{http://www.aldebaran.cz/glossary/print.php?id=1894}{\texttt{http://www.aldebaran.cz/glossary/print.php?id=1894}}
 		
-	\bibitem{linkToScalar} Wikipedia,
-		\textit{Skalár}, [online]. 2018 [cit. 2018-2-1]\\
-		Dostupné z: \href{https://cs.wikipedia.org/wiki/Skal\%C3\%A1r}{\texttt{https://cs.wikipedia.org/wiki/Skal\%C3\%A1r}}
+	\bibitem{linkToScalar} Physic Class Room,
+		\textit{Scalar}, [online]. 2018 [cit. 2018-2-1]\\
+		Dostupné z: \href{http://www.physicsclassroom.com/class/1DKin/Lesson-1/Scalars-and-Vectors}{\texttt{http://www.physicsclassroom.com/class/1DKin/Lesson-1/Scalars-and-Vectors}}
 		
 	\bibitem{linkToIDE} Wikipedia,
 		\textit{IDE}, [online]. 2018 [cit. 2018-2-4]\\
