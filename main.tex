@@ -89,13 +89,13 @@ V této práci se seznámíme se základy simulování davu a hejna. Popíšeme 
 \section{Simulace}
 Pojem simulace lze shrnout do obecné věty: \textit{"Počítačová simulace je napodobení skutečnosti pomocí numerického výpočtu, nezbytná součást modelování fyzikálních procesů. Dokáže předpovědět jak kvantitativní, tak kvalitativní výsledky pokusů při různých počátečních podmínkách. Umožňuje omezit výběr jevů, které celý pokus ovlivňují nejvíce a tím vysvětlit příčiny a podstatu procesů."} (Citace \cite{linkToSimulation})
 
-
+V našem případě se jedná o napodobení davu, kdy pomocí algoritmu \textit{(popsaného v dalších kapitolách)} dokážeme předem modifikovat nadcházející krok a tím i změnit výsledné chování celého davu. Na základě vstupních dat nebo kombinací pravidel můžeme chování měnit a tím simulovat dav při různých situacích, jako je evakuace z budovy nebo běžné chození po prostorách nákupního střediska.
 
 \subsection{Simulace davu}
-Simulačních typů pro dav, případně hejno jsou dva typy. Částicová simulace a simulace založená na umělé inteligenci. \cite{linkToBachelor1}
+Simulaci davu lze zrealizovat dvěmi metodami. Částicová simulace a simulace založená na umělé inteligenci. \cite{linkToBachelor1}
 
 \subsection{Částicová simulace}
-První zmíněná simulace je založena na principu přiřazení hmotného bodu každému prvku z množiny všech prvků které mají spolu iterovat\footnote{Základním principem iterace je opakování určitého procesu v měnícím se kontextu. Uplatňuje se především v dynamických jevech.\cite{linkToIteration}}. Hlavní výhodou využití tohoto typu simulace je možnost použití velkého množství prvků z celkové množiny, neboť výpočty základních sil nejsou příliš náročné na výpočetní výkon. Příklady pro využití jsou typy založené na: magnetických silách, buněčném modelu a sociálních silách. \cite{linkToBachelor1}
+První zmíněná simulace je založena na principu přiřazení hmotného bodu každému prvku z množiny všech prvků které mají spolu iterovat\footnote{Iterace je v programování proces při kterém se soubor pokynů opakuje přesně daným počtem opakování, nebo dokud je splněna podmínka.\cite{linkToIteration}}. Hlavní výhodou využití tohoto typu simulace je možnost použití velkého množství prvků z celkové množiny, neboť výpočty základních sil nejsou příliš náročné na výpočetní výkon. Příklady pro využití jsou typy založené na: magnetických silách, buněčném modelu a sociálních silách. \cite{linkToBachelor1}
 
 \subsection{Simulace na bázi AI (Artificial Intelligence)}\label{sec:simulace-na-bazi-ai-artificial-intelligence}
 Druhý zmíněný typ je založen na bázi Agentů. Ti už nejsou reprezentováni jen obyčejnými silami \textit{(i přesto že se jedná o diametrálně odlišný typ simulace davu, určité fyzikální vlastostni agenti stále musí mít)} ale také přidanými vlastnostmi, kterými předchozí typ tolik nedisponoval. Mají hlavně přidané senzory, díky nímž dokáží vyhodnocovat danou situaci v reálném čase a následně se rozhodovat k dalšímu nejvýhodnějšímu kroku. Pokud do scény vložíme dva a více agentů kteří budou na sebe reagovat, můžeme říci že každý z nich má v jisté míře svůj mozek. Ať už jednodušší \textit{(rozhodování dalšího kroku mezi zdmi)} či složitějšího \textit{(např.: agent může v danou chvíli reagovat zda-li má jít rychleji či pomaleji aby nezpůsobil kolizi s jiným agentem či agenty)}.
@@ -120,14 +120,14 @@ Nejčastějším typem tohoto typu simulace je Craig Reynoldův algoritmus uměl
 Nejčastěji se však setkáme s názvem Boidův algoritmus, který je odvozen od boidů \textit{(boids)} čili alternativnímu názvu agentů. Jak již bylo zmíněno výše, simulace založená na
 umělé inteligenci obsahuje základní prvky částicové simulace, ale má také něco navíc. Výjma senzorů mají také přehled o celkové geometrii celé scény. Tzn. že každý agent \textit{(boid)} má přehled o všech agentech v celé scéně. Pokud bychom tedy maximalizovali důležitá tři pravidla tohoto principu popsané níže, znamená to, že každý iteruje \cite{linkToIteration} s každým.
 
-Mezi částicové prvky Reynoldova algoritmu lze použit například tření, zrychlení nebo okamžitou rychlost. Pokud bychom chtěli náš produkt více přiblížit realitě můžeme tření rozdělit na tření válcove, tření způsobené protivětrem nebo pokud bychom určili jako objekt auto, můžeme použít další fyzikální vlastnosti jako točivý moment případně brzdná dráha.
+Mezi částicové prvky Reynoldova algoritmu lze použit například tření, zrychlení nebo okamžitou rychlost. Reálně lze tření ještě rozdělit na tření válcove, tření způsobené protivětrem nebo pokud bychom určili jako objekt auto, můžeme použít další fyzikální vlastnosti jako točivý moment případně brzdná dráha.
 
-Existuje však celá řada vylepšení která se dají s tímto algoritmem provést, například simulace chování dopravy. Ta je založena na chování založeného na řízení \textit{(Steering behaviors)} \cite{linkToSteeringBehaviors}. 
+Existuje však celá řada vylepšení která se dají s tímto algoritmem provést, například simulace chování dopravy. Ta funguje jako tzv. chování založeného na řízení \textit{(Steering behaviors)} \cite{linkToSteeringBehaviors}. 
 
 V této práci jsem se však omezil na první tři vlastnosti \textit{(tření, zrychlení, okamžitá rychlost)}, které nám k popisu Boidova algoritmu budou dostatečně stačit.
 
 \newpage
-Nyní se zaměříme na popis Reynoldova algoritmu, který v surovém základu obsahuje tyto tři základní vlastnosti:
+Nyní se zaměříme na popis Reynoldova algoritmu, který obsahuje tři základní vlastnosti:
 
 \begin{enumerate}
 	\item Separace \textit{(Separation)}
@@ -144,16 +144,16 @@ Oddělení od ostatních agentů funguje na principu základních operací s vek
 Následuje sled základních operací které provedou separaci od ostatních agentů. 
 
 \begin{enumerate}
-	\item Odečtení dvou vektorů podle vzorce \textit{vSub = v1 - v2}, kde \textit{v1} je vektor aktuálního agenta\\ a \textit{v2} je vektor agenta ke kterému jsme se přiblížili. V tomto kroku je velice důležité nezaměnit pořadí odečítaných vektorů.
-	\item Normalizování vektoru podle vzorce \textit{vNorm = norm(vSub)}, kde \textit{vSub} je výsledek z předchozího kroku.
-	\item Vydělení výsledku kroku č. 2 podle vzorce \textit{vRes = vNorm / d}, kde \textit{d} je vzdálenost těchto agentů mezi sebou a \textit{vRes} je celkový výsledek těchto základních operací, které se následně využívají v dalších krocích \textit{(ty budou popsány v implementaci výsledné aplikace)}.
+	\item Odečtení dvou vektorů podle vzorce \(vSub = v1 - v2\), kde \(v1\) je vektor aktuálního agenta\\ a \(v2\) je vektor agenta ke kterému jsme se přiblížili.
+	\item Normalizování vektoru podle vzorce \(vNorm = norm(vSub)\), kde \(vSub\) je výsledek z předchozího kroku.
+	\item Vydělení výsledku kroku č. 2 podle vzorce \(vRes = vNorm / d\), kde \(d\) je vzdálenost těchto agentů mezi sebou a \(vRes\) je celkový výsledek těchto základních operací, které se následně využívají v dalších krocích \textit{(ty budou popsány v implementaci výsledné aplikace)}.
 \end{enumerate}
 
 \begin{figure}[H]\centering\includegraphics[width=0.5\textwidth]{Figures/separation.jpg}
 	\caption{Separace - vyhýbání se ostatním agentům (Zdroj: \cite{link2})}
 \end{figure}
 
-\newpage Nyní si ukážeme jak by mohl vypadat pseudokód pro separaci.
+\newpage Následuje ukázka jak vypadá pseudokód pro separaci.
 
 \begin{lstlisting}[language=pascal,label=src:Separation pseudocode,caption=Pseudokód pro separaci]
 
@@ -180,20 +180,21 @@ END PROCEDURE
 \subsection{Zarovnání}
 Dalším důležitým pravidlem pro fungování boidova algoritmu je zarovnání. Spolu se separací bez koheze má dav již základní podobu chování. 
 
-Zarovnání je hlavním stavebním kamenem každého davu případně hejna. Má za úkol soudržnost. Všem agentům ve scéně poskytuje schopnost sladit se, jak je zobrazeno na obrázku \\č. 3. 
+Zarovnání má za úkol soudržnost. Všem agentům ve scéně poskytuje schopnost sladit se, jak je zobrazeno na obrázku č. 3. 
 
 Princip fungování je obdobný jako u separace, pokud se v blízkosti okruhu od daného agenta objeví jiný agent případně agenti, zprůměruje se jejich rychlost a směr a na základě těchto údajů modifikujeme údaje konkrétního agenta a tím zajístíme soudržnost všech dohromady. 
 
 Pokud bychom chtěli aplikovat zarovnání a konkretizovat průběh, musíme se držet těchto kroků:
 
 \begin{enumerate}
-	\item V cyklu, který prochází všechny agenty ve scéně se testuje vzdálenost konkrétního agenta od jiného, který je momentálně v dané iteraci cyklu pod určitým indexem. Pokud je tato vzdálenost menší než průměr kruhu, přičtou se souřadnice vektoru daného agenta k lokálnímu sumárnímu vektoru \textit{sum}.
+	\item V cyklu, který prochází všechny agenty ve scéně se testuje vzdálenost konkrétního agenta od jiného, který je momentálně v dané iteraci cyklu pod určitým indexem. Pokud je tato vzdálenost menší než průměr kruhu, přičtou se souřadnice vektoru daného agenta k lokálnímu sumárnímu vektoru \(sum\).
 	\item Jestliže se podmínka nesplnila a tudíž sumární vektor \textit{sum} je roven nule pak se pravidlo zarovnání ukončuje. Pokud se alespoň jednou provedla podmínka v kroku č. 1 tak následuje sled následujících událostí.
 	
 	\begin{itemize}
-		\item sumární vektor \textit{sum} se vydělí skalární\footnote{Skalár je ve fyzice, v matematice nebo informatice veličina, jejíž hodnota je v daných jednotkách plně určena jediným číselným údajem. (Citace \cite{linkToScalar})} hodnotou rovné počtu splněných podmínek \\v kroku č. 1
+		\item sumární vektor \(sum\) se vydělí skalární\footnote{Skalár je veličina, která je určená pouze svojí velikostí, tj. její hodnota je popsána jediným číslem (skalární veličiny ve fyzice jsou např. hmotnost, objem, teplota).
+		(Citace \cite{linkToScalar})} hodnotou rovné počtu splněných podmínek \\v kroku č. 1
 		\item normalizování sumárního vektoru \textit{sum}
-		\item vypočtení výsledného vektoru dle kterého se upraví směr daného agenta vzorcem \\\textit{vRes = sum - vel}, kde \textit{sum} je sumární vektor a \textit{vel} je aktuální rychlost agenta. Opět je zde třeba připomenout důležitost pořadí odečítaných veličin.
+		\item vypočtení výsledného vektoru dle kterého se upraví směr daného agenta vzorcem \\\(vRes = sum - vel\), kde \(sum\) je sumární vektor a \(vel\) je aktuální rychlost agenta.
 	\end{itemize}
 	
 \end{enumerate}
@@ -202,7 +203,7 @@ Pokud bychom chtěli aplikovat zarovnání a konkretizovat průběh, musíme se 
 	\caption{Zarovnání - určení směru agenta vůči průměrnému směru ostatních (Zdroj: \cite{link2})}
 \end{figure}
 
-Následuje ukázka pseudokódu jak by mohla zhruba vypadat procedura/metoda Alignment.
+Následuje ukázka pseudokódu jak by mohla vypadat procedura Alignment.
 
 \begin{lstlisting}[language=pascal,label=src:Alignment pseudocode,caption=Pseudokód pro zarovnání]
 
@@ -233,15 +234,15 @@ END PROCEDURE
 \subsection{Koheze}
 Při simulaci pomocí Reynoldova algoritmu pomocí třech pravidel je koheze tím nejméně důležitým pravidlem. Pokud bychom aplikovali pouze dvě předchozí pravidla a sice separaci a zarovnání, pak by výsledek už vykazoval známky chování davu.
 
-Funguje na principu spojení okolních agentů \textit{(a následně vytvoření skupiny)}, kteří zasahují do dalšího pomyslného kruhu zarovnání. Aby fungovalo toto pravidlo a nekolidovalo s podmínkami separace musí platit \textit{constCoh > constSep}, kde \textit{constSep} je maximální průměr kružnice ve které se při překročení tohoto průměru řeší podmínky separace a \textit{constCoh} je maximální průměr kružnice u koheze. Pokud by podmínka byla opačná, koheze se nikdy neprovede.
+Funguje na principu spojení okolních agentů \textit{(a následně vytvoření skupiny)}, kteří zasahují do dalšího pomyslného kruhu zarovnání. Aby fungovalo toto pravidlo a nekolidovalo s podmínkami separace musí platit \(constCoh > constSep\), kde \(constSep\) je maximální průměr kružnice ve které se při překročení tohoto průměru řeší podmínky separace a \(constCoh\) je maximální průměr kružnice u koheze. Pokud by podmínka byla opačná, koheze se nikdy neprovede.
 
 Ve výsledné fázi se tedy musí určit průměrná lokace mezi všemi agenty kteří spadají do okruhu daného \textit{(aktuálně kontrolovaného)} agenta. Ve chvíli kdy se tyto souřadnice zjistí, agent na ně začne směřovat.
 
 Následují dvě základní operace které provedou změnu směru daného agenta k průměrné lokaci ostatních agentů, kteří jsou v jeho okruhu.
 
 \begin{enumerate}
-	\item Opět je zde hlavní cyklus který prochází všechny agenty ve scéně a kontroluje vzdálenosti ostatních agentů vůči konkrétnímu agentovi. Pokud libovolný agent spadá do okruhu nějakého konkrétního, opět se přičítá k sumárnímu vektoru \textit{sum} avšak ne rychlost, ale lokace onoho blízkého agenta.
-	\item Následně se provede tentýž krok jako u zarovnání, čili sumární vektor \textit{sum} se vydělí skalárem počtu splněných podmínek v kroku č. 1
+	\item Hlavní cyklus který prochází všechny agenty ve scéně a kontroluje vzdálenosti ostatních agentů vůči konkrétnímu agentovi. Pokud libovolný agent spadá do okruhu nějakého konkrétního, opět se přičítá k sumárnímu vektoru \(sum\) avšak ne rychlost, ale lokace blízkého agenta.
+	\item Následně se provede tentýž krok jako u zarovnání, čili sumární vektor \(sum\) se vydělí skalárem počtu splněných podmínek v kroku č. 1
 	
 \end{enumerate}
 
@@ -249,7 +250,7 @@ Následují dvě základní operace které provedou změnu směru daného agenta
 	\caption{Koheze - určení směru k průměrné lokaci okolních agentů (Zdroj: \cite{link2})}
 \end{figure}
 
-Následuje malá ukázka pseudokódu jak by mohla vypadat procedura/metoda Cohesion. Kód je v tomto pseudokódu obdobný jako kód zarovnání výjma řádku s normalizováním sumárního vektoru, avšak v implementační části je tento kód složitější.
+Následuje ukázka pseudokódu jak by vypadala procedura Cohesion. Kód je v tomto pseudokódu obdobný jako kód zarovnání výjma řádku s normalizováním sumárního vektoru, avšak v implementační části je tento kód složitější.
 
 \begin{lstlisting}[language=pascal,label=src:Cohesion pseudocode,caption=Pseudokód pro kohezi]
 
@@ -302,27 +303,36 @@ END PROCEDURE
 
 \end{lstlisting}
 
-Nyní lze přistoupit k implementační části, je však zapotřebí zmínit, že tento algoritmus se v reálu musí aplikovat do tzv. Flocking algoritmu, který všechny agenty ve scéně vytváří a koordinuje jejich průběh s vizualizací.
+Tento algoritmus se ještě aplikuje do tzv. Flocking algoritmu, který všechny agenty ve scéně vytváří a koordinuje jejich průběh s vizualizací.
 
 \newpage
 \section{Implementace}
 
+\subsection{Popis realizace demonstrační aplikace}
+Cílem demostrační aplikace je zrealizování a zvizualizování Craig Reynoldova algoritmu do využitelné podoby. Tento algoritmus lze aplikovat mnoha způsoby avšak rozhodl jsem se pro dvě spodní varianty:
+
+\begin{itemize}
+	\item Simulace úniku davu lidí z budovy podle nastavených únikových cest.
+	\item Simulace hejna ryb s vyhýbáním se predátorovi.
+\end{itemize}
+
+Vetšinu parametrů lze měnit/kombinovat v config.cfg souboru \textit{(lze i kombinovat jednotlivá tři pravidla postupným zapínáním/vypínáním)} a měnit mapu včetně únikových bodů lze v souboru map.txt, která je použitelná pouze pro první uvedený typ.
+
+Při vypnutých pravidlech kromě separace se dav bude chovat stylem \textit{``každý si jde kam chce''}.
+
 \subsection{Použité technologie}
-Jako hlavní nástroj jsem použil IDE\footnote{Integrated Development Environment - program, který usnadňuje práci programátorům \cite{linkToIDE})} Visual Studio verze 2017 od firmy Microsoft. Ten poskytuje nástroj NuGet, který nastavuje a konfiguruje potřebné knihovny nebo balíčky pro daný projekt, nicméně se v mém případě příliš neosvědčil a tak jsem pomocí něj úspěšně nainstaloval a nakonfiguroval pouze jednu knihovnu \textit{(Assimp)}, zbytek jsem musel konfigurovat ručně.
+Výsledná aplikace je naprogramována v jazyce C++ a jako hlavní nástroj jsem použil Visual Studio verze 2017 \cite{linkToVisualStudio}, protože je nejpoužívanějším IDE\footnote{Integrated Development Environment - program, který usnadňuje práci programátorům \cite{linkToIDE})} pro vývoj \cite{linkToTopIDE}. 
 
-Jako hlavní vykreslovací knihovu jsem použil OpenGL \cite{linkToOpenGL} verze 3.3.1 a jako nastavbu pro aplikační okna jsem použil knihovnu GLFW \cite{linkToGLFW} verze 3.2.1, která byla v průběhu mé práce velice stabilní. 
+Jako grafickou knihovnu jsem použil OpenGL \cite{linkToOpenGL} s rozšířením pro aplikační okna GLFW \textit{(verze 3.2.1)} \cite{linkToGLFW} a realtime mechanismy GLEW \textit{(verze 2.1.0)} \cite{linkToGLew}.
 
-Následuje knihovna GLEW \cite{linkToGLew} ve verzi 2.1.0, která slouží v pozadí aplikace jako rozšiřující nástroj OpenGL pro realtime mechanismy. 
+K načítání objektů jsem použil knihovnu Assimp \cite{linkToAssimp} \textit{(verze 3.2)}, která je vhodná kvůli velké škále podporovaných grafických formátů.
 
-K načítání objektů různých formátů jsem použil knihovnu Assimp \cite{linkToAssimp} verze 3.2, kterou se mi jako jedinou podařilo nakonfigurovat pomocí instalačního nástroje NuGet. S touto knihovnou jsem měl hodně problémů, zejména co se verzí týče. Původně jsem použil starší verzi 3.0 která však nepodporovala novější formáty souborů jenž měli v sobě zahrnuté i animace objektů.
+Pro matematické operace jsem použil knihovnu GLM \cite{linkToGLM} \textit{(verze 0.9.8.5)} hlavně pro počítání s maticemi.
 
-Pro matematické funkce, zejména operace s maticemi jsem použil knihovnu GLM \cite{linkToGLM} verze 0.9.8.5. Ruční instalace této knihovny ze všech výše uvedených byla pro mne nejméně komplikovaná.
-
-Jako poslední knihovnu jsem použil stb\_image z projektu Stb \cite{linkToStb} ve verzi 2.18. Po pročtení několika internetových diskusí jsem dospěl k této, pro mne spolehlivé, knihovně. Narozdíl od OpenCV \cite{linkToOpenCV} se kterou jsem měl velké problémy jak při konfiguraci tak s načítám určitých typů rastrových\footnote{Rastrová grafika je jeden ze dvou základních způsobů, jakým počítače ukládají a zpracovávají obrazové informace. \cite{linkToRastr}} dat, zejména s formátem DDS \cite{linkToDDS}, tak knihovna stb\_image tento formát bez problémů načetla.
-
-\begin{figure}[H]\centering\includegraphics[width=0.62\textwidth]{Figures/screen3.png}
-	\caption{Ukázka ruční konfigurace knihoven pomocí systémových proměnných}
-\end{figure}
+\subsection{Modulární architektura}
+%\begin{figure}[H]\centering\includegraphics[width=0.62\textwidth]{Figures/screen3.png}
+%	\caption{Ukázka konfigurace knihoven pomocí systémových proměnných}
+%\end{figure}
 
 %\begin{table}
 %	\centering
@@ -436,21 +446,17 @@ Nasazením nezůstane stavu úsek reality predátorů z klientely přirovnávaj�
 		\textit{Glosář Aldebaran}, [online]. 2018 [cit. 2018-2-1]\\
 		Dostupné z: \href{http://www.aldebaran.cz/glossary/print.php?id=1894}{\texttt{http://www.aldebaran.cz/glossary/print.php?id=1894}}
 		
-	\bibitem{linkToScalar} Physic Class Room,
-		\textit{Scalar}, [online]. 2018 [cit. 2018-2-1]\\
-		Dostupné z: \href{http://www.physicsclassroom.com/class/1DKin/Lesson-1/Scalars-and-Vectors}{\texttt{http://www.physicsclassroom.com/class/1DKin/Lesson-1/Scalars-and-Vectors}}
+	\bibitem{linkToScalar} Katedra Mechaniky,
+		\textit{Skalár}, [online]. 2018 [cit. 2018-2-1]\\
+		Dostupné z: \href{https://www.kme.zcu.cz/kmet/bio/matskalvekt.php}{\texttt{https://www.kme.zcu.cz/kmet/bio/matskalvekt.php}}
 		
-	\bibitem{linkToIDE} Wikipedia,
+	\bibitem{linkToIDE} Techopedia,
 		\textit{IDE}, [online]. 2018 [cit. 2018-2-4]\\
-		Dostupné z: \href{https://cs.wikipedia.org/wiki/V\%C3\%BDvojov\%C3\%A9\_prost\%C5\%99ed\%C3\%AD}{\texttt{https://cs.wikipedia.org/wiki/V\%C3\%BDvojov\%C3\%A9\_prost\%C5\%99ed\%C3\%AD}}
+		Dostupné z:\\ \href{https://www.techopedia.com/definition/26860/integrated-development-environment-ide}{\texttt{https://www.techopedia.com/definition/26860/integrated-development-environment-ide}}
 		
-	\bibitem{linkToRastr} Wikipedia,
-		\textit{Rastrová grafika}, [online]. 2018 [cit. 2018-2-4]\\
-		Dostupné z: \href{https://cs.wikipedia.org/wiki/Rastrov\%C3\%A1\_grafika}{\texttt{https://cs.wikipedia.org/wiki/Rastrov\%C3\%A1\_grafika}}
-		
-	\bibitem{linkToDDS} Wikipedia,
-		\textit{DirectDraw Surface}, [online]. 2018 [cit. 2018-2-4]\\
-		Dostupné z: \href{https://en.wikipedia.org/wiki/DirectDraw\_Surface}{\texttt{https://en.wikipedia.org/wiki/DirectDraw\_Surface}}
+	\bibitem{linkToTopIDE} Top IDE Index,
+		[online]. 2018 [cit. 2018-2-4]\\
+		Dostupné z: \href{https://pypl.github.io/IDE.html}{\texttt{https://pypl.github.io/IDE.html}}
 		
 	\bibitem{linkToVisualStudio} Visual Studio IDE,
 		[online]. 2018 [cit. 2018-2-4]\\
