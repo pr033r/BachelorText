@@ -1,25 +1,28 @@
-\select@language {slovak}
-\select@language {czech}
-\select@language {czech}
-\select@language {czech}
-\select@language {english}
-\select@language {czech}
+\babel@toc {slovak}{}
+\babel@toc {czech}{}
+\babel@toc {czech}{}
+\babel@toc {czech}{}
+\babel@toc {english}{}
+\babel@toc {czech}{}
 \contentsline {section}{Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek a symbol\IeC {\r u}}{2}{Doc-Start}
 \contentsline {section}{Seznam obr\'azk\r {u}}{3}{Doc-Start}
-\contentsline {section}{Seznam v\IeC {\'y}pis\IeC {\r u} zdrojov\IeC {\'e}ho k\IeC {\'o}du}{4}{Doc-Start}
-\contentsline {section}{\numberline {1}\IeC {\'U}vod}{5}{section.1}
-\contentsline {section}{\numberline {2}Simulace}{6}{section.2}
-\contentsline {subsection}{\numberline {2.1}Simulace davu}{6}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}\IeC {\v C}\IeC {\'a}sticov\IeC {\'a} simulace}{6}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Simulace na b\IeC {\'a}zi AI (Artificial Intelligence)}{6}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Craig Reynold\IeC {\r u}v algoritmus}{7}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Separace}{8}{subsection.2.5}
-\contentsline {subsection}{\numberline {2.6}Zarovn\IeC {\'a}n\IeC {\'\i }}{9}{subsection.2.6}
-\contentsline {subsection}{\numberline {2.7}Koheze}{11}{subsection.2.7}
+\contentsline {section}{Seznam tabulek}{4}{Doc-Start}
+\contentsline {section}{Seznam v\IeC {\'y}pis\IeC {\r u} zdrojov\IeC {\'e}ho k\IeC {\'o}du}{5}{Doc-Start}
+\contentsline {section}{\numberline {1}\IeC {\'U}vod}{6}{section.1}
+\contentsline {section}{\numberline {2}Simulace}{7}{section.2}
+\contentsline {subsection}{\numberline {2.1}Simulace davu}{7}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}\IeC {\v C}\IeC {\'a}sticov\IeC {\'a} simulace}{7}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Simulace na b\IeC {\'a}zi AI (Artificial Intelligence)}{7}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Craig Reynold\IeC {\r u}v algoritmus}{8}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Separace}{9}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Zarovn\IeC {\'a}n\IeC {\'\i }}{10}{subsection.2.6}
+\contentsline {subsection}{\numberline {2.7}Koheze}{12}{subsection.2.7}
 \contentsline {subsection}{\numberline {2.8}Aplikov\IeC {\'a}n\IeC {\'\i } t\IeC {\v r}\IeC {\'\i } pravidel}{13}{subsection.2.8}
-\contentsline {section}{\numberline {3}Implementace}{14}{section.3}
-\contentsline {subsection}{\numberline {3.1}Popis realizace demonstra\IeC {\v c}n\IeC {\'\i } aplikace}{14}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Pou\IeC {\v z}it\IeC {\'e} technologie}{14}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Modul\IeC {\'a}rn\IeC {\'\i } architektura}{14}{subsection.3.3}
-\contentsline {section}{\numberline {4}Z\IeC {\'a}v\IeC {\v e}r}{14}{section.4}
-\contentsline {section}{Reference}{14}{section.4}
+\contentsline {section}{\numberline {3}Implementace}{15}{section.3}
+\contentsline {subsection}{\numberline {3.1}Popis realizace demonstra\IeC {\v c}n\IeC {\'\i } aplikace}{15}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Pou\IeC {\v z}it\IeC {\'e} technologie}{15}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Optimalizace}{15}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Steering behaviors}{18}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}\IeC {\'U}nik z budovy}{19}{subsection.3.5}
+\contentsline {section}{\numberline {4}Z\IeC {\'a}v\IeC {\v e}r}{19}{section.4}
+\contentsline {section}{Reference}{19}{section.4}

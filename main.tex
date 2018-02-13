@@ -124,7 +124,7 @@ Mezi částicové prvky Reynoldova algoritmu lze použit například tření, zr
 
 Existuje však celá řada vylepšení která se dají s tímto algoritmem provést, například simulace chování dopravy. Ta funguje jako tzv. chování založeného na řízení \textit{(Steering behaviors)} \cite{linkToSteeringBehaviors}. 
 
-V této práci jsem se však omezil na první tři vlastnosti \textit{(tření, zrychlení, okamžitá rychlost)}, které nám k popisu Boidova algoritmu budou dostatečně stačit.
+V této práci jsem toto vylepšení použil a tím přiblížil chování davu více realitě. Přidané fyzikální veličiny jsou již zmíněné: tření, zrychlení a okamžitá rychlost.
 
 \newpage
 Nyní se zaměříme na popis Reynoldova algoritmu, který obsahuje tři základní vlastnosti:
@@ -136,7 +136,7 @@ Nyní se zaměříme na popis Reynoldova algoritmu, který obsahuje tři základ
 		kapalného a pevného tělesa), pozn. upraveno \cite{linkToCohesion}}\textit{(Cohesion)}
 \end{enumerate}
 
-\subsection{Separace}
+\subsection{Separace}\label{sec:separace}
 Separace slouží k tomu, aby se dva a více agentů nepřiblížili příliš blízko sebe a tím vyvolali kolizi mezi sebou. Je to první a nejzákladnější vlastnost Reynoldova algoritmu bez které by nebylo možné vytvořit kompletní simulaci. 
 
 Oddělení od ostatních agentů funguje na principu základních operací s vektory \textit{(2D nebo 3D)} a vytvoření pomyslného kruhu kolem každého agenta, který jej upozorní zda-li není příliš blízko jiného agenta. 
@@ -156,7 +156,6 @@ Následuje sled základních operací které provedou separaci od ostatních age
 \newpage Následuje ukázka jak vypadá pseudokód pro separaci.
 
 \begin{lstlisting}[language=pascal,label=src:Separation pseudocode,caption=Pseudokód pro separaci]
-
 PROCEDURE Separation(boid bJ)
 
 Vector result;
@@ -174,10 +173,9 @@ END
 RETURN result
 
 END PROCEDURE
-
 \end{lstlisting}
 
-\subsection{Zarovnání}
+\subsection{Zarovnání}\label{sec:zarovnani}
 Dalším důležitým pravidlem pro fungování boidova algoritmu je zarovnání. Spolu se separací bez koheze má dav již základní podobu chování. 
 
 Zarovnání má za úkol soudržnost. Všem agentům ve scéně poskytuje schopnost sladit se, jak je zobrazeno na obrázku č. 3. 
@@ -206,7 +204,6 @@ Pokud bychom chtěli aplikovat zarovnání a konkretizovat průběh, musíme se 
 Následuje ukázka pseudokódu jak by mohla vypadat procedura Alignment.
 
 \begin{lstlisting}[language=pascal,label=src:Alignment pseudocode,caption=Pseudokód pro zarovnání]
-
 PROCEDURE Alignment(boid bJ)
 
 	Vector sum
@@ -226,12 +223,10 @@ PROCEDURE Alignment(boid bJ)
 	END ELSE
 		RETURN sum
 	END
-
 END PROCEDURE
-
 \end{lstlisting}
 
-\subsection{Koheze}
+\subsection{Koheze}\label{sec:koheze}
 Při simulaci pomocí Reynoldova algoritmu pomocí třech pravidel je koheze tím nejméně důležitým pravidlem. Pokud bychom aplikovali pouze dvě předchozí pravidla a sice separaci a zarovnání, pak by výsledek už vykazoval známky chování davu.
 
 Funguje na principu spojení okolních agentů \textit{(a následně vytvoření skupiny)}, kteří zasahují do dalšího pomyslného kruhu zarovnání. Aby fungovalo toto pravidlo a nekolidovalo s podmínkami separace musí platit \(constCoh > constSep\), kde \(constSep\) je maximální průměr kružnice ve které se při překročení tohoto průměru řeší podmínky separace a \(constCoh\) je maximální průměr kružnice u koheze. Pokud by podmínka byla opačná, koheze se nikdy neprovede.
@@ -253,7 +248,6 @@ Následují dvě základní operace které provedou změnu směru daného agenta
 Následuje ukázka pseudokódu jak by vypadala procedura Cohesion. Kód je v tomto pseudokódu obdobný jako kód zarovnání výjma řádku s normalizováním sumárního vektoru, avšak v implementační části je tento kód složitější v řádku vracení výsledné hodnoty, kdy se ještě řeší fyzikální vlastnosti.
 
 \begin{lstlisting}[language=pascal,label=src:Cohesion pseudocode,caption=Pseudokód pro kohezi]
-
 PROCEDURE Cohesion(boid bJ)
 
 	Vector sum
@@ -273,18 +267,16 @@ PROCEDURE Cohesion(boid bJ)
 	END
 
 END PROCEDURE
-
 \end{lstlisting}
 
-\subsection{Aplikování tří pravidel}
+\subsection{Aplikování tří pravidel}\label{sec:aplikovani-tri-pravidel}
 Ke kompletní simulaci dojde ve chvíli spojením třech výše zmíněných pravidel. Technicky vzato se jedná o sečtení všech třech výsledných vektorů z každé ze tří procedur a rychlosti daného agenta který je aktuálně v iteraci. Nejdříve se sčítají rychlosti a poté se z této sumy spočítá výsledná pozice (Výpis pseudokódu č. 4).
 
 Avšak pravidel je možné použít více, jak je popsáno v publikaci od Craiga Reynolda, Steering Behaviors For Autonomous Characters \cite{linkToSteeringBehaviors}. Tudíž nemusí být nutně tři fixní pravidla, ale můžeme k sčítání výsledných vektorů jednotlivých pravidel připsat i pravidla jiná. Kombinacemi těchto pravidel lze dosáhnout různého výsledného chování agentů.
 
 Následující pseudokód ukazuje, jak lze tato pravidla aplikovat.
-
+\newpage
 \begin{lstlisting}[language=pascal,label=src:Flocking pseudocode,caption=Pseudokód pro aplikování třech pravidel]
-
 PROCEDURE AllBoidsToNewPosition()
 
 	Vector v1, v2, v3
@@ -300,7 +292,6 @@ PROCEDURE AllBoidsToNewPosition()
 	END
 
 END PROCEDURE
-
 \end{lstlisting}
 
 Tento algoritmus se ještě aplikuje do tzv. Flocking algoritmu, který všechny agenty ve scéně vytváří a koordinuje jejich průběh s vizualizací.
@@ -329,32 +320,122 @@ K načítání objektů jsem použil knihovnu Assimp \cite{linkToAssimp} \textit
 
 Pro matematické operace jsem použil knihovnu GLM \cite{linkToGLM} \textit{(verze 0.9.8.5)} hlavně pro počítání s maticemi.
 
-\subsection{Modulární architektura}
-%\begin{figure}[H]\centering\includegraphics[width=0.62\textwidth]{Figures/screen3.png}
-%	\caption{Ukázka konfigurace knihoven pomocí systémových proměnných}
-%\end{figure}
+Pro zobrazování parametrů a proměnných byla použita GUI AntTweakBar knihovna \textit{(verze 1.16)} \cite{linkToAntTweakBar} kvůli snadnému použití a intuitivnímu rozhraní.
 
-%\begin{table}
-%	\centering
-%	\caption{Settings of FNT algorithm for prediction of Box-Jenkins series}
-%	\label{tab:jenkins}
-%	\begin{tabular}{l@{\hspace{3em}}r}
-%		\toprule
-%		Parameter & Value\\
-%		\midrule
-%		Max epoch steps & 10 \\
-%		Required RMSE & 0.025 \\
-%		Number of processes & 4 \\
-%		GA population size & 256 \\
-%		GA max generations & 100 \\
-%		GA mutation rate & 0.2 \\
-%		GA crossover rate & 0.2 \\
-%		DE population size & 64 \\
-%		DE iterations & 900 \\
-%		DE crossover rate & 0.99 \\
-%		\midrule
-%	\end{tabular}
-%\end{table}
+\subsection{Optimalizace}
+%Než přejdu k implementaci rozšíření Reynoldova algoritmu a popisu částí aplikace rád bych zmínil několik variant, jak jsem aplikaci optimalizoval.
+
+První optimalizace proběhla kvůli paměťovým nárokům. Problém byl v obrovském nárustu paměti po zhruba dvou minutách běhu aplikace. Následující tabulka zobrazuje nárust v kB vůči času od posledního načtení objektu, tj. od počátku vizualizace scény.
+
+\begin{table}[H]
+	\centering
+	\caption{Tabulka nárustu využití paměti RAM}
+	\label{tab:ramoptimalization}
+	\renewcommand{\arraystretch}{1.5}
+	\begin{tabular}{| c | c | c | c | c |}
+		\hline
+		10s & 30s & 1min & 2min & 5min\\\hline
+		+12kB & +26kB & +51kB & +1240kB & +4281kB\\
+		\hline
+	\end{tabular}
+\end{table}
+
+Jak je patrné z hodnot, tak od druhé minuty nárust paměti stoupá takřka exponenciálně. Důvod tak rychlého nárustu byl ten, že jak se postupně k sobě agenti přibližovali, začínalo se aplikovat více pravidel, které ještě neměli optimalizované operace s pamětmi. Po pěti minutách byl nárust tak obrovský že hodnota FPS klesla na 10. 
+
+Začal jsem tedy hledat slabá místa a nakonec se mi veškeré operace s pamětma podařilo dostat pod kontrolu a eliminovat tak veškerý nárust využití paměti. 
+
+Příklad ošetření jedné z mnoha částí kódu můžeme vidět zde.
+
+\begin{lstlisting}[label=src:memory elimination,caption=Ukázka eliminace nárustu paměti]
+this->tmpVector->set();
+this->tmpVectorMem = this->tmpVector;
+this->tmpVector = this->tmpVector->subTwoVector(location, Boidss->at(i)->location);
+// ...operations with tmpVector
+this->steer->addVector(this->tmpVector);
+delete this->tmpVector;
+this->tmpVector = this->tmpVectorMem;
+\end{lstlisting}
+
+Důležitý je třetí řádek, kdy se volá metoda \textit{subTwoVector(...)}, která vrací výsledek odečtení dvou vektoru jako odkaz na nově vytvořenou paměť. Abychom zabránili nárustu paměti, musíme tento výpočet uložit do dočasné paměti \textit{tmpVector} se kterou provedeme patřičné operace a ve chvíli kdy jí už nebudeme potřebovat, tak ji smažeme.
+
+Musíme však zachovat původní adresu \textit{tmpVector}. Pro tento účel slouží proměnná \\\textit{tmpVectorMem} který slouží jako prostředník pro uchování adresy. Pak tedy můžeme tuto původní adresu přiřadit zpět, v tomto případě poslední řádek kódu.
+\\\\
+Jelikož jsem se snažil maximálně šetřit využití paměťi ve třídě \textit{Boids}, jejíž instance je volána v každé smyčce tak jednotlivá pravidla i metody pro mezivýpočty používali mezi sebou stejné adresy pamětí.
+
+Aby nedocházelo k neoprávněným přístupům a záměnou adres, využil jsem pomocnou proměnnou do které jsem dočasně uložil výsledek pravidla a pak pomocí metody \textit{set} bezpečně nastavil hodnoty vektoru bez jakéhokoliv úniku paměti. Tento způsob jsem aplikoval na všechna použitá pravidla, včetně vyhýbání se zdem.
+
+Vůči 100 agentům ve scéně měla aplikace využití 110 MB včetně použitých textur a objektů, po těchto doposud zmíněných optimalizací je využití 91 MB.
+\\\\
+Další vylepšení bylo lepší použití cyklů. Klasický zápis cyklu který jsem před tímto typem optimalizace používal je následujicí:\newpage
+\begin{lstlisting}[label=src:classic cycle,caption=Použití klasického cyklu] 
+for (int i = 0; i < this->models->size(); i++) {...}
+\end{lstlisting}
+Po pročtení oficiálních referencí pro C++ \cite{linkToCppReference} jsem zjistil že při každé iteraci cyklem se stále volá metoda \textit{size()}, která tento výkon podstatně snižuje. Řešením je uložit tuto hodnotu do proměnné. Dalším vylepšením je použití pre-inkrementace proměnné \textit{i}. Toto použití je mnohem účinnější než post-inkrementace z důvodu, že nepoužívá dočasné úložiště a vkládání potřebného kódu na pozadí \cite{linkToPreIncrementation}. Výsledný cyklus pak vypadá takto:
+\begin{lstlisting}[label=src:optimalized cycle,caption=Použití optimalizovaného cyklu] 
+for (int i = 0, len = this->models->size(); i < len; ++i) {...}
+\end{lstlisting}
+
+Tyto zdánlivě bezvýznamné změny v důležitých cyklech dokázali přidat až 5 FPS.
+\\\\
+Další problém nastal v načítání objektů. Původní verze nahrávání objektů do scény probíhala v obyčejné smyčce takže stejné objekty \textit{(v mojem případě objekty agentů)} se načítali vícekrát. 
+
+Toto jsem vyřešil pomocí kopírovacího konstruktoru. Daný typ objektu jsem načetl pouze jednou a pak v cyklu předával adresu načteného objektu dalšímu konstruktoru, který tuto paměť nakopíroval pro svou instanci. Tato část optimalizace ušetřila při načítání až 40 sekund.
+
+\begin{lstlisting}[label=src:copy constructor,caption=Ukázka použití kopírovacího konstruktoru]
+// loading object method in Flock class
+Model *tmpBoidsModel = new Model(this->cfg->OBJ_BOID, this->cfg);
+for (int i = 0; i < this->numberOfBoids; ++i) {
+	if (tmpBoidsModel != NULL)
+		this->boidsModel[i] = new Model(*tmpBoidsModel);
+	}
+}
+
+// copy constructor in Model class
+Model(const Model& model) 
+: 
+	textures_loaded(model.textures_loaded),
+	meshes(model.meshes),
+	directory(model.directory),
+	gammaCorrection(model.gammaCorrection),
+	cfg(model.cfg)
+{}
+\end{lstlisting}
+
+\subsection{Steering behaviors}
+Řízení chování \cite{linkToSteeringBehaviors} již zmíněné v teoretické části jsem použil pro reálnější podobu chování celého davu.
+
+Jako první vlastnost jsem použil hledání \textit{(seek)} primárně použivané u Koheze při návratové hodnotě (viz kapitola \ref{sec:koheze}), kde jsem upozornil na složitější implementační část oproti zarovnání.
+
+Hledání je určteno k tomu, aby agent směřoval k nějakému cíli, tak že upravuje aktuální rychlost \textit{(velocity)}. V případě koheze je cíl průměrná lokace okolních agentů. Výsledek této operace je seek vektor.
+
+Následující kód ukazuje jak se seek vektor vypočte.
+
+\begin{lstlisting}[label=src:seek,caption=Vypočtení seek vektoru]
+this->tmpVectorMem = desired->subTwoVector(v, this->location);
+this->desired->set(this->tmpVectorMem->vec.x, this->tmpVectorMem->vec.y, this->tmpVectorMem->vec.z);
+delete this->tmpVectorMem;
+
+this->desired->normalize();
+this->desired->mulScalar(maxSpeed);
+
+this->seekResult->set();
+this->tmpVectorMem = seekResult->subTwoVector(this->desired, this->velocity);
+this->seekResult->set(this->tmpVectorMem->vec.x, this->tmpVectorMem->vec.y, this->tmpVectorMem->vec.z);
+delete this->tmpVectorMem;
+
+seekResult->limit(maxForce);
+\end{lstlisting}
+
+Nejprve se spočte lokace na kterou má agent směřovat \textit{(vektor desired)}, a nastavíme maximální zrychlení aby se na místo dostavil co nejdříve.
+
+Následuje vypočtení samotného seek vektoru, který je roven rozdílu mezi požadovanou a aktuální rychlostí. Naposledy pak musíme vektor limitovat konstantou tření \textit{(maxForce)}.
+\\
+
+Další vlastností kterou jsem použil je následování bodů \textit{(Path Following)}. V mé práci slouží jako kontrolní body v budově.
+
+Po určení tohoto jednoho či více bodů na ně agent začně postupně směřovat. Při následování bodů se použivá funkce pro vypočtení seek vektoru který je poté aplikován jako další pravidlo, tzn. k výsledné rychlosti se přičte další vektor (viz kapitola \ref{sec:aplikovani-tri-pravidel}).
+
+\subsection{Únik z budovy}
 
 %\begin{figure}
 %	\subfloat[obecný]
@@ -454,6 +535,14 @@ Pro matematické operace jsem použil knihovnu GLM \cite{linkToGLM} \textit{(ver
 		\textit{IDE}, [online]. 2018 [cit. 2018-2-4]\\
 		Dostupné z:\\ \href{https://www.techopedia.com/definition/26860/integrated-development-environment-ide}{\texttt{https://www.techopedia.com/definition/26860/integrated-development-environment-ide}}
 		
+	\bibitem{linkToCppReference} CppReference.com,
+		, [online]. 2018 [cit. 2018-2-4]\\
+		Dostupné z: \href{http://en.cppreference.com/w/}{\texttt{http://en.cppreference.com/w/}}
+		
+	\bibitem{linkToPreIncrementation} CppReference.com,
+		\textit{Increment/decrement operators}, [online]. 2018 [cit. 2018-2-4]\\
+		Dostupné z: \href{http://en.cppreference.com/w/cpp/language/operator\_incdec}{\texttt{http://en.cppreference.com/w/cpp/language/operator\_incdec}}
+		
 	\bibitem{linkToTopIDE} Top IDE Index,
 		[online]. 2018 [cit. 2018-2-4]\\
 		Dostupné z: \href{https://pypl.github.io/IDE.html}{\texttt{https://pypl.github.io/IDE.html}}
@@ -489,6 +578,10 @@ Pro matematické operace jsem použil knihovnu GLM \cite{linkToGLM} \textit{(ver
 	\bibitem{linkToOpenCV} OpenCV,
 		[online]. 2018 [cit. 2018-2-4]\\
 		Dostupné z: \href{https://opencv.org/}{\texttt{https://opencv.org/}}
+		
+	\bibitem{linkToAntTweakBar} AntTweakBar,
+		[online]. 2018 [cit. 2018-2-13]\\
+		Dostupné z: \href{http://anttweakbar.sourceforge.net/doc/}{\texttt{http://anttweakbar.sourceforge.net/doc/}}
 		
 \end{thebibliography}
 
