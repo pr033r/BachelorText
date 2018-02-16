@@ -379,7 +379,7 @@ Tyto zdánlivě bezvýznamné změny v důležitých cyklech dokázali přidat a
 \\\\
 Další problém nastal v načítání objektů. Původní verze nahrávání objektů do scény probíhala v obyčejné smyčce takže stejné objekty \textit{(v mojem případě objekty agentů)} se načítali vícekrát. 
 
-Toto jsem vyřešil pomocí kopírovacího konstruktoru. Daný typ objektu jsem načetl pouze jednou a pak v cyklu předával adresu načteného objektu dalšímu konstruktoru, který tuto paměť nakopíroval pro svou instanci. Tato část optimalizace ušetřila při načítání až 40 sekund.
+Toto jsem vyřešil pomocí kopírovacího konstruktoru. Daný typ objektu jsem načetl pouze jednou a pak v cyklu předával adresu načteného objektu kopírovacímu konstruktoru, který tuto paměť nakopíroval pro svou instanci. Tato část optimalizace ušetřila při načítání až 40 sekund.
 
 \begin{lstlisting}[label=src:copy constructor,caption=Ukázka použití kopírovacího konstruktoru]
 // loading object method in Flock class
@@ -428,7 +428,7 @@ seekResult->limit(maxForce);
 
 Nejprve se spočte lokace na kterou má agent směřovat \textit{(vektor desired)}, a nastavíme maximální zrychlení aby se na místo dostavil co nejdříve.
 
-Následuje vypočtení samotného seek vektoru, který je roven rozdílu mezi požadovanou a aktuální rychlostí. Naposledy pak musíme vektor limitovat konstantou tření \textit{(maxForce)}.
+Následuje vypočtení samotného seek vektoru, který je roven rozdílu mezi požadovanou a aktuální rychlostí. V poslední řadě pak musíme vektor limitovat konstantou tření \textit{(maxForce)}.
 \\
 
 Další vlastností kterou jsem použil je následování bodů \textit{(Path Following)}. V mé práci slouží jako kontrolní body v budově.
