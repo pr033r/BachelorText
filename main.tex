@@ -89,7 +89,7 @@ V této práci se seznámíme se základy simulování davu a hejna. Popíšeme 
 \section{Simulace}
 Pojem simulace lze shrnout do obecné věty: \textit{"Počítačová simulace je napodobení skutečnosti pomocí numerického výpočtu, nezbytná součást modelování fyzikálních procesů. Dokáže předpovědět jak kvantitativní, tak kvalitativní výsledky pokusů při různých počátečních podmínkách. Umožňuje omezit výběr jevů, které celý pokus ovlivňují nejvíce a tím vysvětlit příčiny a podstatu procesů."} (Citace \cite{linkToSimulation})
 
-V našem případě se jedná o napodobení davu, kdy pomocí algoritmu \textit{(popsaného v dalších kapitolách)} dokážeme předem modifikovat nadcházející krok a tím i změnit výsledné chování celého davu. Na základě vstupních dat nebo kombinací pravidel můžeme chování měnit a tím simulovat dav při různých situacích, jako je evakuace z budovy nebo běžné chození po prostorách nákupního střediska.
+V našem případě se jedná o napodobení davu, kdy pomocí algoritmu dokážeme předem modifikovat nadcházející krok a tím i změnit výsledné chování celého davu. Na základě vstupních dat nebo kombinací pravidel můžeme chování měnit a tím simulovat dav při různých situacích, jako je evakuace z budovy nebo běžné chození po prostorách nákupního střediska.
 
 \subsection{Simulace davu}
 Simulaci davu lze zrealizovat dvěmi metodami. Částicová simulace a simulace založená na umělé inteligenci. \cite{linkToBachelor1}
@@ -108,23 +108,22 @@ Jelikož jsem využil tento typ simulace, tak v dalších kapitolách budeme ka�
 
 \begin{figure}\centering\includegraphics[width=0.8\textwidth]{Figures/flock_fish.png}
 	\caption{
-		Ukázka simulace hejna ryb v Unreal Enginu 4\\\hspace{\textwidth}(Zdroj: 
-		\href{http://blog.csdn.net/nosix/article/details/52859160}{\texttt{http://blog.csdn.net/nosix/article/details/52859160}})
+		Ukázka simulace hejna ryb v Unreal Enginu 4 (Zdroj: \cite{linkToUnrealEngineFish})
 	}
 \end{figure}
 
 \subsection{Craig Reynoldův algoritmus}
 
-Nejčastějším typem tohoto typu simulace je Craig Reynoldův algoritmus umělé inteligence vytvořený v roce 1986 a oficiálně představený roku 1987 na konferenci ACM SIGGRAPH \cite{linkToACM, linkToSIGGRAPH}.
+Nejčastějším typem simulace založené na umělé inteligenci je Craig Reynoldův algoritmus  vytvořený v roce 1986 a oficiálně představený roku 1987 na konferenci ACM SIGGRAPH \cite{linkToACM, linkToSIGGRAPH}.
 
 Nejčastěji se však setkáme s názvem Boidův algoritmus, který je odvozen od boidů \textit{(boids)} čili alternativnímu názvu agentů. Jak již bylo zmíněno výše, simulace založená na
-umělé inteligenci obsahuje základní prvky částicové simulace, ale má také něco navíc. Výjma senzorů mají také přehled o celkové geometrii celé scény. Tzn. že každý agent \textit{(boid)} má přehled o všech agentech v celé scéně. Pokud bychom tedy maximalizovali důležitá tři pravidla tohoto principu popsané níže, znamená to, že každý iteruje \cite{linkToIteration} s každým.
+umělé inteligenci obsahuje základní prvky částicové simulace, ale má také něco navíc. Výjma senzorů mají také přehled o celkové geometrii celé scény. Tzn. že každý agent \textit{(boid)} má přehled o všech agentech v celé scéně. Pokud bychom tedy maximalizovali důležitá tři pravidla tohoto principu popsané níže, znamená to, že každý iteruje s každým.
 
 Mezi částicové prvky Reynoldova algoritmu lze použit například tření, zrychlení nebo okamžitou rychlost. Reálně lze tření ještě rozdělit na tření válcove, tření způsobené protivětrem nebo pokud bychom určili jako objekt auto, můžeme použít další fyzikální vlastnosti jako točivý moment případně brzdná dráha.
 
 Existuje však celá řada vylepšení která se dají s tímto algoritmem provést, například simulace chování dopravy. Ta funguje jako tzv. chování založeného na řízení \textit{(Steering behaviors)} \cite{linkToSteeringBehaviors}. 
 
-V této práci jsem toto vylepšení použil a tím přiblížil chování davu více realitě. Přidané fyzikální veličiny jsou již zmíněné: tření, zrychlení a okamžitá rychlost.
+V této práci byla tato vylepšení použita a tím lze více přiblížit chování davu realitě. Přidané fyzikální veličiny jsou již zmíněné: tření, zrychlení a okamžitá rychlost.
 
 \newpage
 Nyní se zaměříme na popis Reynoldova algoritmu, který obsahuje tři základní vlastnosti:
@@ -300,7 +299,7 @@ Tento algoritmus se ještě aplikuje do tzv. Flocking algoritmu, který všechny
 \section{Implementace}
 
 \subsection{Popis realizace demonstrační aplikace}
-Cílem demostrační aplikace je zrealizování a zvizualizování Craig Reynoldova algoritmu do využitelné podoby. Tento algoritmus lze aplikovat mnoha způsoby avšak rozhodl jsem se pro dvě spodní varianty:
+Cílem demostrační aplikace je zrealizování a zvizualizování Craig Reynoldova algoritmu do využitelné podoby. Tento algoritmus lze aplikovat mnoha způsoby avšak byly použity dvě spodní varianty:
 
 \begin{itemize}
 	\item Simulace úniku davu lidí z budovy podle nastavených únikových cest.
@@ -312,13 +311,13 @@ Vetšinu parametrů lze měnit/kombinovat v config.cfg souboru \textit{(lze i ko
 Při vypnutých pravidlech kromě separace se dav bude chovat stylem \textit{``každý si jde kam chce''}.
 
 \subsection{Použité technologie}
-Výsledná aplikace je naprogramována v jazyce C++ a jako hlavní nástroj jsem použil Visual Studio verze 2017 \cite{linkToVisualStudio}, protože je nejpoužívanějším IDE\footnote{Integrated Development Environment - program, který nabízí velkou škálu nástrojů usnadňující programátoskou práci. \cite{linkToIDE})} pro vývoj \cite{linkToTopIDE}. 
+Výsledná aplikace je naprogramována v jazyce C++ a jako hlavní nástroj bylo použito Visual Studio verze 2017 \cite{linkToVisualStudio}, protože je nejpoužívanějším IDE pro vývoj \cite{linkToTopIDE}. 
 
-Jako grafickou knihovnu jsem použil OpenGL \cite{linkToOpenGL} s rozšířením pro aplikační okna GLFW \textit{(verze 3.2.1)} \cite{linkToGLFW} a realtime mechanismy GLEW \textit{(verze 2.1.0)} \cite{linkToGLew}.
+Jako grafická knihovna byla použita OpenGL \cite{linkToOpenGL} s rozšířením pro aplikační okna GLFW \textit{(verze 3.2.1)} \cite{linkToGLFW} a realtime mechanismy GLEW \textit{(verze 2.1.0)} \cite{linkToGLew}.
 
-K načítání objektů jsem použil knihovnu Assimp \cite{linkToAssimp} \textit{(verze 3.2)}, která je vhodná kvůli velké škále podporovaných grafických formátů.
+K načítání objektů posloužila knihovna Assimp \cite{linkToAssimp} \textit{(verze 3.2)}, která je vhodná kvůli velké škále podporovaných grafických formátů.
 
-Pro matematické operace jsem použil knihovnu GLM \cite{linkToGLM} \textit{(verze 0.9.8.5)} hlavně pro počítání s maticemi.
+Pro matematické operace byla použita knihovna GLM \cite{linkToGLM} \textit{(verze 0.9.8.5)} hlavně pro počítání s maticemi.
 
 Pro zobrazování parametrů a proměnných byla použita GUI AntTweakBar knihovna \textit{(verze 1.16)} \cite{linkToAntTweakBar} kvůli snadnému použití a intuitivnímu rozhraní.
 
@@ -340,9 +339,9 @@ První optimalizace proběhla kvůli paměťovým nárokům. Problém byl v obro
 	\end{tabular}
 \end{table}
 
-Jak je patrné z hodnot, tak od druhé minuty nárust paměti stoupá takřka exponenciálně. Důvod tak rychlého nárustu byl ten, že jak se postupně k sobě agenti přibližovali, začínalo se aplikovat více pravidel, které ještě neměli optimalizované operace s pamětmi. Po pěti minutách byl nárust tak obrovský že hodnota FPS klesla na 10. 
+Jak je patrné z hodnot, tak od druhé minuty nárust paměti stoupá takřka exponenciálně. Důvod tak rychlého nárustu byl ten, že jak se postupně k sobě agenti přibližovali, začínalo se aplikovat více pravidel, které ještě neměli optimalizované operace s pamětmi. Po pěti minutách byl nárust tak obrovský, že hodnota FPS klesla na 10. 
 
-Začal jsem tedy hledat slabá místa a nakonec se mi veškeré operace s pamětma podařilo dostat pod kontrolu a eliminovat tak veškerý nárust využití paměti. 
+Nakonec se veškeré operace s pamětma podařilo dostat pod kontrolu a eliminovat tak veškerý nárust využití paměti. 
 
 Příklad ošetření jedné z mnoha částí kódu můžeme vidět zde.
 
@@ -358,28 +357,28 @@ this->tmpVector = this->tmpVectorMem;
 
 Důležitý je třetí řádek, kdy se volá metoda \textit{subTwoVector(...)}, která vrací výsledek odečtení dvou vektoru jako odkaz na nově vytvořenou paměť. Abychom zabránili nárustu paměti, musíme tento výpočet uložit do dočasné paměti \textit{tmpVector} se kterou provedeme patřičné operace a ve chvíli kdy jí už nebudeme potřebovat, tak ji smažeme.
 
-Musíme však zachovat původní adresu \textit{tmpVector}. Pro tento účel slouží proměnná \\\textit{tmpVectorMem} který slouží jako prostředník pro uchování adresy. Pak tedy můžeme tuto původní adresu přiřadit zpět, v tomto případě poslední řádek kódu.
+Musíme však zachovat původní adresu \textit{tmpVector}. Pro tento účel slouží proměnná \\\textit{tmpVectorMem} která slouží jako prostředník pro uchování adresy. Pak tedy můžeme tuto původní adresu přiřadit zpět, v tomto případě poslední řádek kódu.
 \\\\
-Jelikož jsem se snažil maximálně šetřit využití paměťi ve třídě \textit{Boids}, jejíž instance je volána v každé smyčce tak jednotlivá pravidla i metody pro mezivýpočty používali mezi sebou stejné adresy pamětí.
+Pro větší úsporu paměťi ve třídě \textit{Boids}, jejíž instance je volána v každé smyčce, tak jednotlivá pravidla i metody pro mezivýpočty používali mezi sebou stejné adresy pamětí.
 
-Aby nedocházelo k neoprávněným přístupům a záměnou adres, využil jsem pomocnou proměnnou do které jsem dočasně uložil výsledek pravidla a pak pomocí metody \textit{set} bezpečně nastavil hodnoty vektoru bez jakéhokoliv úniku paměti. Tento způsob jsem aplikoval na všechna použitá pravidla, včetně vyhýbání se zdem.
+Aby nedocházelo k neoprávněným přístupům a záměnou adres, tak byla využita pomocná proměnná do které se dočasně uložil výsledek pravidla a pak pomocí metody \textit{set()} z třídy \textit{MyVector} šlo bezpečně nastavil hodnoty vektoru bez jakéhokoliv úniku paměti. Tento způsob byl aplikován na všechna použitá pravidla, včetně vyhýbání se zdem.
 
-Vůči 100 agentům ve scéně měla aplikace využití 110 MB včetně použitých textur a objektů, po těchto doposud zmíněných optimalizací je využití 91 MB.
+Vůči 100 agentům ve scéně měla aplikace využití 110 MB včetně použitých textur a objektů, po těchto doposud zmíněných optimalizací bylo využití 91 MB.
 \\\\
-Další vylepšení bylo lepší použití cyklů. Klasický zápis cyklu který jsem před tímto typem optimalizace používal je následujicí:\newpage
+Další vylepšení bylo lepší použití cyklů. Klasický zápis cyklu který byl použit před tímto typem optimalizace je následujicí:
 \begin{lstlisting}[label=src:classic cycle,caption=Použití klasického cyklu] 
 for (int i = 0; i < this->models->size(); i++) {...}
 \end{lstlisting}
-Po pročtení oficiálních referencí pro C++ \cite{linkToCppReference} jsem zjistil že při každé iteraci cyklem se stále volá metoda \textit{size()}, která tento výkon podstatně snižuje. Řešením je uložit tuto hodnotu do proměnné. Dalším vylepšením je použití pre-inkrementace proměnné \textit{i}. Toto použití je mnohem účinnější než post-inkrementace z důvodu, že nepoužívá dočasné úložiště a vkládání potřebného kódu na pozadí \cite{linkToPreIncrementation}. Výsledný cyklus pak vypadá takto:
+Po pročtení oficiálních referencí pro C++ \cite{linkToCppReference} bylo zjištěno, že při každé iteraci cyklem se stále volá metoda \textit{size()}, která tento výkon podstatně snižuje. Řešením je uložit tuto hodnotu do proměnné a tu pak  následně porovnávat v podmínce. Dalším vylepšením je použití prefixové inkrementace proměnné \textit{i}. Toto použití je mnohem účinnější než postfixová inkrementace z důvodu, že nepoužívá dočasné úložiště a vkládání potřebného kódu na pozadí \cite{linkToPreIncrementation}. Výsledný cyklus pak vypadá takto:
 \begin{lstlisting}[label=src:optimalized cycle,caption=Použití optimalizovaného cyklu] 
 for (int i = 0, len = this->models->size(); i < len; ++i) {...}
 \end{lstlisting}
 
 Tyto zdánlivě bezvýznamné změny v důležitých cyklech dokázali přidat až 5 FPS.
 \\\\
-Další problém nastal v načítání objektů. Původní verze nahrávání objektů do scény probíhala v obyčejné smyčce takže stejné objekty \textit{(v mojem případě objekty agentů)} se načítali vícekrát. 
+Další problém nastal v načítání objektů. Původní verze nahrávání objektů do scény probíhala\\ v obyčejné smyčce, takže stejné objekty \textit{(v tomto případě objekty agentů)} se načítali vícekrát. 
 
-Toto jsem vyřešil pomocí kopírovacího konstruktoru. Daný typ objektu jsem načetl pouze jednou a pak v cyklu předával adresu načteného objektu kopírovacímu konstruktoru, který tuto paměť nakopíroval pro svou instanci. Tato část optimalizace ušetřila při načítání až 40 sekund.
+Řešení spočívalo v kopírovacím konstruktoru. Daný typ objektu byl načten pouze jednou a poté se v cyklu předávala adresa načteného objektu kopírovacímu konstruktoru, který tuto paměť nakopíroval pro svou instanci. Tato část optimalizace ušetřila při načítání při 100 agentech 40 sekund.
 
 \begin{lstlisting}[label=src:copy constructor,caption=Ukázka použití kopírovacího konstruktoru]
 // loading object method in Flock class
@@ -404,7 +403,7 @@ Model(const Model& model)
 \subsection{Steering behaviors}
 Řízení chování \cite{linkToSteeringBehaviors} již zmíněné v teoretické části jsem použil pro reálnější podobu chování celého davu.
 
-Jako první vlastnost jsem použil hledání \textit{(seek)} primárně použivané u Koheze při návratové hodnotě (viz kapitola \ref{sec:koheze}), kde jsem upozornil na složitější implementační část oproti zarovnání.
+Jako první vlastnost byla použita seek \textit{(hledání)} primárně použivané u Koheze při návratové hodnotě (viz kapitola \ref{sec:koheze}), kde bylo upozorněno na složitější implementační část oproti zarovnání.
 
 Hledání je určteno k tomu, aby agent směřoval k nějakému cíli, tak že upravuje aktuální rychlost \textit{(velocity)}. V případě koheze je cíl průměrná lokace okolních agentů. Výsledek této operace je seek vektor.
 
@@ -431,9 +430,9 @@ Nejprve se spočte lokace na kterou má agent směřovat \textit{(vektor desired
 Následuje vypočtení samotného seek vektoru, který je roven rozdílu mezi požadovanou a aktuální rychlostí. V poslední řadě pak musíme vektor limitovat konstantou tření \textit{(maxForce)}.
 \\
 
-Další vlastností kterou jsem použil je následování bodů \textit{(Path Following)}. V mé práci slouží jako kontrolní body v budově.
+Další vlastností která byla použita je následování bodů \textit{(Path Following)}. V této práci slouží jako kontrolní body v budově.
 
-Po určení tohoto jednoho či více bodů na ně agent začně postupně směřovat. Při následování bodů se použivá funkce pro vypočtení seek vektoru který je poté aplikován jako další pravidlo, tzn. k výsledné rychlosti se přičte další vektor (viz kapitola \ref{sec:aplikovani-tri-pravidel}).
+Po určení tohoto jednoho či více bodů na ně agent začně postupně směřovat. Při následování bodů se použivá funkce pro vypočtení seek vektoru, který je poté aplikován jako další pravidlo, tzn. k výsledné rychlosti se přičte další vektor (viz kapitola \ref{sec:aplikovani-tri-pravidel}).
 
 \subsection{Únik z budovy}
 
@@ -478,6 +477,9 @@ Po určení tohoto jednoho či více bodů na ně agent začně postupně směř
 	\bibitem{link2} Boids, 
 		\textit{Background and Update by Craig Reynolds}, [online]. 2018 [cit. 2018-2-1]\\
 		Dostupné z: \href{https://www.red3d.com/cwr/boids/}{\texttt{https://www.red3d.com/cwr/boids/}}
+	
+	\bibitem{linkToUnrealEngineFish} Unreal Engine 4 \textit{simulace ryb}, [online]. 2018 [cit. 2018-2-1]\\
+		Dostupné z: \href{		http://blog.csdn.net/nosix/article/details/52859160}{\texttt{		http://blog.csdn.net/nosix/article/details/52859160}}
 	
 	\bibitem{link3} The nature of code, 
 		\textit{Chapter 6. Autonomous Agents}, [online]. 2018 [cit. 2018-2-1]\\
