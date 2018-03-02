@@ -435,35 +435,43 @@ Další vlastností která byla použita je následování bodů \textit{(Path F
 Po určení tohoto jednoho či více bodů na ně agent začně postupně směřovat. Při následování bodů se použivá funkce pro vypočtení seek vektoru, který je poté aplikován jako další pravidlo, tzn. k výsledné rychlosti se přičte další vektor (viz kapitola \ref{sec:aplikovani-tri-pravidel}).
 
 \subsection{Únik z budovy}
+První část využití Reynoldova agoritmu je simulace úniku lidí z budovy podle nastavených únikových cest. Funkčně je tato část určena k tomu, aby po skončení simulace mohl uživatel zjistit kolik by zabralo času evakuovat lidi z budovy. V případě časově náročné evakuace může uživatel upravit plán budovy a únikové cesty tak, aby budova splňovala dané normy.
 
-%\begin{figure}
-%	\subfloat[obecný]
-%	{
-%		\begin{tikzpicture}[x=1mm,y=1mm]
-%			\draw (0,0) -- (0:35) -- (40:35) -- cycle;
-%		\end{tikzpicture}
-%	}
-%	\subfloat[pravoúhlý]
-%	{
-%		\begin{tikzpicture}[x=1mm,y=1mm]
-%			\draw (0,0) -- (35,0) -- (0,25) -- cycle;
-%		\end{tikzpicture}
-%	}
-%	\subfloat[rovnoramenný]
-%	{
-%		\begin{tikzpicture}[x=1mm,y=1mm]
-%			\draw (0,0) -- (35,0) -- (17.5,45) -- cycle;
-%		\end{tikzpicture}
-%	}	
-%	\subfloat[rovnostranný]
-%	{
-%		\begin{tikzpicture}[x=1mm,y=1mm]
-%			\draw (0,0) -- (0:35) -- (60:35) -- cycle;
-%		\end{tikzpicture}
-%	}
-%	\caption{Trojúhelníky}
-%	\label{fig:Triangles}
-%\end{figure}
+Plán budovy můžeme upravovat v souboru \textit{map.txt} včetně definování dalších pater\\ a únikových cest. Jelikož se jedná o textový soubor, tak každý znak reprezentuje jinou funkci. Popis funkčních znaků můžeme vidět níže:
+
+\begin{itemize}
+	\item \textbf{G} generační místo pro dav, který lze použít vícekrát v každém patře či místnostech
+	\item \textbf{-} reprezentuje vertikální stěnu
+	\item \textbf{|} reprezentuje horizontální stěnu
+	\item \textbf{+} reprezentuje spojovací stěnu jako kombinace horizontální a vertikální stěny
+	\item \textbf{*} blok stěny ve jednoho bodu, proto ji lze použít jako reprezentaci sloupu v patře
+	\item \textbf{=} reprezentuje začátek schématu nového patra
+	\item \textbf{/} ukončovací znak patra
+	\item \textbf{A-Z, a-z} únikové body podle který se dav řídí \textit{(mimo G jako generační bod a F jako ukončovací bod zřetězeného řízení davu, viz níže)}
+	\item \textbf{1-9, F} zřetězené řízení davu použité jako únik z labyrintu pomocí 10 únikových bodů
+\end{itemize}
+
+Pro únik v jedné části budovy jsou požity dva znaky \textit{(např.: velké  písmeno A a malé a)}. Nejdříve dav směřuje k menšímu znaku a poté k většímu který indikuje finální bod. V každém patře může být těchto únikových bodů libovolný počet, kdy pokud v jednom patře končíme např.: znakem D, pak se v dalším patře začíná od znaku E. Jenotlivý agent určuje ke kterému bodu jít pomocí vzdálenosti od něj.
+
+Druhým typem úniku je únik z labyrintu, tedy složitějších prostor budovy kdy je potřeba více než dva body úniku z jedné části budovy. Dav začne směřovat k nejbližšímu nejmenšímu číslu a pokud tohoto čísla dosáhne, tak poté začne směřovat k dalšímu o 1 větší dokud neskončí u písmene F. Ukázku nákresu budovy můžeme vidět na obrázku 5.
+
+Při spuštění aplikace která vykreslí definované schéma lze scénu ovládat pomocí následujících kláves:
+
+\begin{itemize}
+	\item \textbf{1-6} klávesou lze přepínat mezi pohledy jednotlivých pater, přičemž se neaktuální patro přepne do režimu průhlednosti
+	\item \textbf{E} přepnutí celé budovy do řežimu průhlednosti se zvýrazněním davů
+	\item \textbf{Q} opětovné vykreslení celé budovy bez režimu průhlednosti pater
+	\item \textbf{Mezerník} spuštění simulace, opětovným stiskem lze simulaci ukončit
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\subfloat[ Půdorys]{\includegraphics[width=0.45\textwidth]{Figures/map.jpg}\label{fig:f1}}
+	\hfill
+	\subfloat[ Patro]{\includegraphics[width=0.45\textwidth]{Figures/map2.jpg}\label{fig:f2}}
+	\caption{Ukázka nákresu budovy v textovém souboru}
+\end{figure}
+
 
 \section{Závěr}
 
