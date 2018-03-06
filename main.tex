@@ -177,7 +177,7 @@ END PROCEDURE
 \subsection{Zarovnání}\label{sec:zarovnani}
 Dalším důležitým pravidlem pro fungování boidova algoritmu je zarovnání. Spolu se separací bez koheze má dav již základní podobu chování. 
 
-Zarovnání má za úkol soudržnost. Všem agentům ve scéně poskytuje schopnost sladit se, jak je zobrazeno na obrázku č. 3. 
+Zarovnání má za úkol soudržnost. Všem agentům ve scéně poskytuje schopnost sladit se, jak je zobrazeno na obrázku č. \ref{fig:zarovnani}. 
 
 Princip fungování je obdobný jako u separace, pokud se v blízkosti okruhu od daného agenta objeví jiný agent případně agenti, zprůměruje se jejich rychlost a směr a na základě těchto údajů modifikujeme údaje konkrétního agenta a tím zajístíme soudržnost všech dohromady. 
 
@@ -196,8 +196,8 @@ Pokud bychom chtěli aplikovat zarovnání a konkretizovat průběh, musíme se 
 	
 \end{enumerate}
 
-\begin{figure}[H]\centering\includegraphics[width=0.5\textwidth]{Figures/alignment.jpg}
-	\caption{Zarovnání - určení směru agenta vůči průměrnému směru ostatních (Zdroj: \cite{link2})}
+\begin{figure}[H]\centering\includegraphics[width=0.5\textwidth]{Figures/alignment.jpg}{zarovnani}
+	\caption{Zarovnání - určení směru agenta vůči průměrnému směru ostatních (Zdroj: \cite{link2})} \label{fig:zarovnani}
 \end{figure}
 
 Následuje ukázka pseudokódu jak by mohla vypadat procedura Alignment.
@@ -363,7 +363,7 @@ Pro větší úsporu paměťi ve třídě \textit{Boids}, jejíž instance je vo
 
 Aby nedocházelo k neoprávněným přístupům a záměnou adres, tak byla využita pomocná proměnná do které se dočasně uložil výsledek pravidla a pak pomocí metody \textit{set()} z třídy \textit{MyVector} šlo bezpečně nastavil hodnoty vektoru bez jakéhokoliv úniku paměti. Tento způsob byl aplikován na všechna použitá pravidla, včetně vyhýbání se zdem.
 
-Vůči 100 agentům ve scéně měla aplikace využití 110 MB včetně použitých textur a objektů, po těchto doposud zmíněných optimalizací bylo využití 91 MB.
+Vůči 100 agentům ve scéně měla starší verze aplikace využití 110 MB včetně použitých textur a objektů, po těchto doposud zmíněných optimalizací bylo využití 91 MB.
 \\\\
 Další vylepšení bylo lepší použití cyklů. Klasický zápis cyklu který byl použit před tímto typem optimalizace je následujicí:
 \begin{lstlisting}[label=src:classic cycle,caption=Použití klasického cyklu] 
@@ -400,7 +400,7 @@ Model(const Model& model)
 {}
 \end{lstlisting}
 
-\subsection{Steering behaviors}
+\subsection{Steering behaviors}\label{sec:steering-behaviors}
 Řízení chování \cite{linkToSteeringBehaviors} již zmíněné v teoretické části jsem použil pro reálnější podobu chování celého davu.
 
 Jako první vlastnost byla použita seek \textit{(hledání)} primárně použivané u Koheze při návratové hodnotě (viz kapitola \ref{sec:koheze}), kde bylo upozorněno na složitější implementační část oproti zarovnání.
@@ -434,6 +434,34 @@ Další vlastností která byla použita je následování bodů \textit{(Path F
 
 Po určení tohoto jednoho či více bodů na ně agent začně postupně směřovat. Při následování bodů se použivá funkce pro vypočtení seek vektoru, který je poté aplikován jako další pravidlo, tzn. k výsledné rychlosti se přičte další vektor (viz kapitola \ref{sec:aplikovani-tri-pravidel}).
 
+\subsection{Třídní diagram}
+Pro provoz simulace a základního chování slouží tři třídy.
+
+\begin{figure}[H]\centering\includegraphics[width=0.7\textwidth]{Figures/diagram1.jpg}
+	\caption{Diagram řídicích tříd}
+\end{figure}
+
+Hlavní třídou je třída Flock, která koordinuje komunikaci mezi třídou Walls a Boids. Zároveň se stará o veškeré vytváření agentů, kterým přiřažuje jednotlivé objekty ve scéně, jenž jsou vizualizovány uživateli. Také v každé iteraci volá simulační mechanismy pomocí metody \textit{run()}.
+
+Třída Walls vytváří zdi podle předaných dat z mapy a udržuje informace o generačních pozicích a pozicích únikových bodů. Díky tomu může třída Flock vygenerovat agenty do patřičného patra a pozice. Zároveň jsou tato data sdílena s třídou Boids, která může kontrolovat kolize se zdmi a počítat pozice únikových bodů na které má agent směřovat.
+
+\subsection{Výsledné aplikování pravidel}
+Všechna pravidla jsou aplikována jako součet výsledků jednotlivých pravidel \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel})}. \\V této práci k sečtení a vytvoření výsledného vektoru slouží metoda \textit{appplyForce(...))}, která přidá do výsledného vektoru \textit{acceleratoin} další vektor \textit{(výsledek jednoho z pravidel)}. Výsledná pozice agenta je pak ovlivněna tímto vektorem.
+
+Ukázku můžeme vidět níže.
+
+\begin{lstlisting}[label=src:seek,caption=Nastavení výsledné pozice agenta] 
+void Boids::update() {
+	acceleration->mulScalar((float)(.4));
+	velocity->addVector(acceleration);
+	velocity->limit(maxSpeed);
+	location->addVector(velocity);
+	acceleration->mulScalar(0);
+}
+\end{lstlisting}
+
+Po vynásobení konstantou 0.4, která slouží pro nastavení citlivosti \textit{(může a nemusí být použita, zde je nastavena po experimentech jako ideální)} následuje přidání a limitování vektoru a vypočtení výsledné pozice. Na konci musíme vektor \textit{acceleration} vynulovat pro použití v další iteraci.
+
 \subsection{Únik z budovy}
 První část využití Reynoldova agoritmu je simulace úniku lidí z budovy podle nastavených únikových cest. Funkčně je tato část určena k tomu, aby po skončení simulace mohl uživatel zjistit kolik by zabralo času evakuovat lidi z budovy. V případě časově náročné evakuace může uživatel upravit plán budovy a únikové cesty tak, aby budova splňovala dané normy.
 
@@ -451,14 +479,14 @@ Plán budovy můžeme upravovat v souboru \textit{map.txt} včetně definování
 	\item \textbf{1-9, F} zřetězené řízení davu použité jako únik z labyrintu pomocí 10 únikových bodů
 \end{itemize}
 
-Pro únik v jedné části budovy jsou požity dva znaky \textit{(např.: velké  písmeno A a malé a)}. Nejdříve dav směřuje k menšímu znaku a poté k většímu který indikuje finální bod. V každém patře může být těchto únikových bodů libovolný počet, kdy pokud v jednom patře končíme např.: znakem D, pak se v dalším patře začíná od znaku E. Jenotlivý agent určuje ke kterému bodu jít pomocí vzdálenosti od něj.
+Pro únik v jedné části budovy jsou požity dva znaky \textit{(např.: velké  písmeno A a malé a)}. Nejdříve dav směřuje k menšímu znaku a poté k většímu který indikuje finální bod. V každém patře může být těchto únikových bodů libovolný počet, kdy pokud v jednom patře končíme např.: znakem D, pak se v dalším patře začíná od znaku E. Jenotlivý agent určuje ke kterému bodu jít pomocí vzdálenosti od něj \textit{(tzn. k nejbližšímu)}.
 
-Druhým typem úniku je únik z labyrintu, tedy složitějších prostor budovy kdy je potřeba více než dva body úniku z jedné části budovy. Dav začne směřovat k nejbližšímu nejmenšímu číslu a pokud tohoto čísla dosáhne, tak poté začne směřovat k dalšímu o 1 větší dokud neskončí u písmene F. Ukázku nákresu budovy můžeme vidět na obrázku 5.
+Druhým typem úniku je únik z labyrintu, tedy složitějších prostor budovy kdy je potřeba více než dva body úniku z jedné části budovy. Dav začne směřovat k nejbližšímu nejmenšímu číslu a pokud tohoto čísla dosáhne, tak poté začne směřovat k dalšímu o 1 větší dokud neskončí u písmene F. Tento způsob lze aplikovat pouze u vykreslení jednoho patra. Ukázku nákresu budovy můžeme vidět na obrázku č.  \ref{fig:mapatxt}.
 
 Při spuštění aplikace která vykreslí definované schéma lze scénu ovládat pomocí následujících kláves:
 
 \begin{itemize}
-	\item \textbf{1-6} klávesou lze přepínat mezi pohledy jednotlivých pater, přičemž se neaktuální patro přepne do režimu průhlednosti
+	\item \textbf{1-9} klávesou lze přepínat mezi pohledy jednotlivých pater, přičemž se neaktuální patro přepne do režimu průhlednosti
 	\item \textbf{E} přepnutí celé budovy do řežimu průhlednosti se zvýrazněním davů
 	\item \textbf{Q} opětovné vykreslení celé budovy bez režimu průhlednosti pater
 	\item \textbf{Mezerník} spuštění simulace, opětovným stiskem lze simulaci ukončit
@@ -466,12 +494,82 @@ Při spuštění aplikace která vykreslí definované schéma lze scénu ovlád
 
 \begin{figure}[H]
 	\centering
-	\subfloat[ Půdorys]{\includegraphics[width=0.45\textwidth]{Figures/map.jpg}\label{fig:f1}}
+	\subfloat[ Půdorys]{\includegraphics[width=0.45\textwidth]{Figures/map.jpg}\label{fig:mapatxt}}
 	\hfill
-	\subfloat[ Patro]{\includegraphics[width=0.45\textwidth]{Figures/map2.jpg}\label{fig:f2}}
-	\caption{Ukázka nákresu budovy v textovém souboru}
+	\subfloat[ Patro]{\includegraphics[width=0.45\textwidth]{Figures/map2.jpg}\label{fig:mapatxt}}
+	\caption{Ukázka nákresu budovy v textovém souboru} \label{fig:mapatxt}
 \end{figure}
 
+Při zapnutí simulace jsou agenti v půdorysu okamžitě vedení směrem ven mimo budovu, avšak agenti v dalších patrech musí využít jiné evakuační cesty aby se dostali do spodního patra odkud můžou vyjít ven. Proto pokud se agent v patře dostane k finálnímu bodu úniku \textit{(velké písmeno)}, začne ``sestupovat'' do půdorysu budovy. Sestup však zabere nějaký čas, jednak kvůli zatížení únikových cest tak samotného sestupu. Souvisí s tím také to, že agentovi v posledním patře bude sestup trvat déle než agentovi v prvním patře. Hodnotu míry opuštění budovy \textit{(konkrétněji: evakuační výtah je rychlejší než evakuační schodiště)}, lze měnit v konfiguračním souboru.
+
+\begin{figure}[H]\centering\includegraphics[width=0.7\textwidth]{Figures/screen5.jpg}
+	\caption{Ukázka vyrenderovaného půdorysu budovy}
+\end{figure}
+
+Po načtení textového souboru se jednotlivé znaky uloží do kontejneru \textit{vector}, který obsahuje odkazy na další kontejnery, které reprezentují jednotlivé sloupce. K danému znaku lze tedy přistoupit metodikou matice \cite{linkToMatrix} - řádek, sloupec.
+\begin{lstlisting}[label=src:mapSave,caption=Způsob uložení mapy v paměti]
+vector<vector<char>*> *map;
+\end{lstlisting}
+
+Pro následování bodů byla použita metoda \textit{arriveTo(...)} která využívá metodu \textit{seek(...)} \textit{(viz kapitola \ref{sec:steering-behaviors})}. Abychom správně určili, který agent má kam směřovat, musíme metodě\\ \textit{arriveTo(...)} předat správný vektor, který získáme metodou \textit{getArriveVector(...)}. Ta vrátí výsledný vektor který je předán \textit{seek()} metodě. Výsledek je pak nový vektor, který se aplikuje jako nové pravidlo \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel})} a tím zajistíme že agent bude směřovat na nejbližší únikový bod a následně na finální bod. 
+Následuje ukázka, jak principiálně funguje metoda \textit{getArriveVector(...)}.
+
+\begin{lstlisting}[label=src:mapSave,caption=Princip metody getArriveVector(...)]
+// getting minIndex from exitPoints...
+if ((walls->exitPositions.at(minIndex)->vec.y / walls->floorDiferencial) == this->floor) {
+	
+	if (location->distance(walls->exitPositions.at(minIndex)) < cfg->PATH_TO_FIND_RADIUS && !this->incrementedOnce) {
+		++minIndex;
+		this->incrementedOnce = true;
+	}
+	// code...
+	return walls->exitPositions.at(minIndex);
+}
+\end{lstlisting}
+
+V první části kódu, zde nezmíněné kvůli délce, je získání \textit{minIndex} hodnoty ve které je uložen index z kontejneru \textit{map}, odkud začínají souřadnice únikových bodů ve stejném patře jako je aktuálně kontrolovaný agent. Pokud tedy v půdorysu bude 8 únikových bodů, jak je zobrazeno na obrázku č. \ref{fig:mapatxt}, tj. 4 finální únikové cesty, pak \textit{minIndex} v následujícím patře bude 9. Je třeba upozornit, že hodnota \textit{minIndex} vždy odkazuje na index menšího písmena.
+
+Následuje podmínka jenž kontroluje, zda-li se agent nachází ve stejém patře jako únikový bod \textit{(souřadnice Y únikového bodu vydělená výškou jednoho patra - konstanta třídy Walls)} a následná kontrola, zda se agent dostal do blízkosti okruhu únikového bodu. Pokud ano, může agent pokračovat k finálnímu bodu tak, že hodnotu \textit{minIndex} zvýšíme o 1.
+
+Mimo další operace které se nachází mezi návratovou hodnotou a předchozími podmínkami, je nakonec vrácen vektor s indexem \textit{minIndex}.
+
+Útěk ze složitějších prostor pomocí čísel \textit{(útěk z labyrintu)} funguje na stejné bázi s tím že se hodnota inkrementuje do té doby, dokud agent nenarazí na písmeno F, čili koncový bod.
+
+\subsection{Testování úniku z budovy}
+
+Testování proběhlo na PC s procesorem Intel Core i5-2500 3.3GHz, 12GB RAM a grafickou kartou Sapphire Radeon R9 280X Dual-X.
+
+Všechny části testů byly provedeny na schématu budovy s parcelou 30x17 bloků, kdy jeden blok odpovídá jednomu znaku v textovém souboru \textit{map.txt} a na 1x1 blok se vejde průměrně 6 agentů bez větších kolizí.
+
+První část testování je zaměřena na rychlost a plynulost aplikace. Jaké byly hodnoty FPS při daném počtu agentů, počtu pater a složitosti budovy. Hodnoty první a druhé tabulky odpovídají času před zapnutím simulace a času po simulaci.
+
+
+
+\begin{table}[H]
+	\centering
+	\caption{Tabulka hodnot FPS úniku z budovy před začátkem simulace}
+	\label{tab:ramoptimalization}
+	\renewcommand{\arraystretch}{1.0}
+	\begin{tabular}{| c | c | c | c | c |}
+		\hline
+		Pater & Agentů & Únikových bodů & Počet zdí & FPS\\\hline
+		0 & 200 & 8 & 30 & 110\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\newpage
+\section{Zhodnocení}
+
+Text na doplnění...
+
+\begin{figure}[H]\centering\includegraphics[width=0.9\textwidth]{Figures/screen1.jpg}
+	\caption{Vyrenderovaná třípatrová budova}
+\end{figure}
+
+\begin{figure}[H]\centering\includegraphics[width=0.9\textwidth]{Figures/screen4.jpg}
+	\caption{Budova přepnuta do průhledného režimu se zviditelněním agentů a únikových bodů}
+\end{figure}
 
 \section{Závěr}
 
@@ -540,6 +638,10 @@ Při spuštění aplikace která vykreslí definované schéma lze scénu ovlád
 	\bibitem{linkToScalar} Katedra Mechaniky,
 		\textit{Skalár}, [online]. 2018 [cit. 2018-2-1]\\
 		Dostupné z: \href{https://www.kme.zcu.cz/kmet/bio/matskalvekt.php}{\texttt{https://www.kme.zcu.cz/kmet/bio/matskalvekt.php}}
+		
+	\bibitem{linkToMatrix} IT slovník,
+		\textit{Matice}, [online]. 2018 [cit. 2018-3-6]\\
+		Dostupné z: \href{https://it-slovnik.cz/pojem/matice}{\texttt{https://it-slovnik.cz/pojem/matice}}
 		
 	\bibitem{linkToIDE} Techopedia,
 		\textit{IDE}, [online]. 2018 [cit. 2018-2-4]\\
