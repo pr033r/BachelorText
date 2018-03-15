@@ -1,8 +1,9 @@
-\babel@toc {slovak}{}
-\babel@toc {czech}{}
-\babel@toc {czech}{}
-\babel@toc {czech}{}
-\babel@toc {english}{}
-\babel@toc {czech}{}
+\select@language {slovak}
+\select@language {czech}
+\select@language {czech}
+\select@language {czech}
+\select@language {english}
+\select@language {czech}
 \contentsline {table}{\numberline {1}{\ignorespaces Tabulka n\IeC {\'a}rustu vyu\IeC {\v z}it\IeC {\'\i } pam\IeC {\v e}ti RAM\relax }}{15}{table.caption.5}
-\contentsline {table}{\numberline {2}{\ignorespaces Tabulka hodnot FPS \IeC {\'u}niku z budovy p\IeC {\v r}ed za\IeC {\v c}\IeC {\'a}tkem simulace\relax }}{23}{table.caption.9}
+\contentsline {table}{\numberline {2}{\ignorespaces Tabulka hodnot FPS b\IeC {\v e}hem spu\IeC {\v s}t\IeC {\v e}n\IeC {\'e} simulace\relax }}{23}{table.caption.9}
+\contentsline {table}{\numberline {3}{\ignorespaces Tabulka hodnot doby opu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } budovy\relax }}{24}{table.caption.10}

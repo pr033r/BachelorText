@@ -58,6 +58,7 @@ This thesis focuses on the description of boid's algorithm which is the most use
 \AddAcronym{GPU}{Graphics processing unit – grafická karta, má svůj procesor i výpočetní paměť}
 \AddAcronym{IDE}{Integrated Development Environment - program usnadňující práci programátorům}
 \AddAcronym{Realtime}{Vykreslování v reálném čase – snaha vykreslovat co nejrychleji}
+\AddAcronym{RAM}{Random Access Memory – hlavní paměť počítače}
 \AddAcronym{AI}{Artificial Intelligence - umělá inteligence}
 \AddAcronym{GLFW}{Graphics Library Framework - Multiplatformní technologie rozšiřující OpenGL o vytváření aplikačních oken}
 \AddAcronym{GLEW}{OpenGL Extension Wrangler Library - poskytuje realtime prostředky pro danou platformu}
@@ -123,10 +124,10 @@ Mezi částicové prvky Reynoldova algoritmu lze použit například tření, zr
 
 Existuje však celá řada vylepšení která se dají s tímto algoritmem provést, například simulace chování dopravy. Ta funguje jako tzv. chování založeného na řízení \textit{(Steering behaviors)} \cite{linkToSteeringBehaviors}. 
 
-V této práci byla tato vylepšení použita a tím lze více přiblížit chování davu realitě. Přidané fyzikální veličiny jsou již zmíněné: tření, zrychlení a okamžitá rychlost.
+V této práci byla tato vylepšení použita čímž lze chování davu více přiblížit realitě. Přidané fyzikální veličiny jsou již zmíněné: tření, zrychlení a okamžitá rychlost.
 
 \newpage
-Nyní se zaměříme na popis Reynoldova algoritmu, který obsahuje tři základní vlastnosti:
+Následuje popis Reynoldova algoritmu, který obsahuje tři základní vlastnosti:
 
 \begin{enumerate}
 	\item Separace \textit{(Separation)}
@@ -140,38 +141,40 @@ Separace slouží k tomu, aby se dva a více agentů nepřiblížili příliš b
 
 Oddělení od ostatních agentů funguje na principu základních operací s vektory \textit{(2D nebo 3D)} a vytvoření pomyslného kruhu kolem každého agenta, který jej upozorní zda-li není příliš blízko jiného agenta. 
 
-Následuje sled základních operací které provedou separaci od ostatních agentů. 
+Následující kroky provedou separaci agentů: 
 
 \begin{enumerate}
-	\item Odečtení dvou vektorů podle vzorce \(vSub = v1 - v2\), kde \(v1\) je vektor aktuálního agenta\\ a \(v2\) je vektor agenta ke kterému jsme se přiblížili.
-	\item Normalizování vektoru podle vzorce \(vNorm = norm(vSub)\), kde \(vSub\) je výsledek z předchozího kroku.
-	\item Vydělení výsledku kroku č. 2 podle vzorce \(vRes = vNorm / d\), kde \(d\) je vzdálenost těchto agentů mezi sebou a \(vRes\) je celkový výsledek těchto základních operací, které se následně využívají v dalších krocích \textit{(ty budou popsány v implementaci výsledné aplikace)}.
+	\item Odečtení vektoru agenta od vektoru aktuálně kontrolovaného agenta.
+	\item Normalizování výsledného vektoru z předhozího kroku.
+	\item Vydělení výsledku kroku č. 2 vzdáleností těchto dvou agentů. Výsledek se přičítá k výslednému vektoru.
+	\item Pokud je v okolí agenta více agentů se kterými koliduje, pak se na konci výsledný vektor vydělí počtem těchto agentů (viz obrázek č. \ref{fig:separationImg}).
 \end{enumerate}
 
-\begin{figure}[H]\centering\includegraphics[width=0.5\textwidth]{Figures/separation.jpg}
-	\caption{Separace - vyhýbání se ostatním agentům (Zdroj: \cite{link2})}
+\begin{figure}[H]\centering\includegraphics[width=0.5\textwidth]{Figures/separation.jpg}\label{fig:separationImg}
+	\caption{Separace - vyhýbání se ostatním agentům (Zdroj: \cite{link2})}\label{fig:separationImg}
 \end{figure}
 
-\newpage Následuje ukázka jak vypadá pseudokód pro separaci.
-
-\begin{lstlisting}[language=pascal,label=src:Separation pseudocode,caption=Pseudokód pro separaci]
-PROCEDURE Separation(boid bJ)
-
-Vector result;
-
-FOR EACH BOID b
-	IF b != bJ THEN
-		IF |b.position - bJ.position| < 100 THEN			
-			sub = b.position - bJ.position
-			Normalize(sub)
-			result = sum / |b.position - bJ.position|
-		END IF
-	END IF
-END
-
-RETURN result
-
-END PROCEDURE
+\begin{lstlisting}[language=c++,label=src:Separation pseudocode,caption=Pseudokód pro separaci]
+function Separation(boid paramBoid)
+{
+	Vector result
+	int count
+	
+	for (b in allBoids) {
+		if (b != paramBoid){
+			distance = distanceBetween(b, paramBoid)
+			if (distance < SEPARATION_DIAMETER){
+				sub = substractVectors(b, paramBoid) // b - paramBoid
+				normalize(sub)
+				divideScalar(sub, distance) // sub / distance
+				result = result + sub
+				count = count + 1
+			}
+		}
+	}
+	
+	return divideScalar(result, count) // result / count
+}
 \end{lstlisting}
 
 \subsection{Zarovnání}\label{sec:zarovnani}
@@ -185,7 +188,7 @@ Pokud bychom chtěli aplikovat zarovnání a konkretizovat průběh, musíme se 
 
 \begin{enumerate}
 	\item V cyklu, který prochází všechny agenty ve scéně se testuje vzdálenost konkrétního agenta od jiného, který je momentálně v dané iteraci cyklu pod určitým indexem. Pokud je tato vzdálenost menší než průměr kruhu, přičtou se souřadnice vektoru daného agenta k lokálnímu sumárnímu vektoru \(sum\).
-	\item Jestliže se podmínka nesplnila a tudíž sumární vektor \textit{sum} je roven nule pak se pravidlo zarovnání ukončuje. Pokud se alespoň jednou provedla podmínka v kroku č. 1 tak následuje sled následujících událostí.
+	\item Jestliže se podmínka nesplnila a tudíž sumární vektor \textit{sum} je roven nule pak se pravidlo zarovnání ukončuje. Pokud se alespoň jednou podmínka v kroku č. 1 provedla tak následují kroky:
 	
 	\begin{itemize}
 		\item sumární vektor \(sum\) se vydělí skalární\footnote{Skalár je veličina, která je určená pouze svojí velikostí, tj. její hodnota je popsána jediným číslem (skalární veličiny ve fyzice jsou např. hmotnost, objem, teplota).
@@ -196,39 +199,40 @@ Pokud bychom chtěli aplikovat zarovnání a konkretizovat průběh, musíme se 
 	
 \end{enumerate}
 
-\begin{figure}[H]\centering\includegraphics[width=0.5\textwidth]{Figures/alignment.jpg}{zarovnani}
+\begin{figure}[H]\centering\includegraphics[width=0.5\textwidth]{Figures/alignment.jpg}
 	\caption{Zarovnání - určení směru agenta vůči průměrnému směru ostatních (Zdroj: \cite{link2})} \label{fig:zarovnani}
 \end{figure}
 
-Následuje ukázka pseudokódu jak by mohla vypadat procedura Alignment.
-
-\begin{lstlisting}[language=pascal,label=src:Alignment pseudocode,caption=Pseudokód pro zarovnání]
-PROCEDURE Alignment(boid bJ)
-
+\begin{lstlisting}[language=C++,label=src:Alignment pseudocode,caption=Pseudokód pro zarovnání]
+function Alignment(boid paramBoid)
+{
 	Vector sum
-	Integer count
+	int count
 	
-	FOR EACH BOID bJ
-		IF b != bJ THEN
-			sum = sum + b.velocity
-			count = count + 1
-		END IF
-	END
+	for (b in allBoids) {
+		if (b != paramBoid){
+			distance = distanceBetween(b, paramBoid)
+			if (distance < ALIGNMENT_DIAMETER){
+				sum = sum + b.velocity
+				count = count + 1
+			}
+		}
+	}
 	
-	IF count > 0 THEN
-		sum = sum / count
-		Normalize(sum)
-		RETURN (sum - velocity)
-	END ELSE
-		RETURN sum
-	END
-END PROCEDURE
+	if (count > 0){
+		divideScalar(sum, count) // sum / count
+		normalize(sum)
+		return substractVectors(sum, velocity) // sum - velocity
+	} else {
+		return sum
+	}
+}
 \end{lstlisting}
 
 \subsection{Koheze}\label{sec:koheze}
 Při simulaci pomocí Reynoldova algoritmu pomocí třech pravidel je koheze tím nejméně důležitým pravidlem. Pokud bychom aplikovali pouze dvě předchozí pravidla a sice separaci a zarovnání, pak by výsledek už vykazoval známky chování davu.
 
-Funguje na principu spojení okolních agentů \textit{(a následně vytvoření skupiny)}, kteří zasahují do dalšího pomyslného kruhu zarovnání. Aby fungovalo toto pravidlo a nekolidovalo s podmínkami separace musí platit \(constCoh > constSep\), kde \(constSep\) je maximální průměr kružnice ve které se při překročení tohoto průměru řeší podmínky separace a \(constCoh\) je maximální průměr kružnice u koheze. Pokud by podmínka byla opačná, koheze se nikdy neprovede.
+Funguje na principu spojení okolních agentů \textit{(a následně vytvoření skupiny)}, kteří zasahují do dalšího pomyslného kruhu. Aby toto pravidlo fungovalo správně a nekolidovalo s podmínkami separace pak musí platit \(constCoh > constSep\), kde \(constSep\) je maximální průměr kružnice ve které se při překročení tohoto průměru řeší podmínky separace a \(constCoh\) je maximální průměr kružnice u koheze. Pokud by podmínka byla opačná, koheze se provede špatně nebo vůbec. Průměry kružnic koheze a zarovnání však na sebe vliv nemají.
 
 Ve výsledné fázi se tedy musí určit průměrná lokace mezi všemi agenty kteří spadají do okruhu daného \textit{(aktuálně kontrolovaného)} agenta. Ve chvíli kdy se tyto souřadnice zjistí, agent na ně začne směřovat.
 
@@ -244,28 +248,31 @@ Následují dvě základní operace které provedou změnu směru daného agenta
 	\caption{Koheze - určení směru k průměrné lokaci okolních agentů (Zdroj: \cite{link2})}
 \end{figure}
 
-Následuje ukázka pseudokódu jak by vypadala procedura Cohesion. Kód je v tomto pseudokódu obdobný jako kód zarovnání výjma řádku s normalizováním sumárního vektoru, avšak v implementační části je tento kód složitější v řádku vracení výsledné hodnoty, kdy se ještě řeší fyzikální vlastnosti.
+Kód v následujícím pseudokódu je obdobný jako kód zarovnání výjma řádku s normalizováním sumárního vektoru, avšak v implementační části je tento kód složitější v řádku vracení výsledné hodnoty, kdy se ještě řeší fyzikální vlastnosti.
 
-\begin{lstlisting}[language=pascal,label=src:Cohesion pseudocode,caption=Pseudokód pro kohezi]
-PROCEDURE Cohesion(boid bJ)
-
+\begin{lstlisting}[language=c++,label=src:Cohesion pseudocode,caption=Pseudokód pro kohezi]
+function Cohesion(boid paramBoid)
+{	
 	Vector sum
-	Integer count
+	int count
 	
-	FOR EACH BOID bJ
-		IF b != bJ THEN
-			sum = sum + b.location
-		END IF
-	END
+	for (b in allBoids) {
+		if (b != paramBoid){
+			distance = distanceBetween(b, paramBoid)
+			if (distance < COHESION_DIAMETER){
+				sum = sum + b.location
+				count = count + 1
+			}
+		}
+	}
 	
-	IF count > 0 THEN
-		sum = sum / count
-		RETURN (sum - velocity)
-	END ELSE
-		RETURN sum
-	END
-
-END PROCEDURE
+	if (count > 0){
+		divideScalar(sum, count) // sum / count
+		return physicalProperty(substractVectors(sum, velocity))
+	} else {
+		return sum
+	}
+}
 \end{lstlisting}
 
 \subsection{Aplikování tří pravidel}\label{sec:aplikovani-tri-pravidel}
@@ -274,23 +281,24 @@ Ke kompletní simulaci dojde ve chvíli spojením třech výše zmíněných pra
 Avšak pravidel je možné použít více, jak je popsáno v publikaci od Craiga Reynolda, Steering Behaviors For Autonomous Characters \cite{linkToSteeringBehaviors}. Tudíž nemusí být nutně tři fixní pravidla, ale můžeme k sčítání výsledných vektorů jednotlivých pravidel připsat i pravidla jiná. Kombinacemi těchto pravidel lze dosáhnout různého výsledného chování agentů.
 
 Následující pseudokód ukazuje, jak lze tato pravidla aplikovat.
-\newpage
-\begin{lstlisting}[language=pascal,label=src:Flocking pseudocode,caption=Pseudokód pro aplikování třech pravidel]
-PROCEDURE AllBoidsToNewPosition()
 
+\begin{lstlisting}[language=c++,label=src:Flocking pseudocode,caption=Pseudokód pro aplikování třech pravidel]
+function AllBoidsToNewPosition()
+{
 	Vector v1, v2, v3
 	Boid b
 	
-	FOR EACH BOID b
+	for (b in allBoids) {
 		v1 = Separation(b)
 		v2 = Alignment(b)
 		v3 = Cohesion(b)
+		// v4 = anotherRule(b)
 		
 		b.velocity = b.velocity + v1 + v2 + v3
 		b.position = b.position + b.velocity
-	END
+	}
 
-END PROCEDURE
+}
 \end{lstlisting}
 
 Tento algoritmus se ještě aplikuje do tzv. Flocking algoritmu, který všechny agenty ve scéně vytváří a koordinuje jejich průběh s vizualizací.
@@ -321,10 +329,9 @@ Pro matematické operace byla použita knihovna GLM \cite{linkToGLM} \textit{(ve
 
 Pro zobrazování parametrů a proměnných byla použita GUI AntTweakBar knihovna \textit{(verze 1.16)} \cite{linkToAntTweakBar} kvůli snadnému použití a intuitivnímu rozhraní.
 
-\subsection{Optimalizace}
-%Než přejdu k implementaci rozšíření Reynoldova algoritmu a popisu částí aplikace rád bych zmínil několik variant, jak jsem aplikaci optimalizoval.
+\subsection{Problémy při implementaci}
 
-První optimalizace proběhla kvůli paměťovým nárokům. Problém byl v obrovském nárustu paměti po zhruba dvou minutách běhu aplikace. Následující tabulka zobrazuje nárust v kB vůči času od posledního načtení objektu, tj. od počátku vizualizace scény.
+První problém nastal kvůli paměťovým nárokům. Důvod byl v obrovském nárustu paměti po zhruba dvou minutách běhu aplikace. Následující tabulka zobrazuje nárust v kB vůči času od posledního načtení objektu, tj. od počátku vizualizace scény.
 
 \begin{table}[H]
 	\centering
@@ -339,13 +346,14 @@ První optimalizace proběhla kvůli paměťovým nárokům. Problém byl v obro
 	\end{tabular}
 \end{table}
 
-Jak je patrné z hodnot, tak od druhé minuty nárust paměti stoupá takřka exponenciálně. Důvod tak rychlého nárustu byl ten, že jak se postupně k sobě agenti přibližovali, začínalo se aplikovat více pravidel, které ještě neměli optimalizované operace s pamětmi. Po pěti minutách byl nárust tak obrovský, že hodnota FPS klesla na 10. 
+Jak je patrné z hodnot, tak od druhé minuty nárust paměti stoupá takřka exponenciálně. Důvod tak rychlého nárustu byl ten, že jak se postupně k sobě agenti přibližovali, začínalo se aplikovat více pravidel, které ještě neměly optimalizované operace s pamětma. Tzn. nejdříve se začaly aplikovat pravidla s větším průměrem \textit{(buď koheze nebo zarovnání)} kružnice, ale když byli agenti blízko sebe, každému se vyhodnocovala všechna paměťově neoptimalizovaná pravidla.
+Po pěti minutách byl nárust tak obrovský, že hodnota FPS klesla na 10. 
 
-Nakonec se veškeré operace s pamětma podařilo dostat pod kontrolu a eliminovat tak veškerý nárust využití paměti. 
+Pro veškeré výpočetní operace s vektory byla vytvořena třída \textit{MyVector} z níž dědí třída \textit{MyVector2D}, která je využita pro pohyb davu v budově, první zmíněná je určená pro hejno. Důvod je přenositelnost a nezávislost algoritmu na platformě. Všechny důležité třídy využívají k vytvoření scény pouze nativní knihovny C++.
 
-Příklad ošetření jedné z mnoha částí kódu můžeme vidět zde.
+Příklad ošetření jedné části kódu:
 
-\begin{lstlisting}[label=src:memory elimination,caption=Ukázka eliminace nárustu paměti]
+\begin{lstlisting}[language=c++,label=src:memory elimination,caption=Ukázka eliminace nárustu paměti]
 this->tmpVector->set();
 this->tmpVectorMem = this->tmpVector;
 this->tmpVector = this->tmpVector->subTwoVector(location, Boidss->at(i)->location);
@@ -363,24 +371,24 @@ Pro větší úsporu paměťi ve třídě \textit{Boids}, jejíž instance je vo
 
 Aby nedocházelo k neoprávněným přístupům a záměnou adres, tak byla využita pomocná proměnná do které se dočasně uložil výsledek pravidla a pak pomocí metody \textit{set()} z třídy \textit{MyVector} šlo bezpečně nastavil hodnoty vektoru bez jakéhokoliv úniku paměti. Tento způsob byl aplikován na všechna použitá pravidla, včetně vyhýbání se zdem.
 
-Vůči 100 agentům ve scéně měla starší verze aplikace využití 110 MB včetně použitých textur a objektů, po těchto doposud zmíněných optimalizací bylo využití 91 MB.
+Vůči 100 agentům ve scéně měla starší verze aplikace využití RAM 110 MB včetně použitých textur a objektů. Po těchto doposud zmíněných změnách bylo využití 91 MB.
 \\\\
 Další vylepšení bylo lepší použití cyklů. Klasický zápis cyklu který byl použit před tímto typem optimalizace je následujicí:
-\begin{lstlisting}[label=src:classic cycle,caption=Použití klasického cyklu] 
+\begin{lstlisting}[language=c++,label=src:classic cycle,caption=Použití klasického cyklu] 
 for (int i = 0; i < this->models->size(); i++) {...}
 \end{lstlisting}
-Po pročtení oficiálních referencí pro C++ \cite{linkToCppReference} bylo zjištěno, že při každé iteraci cyklem se stále volá metoda \textit{size()}, která tento výkon podstatně snižuje. Řešením je uložit tuto hodnotu do proměnné a tu pak  následně porovnávat v podmínce. Dalším vylepšením je použití prefixové inkrementace proměnné \textit{i}. Toto použití je mnohem účinnější než postfixová inkrementace z důvodu, že nepoužívá dočasné úložiště a vkládání potřebného kódu na pozadí \cite{linkToPreIncrementation}. Výsledný cyklus pak vypadá takto:
-\begin{lstlisting}[label=src:optimalized cycle,caption=Použití optimalizovaného cyklu] 
+Dle oficiálních referencí pro C++ \cite{linkToCppReference} bylo zjištěno, že při každé iteraci cyklem se stále volá metoda \textit{size()}, která tento výkon podstatně snižuje. Řešením je uložit tuto hodnotu do proměnné a tu pak  následně porovnávat v podmínce. Dalším vylepšením je použití prefixové inkrementace proměnné \textit{i}. Toto použití je mnohem účinnější než postfixová inkrementace z důvodu, že nepoužívá dočasné úložiště a vkládání potřebného kódu na pozadí \cite{linkToPreIncrementation}. Výsledný cyklus pak vypadá takto:
+\begin{lstlisting}[language=c++,label=src:optimalized cycle,caption=Použití optimalizovaného cyklu] 
 for (int i = 0, len = this->models->size(); i < len; ++i) {...}
 \end{lstlisting}
 
-Tyto zdánlivě bezvýznamné změny v důležitých cyklech dokázali přidat až 5 FPS.
+Tyto změny důležitých cyklů v hlavní smyčce dokázaly přidat až 5 FPS.
 \\\\
 Další problém nastal v načítání objektů. Původní verze nahrávání objektů do scény probíhala\\ v obyčejné smyčce, takže stejné objekty \textit{(v tomto případě objekty agentů)} se načítali vícekrát. 
 
-Řešení spočívalo v kopírovacím konstruktoru. Daný typ objektu byl načten pouze jednou a poté se v cyklu předávala adresa načteného objektu kopírovacímu konstruktoru, který tuto paměť nakopíroval pro svou instanci. Tato část optimalizace ušetřila při načítání při 100 agentech 40 sekund.
+Řešení spočívalo v kopírovacím konstruktoru. Daný typ objektu byl načten pouze jednou a poté se v cyklu předávala adresa načteného objektu kopírovacímu konstruktoru, který tuto paměť nakopíroval pro svou instanci. Při načítání 100 agentů bylo celkově ušetřeno 40 sekund.
 
-\begin{lstlisting}[label=src:copy constructor,caption=Ukázka použití kopírovacího konstruktoru]
+\begin{lstlisting}[language=c++,label=src:copy constructor,caption=Ukázka použití kopírovacího konstruktoru]
 // loading object method in Flock class
 Model *tmpBoidsModel = new Model(this->cfg->OBJ_BOID, this->cfg);
 for (int i = 0; i < this->numberOfBoids; ++i) {
@@ -401,15 +409,15 @@ Model(const Model& model)
 \end{lstlisting}
 
 \subsection{Steering behaviors}\label{sec:steering-behaviors}
-Řízení chování \cite{linkToSteeringBehaviors} již zmíněné v teoretické části jsem použil pro reálnější podobu chování celého davu.
+Řízení chování \cite{linkToSteeringBehaviors} již zmíněné v teoretické části bylo použito pro reálnější podobu chování celého davu.
 
-Jako první vlastnost byla použita seek \textit{(hledání)} primárně použivané u Koheze při návratové hodnotě (viz kapitola \ref{sec:koheze}), kde bylo upozorněno na složitější implementační část oproti zarovnání.
+Jako první vlastnost byla použita metoda seek \textit{(hledání)} primárně použivané u Koheze při návratové hodnotě (viz kapitola \ref{sec:koheze}), kde bylo upozorněno na složitější implementační část oproti zarovnání.
 
 Hledání je určteno k tomu, aby agent směřoval k nějakému cíli, tak že upravuje aktuální rychlost \textit{(velocity)}. V případě koheze je cíl průměrná lokace okolních agentů. Výsledek této operace je seek vektor.
 
 Následující kód ukazuje jak se seek vektor vypočte.
 
-\begin{lstlisting}[label=src:seek,caption=Vypočtení seek vektoru]
+\begin{lstlisting}[language=c++,label=src:seek,caption=Vypočtení seek vektoru]
 this->tmpVectorMem = desired->subTwoVector(v, this->location);
 this->desired->set(this->tmpVectorMem->vec.x, this->tmpVectorMem->vec.y, this->tmpVectorMem->vec.z);
 delete this->tmpVectorMem;
@@ -430,7 +438,7 @@ Nejprve se spočte lokace na kterou má agent směřovat \textit{(vektor desired
 Následuje vypočtení samotného seek vektoru, který je roven rozdílu mezi požadovanou a aktuální rychlostí. V poslední řadě pak musíme vektor limitovat konstantou tření \textit{(maxForce)}.
 \\
 
-Další vlastností která byla použita je následování bodů \textit{(Path Following)}. V této práci slouží jako kontrolní body v budově.
+Další vlastností která byla použita je následování bodů \textit{(Path Following)}. V této práci slouží jako následování kontrolních bodů v budově.
 
 Po určení tohoto jednoho či více bodů na ně agent začně postupně směřovat. Při následování bodů se použivá funkce pro vypočtení seek vektoru, který je poté aplikován jako další pravidlo, tzn. k výsledné rychlosti se přičte další vektor (viz kapitola \ref{sec:aplikovani-tri-pravidel}).
 
@@ -446,11 +454,9 @@ Hlavní třídou je třída Flock, která koordinuje komunikaci mezi třídou Wa
 Třída Walls vytváří zdi podle předaných dat z mapy a udržuje informace o generačních pozicích a pozicích únikových bodů. Díky tomu může třída Flock vygenerovat agenty do patřičného patra a pozice. Zároveň jsou tato data sdílena s třídou Boids, která může kontrolovat kolize se zdmi a počítat pozice únikových bodů na které má agent směřovat.
 
 \subsection{Výsledné aplikování pravidel}
-Všechna pravidla jsou aplikována jako součet výsledků jednotlivých pravidel \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel})}. \\V této práci k sečtení a vytvoření výsledného vektoru slouží metoda \textit{appplyForce(...))}, která přidá do výsledného vektoru \textit{acceleratoin} další vektor \textit{(výsledek jednoho z pravidel)}. Výsledná pozice agenta je pak ovlivněna tímto vektorem.
+Všechna pravidla jsou aplikována jako součet výsledků jednotlivých pravidel \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel})}. \\V této práci k sečtení a vytvoření výsledného vektoru slouží metoda \textit{appplyForce(...))}, která přidá do výsledného vektoru \textit{acceleratoin} další vektor \textit{(výsledek jednoho z pravidel)}. Pro nastavení výsledné pozice agenta slouží metoda \textit{update()}, která k tomu využije vektor \textit{acceleration}.
 
-Ukázku můžeme vidět níže.
-
-\begin{lstlisting}[label=src:seek,caption=Nastavení výsledné pozice agenta] 
+\begin{lstlisting}[language=c++,label=src:seek,caption=Nastavení výsledné pozice agenta] 
 void Boids::update() {
 	acceleration->mulScalar((float)(.4));
 	velocity->addVector(acceleration);
@@ -460,7 +466,7 @@ void Boids::update() {
 }
 \end{lstlisting}
 
-Po vynásobení konstantou 0.4, která slouží pro nastavení citlivosti \textit{(může a nemusí být použita, zde je nastavena po experimentech jako ideální)} následuje přidání a limitování vektoru a vypočtení výsledné pozice. Na konci musíme vektor \textit{acceleration} vynulovat pro použití v další iteraci.
+Po vynásobení konstantou 0.4, která slouží pro nastavení citlivosti \textit{(může a nemusí být použita, zde je nastavena po experimentech jako ideální)} následuje přidání, limitování vektoru a~vypočtení výsledné pozice. Na konci musíme vektor \textit{acceleration} vynulovat pro použití v další iteraci.
 
 \subsection{Únik z budovy}
 První část využití Reynoldova agoritmu je simulace úniku lidí z budovy podle nastavených únikových cest. Funkčně je tato část určena k tomu, aby po skončení simulace mohl uživatel zjistit kolik by zabralo času evakuovat lidi z budovy. V případě časově náročné evakuace může uživatel upravit plán budovy a únikové cesty tak, aby budova splňovala dané normy.
@@ -507,14 +513,14 @@ Při zapnutí simulace jsou agenti v půdorysu okamžitě vedení směrem ven mi
 \end{figure}
 
 Po načtení textového souboru se jednotlivé znaky uloží do kontejneru \textit{vector}, který obsahuje odkazy na další kontejnery, které reprezentují jednotlivé sloupce. K danému znaku lze tedy přistoupit metodikou matice \cite{linkToMatrix} - řádek, sloupec.
-\begin{lstlisting}[label=src:mapSave,caption=Způsob uložení mapy v paměti]
+\begin{lstlisting}[language=c++,label=src:mapSave,caption=Způsob uložení mapy v paměti]
 vector<vector<char>*> *map;
 \end{lstlisting}
 
 Pro následování bodů byla použita metoda \textit{arriveTo(...)} která využívá metodu \textit{seek(...)} \textit{(viz kapitola \ref{sec:steering-behaviors})}. Abychom správně určili, který agent má kam směřovat, musíme metodě\\ \textit{arriveTo(...)} předat správný vektor, který získáme metodou \textit{getArriveVector(...)}. Ta vrátí výsledný vektor který je předán \textit{seek()} metodě. Výsledek je pak nový vektor, který se aplikuje jako nové pravidlo \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel})} a tím zajistíme že agent bude směřovat na nejbližší únikový bod a následně na finální bod. 
 Následuje ukázka, jak principiálně funguje metoda \textit{getArriveVector(...)}.
 
-\begin{lstlisting}[label=src:mapSave,caption=Princip metody getArriveVector(...)]
+\begin{lstlisting}[language=c++,label=src:mapSave,caption=Princip metody getArriveVector(...)]
 // getting minIndex from exitPoints...
 if ((walls->exitPositions.at(minIndex)->vec.y / walls->floorDiferencial) == this->floor) {
 	
@@ -541,19 +547,42 @@ Testování proběhlo na PC s procesorem Intel Core i5-2500 3.3GHz, 12GB RAM a g
 
 Všechny části testů byly provedeny na schématu budovy s parcelou 30x17 bloků, kdy jeden blok odpovídá jednomu znaku v textovém souboru \textit{map.txt} a na 1x1 blok se vejde průměrně 6 agentů bez větších kolizí.
 
-První část testování je zaměřena na rychlost a plynulost aplikace. Jaké byly hodnoty FPS při daném počtu agentů, počtu pater a složitosti budovy. Hodnoty první a druhé tabulky odpovídají času před zapnutím simulace a času po simulaci.
-
-
+První část testování je zaměřena na rychlost a plynulost aplikace. Jaké byly hodnoty FPS při daném počtu agentů, počtu pater a složitosti budovy \textit{(počet zdí)}. Hodnoty FPS jsou odečteny během simulace.
 
 \begin{table}[H]
 	\centering
-	\caption{Tabulka hodnot FPS úniku z budovy před začátkem simulace}
-	\label{tab:ramoptimalization}
+	\caption{Tabulka hodnot FPS během spuštěné simulace}
+	\label{tab:tablefps}
 	\renewcommand{\arraystretch}{1.0}
 	\begin{tabular}{| c | c | c | c | c |}
 		\hline
 		Pater & Agentů & Únikových bodů & Počet zdí & FPS\\\hline
-		0 & 200 & 8 & 30 & 110\\
+		0 & 200 & 8 & 193 & 56\\
+		1 & 200 & 10 & 343 & 55\\
+		2 & 200 & 14 & 513 & 52\\
+		3 & 200 & 18 & 683 & 47\\
+		4 & 200 & 22 & 853 & 42\\
+		5 & 200 & 24 & 1023 & 39\\
+		\hline
+	\end{tabular}
+\end{table}
+
+Jak je patrné, tak čím více je pater, tím více klesá FPS z důvodu více kontrol kolizí se zdmi \\\textit{(i když se řeší kolize v každém patře zvlášť)}. Dále bylo z testování zjištěno, že se hodnoty během či mimo simulaci takřka vůbec neliší.
+
+\begin{table}[H]
+	\centering
+	\caption{Tabulka hodnot doby opuštění budovy}
+	\label{tab:tabletime}
+	\renewcommand{\arraystretch}{1.0}
+	\begin{tabular}{| c | c | c | c | c |}
+		\hline
+		Pater & Agentů & Únikových bodů & Čas evakuace [s]\\\hline
+		0 & 200 & 8 & 58.6\\
+		1 & 200 & 10 & 115.8\\
+		2 & 200 & 14 & 52\\
+		3 & 200 & 18 & 47\\
+		4 & 200 & 22 & 42\\
+		5 & 200 & 24 & 39\\
 		\hline
 	\end{tabular}
 \end{table}
