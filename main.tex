@@ -485,7 +485,7 @@ Plán budovy můžeme upravovat v souboru \textit{map.txt} včetně definování
 	\item \textbf{1-9, F} zřetězené řízení davu použité jako únik z labyrintu pomocí 10 únikových bodů
 \end{itemize}
 
-Pro únik v jedné části budovy jsou požity dva znaky \textit{(např.: velké  písmeno A a malé a)}. Nejdříve dav směřuje k menšímu znaku a poté k většímu který indikuje finální bod. V každém patře může být těchto únikových bodů libovolný počet, kdy pokud v jednom patře končíme např.: znakem D, pak se v dalším patře začíná od znaku E. Jenotlivý agent určuje ke kterému bodu jít pomocí vzdálenosti od něj \textit{(tzn. k nejbližšímu)}.
+Pro únik v jedné části budovy jsou požity dva znaky \textit{(např.: velké  písmeno A a malé a)}. Nejdříve dav směřuje k menšímu znaku a poté k většímu který indikuje finální bod. V každém patře může být těchto únikových bodů libovolný počet, kdy pokud v jednom patře končíme např.: znakem D, pak se v dalším patře začíná od znaku E. Jenotlivý agent určuje ke kterému bodu jít pomocí vzdálenosti od něj \textit{(tj. k nejbližšímu)}.
 
 Druhým typem úniku je únik z labyrintu, tedy složitějších prostor budovy kdy je potřeba více než dva body úniku z jedné části budovy. Dav začne směřovat k nejbližšímu nejmenšímu číslu a pokud tohoto čísla dosáhne, tak poté začne směřovat k dalšímu o 1 větší dokud neskončí u písmene F. Tento způsob lze aplikovat pouze u vykreslení jednoho patra. Ukázku nákresu budovy můžeme vidět na obrázku č.  \ref{fig:mapatxt}.
 
@@ -506,7 +506,7 @@ Při spuštění aplikace která vykreslí definované schéma lze scénu ovlád
 	\caption{Ukázka nákresu budovy v textovém souboru} \label{fig:mapatxt}
 \end{figure}
 
-Při zapnutí simulace jsou agenti v půdorysu okamžitě vedení směrem ven mimo budovu, avšak agenti v dalších patrech musí využít jiné evakuační cesty aby se dostali do spodního patra odkud můžou vyjít ven. Proto pokud se agent v patře dostane k finálnímu bodu úniku \textit{(velké písmeno)}, začne ``sestupovat'' do půdorysu budovy. Sestup však zabere nějaký čas, jednak kvůli zatížení únikových cest tak samotného sestupu. Souvisí s tím také to, že agentovi v posledním patře bude sestup trvat déle než agentovi v prvním patře. Hodnotu míry opuštění budovy \textit{(konkrétněji: evakuační výtah je rychlejší než evakuační schodiště)}, lze měnit v konfiguračním souboru.
+Při zapnutí simulace jsou agenti v půdorysu okamžitě vedení směrem ven mimo budovu, avšak agenti v dalších patrech musí využít jiné evakuační cesty aby se dostali do spodního patra odkud můžou vyjít ven. Proto pokud se agent v patře dostane k finálnímu bodu úniku \textit{(velké písmeno)}, začne ``sestupovat'' do půdorysu budovy. Sestup však zabere nějaký čas, jednak kvůli zatížení únikových cest tak samotného sestupu. Souvisí s tím také to, že agentovi v posledním patře bude sestup trvat déle než agentovi v prvním patře. Hodnotu míry opuštění budovy \textit{(konkrétněji: evakuační výtah je rychlejší než evakuační schodiště)} lze měnit v konfiguračním souboru pomocí konstanty FLOOR\_TIME\_DURATION.
 
 \begin{figure}[H]\centering\includegraphics[width=0.7\textwidth]{Figures/screen5.jpg}
 	\caption{Ukázka vyrenderovaného půdorysu budovy}
@@ -517,8 +517,7 @@ Po načtení textového souboru se jednotlivé znaky uloží do kontejneru \text
 vector<vector<char>*> *map;
 \end{lstlisting}
 
-Pro následování bodů byla použita metoda \textit{arriveTo(...)} která využívá metodu \textit{seek(...)} \textit{(viz kapitola \ref{sec:steering-behaviors})}. Abychom správně určili, který agent má kam směřovat, musíme metodě\\ \textit{arriveTo(...)} předat správný vektor, který získáme metodou \textit{getArriveVector(...)}. Ta vrátí výsledný vektor který je předán \textit{seek()} metodě. Výsledek je pak nový vektor, který se aplikuje jako nové pravidlo \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel})} a tím zajistíme že agent bude směřovat na nejbližší únikový bod a následně na finální bod. 
-Následuje ukázka, jak principiálně funguje metoda \textit{getArriveVector(...)}.
+Pro následování bodů byla použita metoda \textit{arriveTo(...)} která využívá metodu \textit{seek(...)} \textit{(viz kapitola \ref{sec:steering-behaviors})}. Abychom správně určili, který agent má kam směřovat, musíme metodě\\ \textit{arriveTo(...)} předat správný vektor, který získáme metodou \textit{getArriveVector(...)}. Ta vrátí výsledný vektor který je předán \textit{seek()} metodě. Výsledek je pak nový vektor, který se aplikuje jako nové pravidlo \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel})} a~tím zajistíme že agent bude směřovat na nejbližší únikový bod a~následně na finální bod. 
 
 \begin{lstlisting}[language=c++,label=src:mapSave,caption=Princip metody getArriveVector(...)]
 // getting minIndex from exitPoints...
