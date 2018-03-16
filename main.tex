@@ -311,7 +311,7 @@ Cílem demostrační aplikace je zrealizování a zvizualizování Craig Reynold
 
 \begin{itemize}
 	\item Simulace úniku davu lidí z budovy podle nastavených únikových cest.
-	\item Simulace hejna ryb s vyhýbáním se predátorovi.
+	\item Simulace hejna ryb s vyhýbáním se objektu.
 \end{itemize}
 
 Vetšinu parametrů lze měnit/kombinovat v config.cfg souboru \textit{(lze i kombinovat jednotlivá tři pravidla postupným zapínáním/vypínáním)} a měnit mapu včetně únikových bodů lze v souboru map.txt, která je použitelná pouze pro první uvedený typ.
@@ -581,8 +581,26 @@ Testy proběhly při počtu agentů 200, počtu pater 5 a nastevní míry opušt
 
 \begin{table}[H]
 	\centering
+	\caption{Tabulka naměřených hodnot - PC1}
+	\label{tab:tablePC1}
+	\renewcommand{\arraystretch}{1.0}
+	\begin{tabular}{| c | c | c | c | c | c |}
+		\hline
+		Pater  & Únikových bodů & Počet zdí & FPS před & FPS během & Čas [s]\\\hline
+		0 & 8 & 193 &  &  & \\
+		1 & 10 & 343 &  &  & \\
+		2 & 14 & 513 &  &  & \\
+		3 & 18 & 683 &  &  & \\
+		4 & 22 & 853 &  &  & \\
+		5 & 24 & 1023 &  &  & \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
 	\caption{Tabulka naměřených hodnot - PC2}
-	\label{tab:tablefps}
+	\label{tab:tablePC2}
 	\renewcommand{\arraystretch}{1.0}
 	\begin{tabular}{| c | c | c | c | c | c |}
 		\hline
@@ -597,12 +615,43 @@ Testy proběhly při počtu agentů 200, počtu pater 5 a nastevní míry opušt
 	\end{tabular}
 \end{table}
 
+\begin{table}[H]
+	\centering
+	\caption{Tabulka naměřených hodnot - PC3}
+	\label{tab:tablePC3}
+	\renewcommand{\arraystretch}{1.0}
+	\begin{tabular}{| c | c | c | c | c | c |}
+		\hline
+		Pater  & Únikových bodů & Počet zdí & FPS před & FPS během & Čas [s]\\\hline
+		0 & 8 & 193 &  &  & \\
+		1 & 10 & 343 &  &  & \\
+		2 & 14 & 513 &  &  & \\
+		3 & 18 & 683 &  &  & \\
+		4 & 22 & 853 &  &  & \\
+		5 & 24 & 1023 &  &  & \\
+		\hline
+	\end{tabular}
+\end{table}
+
 Jak je patrné, tak čím více je pater, tím více klesá FPS z důvodu více kontrol kolizí se zdmi \\\textit{(i když se řeší kolize v každém patře zvlášť)}.
+
+\newpage
+
+\subsection{Simulace hejna ryb}
+Druhý typ využití Reynoldova algoritmu je simulace hejna. V tomto případě je použita simulace ryb, ale při změně načítaného objektu v konfiguračním souboru můžeme vytvořit simulaci čehokoliv. Pro změnu scény je třeba přepsat několik parametrů, zejména pak SCENE\_TYPE na 3D. U výsledné aplikace je připraven obsah souboru \textit{configFish.cfg}, kterým stačí přepsat obsah hlavní souboru \textit{config.cfg} bez potřeby přepisování všech důležitých parametrů.
+
+Algoritmus funguje stejně jako při úniku z budovy, výjma využití třídy \textit{MyVector2D}, která je nahrazena výpočty ve 3D třídou \textit{MyVector}.
+
+V konfiguračním souboru můžeme nastavit počet objektů, kterým se agenti budou vyhýbat. V případě pokud se agent dostane do blízkosti objektu, pak vyhýbání funguje na principu vynásobení hodnoty separace konstantou. To způsobí větší odstup od objektu. Pokud objektu přiřadíme rychlost a on se následně bude hýbat, tak můžeme říci, že se jedná o predátora. Proto využití tohoto typu simulace je čistě obecné.
+
+
 
 \newpage
 \section{Zhodnocení}
 
 Text na doplnění...
+
+\newpage
 
 \begin{figure}[H]\centering\includegraphics[width=0.9\textwidth]{Figures/screen1.jpg}
 	\caption{Vyrenderovaná třípatrová budova}
@@ -613,7 +662,9 @@ Text na doplnění...
 \end{figure}
 
 \section{Závěr}
+text
 
+\newpage
 
 \begin{thebibliography}{99}
 	
