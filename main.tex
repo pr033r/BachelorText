@@ -329,7 +329,7 @@ Pro matematické operace byla použita knihovna GLM \cite{linkToGLM} \textit{(ve
 
 Pro zobrazování parametrů a proměnných byla použita GUI AntTweakBar knihovna \textit{(verze 1.16)} \cite{linkToAntTweakBar} kvůli snadnému použití a intuitivnímu rozhraní.
 
-\subsection{Problémy při implementaci}
+\subsection{Problémy při implementaci}\label{sec:problemy-pri-implementaci}
 
 První problém nastal kvůli paměťovým nárokům. Důvod byl v obrovském nárustu paměti po zhruba dvou minutách běhu aplikace. Následující tabulka zobrazuje nárust v kB vůči času od posledního načtení objektu, tj. od počátku vizualizace scény.
 
@@ -349,7 +349,7 @@ První problém nastal kvůli paměťovým nárokům. Důvod byl v obrovském n�
 Jak je patrné z hodnot, tak od druhé minuty nárust paměti stoupá takřka exponenciálně. Důvod tak rychlého nárustu byl ten, že jak se postupně k sobě agenti přibližovali, začínalo se aplikovat více pravidel, které ještě neměly optimalizované operace s pamětma. Tzn. nejdříve se začaly aplikovat pravidla s větším průměrem \textit{(buď koheze nebo zarovnání)} kružnice, ale když byli agenti blízko sebe, každému se vyhodnocovala všechna paměťově neoptimalizovaná pravidla.
 Po pěti minutách byl nárust tak obrovský, že hodnota FPS klesla na 10. 
 
-Pro veškeré výpočetní operace s vektory byla vytvořena třída \textit{MyVector} z níž dědí třída \textit{MyVector2D}, která je využita pro pohyb davu v budově, první zmíněná je určená pro hejno. Důvod je přenositelnost a nezávislost algoritmu na platformě. Všechny důležité třídy využívají k vytvoření scény pouze nativní knihovny C++.
+Pro veškeré výpočetní operace s vektory byla vytvořena třída \textit{MyVector} z níž dědí třída \textit{MyVector2D}, která je využita pro pohyb davu v budově. První zmíněná je určená pro hejno. Důvod využití vlastní třídy je přenositelnost a nezávislost algoritmu na platformě. Všechny důležité třídy využívají k vytvoření scény pouze nativní knihovny C++.
 
 Příklad ošetření jedné části kódu:
 
@@ -443,9 +443,9 @@ Další vlastností která byla použita je následování bodů \textit{(Path F
 Po určení tohoto jednoho či více bodů na ně agent začně postupně směřovat. Při následování bodů se použivá funkce pro vypočtení seek vektoru, který je poté aplikován jako další pravidlo, tzn. k výsledné rychlosti se přičte další vektor (viz kapitola \ref{sec:aplikovani-tri-pravidel}).
 
 \subsection{Třídní diagram}
-Pro provoz simulace a základního chování slouží tři třídy.
+Pro provoz simulace a chování davu slouží tři základní a tři pomocné třídy.
 
-\begin{figure}[H]\centering\includegraphics[width=0.7\textwidth]{Figures/diagram1.jpg}
+\begin{figure}[H]\centering\includegraphics[width=0.8\textwidth]{Figures/diagram2.jpg}
 	\caption{Diagram řídicích tříd}
 \end{figure}
 
@@ -453,8 +453,10 @@ Hlavní třídou je třída Flock, která koordinuje komunikaci mezi třídou Wa
 
 Třída Walls vytváří zdi podle předaných dat z mapy a udržuje informace o generačních pozicích a pozicích únikových bodů. Díky tomu může třída Flock vygenerovat agenty do patřičného patra a pozice. Zároveň jsou tato data sdílena s třídou Boids, která může kontrolovat kolize se zdmi a počítat pozice únikových bodů na které má agent směřovat.
 
+Jak již bylo zmíněno v kapitole \ref{sec:problemy-pri-implementaci}, tak pro operace s vektory byla použita vlastní třída \textit{MyVector} ze které dědí třída \textit{MyVector2D} z důvodu přenositelnosti a nezávislosti algoritmu na dané platformě.
+
 \subsection{Výsledné aplikování pravidel}
-Všechna pravidla jsou aplikována jako součet výsledků jednotlivých pravidel \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel})}. \\V této práci k sečtení a vytvoření výsledného vektoru slouží metoda \textit{appplyForce(...))}, která přidá do výsledného vektoru \textit{acceleratoin} další vektor \textit{(výsledek jednoho z pravidel)}. Pro nastavení výsledné pozice agenta slouží metoda \textit{update()}, která k tomu využije vektor \textit{acceleration}.
+Všechna pravidla jsou aplikována jako součet výsledků jednotlivých pravidel \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel})}. \\V této práci k sečtení a vytvoření výsledného vektoru slouží metoda \textit{appplyForce(...))}, která přidá do výsledného vektoru \textit{acceleratoin} další vektor \textit{(výsledek jednoho z pravidel)}. Tento vektor je pak aplikován v metodě \textit{update()}, která nastaví agentovi novou pozici a rychlost.
 
 \begin{lstlisting}[language=c++,label=src:seek,caption=Nastavení výsledné pozice agenta] 
 void Boids::update() {
@@ -469,7 +471,7 @@ void Boids::update() {
 Po vynásobení konstantou 0.4, která slouží pro nastavení citlivosti \textit{(může a nemusí být použita, zde je nastavena po experimentech jako ideální)} následuje přidání, limitování vektoru a~vypočtení výsledné pozice. Na konci musíme vektor \textit{acceleration} vynulovat pro použití v další iteraci.
 
 \subsection{Únik z budovy}
-První část využití Reynoldova agoritmu je simulace úniku lidí z budovy podle nastavených únikových cest. Funkčně je tato část určena k tomu, aby po skončení simulace mohl uživatel zjistit kolik by zabralo času evakuovat lidi z budovy. V případě časově náročné evakuace může uživatel upravit plán budovy a únikové cesty tak, aby budova splňovala dané normy.
+První část využití Reynoldova agoritmu je simulace úniku lidí z budovy podle nastavených únikových cest. Funkčně je tato část určena k tomu, aby po skončení simulace mohl uživatel zjistit kolik času by zabralo evakuovat lidi z předem definovaného plánu budovy. V případě časově náročné evakuace může uživatel upravit plán budovy a únikové cesty tak, aby budova splňovala dané normy.
 
 Plán budovy můžeme upravovat v souboru \textit{map.txt} včetně definování dalších pater\\ a únikových cest. Jelikož se jedná o textový soubor, tak každý znak reprezentuje jinou funkci. Popis funkčních znaků můžeme vidět níže:
 
@@ -478,18 +480,18 @@ Plán budovy můžeme upravovat v souboru \textit{map.txt} včetně definování
 	\item \textbf{-} reprezentuje vertikální stěnu
 	\item \textbf{|} reprezentuje horizontální stěnu
 	\item \textbf{+} reprezentuje spojovací stěnu jako kombinace horizontální a vertikální stěny
-	\item \textbf{*} blok stěny ve jednoho bodu, proto ji lze použít jako reprezentaci sloupu v patře
+	\item \textbf{*} blok stěny jednoho bodu, proto ji lze použít jako reprezentaci sloupu v patře
 	\item \textbf{=} reprezentuje začátek schématu nového patra
-	\item \textbf{/} ukončovací znak patra
+	\item \textbf{/} ukončovací znak schématu patra
 	\item \textbf{A-Z, a-z} únikové body podle který se dav řídí \textit{(mimo G jako generační bod a F jako ukončovací bod zřetězeného řízení davu, viz níže)}
 	\item \textbf{1-9, F} zřetězené řízení davu použité jako únik z labyrintu pomocí 10 únikových bodů
 \end{itemize}
 
-Pro únik v jedné části budovy jsou požity dva znaky \textit{(např.: velké  písmeno A a malé a)}. Nejdříve dav směřuje k menšímu znaku a poté k většímu který indikuje finální bod. V každém patře může být těchto únikových bodů libovolný počet, kdy pokud v jednom patře končíme např.: znakem D, pak se v dalším patře začíná od znaku E. Jenotlivý agent určuje ke kterému bodu jít pomocí vzdálenosti od něj \textit{(tj. k nejbližšímu)}.
+Pro únik v jedné části budovy jsou požity dva znaky \textit{(např.: velké  písmeno A a malé a)}. Nejdříve dav směřuje k menšímu znaku a poté k většímu, který indikuje finální bod. V každém patře může být těchto únikových bodů libovolný počet, kdy pokud v jednom patře končíme např.: znakem D, pak se v dalším patře začíná od znaku E. Jenotlivý agent určuje ke kterému bodu jít pomocí vzdálenosti od něj \textit{(tj. k nejbližšímu)}.
 
-Druhým typem úniku je únik z labyrintu, tedy složitějších prostor budovy kdy je potřeba více než dva body úniku z jedné části budovy. Dav začne směřovat k nejbližšímu nejmenšímu číslu a pokud tohoto čísla dosáhne, tak poté začne směřovat k dalšímu o 1 větší dokud neskončí u písmene F. Tento způsob lze aplikovat pouze u vykreslení jednoho patra. Ukázku nákresu budovy můžeme vidět na obrázku č.  \ref{fig:mapatxt}.
-
-Při spuštění aplikace která vykreslí definované schéma lze scénu ovládat pomocí následujících kláves:
+Druhým typem úniku je únik z labyrintu, tedy složitějších prostor budovy kdy je potřeba více než dva únikové body. Dav začne směřovat k nejbližšímu nejmenšímu číslu a pokud tohoto čísla dosáhne, tak poté začne směřovat k dalšímu o 1 větší dokud neskončí u písmene F. Tento způsob lze aplikovat pouze u vykreslení jednoho patra. 
+\\\\
+Při spuštění aplikace, která vykreslí definované schéma lze scénu ovládat pomocí následujících kláves:
 
 \begin{itemize}
 	\item \textbf{1-9} klávesou lze přepínat mezi pohledy jednotlivých pater, přičemž se neaktuální patro přepne do režimu průhlednosti
@@ -506,16 +508,11 @@ Při spuštění aplikace která vykreslí definované schéma lze scénu ovlád
 	\caption{Ukázka nákresu budovy v textovém souboru} \label{fig:mapatxt}
 \end{figure}
 
-Při zapnutí simulace jsou agenti v půdorysu okamžitě vedení směrem ven mimo budovu, avšak agenti v dalších patrech musí využít jiné evakuační cesty aby se dostali do spodního patra odkud můžou vyjít ven. Proto pokud se agent v patře dostane k finálnímu bodu úniku \textit{(velké písmeno)}, začne ``sestupovat'' do půdorysu budovy. Sestup však zabere nějaký čas, jednak kvůli zatížení únikových cest tak samotného sestupu. Souvisí s tím také to, že agentovi v posledním patře bude sestup trvat déle než agentovi v prvním patře. Hodnotu míry opuštění budovy \textit{(konkrétněji: evakuační výtah je rychlejší než evakuační schodiště)} lze měnit v konfiguračním souboru pomocí konstanty FLOOR\_TIME\_DURATION.
+Při zapnutí simulace jsou agenti v půdorysu okamžitě vedení směrem ven mimo budovu, avšak agenti v dalších patrech musí využít jiné evakuační cesty aby se dostali do spodního patra odkud můžou vyjít ven\footnote{Agenty v patře lze také směrovat rovnou ven mimo budovu, tj.~forma venkovního evakuačního schodiště. Dole v přízemí mimo budovu však musí být definován další evakuační bod (pod ``schodištěm''), jinak začnou agenti směřovat k nejbližšímu bodu, který by jinak byl v budově.}. Proto pokud se agent v patře dostane k finálnímu bodu úniku \textit{(velké písmeno)}, začne ``sestupovat'' do přízemí budovy. Sestup však zabere nějaký čas, jednak kvůli zatížení únikových cest tak samotného sestupu. Souvisí s tím také to, že agentovi v posledním patře bude sestup trvat déle než agentovi v prvním patře. Hodnotu míry opuštění budovy \textit{(konkrétněji: evakuační výtah je rychlejší než evakuační schodiště)} lze měnit v konfiguračním souboru pomocí konstanty FLOOR\_TIME\_DURATION.
 
-\begin{figure}[H]\centering\includegraphics[width=0.7\textwidth]{Figures/screen5.jpg}
+\begin{figure}[H]\centering\includegraphics[width=0.66\textwidth]{Figures/screen5.jpg}
 	\caption{Ukázka vyrenderovaného půdorysu budovy}
 \end{figure}
-
-Po načtení textového souboru se jednotlivé znaky uloží do kontejneru \textit{vector}, který obsahuje odkazy na další kontejnery, které reprezentují jednotlivé sloupce. K danému znaku lze tedy přistoupit metodikou matice \cite{linkToMatrix} - řádek, sloupec.
-\begin{lstlisting}[language=c++,label=src:mapSave,caption=Způsob uložení mapy v paměti]
-vector<vector<char>*> *map;
-\end{lstlisting}
 
 Pro následování bodů byla použita metoda \textit{arriveTo(...)} která využívá metodu \textit{seek(...)} \textit{(viz kapitola \ref{sec:steering-behaviors})}. Abychom správně určili, který agent má kam směřovat, musíme metodě\\ \textit{arriveTo(...)} předat správný vektor, který získáme metodou \textit{getArriveVector(...)}. Ta vrátí výsledný vektor který je předán \textit{seek()} metodě. Výsledek je pak nový vektor, který se aplikuje jako nové pravidlo \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel})} a~tím zajistíme že agent bude směřovat na nejbližší únikový bod a~následně na finální bod. 
 
@@ -534,57 +531,73 @@ if ((walls->exitPositions.at(minIndex)->vec.y / walls->floorDiferencial) == this
 
 V první části kódu, zde nezmíněné kvůli délce, je získání \textit{minIndex} hodnoty ve které je uložen index z kontejneru \textit{map}, odkud začínají souřadnice únikových bodů ve stejném patře jako je aktuálně kontrolovaný agent. Pokud tedy v půdorysu bude 8 únikových bodů, jak je zobrazeno na obrázku č. \ref{fig:mapatxt}, tj. 4 finální únikové cesty, pak \textit{minIndex} v následujícím patře bude 9. Je třeba upozornit, že hodnota \textit{minIndex} vždy odkazuje na index menšího písmena.
 
-Následuje podmínka jenž kontroluje, zda-li se agent nachází ve stejém patře jako únikový bod \textit{(souřadnice Y únikového bodu vydělená výškou jednoho patra - konstanta třídy Walls)} a následná kontrola, zda se agent dostal do blízkosti okruhu únikového bodu. Pokud ano, může agent pokračovat k finálnímu bodu tak, že hodnotu \textit{minIndex} zvýšíme o 1.
+Následuje podmínka jenž kontroluje, zda-li se agent nachází ve stejém patře jako únikový bod \textit{(souřadnice Y únikového bodu vydělená výškou jednoho patra - konstanta třídy Walls)} a~následná kontrola, zda se agent dostal do blízkosti okruhu únikového bodu. Pokud ano, může agent pokračovat k finálnímu bodu tak, že hodnotu \textit{minIndex} zvýšíme o 1.
 
 Mimo další operace které se nachází mezi návratovou hodnotou a předchozími podmínkami, je nakonec vrácen vektor s indexem \textit{minIndex}.
 
-Útěk ze složitějších prostor pomocí čísel \textit{(útěk z labyrintu)} funguje na stejné bázi s tím že se hodnota inkrementuje do té doby, dokud agent nenarazí na písmeno F, čili koncový bod.
+Útěk ze složitějších prostor pomocí čísel \textit{(útěk z labyrintu)} funguje na stejné bázi s~tím rozdílem, že se hodnota inkrementuje do té doby dokud agent nenarazí na písmeno F, čili koncový bod.
+
+\subsubsection{Problémy při úniku z budovy}\label{sec:problemy-pri-uniku-z-budovy}
+
+Agenti se můžou občas dostat do problémů zejména díky špatnému návrhu budovy, nebo také kvůli nedokonalosti Reynoldova algoritmu. 
+
+Například pokud při úniku z budovy zapneme všechna tři pravidla, může nastat efeket procházení zdí. Tento problém vzniká kvůli nastaveným konstantám citlivosti u každého pravidla. Tyto konstanty byly nastaveny po řadě experimentů jako nejvhodnější a~jsou neměnné \textit{(kromě konstanty citlivosti úniku ESCAPE\_SENSITIVITY, kterou lze měnit v konfiguračním souboru)}. Pokud je konstanta příliš nízká, dané pravidlo by zaniklo mezi ostatními. Pokud příliš vysoká, tak by dané pravidlo překrylo ostatní. U konstanty citlivosti úniku je však občas potřebné přenastavení. Částečné řešení spočívá jen v použití separace. Dav se tedy chová jako dav skutečných lidí \textit{(každý si jde kam chce)}.
+
+Další problém může nastat při generování agentů, kdy agenti vyberou jako cestu \\k nejkratšímu bodu tu variantu, že se bod nachází za zdí či v jiné místnosti (viz obrázek č. \ref{fig:buildingEscapeProblem1}). S tím souvisí možnost zaseknutí o zeď, kdy má agent před sebou překážku za kterou je cílový bod a např.: dva bloky od něj je východ. Má však nastavenou cestu přímo na bod \textit{(přes zeď)}. Řešení takovýchto situací je však nad rámec této práce \textit{(jedná se o pokročilé techniky AI)}.
+
+S generováním souvisí ještě jedna věc, a sice při generování většího množství agentů na malém prostoru se může některý z nich ``zabořit'' do zdi a už se z ní nemůže dostat. 
+
+\begin{figure}[H]\centering\includegraphics[width=0.25\textwidth]{Figures/buildingEscapeProblem.jpg}\label{fig:buildingEscapeProblem1}
+	\caption{Problém uváznutí při špatném určení únikových bodů}
+	\label{fig:buildingEscapeProblem1}
+\end{figure}
 
 \subsection{Testování úniku z budovy}
 
-Testování proběhlo na PC s procesorem Intel Core i5-2500 3.3GHz, 12GB RAM a grafickou kartou Sapphire Radeon R9 280X Dual-X.
+Testování proběhlo na třech PC s parametry uvedenými v tabulce č. \ref{tab:tablepc}.
+Výsledky testů se na jiných PC mohou lišit.
 
-Všechny části testů byly provedeny na schématu budovy s parcelou 30x17 bloků, kdy jeden blok odpovídá jednomu znaku v textovém souboru \textit{map.txt} a na 1x1 blok se vejde průměrně 6 agentů bez větších kolizí.
-
-První část testování je zaměřena na rychlost a plynulost aplikace. Jaké byly hodnoty FPS při daném počtu agentů, počtu pater a složitosti budovy \textit{(počet zdí)}. Hodnoty FPS jsou odečteny během simulace.
 
 \begin{table}[H]
 	\centering
-	\caption{Tabulka hodnot FPS během spuštěné simulace}
+	\caption{Tabulka parametrů PC na kterých proběhlo testování}
+	\label{tab:tablepc}
+	\renewcommand{\arraystretch}{1.0}
+	\begin{tabular}{| c | c | c | c |}
+		\hline
+		& PC1 & PC2 & PC3 \\\hline
+		CPU & Intel i5 @ & Intel i5-2500 @ 3.3GHz& Intel i7- @ 3.3GHz\\
+		RAM & 4 GB & 12 GB & 16 GB\\
+		GPU & 200 & Radeon R9 280X Dual-X & GeForce 1070 Ti\\
+		\hline
+	\end{tabular}
+\end{table}
+
+Všechny části testů byly provedeny na schématu budovy s parcelou 30x17 bloků, kdy jeden blok odpovídá jednomu znaku v textovém souboru \textit{map.txt} a na 1x1 blok se vejde průměrně 5~agentů bez větších kolizí.
+
+Tabulky zobrazují jaké byly hodnoty FPS při daném počtu agentů, počtu pater a složitosti budovy \textit{(počet zdí)}. Hodnoty FPS jsou odečteny před a během simulace. Poslední hodnotou je čas opuštění budovy.
+
+Testy proběhly při počtu agentů 200, počtu pater 5 a nastevní míry opuštění jednoho patra na 5 sekund.
+
+\begin{table}[H]
+	\centering
+	\caption{Tabulka naměřených hodnot - PC2}
 	\label{tab:tablefps}
 	\renewcommand{\arraystretch}{1.0}
-	\begin{tabular}{| c | c | c | c | c |}
+	\begin{tabular}{| c | c | c | c | c | c |}
 		\hline
-		Pater & Agentů & Únikových bodů & Počet zdí & FPS\\\hline
-		0 & 200 & 8 & 193 & 56\\
-		1 & 200 & 10 & 343 & 55\\
-		2 & 200 & 14 & 513 & 52\\
-		3 & 200 & 18 & 683 & 47\\
-		4 & 200 & 22 & 853 & 42\\
-		5 & 200 & 24 & 1023 & 39\\
+		Pater  & Únikových bodů & Počet zdí & FPS před & FPS během & Čas [s]\\\hline
+		0 & 8 & 193 & 56 & 55 & 58.6\\
+		1 & 10 & 343 & 55 & 50 & 115.8\\
+		2 & 14 & 513 & 52 & 46 & \\
+		3 & 18 & 683 & 47 & 41 & \\
+		4 & 22 & 853 & 42 & 39 & \\
+		5 & 24 & 1023 & 39 & 28 & \\
 		\hline
 	\end{tabular}
 \end{table}
 
-Jak je patrné, tak čím více je pater, tím více klesá FPS z důvodu více kontrol kolizí se zdmi \\\textit{(i když se řeší kolize v každém patře zvlášť)}. Dále bylo z testování zjištěno, že se hodnoty během či mimo simulaci takřka vůbec neliší.
-
-\begin{table}[H]
-	\centering
-	\caption{Tabulka hodnot doby opuštění budovy}
-	\label{tab:tabletime}
-	\renewcommand{\arraystretch}{1.0}
-	\begin{tabular}{| c | c | c | c | c |}
-		\hline
-		Pater & Agentů & Únikových bodů & Čas evakuace [s]\\\hline
-		0 & 200 & 8 & 58.6\\
-		1 & 200 & 10 & 115.8\\
-		2 & 200 & 14 & 52\\
-		3 & 200 & 18 & 47\\
-		4 & 200 & 22 & 42\\
-		5 & 200 & 24 & 39\\
-		\hline
-	\end{tabular}
-\end{table}
+Jak je patrné, tak čím více je pater, tím více klesá FPS z důvodu více kontrol kolizí se zdmi \\\textit{(i když se řeší kolize v každém patře zvlášť)}.
 
 \newpage
 \section{Zhodnocení}

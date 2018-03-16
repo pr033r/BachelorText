@@ -7,6 +7,5 @@
 \contentsline {lstlisting}{\numberline {7}Pou\IeC {\v z}it\IeC {\'\i } optimalizovan\IeC {\'e}ho cyklu}{17}{lstlisting.7}
 \contentsline {lstlisting}{\numberline {8}Uk\IeC {\'a}zka pou\IeC {\v z}it\IeC {\'\i } kop\IeC {\'\i }rovac\IeC {\'\i }ho konstruktoru}{17}{lstlisting.8}
 \contentsline {lstlisting}{\numberline {9}Vypo\IeC {\v c}ten\IeC {\'\i } seek vektoru}{18}{lstlisting.9}
-\contentsline {lstlisting}{\numberline {10}Nastaven\IeC {\'\i } v\IeC {\'y}sledn\IeC {\'e} pozice agenta}{19}{lstlisting.10}
-\contentsline {lstlisting}{\numberline {11}Zp\IeC {\r u}sob ulo\IeC {\v z}en\IeC {\'\i } mapy v pam\IeC {\v e}ti}{22}{lstlisting.11}
-\contentsline {lstlisting}{\numberline {12}Princip metody getArriveVector(...)}{22}{lstlisting.12}
+\contentsline {lstlisting}{\numberline {10}Nastaven\IeC {\'\i } v\IeC {\'y}sledn\IeC {\'e} pozice agenta}{20}{lstlisting.10}
+\contentsline {lstlisting}{\numberline {11}Princip metody getArriveVector(...)}{23}{lstlisting.11}
