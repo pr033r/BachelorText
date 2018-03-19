@@ -1,9 +1,9 @@
-\babel@toc {slovak}{}
-\babel@toc {czech}{}
-\babel@toc {czech}{}
-\babel@toc {czech}{}
-\babel@toc {english}{}
-\babel@toc {czech}{}
+\select@language {slovak}
+\select@language {czech}
+\select@language {czech}
+\select@language {czech}
+\select@language {english}
+\select@language {czech}
 \contentsline {section}{Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek a symbol\IeC {\r u}}{2}{Doc-Start}
 \contentsline {section}{Seznam obr\'azk\r {u}}{3}{Doc-Start}
 \contentsline {section}{Seznam tabulek}{4}{Doc-Start}
