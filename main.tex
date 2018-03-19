@@ -44,13 +44,13 @@ odborné rady, za neocenitelné zkušenosti a za všechen čas, jenž mi takto v
 Tím že dokážeme simulovat toto chování, můžeme vytvořit reálnou podobu davu. Toho se hojně využívá např. ve filmech, hrách či návrhu budov.
 Tato práce se zaměřuje na popis boidova algoritmu, který je dnes nejpoužívanější co se simulace davu týče.}
 
-\CzechKeywords{dav, vizualizace, optimalizace, OpenGL, Boidův algoritmus, koheze, separace, zarovnání, agent}
+\CzechKeywords{Boidův algoritmus, dav, hejno, koheze, separace, zarovnání, agent}
 
 \EnglishAbstract{Many things in nature are impressive like animals which can be organized into larger and logical oriented grouping.
 In that case when we can simulate the behavior, we can create real crowd form. This can be useful f.e. in movies, games or for building design. 
 This thesis focuses on the description of boid's algorithm which is the most used crowd simulation principle today. }
 
-\EnglishKeywords{crowd, visualization, optimization, OpenGL, Boid's algorithm, cohesion, separation, alignment, agent}
+\EnglishKeywords{Boid's algorithm, crowd, flock, cohesion, separation, alignment, agent}
 
 \AddAcronym{ACM}{Association for Computing Machinery - vědecky-vzdělávací instituce pro výpočetní technologie}
 \AddAcronym{SIGGRAPH}{Special Interest Group on Computer GRAPHics and Interactive Techniques - výroční konference v počítačové grafice}
@@ -105,7 +105,7 @@ Tento typ simulace hojně využívá herní průmysl kdy v nějaké scéně - he
 
 Je třeba také zminit kinematografický průmysl, který simuluje davy lidí. Tím pádem animátorům odpadne kus práce kdy by museli každého agenta animovat zvlášť.
 
-Jelikož jsem využil tento typ simulace, tak v dalších kapitolách budeme každý bod ve scéně nazývat agentem.
+Jelikož byl v této práci využit tento typ simulace, tak v dalších kapitolách budeme každý bod ve scéně nazývat agentem.
 
 \begin{figure}\centering\includegraphics[width=0.8\textwidth]{Figures/flock_fish.png}
 	\caption{
@@ -453,7 +453,7 @@ Hlavní třídou je třída Flock, která koordinuje komunikaci mezi třídou Wa
 
 Třída Walls vytváří zdi podle předaných dat z mapy a udržuje informace o generačních pozicích a pozicích únikových bodů. Díky tomu může třída Flock vygenerovat agenty do patřičného patra a pozice. Zároveň jsou tato data sdílena s třídou Boids, která může kontrolovat kolize se zdmi a počítat pozice únikových bodů na které má agent směřovat.
 
-Jak již bylo zmíněno v kapitole \ref{sec:problemy-pri-implementaci}, tak pro operace s vektory byla použita vlastní třída \textit{MyVector} ze které dědí třída \textit{MyVector2D} z důvodu přenositelnosti a nezávislosti algoritmu na dané platformě.
+Jak již bylo zmíněno v kapitole \ref{sec:problemy-pri-implementaci}, tak pro operace s vektory byla použita vlastní třída \textit{MyVector} ze které dědí třída \textit{MyVector2D} z důvodu přenositelnosti a nezávislosti algoritmu na platformě.
 
 \subsection{Výsledné aplikování pravidel}
 Všechna pravidla jsou aplikována jako součet výsledků jednotlivých pravidel \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel})}. \\V této práci k sečtení a vytvoření výsledného vektoru slouží metoda \textit{appplyForce(...))}, která přidá do výsledného vektoru \textit{acceleratoin} další vektor \textit{(výsledek jednoho z pravidel)}. Tento vektor je pak aplikován v metodě \textit{update()}, která nastaví agentovi novou pozici a rychlost.
@@ -566,9 +566,9 @@ Výsledky testů se na jiných PC mohou lišit.
 	\begin{tabular}{| c | c | c | c |}
 		\hline
 		& PC1 & PC2 & PC3 \\\hline
-		CPU & Intel i5 @ & Intel i5-2500 @ 3.3GHz& Intel i7-5820 @ 3.3GHz\\
+		CPU & Intel i7-2637M @ 2.7GHz & Intel i5-2500 @ 3.3GHz& Intel i7-5820 @ 3.3GHz\\
 		RAM & 4 GB & 12 GB & 16 GB\\
-		GPU & 200 & Radeon R9 280X Dual-X & GeForce 1070 Ti\\
+		GPU & Intel HD Graphics 3000 & Radeon R9 280X Dual-X & GeForce 1070 Ti\\
 		\hline
 	\end{tabular}
 \end{table}
@@ -587,12 +587,12 @@ Testy proběhly při počtu agentů 200, počtu pater 5, rychlostí agentů 3 s 
 	\begin{tabular}{| c | c | c | c | c | c |}
 		\hline
 		Pater  & Únikových bodů & Počet zdí & FPS před & FPS během & Čas [s]\\\hline
-		0 & 8 & 193 &  &  & \\
-		1 & 10 & 343 &  &  & \\
-		2 & 14 & 513 &  &  & \\
-		3 & 18 & 683 &  &  & \\
-		4 & 22 & 853 &  &  & \\
-		5 & 24 & 1023 &  &  & \\
+		0 & 8 & 193 & 51 & 50 & 65.3\\
+		1 & 10 & 343 & 48 & 46 & 151.6\\
+		2 & 14 & 513 & 43 & 40 & 202.1\\
+		3 & 18 & 683 & 39 & 37 & 213.7\\
+		4 & 22 & 853 & 36 & 31 & 245.2\\
+		5 & 24 & 1023 & 32 & 28 & 337.1\\
 		\hline
 	\end{tabular}
 \end{table}
@@ -624,11 +624,11 @@ Testy proběhly při počtu agentů 200, počtu pater 5, rychlostí agentů 3 s 
 		\hline
 		Pater  & Únikových bodů & Počet zdí & FPS před & FPS během & Čas [s]\\\hline
 		0 & 8 & 193 & 120 & 118 & 58.2\\
-		1 & 10 & 343 & 111 & 105 & 94\\
-		2 & 14 & 513 & 102 & 92 & 97\\
-		3 & 18 & 683 & 90 & 84 & 112\\
-		4 & 22 & 853 & 82 & 71 & 116\\
-		5 & 24 & 1023 & 74 & 64 & 169\\
+		1 & 10 & 343 & 111 & 105 & 94.1\\
+		2 & 14 & 513 & 102 & 92 & 97.3\\
+		3 & 18 & 683 & 90 & 84 & 112.4\\
+		4 & 22 & 853 & 82 & 71 & 116.1\\
+		5 & 24 & 1023 & 74 & 64 & 169.8\\
 		\hline
 	\end{tabular}
 \end{table}
@@ -638,18 +638,34 @@ Jak je patrné, tak čím více je pater, tím více klesá FPS z důvodu více 
 \newpage
 
 \subsection{Simulace hejna ryb}
-Druhý typ využití Reynoldova algoritmu je simulace hejna. V tomto případě je použita simulace ryb, ale při změně načítaného objektu v konfiguračním souboru můžeme vytvořit simulaci čehokoliv. Pro změnu scény je třeba přepsat několik parametrů, zejména pak SCENE\_TYPE na 3D. U výsledné aplikace je připraven obsah souboru \textit{configFish.cfg}, kterým stačí přepsat obsah hlavní souboru \textit{config.cfg} bez potřeby přepisování všech důležitých parametrů.
+Druhý typ využití Reynoldova algoritmu je simulace hejna. V tomto případě je použita simulace ryb, ale při změně načítaného objektu v konfiguračním souboru můžeme vytvořit simulaci čehokoliv. Pro změnu scény je třeba přepsat několik parametrů, zejména pak SCENE\_TYPE na 3D. U výsledné aplikace je připraven obsah souboru \textit{configFish.cfg}, kterým stačí přepsat obsah hlavního souboru \textit{config.cfg} bez potřeby přepisování všech důležitých parametrů.
 
 Algoritmus funguje stejně jako při úniku z budovy, výjma využití třídy \textit{MyVector2D}, která je nahrazena výpočty ve 3D třídou předka \textit{MyVector}.
 
-V konfiguračním souboru můžeme nastavit počet objektů, kterým se agenti budou vyhýbat. V případě, že se agent dostane do blízkosti objektu, pak vyhýbání funguje stejně jako separace, akorát s větším obvodem kruhu.
+V konfiguračním souboru můžeme nastavit počet objektů, kterým se agenti budou vyhýbat. V případě, že se agent dostane do blízkosti objektu, pak vyhýbání funguje obdobně jako separace, akorát normalizování vektoru a vydělení vektoru počtem okolních agentů je nahrazeno vynásobení skalárem.
 
+\begin{figure}[H]\centering\includegraphics[width=0.7\textwidth]{Figures/fish3.jpg}\label{fig:fishExample}
+	\caption{Ukázka hejna ryb}
+	\label{fig:fishExample}
+\end{figure}
 
+U této simulace jsou hodnoty FPS přijatelné i pro slabší PC, tj. pro již zmíněné hodnoty v~tabulce č. \ref{tab:tablepc} byly hodnoty pro PC1 a PC2 cca 65 FPS a~to při počtu agentů 400.
+
+\subsubsection{Problémy při simulace hejna}\label{sec:problemy-pri-simulace-hejna}
+U této simulace nastávají problémy ``cukání'' pokud agent začne vyhodnocovat, že se přiblížil k okraji mapy. Důvod tohoto efektu je aplikování kolize s ostatními agenty a zároveň kolize s okrajem mapy. Tento problém nebyl vyřešen ani při zkoušení různých nastavení citlivostí jednotlivých pravidel.
+
+Neplatí to však pro menší množství agentů \textit{(např.: 20 agentů na větší ploše)}. Tyto vizuální problémy nastávají při množství několika set agentů.
 
 \newpage
 \section{Zhodnocení}
 
-Text na doplnění...
+Z výsledků tabulek č. \ref{tab:tablePC1}, \ref{tab:tablePC2} a \ref{tab:tablePC3} je znatelné, že pokud je PC výkonější pak čas úniku je kratší. Toto však lze zobecnit stejnými časy díky nastavení rychlosti agentů. U PC2 byla rychlost agentů vizuálně nejblíže, kdežto u PC3 agenti ``utíkali'' z budovy nepřirozeně rychle a u PC1 šli krokovým tempem. Lze tedy říci, že realitě nejvíce odpovídají hodnoty z tabulky pro PC2.
+
+I když byly použity vylepšené techniky Reynoldova algoritmu \textit{(seek, path following)} a~vyladěná všechna tři pravidla, tak stále tento algoritmus není dokonalý (kapitoly \ref{sec:problemy-pri-uniku-z-budovy}, \ref{sec:problemy-pri-simulace-hejna}) a~pro naprosto reálnou podobu davu se musí ještě hodně vlastností a pravidel připsat.
+
+Do budoucna by bylo vhodné tato pravidla dodělat a~tím zajistit, aby agenti v~budově byli inteligentnější a~nešli přímou cestou za únikovým bodem, případně aby se rozhodovali o úniku dle sektorů budovy.
+
+I přes tyto nedostatky lze Reynoldův algoritmus efektivně aplikovat jako simulaci hejna (viditelné na obrázku č. \ref{fig:hejnoRyb}), což je také nejvyužitelnější způsob. I tak je díky své nedokonalosti a zároveň jednoduchosti nejpoužívanějším algoritmem na bázi AI.
 
 \newpage
 
@@ -661,8 +677,18 @@ Text na doplnění...
 	\caption{Budova přepnuta do průhledného režimu se zviditelněním agentů a únikových bodů}
 \end{figure}
 
+\begin{figure}[H]\centering\includegraphics[width=0.9\textwidth]{Figures/screen3.jpg}
+	\caption{Průhledný režim budovy z boční perspektivy}
+\end{figure}
+
+\begin{figure}[H]\centering\includegraphics[width=0.9\textwidth]{Figures/fish6.jpg}\label{fig:hejnoRyb}
+	\caption{Vyrenderované hejno ryb}\label{fig:hejnoRyb}
+\end{figure}
+
 \section{Závěr}
-text
+Výsledkem této práce je aplikace, která má za úkol zrealizovat simulační algoritmus davu. Teoreticky byly popsány dvě varianty simulace, z níž pro realizaci byla vybrána simulace na bázi AI a pro realizaci byl vybrán Craig Reynoldův algoritmus. V první možnosti využití, a sice evakuace budovy, se Reynoldův algoritmus a jeho vylepšení neosvědčil na plno, avšak pro simulaci hejna byl vyhodnocen jako plně dostačující.
+
+Aplikace nabízí dvě možnosti využití. První, jak již bylo zmíněno, je simulace úniku lidí z bodovy a druhá je využití obecného Boidova algoritmu jakožto simulace hejna (v této práci hejno ryb). U první je možnost nadefinovat si vlastní schéma budovy včetně únikových východů a~u~druhé je možnost nadefinovat počet objektů, jimiž se bude hejno vyhýbat. Uživatel si tak může vyzkoušet na obou příkladech výhody a nevýhody Reynoldova algoritmu a také vliv jednotlivých parametrů na výslednou scénu.
 
 \newpage
 
@@ -731,10 +757,6 @@ text
 		\textit{Skalár}, [online]. 2018 [cit. 2018-2-1]\\
 		Dostupné z: \href{https://www.kme.zcu.cz/kmet/bio/matskalvekt.php}{\texttt{https://www.kme.zcu.cz/kmet/bio/matskalvekt.php}}
 		
-	\bibitem{linkToMatrix} IT slovník,
-		\textit{Matice}, [online]. 2018 [cit. 2018-3-6]\\
-		Dostupné z: \href{https://it-slovnik.cz/pojem/matice}{\texttt{https://it-slovnik.cz/pojem/matice}}
-		
 	\bibitem{linkToIDE} Techopedia,
 		\textit{IDE}, [online]. 2018 [cit. 2018-2-4]\\
 		Dostupné z:\\ \href{https://www.techopedia.com/definition/26860/integrated-development-environment-ide}{\texttt{https://www.techopedia.com/definition/26860/integrated-development-environment-ide}}
@@ -790,14 +812,15 @@ text
 \end{thebibliography}
 
 
-%\appendix
-%\section{Plné tkví drah pokles průběhu}
-%Plachty od mé ochranné zaznamenalo podmínek s zní základy přesně vrátím miliardy, oteplováním si hole jícnu května, mým zrušili z toto paleontologii nás, stádu říkat zájmů zeměpisných ne nedostatek přehazoval pralesem 
+\appendix
+\section{Přílohy}
 
-%\section{Pouze obrázek}
-%\begin{figure}[!h]\centering\includegraphics[width=0.95\textwidth]{Figures/CoffeeAndComputer.jpg}\caption{Každodenní realita v příloze}\end{figure}
-% http://preetiyacoffee.blogspot.cz/
+Součástí přiloženého CD je:
 
-
+\begin{itemize}
+	\item Elektronická verze této práce ve formátu PDF.
+	\item Zdrojové kódy demonstrační aplikace.
+	\item Spustitelný soubor demonstrační aplikace.
+\end{itemize}
 
 \end{document}

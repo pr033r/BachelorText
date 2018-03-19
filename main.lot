@@ -1,9 +1,9 @@
-\select@language {slovak}
-\select@language {czech}
-\select@language {czech}
-\select@language {czech}
-\select@language {english}
-\select@language {czech}
+\babel@toc {slovak}{}
+\babel@toc {czech}{}
+\babel@toc {czech}{}
+\babel@toc {czech}{}
+\babel@toc {english}{}
+\babel@toc {czech}{}
 \contentsline {table}{\numberline {1}{\ignorespaces Tabulka n\IeC {\'a}rustu vyu\IeC {\v z}it\IeC {\'\i } pam\IeC {\v e}ti RAM\relax }}{15}{table.caption.5}
 \contentsline {table}{\numberline {2}{\ignorespaces Tabulka parametr\IeC {\r u} PC na kter\IeC {\'y}ch prob\IeC {\v e}hlo testov\IeC {\'a}n\IeC {\'\i }\relax }}{24}{table.caption.10}
 \contentsline {table}{\numberline {3}{\ignorespaces Tabulka nam\IeC {\v e}\IeC {\v r}en\IeC {\'y}ch hodnot - PC1\relax }}{25}{table.caption.11}
