@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6600) (preloaded format=pdflatex 2018.2.16)  19 MAR 2018 15:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6600) (preloaded format=pdflatex 2018.2.16)  23 MAR 2018 15:13
 entering extended mode
 **./main.tex
 (main.tex
@@ -2034,6 +2034,12 @@ Underfull \hbox (badness 4699) in paragraph at lines 71--71
 ime
  []
 
+
+Underfull \hbox (badness 1163) in paragraph at lines 71--71
+[]|\T1/lmr/m/n/10.95 Graphics pro-cess-ing unit  grafická karta, má sv·j pro-c
+e-sor
+ []
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
 been already used, duplicate ignored
 <to be read again> 
@@ -2178,7 +2184,13 @@ File: Figures/diagram2.jpg Graphic file (type jpg)
 <use Figures/diagram2.jpg>
 Package pdftex.def Info: Figures/diagram2.jpg  used on input line 448.
 (pdftex.def)             Requested size: 364.19667pt x 317.43614pt.
- [19 <./Figures/diagram2.jpg>] [20]
+ [19 <./Figures/diagram2.jpg>]
+Overfull \hbox (3.88457pt too wide) in paragraph at lines 476--477
+[]\T1/lmr/m/n/10.95 Plán bu-dovy m·ºeme up-ravo-vat v souboru \T1/lmr/m/it/10.9
+5 map.txt \T1/lmr/m/n/10.95 v£etn¥ defi-nování dal²ích pa-ter a únikových
+ []
+
+[20]
 Underfull \hbox (badness 10000) in paragraph at lines 492--495
 
  []
@@ -2284,7 +2296,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 826.
 Here is how much of TeX's memory you used:
  27390 strings out of 495203
  459352 string characters out of 3181361
- 568668 words of memory out of 3000000
+ 568674 words of memory out of 3000000
  29920 multiletter control sequences out of 15000+200000
  65887 words of font info for 48 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -2304,7 +2316,7 @@ b></home/adla/.miktex/texmfs/install/fonts/type1/public/lm/lmssbx10.pfb></home/
 adla/.miktex/texmfs/install/fonts/type1/public/lm/lmsy10.pfb></home/adla/.mikte
 x/texmfs/install/fonts/type1/public/lm/lmtt10.pfb></home/adla/.miktex/texmfs/in
 stall/fonts/type1/public/lm/lmtto10.pfb>
-Output written on main.pdf (38 pages, 3299060 bytes).
+Output written on main.pdf (38 pages, 3299064 bytes).
 PDF statistics:
  785 PDF objects out of 1000 (max. 8388607)
  271 named destinations out of 1000 (max. 500000)

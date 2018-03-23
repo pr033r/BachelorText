@@ -53,16 +53,16 @@ This thesis focuses on the description of boid's algorithm which is the most use
 \EnglishKeywords{Boid's algorithm, crowd, flock, cohesion, separation, alignment, agent}
 
 \AddAcronym{ACM}{Association for Computing Machinery - vědecky-vzdělávací instituce pro výpočetní technologie}
-\AddAcronym{SIGGRAPH}{Special Interest Group on Computer GRAPHics and Interactive Techniques - výroční konference v počítačové grafice}
-\AddAcronym{FPS}{Frames per seconds - počet snímku za jednu sekundu}
-\AddAcronym{GPU}{Graphics processing unit – grafická karta, má svůj procesor i výpočetní paměť}
-\AddAcronym{IDE}{Integrated Development Environment - program usnadňující práci programátorům}
-\AddAcronym{Realtime}{Vykreslování v reálném čase – snaha vykreslovat co nejrychleji}
-\AddAcronym{RAM}{Random Access Memory – hlavní paměť počítače}
 \AddAcronym{AI}{Artificial Intelligence - umělá inteligence}
-\AddAcronym{GLFW}{Graphics Library Framework - Multiplatformní technologie rozšiřující OpenGL o vytváření aplikačních oken}
+\AddAcronym{FPS}{Frames per seconds - počet snímku za jednu sekundu}
 \AddAcronym{GLEW}{OpenGL Extension Wrangler Library - poskytuje realtime prostředky pro danou platformu}
+\AddAcronym{GLFW}{Graphics Library Framework - Multiplatformní technologie rozšiřující OpenGL o vytváření aplikačních oken}
 \AddAcronym{GLM}{OpenGL Mathematics - poskytuje širokou škálu matematických operací pro OpenGL}
+\AddAcronym{GPU}{Graphics processing unit – grafická karta, má svůj procesor i~výpočetní paměť}
+\AddAcronym{IDE}{Integrated Development Environment - program usnadňující práci programátorům}
+\AddAcronym{RAM}{Random Access Memory – operační paměť počítače}
+\AddAcronym{Realtime}{Vykreslování v reálném čase – snaha vykreslovat co nejrychleji}
+\AddAcronym{SIGGRAPH}{Special Interest Group on Computer GRAPHics and Interactive Techniques - výroční konference v počítačové grafice}
 
 % Zacatek dokumentu
 \begin{document}
@@ -74,11 +74,11 @@ This thesis focuses on the description of boid's algorithm which is the most use
 \lstlistoflistings
 
 \section{Úvod}
-Simulační algoritmy se používají v širokém spektru odvětví od vědy, her, výpočetních úkonů až po kinematografii či stavbě budov \cite{linkToBuildingSimulation}. Herní využití mívá velmi reálně implementována armáda \cite{linkToArmySimulation}, která tímto způsobem zaškoluje vojáky ve virtuálním simulačním boji jak v taktice tak způsobu nejefektivnějšího využití dostupných zbraní. 
+Simulační algoritmy se používají v širokém spektru odvětví od vědy, her, výpočetních úkonů až po kinematografii či stavbu budov \cite{linkToBuildingSimulation}. Herní využití mívá velmi reálně implementována armáda \cite{linkToArmySimulation}, která tímto způsobem zaškoluje vojáky ve virtuálním simulačním boji jak v taktice, tak způsobu nejefektivnějšího využití dostupných zbraní. 
 
 Pokud vememe v potaz stavbu či projektování budov, nabízí se další subspektra  druhů simulačních programů. Například projektant potřebuje nasimulovat jak velkou zátěž udrží hlavní nosníky, testování a simulování různých druhů materiálů či jak velké budou úniky tepla.
 
-Avšak po této základní konstrukční stránce, se musí také navrhnout optimální velikost budovy a kolik bude schopna pojmout lidí v jednom okamžiku. Kde bude vést úniková cesta v případě požáru a kolik času zabere davu, než se z budovy dostane ven. A zrovna co se bezpečnosti týče, mají simulační algoritmy nejširší využítí. V jistém slova smyslu by se dalo řici, že byly vytvořeny primárně pro tento účel \cite{link1}.
+Avšak po této základní konstrukční stránce, se musí také navrhnout optimální velikost budovy a kolik bude schopna pojmout lidí v jednom okamžiku. Kde bude vést úniková cesta v případě požáru a kolik času zabere davu, než se z budovy dostane ven. A zrovna co se bezpečnosti týče, mají simulační algoritmy nejširší využítí. V jistém slova smyslu by se dalo říci, že byly vytvořeny primárně pro tento účel \cite{link1}.
 
 Při těchto simulacích se tak navrhují nejlepší varianty šířky chodeb, dostupnosti k únikovým východům, přístupu k požárnímu schodišti nebo vyladění ukazatelů směru
 úniku.
@@ -99,9 +99,9 @@ Simulaci davu lze zrealizovat dvěmi metodami. Částicová simulace a simulace 
 První zmíněná simulace je založena na principu přiřazení hmotného bodu každému prvku z množiny všech prvků které mají spolu iterovat\footnote{Iterace je v programování proces při kterém se soubor pokynů opakuje přesně daným počtem opakování, nebo dokud je splněna podmínka.\cite{linkToIteration}}. Hlavní výhodou využití tohoto typu simulace je možnost použití velkého množství prvků z celkové množiny, neboť výpočty základních sil nejsou příliš náročné na výpočetní výkon. Příklady pro využití jsou typy založené na: magnetických silách, buněčném modelu a sociálních silách. \cite{linkToBachelor1}
 
 \subsection{Simulace na bázi AI (Artificial Intelligence)}\label{sec:simulace-na-bazi-ai-artificial-intelligence}
-Druhý zmíněný typ je založen na bázi Agentů. Ti už nejsou reprezentováni jen obyčejnými silami \textit{(i přesto že se jedná o diametrálně odlišný typ simulace davu, určité fyzikální vlastostni agenti stále musí mít)} ale také přidanými vlastnostmi, kterými předchozí typ tolik nedisponoval. Mají hlavně přidané senzory, díky nímž dokáží vyhodnocovat danou situaci v reálném čase a následně se rozhodovat k dalšímu nejvýhodnějšímu kroku. Pokud do scény vložíme dva a více agentů kteří budou na sebe reagovat, můžeme říci že každý z nich má v jisté míře svůj mozek. Ať už jednodušší \textit{(rozhodování dalšího kroku mezi zdmi)} či složitějšího \textit{(např.: agent může v danou chvíli reagovat zda-li má jít rychleji či pomaleji aby nezpůsobil kolizi s jiným agentem či agenty)}.
+Druhý zmíněný typ je založen na bázi Agentů. Ti už nejsou reprezentováni jen obyčejnými silami \textit{(i přesto že se jedná o diametrálně odlišný typ simulace davu, určité fyzikální vlastostni agenti stále musí mít)} ale také přidanými vlastnostmi, kterými předchozí typ tolik nedisponoval. Mají hlavně přidané senzory, díky nímž dokáží vyhodnocovat danou situaci v reálném čase a následně se rozhodovat k dalšímu nejvýhodnějšímu kroku. Pokud do scény vložíme dva a více agentů kteří budou na sebe reagovat, můžeme říci že každý z nich má v jisté míře svůj mozek. Ať už jednodušší \textit{(rozhodování dalšího kroku mezi zdmi)} nebo složitější \textit{(např.: agent může v danou chvíli reagovat zda-li má jít rychleji či pomaleji aby nezpůsobil kolizi s jiným agentem či agenty)}.
 
-Tento typ simulace hojně využívá herní průmysl kdy v nějaké scéně - herní mapě, jsou nasazeny desítky agentů kteří se ve své podstatě starají sami o sebe a přímo či nepřímo komunikují s uživatelem. Obecně však platí že ve hrách je tato implementace mnohonásobně složitější než částicová simulace kvůli mnoha vlastnostem agentů. Konkrétními případy může být třeba hra Crysis \textit{(leden 2007 - stáda jelenů)} a FarCry \textit{(2004 - hejna tropických papoušků)}.
+Tento typ simulace hojně využívá herní průmysl, kdy v nějaké scéně - herní mapě, jsou nasazeny desítky agentů kteří se ve své podstatě starají sami o sebe a přímo či nepřímo komunikují s uživatelem. Obecně však platí že ve hrách je tato implementace mnohonásobně složitější než částicová simulace kvůli mnoha vlastnostem agentů. Konkrétními případy může být třeba hra Crysis \textit{(leden 2007 - stáda jelenů)} a FarCry \textit{(2004 - hejna tropických papoušků)}.
 
 Je třeba také zminit kinematografický průmysl, který simuluje davy lidí. Tím pádem animátorům odpadne kus práce kdy by museli každého agenta animovat zvlášť.
 
@@ -276,7 +276,7 @@ function Cohesion(boid paramBoid)
 \end{lstlisting}
 
 \subsection{Aplikování tří pravidel}\label{sec:aplikovani-tri-pravidel}
-Ke kompletní simulaci dojde ve chvíli spojením třech výše zmíněných pravidel. Technicky vzato se jedná o sečtení všech třech výsledných vektorů z každé ze tří procedur a rychlosti daného agenta který je aktuálně v iteraci. Nejdříve se sčítají rychlosti a poté se z této sumy spočítá výsledná pozice (Výpis pseudokódu č. 4).
+Ke kompletní simulaci dojde ve chvíli spojením třech výše zmíněných pravidel. Technicky vzato se jedná o sečtení všech třech výsledných vektorů z každé ze tří metod a rychlosti daného agenta který je aktuálně v iteraci. Nejdříve se sčítají rychlosti a poté se z této sumy spočítá výsledná pozice (Výpis pseudokódu č. 4).
 
 Avšak pravidel je možné použít více, jak je popsáno v publikaci od Craiga Reynolda, Steering Behaviors For Autonomous Characters \cite{linkToSteeringBehaviors}. Tudíž nemusí být nutně tři fixní pravidla, ale můžeme k sčítání výsledných vektorů jednotlivých pravidel připsat i pravidla jiná. Kombinacemi těchto pravidel lze dosáhnout různého výsledného chování agentů.
 
@@ -456,7 +456,7 @@ Třída Walls vytváří zdi podle předaných dat z mapy a udržuje informace o
 Jak již bylo zmíněno v kapitole \ref{sec:problemy-pri-implementaci}, tak pro operace s vektory byla použita vlastní třída \textit{MyVector} ze které dědí třída \textit{MyVector2D} z důvodu přenositelnosti a nezávislosti algoritmu na platformě.
 
 \subsection{Výsledné aplikování pravidel}
-Všechna pravidla jsou aplikována jako součet výsledků jednotlivých pravidel \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel})}. \\V této práci k sečtení a vytvoření výsledného vektoru slouží metoda \textit{appplyForce(...))}, která přidá do výsledného vektoru \textit{acceleratoin} další vektor \textit{(výsledek jednoho z pravidel)}. Tento vektor je pak aplikován v metodě \textit{update()}, která nastaví agentovi novou pozici a rychlost.
+Všechna pravidla jsou aplikována jako součet výsledků jednotlivých pravidel \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel})}. \\V této práci k sečtení a vytvoření výsledného vektoru slouží metoda \textit{appplyForce(...))}, která přidá do výsledného vektoru \textit{acceleration} další vektor \textit{(výsledek jednoho z pravidel)}. Tento vektor je pak aplikován v metodě \textit{update()}, která nastaví agentovi novou pozici a rychlost.
 
 \begin{lstlisting}[language=c++,label=src:seek,caption=Nastavení výsledné pozice agenta] 
 void Boids::update() {
@@ -471,9 +471,9 @@ void Boids::update() {
 Po vynásobení konstantou 0.4, která slouží pro nastavení citlivosti \textit{(může a nemusí být použita, zde je nastavena po experimentech jako ideální)} následuje přidání, limitování vektoru a~vypočtení výsledné pozice. Na konci musíme vektor \textit{acceleration} vynulovat pro použití v další iteraci.
 
 \subsection{Únik z budovy}
-První část využití Reynoldova agoritmu je simulace úniku lidí z budovy podle nastavených únikových cest. Funkčně je tato část určena k tomu, aby po skončení simulace mohl uživatel zjistit kolik času by zabralo evakuovat lidi z předem definovaného plánu budovy. V případě časově náročné evakuace může uživatel upravit plán budovy a únikové cesty tak, aby budova splňovala dané normy.
+První část využití Reynoldova agoritmu je simulace úniku lidí z budovy podle nastavených únikových cest. Funkčně je tato část určena k tomu, aby po skončení simulace mohl uživatel zjistit, kolik času by zabralo evakuovat lidi z předem definovaného plánu budovy. V případě časově náročné evakuace může uživatel upravit plán budovy a únikové cesty tak, aby budova splňovala dané normy.
 
-Plán budovy můžeme upravovat v souboru \textit{map.txt} včetně definování dalších pater\\ a únikových cest. Jelikož se jedná o textový soubor, tak každý znak reprezentuje jinou funkci. Popis funkčních znaků můžeme vidět níže:
+Plán budovy můžeme upravovat v souboru \textit{map.txt} včetně definování dalších pater a~únikových cest. Jelikož se jedná o textový soubor, tak každý znak reprezentuje jinou funkci. Popis funkčních znaků můžeme vidět níže:
 
 \begin{itemize}
 	\item \textbf{G} generační místo pro dav, který lze použít vícekrát v každém patře či místnostech
@@ -514,7 +514,7 @@ Při zapnutí simulace jsou agenti v půdorysu okamžitě vedení směrem ven mi
 	\caption{Ukázka vyrenderovaného půdorysu budovy}
 \end{figure}
 
-Pro následování bodů byla použita metoda \textit{arriveTo(...)} která využívá metodu \textit{seek(...)} \textit{(viz kapitola \ref{sec:steering-behaviors})}. Abychom správně určili, který agent má kam směřovat, musíme metodě\\ \textit{arriveTo(...)} předat správný vektor, který získáme metodou \textit{getArriveVector(...)}. Ta vrátí výsledný vektor který je předán \textit{seek()} metodě. Výsledek je pak nový vektor, který se aplikuje jako nové pravidlo \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel})} a~tím zajistíme že agent bude směřovat na nejbližší únikový bod a~následně na finální bod. 
+Pro následování bodů byla použita metoda \textit{arriveTo(...)} která využívá metodu \textit{seek(...)} \textit{(viz kapitola \ref{sec:steering-behaviors})}. Abychom správně určili, který agent má kam směřovat, musíme metodě\\\textit{arriveTo(...)} předat správný vektor, který získáme metodou \textit{getArriveVector(...)}. Ta vrátí výsledný vektor který je předán \textit{seek()} metodě. Výsledek je pak nový vektor, který se aplikuje jako nové pravidlo \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel})} a~tím zajistíme že agent bude směřovat na nejbližší únikový bod a~následně na finální bod. 
 
 \begin{lstlisting}[language=c++,label=src:mapSave,caption=Princip metody getArriveVector(...)]
 // getting minIndex from exitPoints...
@@ -541,7 +541,7 @@ Mimo další operace které se nachází mezi návratovou hodnotou a předchozí
 
 Agenti se můžou občas dostat do problémů zejména díky špatnému návrhu budovy, nebo také kvůli nedokonalosti Reynoldova algoritmu. 
 
-Například pokud při úniku z budovy zapneme všechna tři pravidla, může nastat efeket procházení zdí. Tento problém vzniká kvůli nastaveným konstantám citlivosti u každého pravidla. Tyto konstanty byly nastaveny po řadě experimentů jako nejvhodnější a~jsou neměnné \textit{(kromě konstanty citlivosti úniku ESCAPE\_SENSITIVITY, kterou lze měnit v konfiguračním souboru)}. Pokud je konstanta příliš nízká, dané pravidlo by zaniklo mezi ostatními. Pokud příliš vysoká, tak by dané pravidlo překrylo ostatní. U konstanty citlivosti úniku je však občas potřebné přenastavení. Částečné řešení spočívá jen v použití separace. Dav se tedy chová jako dav skutečných lidí \textit{(každý si jde kam chce)}.
+Například pokud při úniku z budovy zapneme všechna tři pravidla, může nastat efekt procházení zdí. Tento problém vzniká kvůli nastaveným konstantám citlivosti u každého pravidla. Tyto konstanty byly nastaveny po řadě experimentů jako nejvhodnější a~jsou neměnné \textit{(kromě konstanty citlivosti úniku ESCAPE\_SENSITIVITY, kterou lze měnit v konfiguračním souboru)}. Pokud je konstanta příliš nízká, dané pravidlo by zaniklo mezi ostatními. Pokud příliš vysoká, tak by dané pravidlo překrylo ostatní. U konstanty citlivosti úniku je však občas potřebné přenastavení. Částečné řešení spočívá jen v použití separace. Dav se tedy chová jako dav skutečných lidí \textit{(každý si jde kam chce)}.
 
 Další problém může nastat při generování agentů, kdy agenti vyberou jako cestu \\k nejkratšímu bodu tu variantu, že se bod nachází za zdí či v jiné místnosti (viz obrázek č. \ref{fig:buildingEscapeProblem1}). S tím souvisí možnost zaseknutí o zeď, kdy má agent před sebou překážku za kterou je cílový bod a např.: dva bloky od něj je východ. Má však nastavenou cestu přímo na bod \textit{(přes zeď)}. Řešení takovýchto situací je však nad rámec této práce \textit{(jedná se o pokročilé techniky AI)}.
 
@@ -577,7 +577,7 @@ Všechny části testů byly provedeny na schématu budovy s parcelou 30x17 blok
 
 Tabulky zobrazují jaké byly hodnoty FPS při daném počtu agentů, počtu pater a složitosti budovy \textit{(počet zdí)}. Hodnoty FPS jsou odečteny před a během simulace. Poslední hodnotou je čas opuštění budovy.
 
-Testy proběhly při počtu agentů 200, počtu pater 5, rychlostí agentů 3 s maximální hodnotou  tření 0.1 a nastevní míry opuštění jednoho patra na 5 sekund.
+Testy proběhly při počtu agentů 200, počtu pater 5, rychlostí agentů 3 s maximální hodnotou  tření 0.1 a nastavení míry opuštění jednoho patra na 8 sekund.
 
 \begin{table}[H]
 	\centering
@@ -638,7 +638,7 @@ Jak je patrné, tak čím více je pater, tím více klesá FPS z důvodu více 
 \newpage
 
 \subsection{Simulace hejna ryb}
-Druhý typ využití Reynoldova algoritmu je simulace hejna. V tomto případě je použita simulace ryb, ale při změně načítaného objektu v konfiguračním souboru můžeme vytvořit simulaci čehokoliv. Pro změnu scény je třeba přepsat několik parametrů, zejména pak SCENE\_TYPE na 3D. U výsledné aplikace je připraven obsah souboru \textit{configFish.cfg}, kterým stačí přepsat obsah hlavního souboru \textit{config.cfg} bez potřeby přepisování všech důležitých parametrů.
+Druhý typ využití Reynoldova algoritmu je simulace hejna. V tomto případě je použita simulace ryb, ale při změně načítaného objektu v konfiguračním souboru můžeme vytvořit simulaci čehokoliv. Pro změnu scény je třeba přepsat několik parametrů, zejména pak SCENE\_TYPE na 3D. U výsledné aplikace je připraven obsah souboru \textit{configFish.cfg} pro simulaci ryb, kterým stačí přepsat obsah hlavního souboru \textit{config.cfg} bez potřeby přepisování všech důležitých parametrů.
 
 Algoritmus funguje stejně jako při úniku z budovy, výjma využití třídy \textit{MyVector2D}, která je nahrazena výpočty ve 3D třídou předka \textit{MyVector}.
 
@@ -651,7 +651,7 @@ V konfiguračním souboru můžeme nastavit počet objektů, kterým se agenti b
 
 U této simulace jsou hodnoty FPS přijatelné i pro slabší PC, tj. pro již zmíněné hodnoty v~tabulce č. \ref{tab:tablepc} byly hodnoty pro PC1 a PC2 cca 65 FPS a~to při počtu agentů 400.
 
-\subsubsection{Problémy při simulace hejna}\label{sec:problemy-pri-simulace-hejna}
+\subsubsection{Problémy při simulaci hejna}\label{sec:problemy-pri-simulace-hejna}
 U této simulace nastávají problémy ``cukání'' pokud agent začne vyhodnocovat, že se přiblížil k okraji mapy. Důvod tohoto efektu je aplikování kolize s ostatními agenty a zároveň kolize s okrajem mapy. Tento problém nebyl vyřešen ani při zkoušení různých nastavení citlivostí jednotlivých pravidel.
 
 Neplatí to však pro menší množství agentů \textit{(např.: 20 agentů na větší ploše)}. Tyto vizuální problémy nastávají při množství několika set agentů.
@@ -665,7 +665,7 @@ I když byly použity vylepšené techniky Reynoldova algoritmu \textit{(seek, p
 
 Do budoucna by bylo vhodné tato pravidla dodělat a~tím zajistit, aby agenti v~budově byli inteligentnější a~nešli přímou cestou za únikovým bodem, případně aby se rozhodovali o úniku dle sektorů budovy.
 
-I přes tyto nedostatky lze Reynoldův algoritmus efektivně aplikovat jako simulaci hejna (viditelné na obrázku č. \ref{fig:hejnoRyb}), což je také nejvyužitelnější způsob. I tak je díky své nedokonalosti a zároveň jednoduchosti nejpoužívanějším algoritmem na bázi AI.
+I přes tyto nedostatky lze Reynoldův algoritmus efektivně aplikovat jako simulaci hejna (viditelné na obrázku č. \ref{fig:hejnoRyb}), což je také nejvyužitelnější způsob. I tak je díky své nedokonalosti a zároveň jednoduchosti nejpoužívanějším algoritmem pro simulaci davu na bázi AI.
 
 \newpage
 

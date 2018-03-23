@@ -173,7 +173,7 @@
 \ifthenelse{\value{Dipl@CurrentThesisType}=\Dipl@MasterThesis}
 {
 
-\Dipl@AuthorDeclaration={\Dipl@IfEnglish{I hereby declare that this master's thesis was written by myself. I have quoted all the references I have drawn upon.}{Prohlašuji, že jsem tuto diplomovou práci vypracoval samostatně. Uvedl jsem všechny literární prameny a publikace, ze kterých jsem čerpal.}}
+\Dipl@AuthorDeclaration={\Dipl@IfEnglish{I hereby declare that this master's thesis was written by myself. I have quoted all the references I have drawn upon.}{Prohlašuji, že jsem tuto bakalářskou práci vypracoval samostatně. Uvedl jsem všechny literární prameny a publikace, ze kterých jsem čerpal.}}
 }
 {\relax}
 }

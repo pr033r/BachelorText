@@ -29,7 +29,7 @@
 \contentsline {subsubsection}{\numberline {3.7.1}Probl\IeC {\'e}my p\IeC {\v r}i \IeC {\'u}niku z budovy}{23}{subsubsection.3.7.1}
 \contentsline {subsection}{\numberline {3.8}Testov\IeC {\'a}n\IeC {\'\i } \IeC {\'u}niku z budovy}{24}{subsection.3.8}
 \contentsline {subsection}{\numberline {3.9}Simulace hejna ryb}{26}{subsection.3.9}
-\contentsline {subsubsection}{\numberline {3.9.1}Probl\IeC {\'e}my p\IeC {\v r}i simulace hejna}{26}{subsubsection.3.9.1}
+\contentsline {subsubsection}{\numberline {3.9.1}Probl\IeC {\'e}my p\IeC {\v r}i simulaci hejna}{26}{subsubsection.3.9.1}
 \contentsline {section}{\numberline {4}Zhodnocen\IeC {\'\i }}{27}{section.4}
 \contentsline {section}{\numberline {5}Z\IeC {\'a}v\IeC {\v e}r}{30}{section.5}
 \contentsline {section}{Reference}{31}{section.5}
