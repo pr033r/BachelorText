@@ -93,10 +93,10 @@ Pojem simulace lze shrnout do obecné věty: \textit{"Počítačová simulace je
 V našem případě se jedná o napodobení davu, kdy pomocí algoritmu dokážeme předem modifikovat nadcházející krok a tím i změnit výsledné chování celého davu. Na základě vstupních dat nebo kombinací pravidel můžeme chování měnit a tím simulovat dav při různých situacích, jako je evakuace z budovy nebo běžné chození po prostorách nákupního střediska.
 
 \subsection{Simulace davu}
-Simulaci davu lze zrealizovat dvěmi metodami. Částicová simulace a simulace založená na umělé inteligenci. \cite{linkToBachelor1}
+Existují v zásadě dvě možnosti, jak simulovat dav lidí. Částicová simulace a simulace založená na umělé inteligenci. \cite{linkToBachelor1}
 
 \subsection{Částicová simulace}
-První zmíněná simulace je založena na principu přiřazení hmotného bodu každému prvku z množiny všech prvků které mají spolu iterovat\footnote{Iterace je v programování proces při kterém se soubor pokynů opakuje přesně daným počtem opakování, nebo dokud je splněna podmínka.\cite{linkToIteration}}. Hlavní výhodou využití tohoto typu simulace je možnost použití velkého množství prvků z celkové množiny, neboť výpočty základních sil nejsou příliš náročné na výpočetní výkon. Příklady pro využití jsou typy založené na: magnetických silách, buněčném modelu a sociálních silách. \cite{linkToBachelor1}
+První zmíněná simulace je založena na principu přiřazení hmotného bodu každému chodci ve scéně, jehož pohyb je odvíjen působením nejrůznějších sil. Hlavní výhoda spočívá v nasimulování velkého množství lidí z důvodu nenáročnosti výpočtů na výpočetní výkon, ale výsledná vizualizace není příliš reálná. Příklady pro využití jsou typy založené na: magnetických silách, buněčném modelu a sociálních silách. \cite{linkToBachelor1}
 
 \subsection{Simulace na bázi AI (Artificial Intelligence)}\label{sec:simulace-na-bazi-ai-artificial-intelligence}
 Druhý zmíněný typ je založen na bázi Agentů. Ti už nejsou reprezentováni jen obyčejnými silami \textit{(i přesto že se jedná o diametrálně odlišný typ simulace davu, určité fyzikální vlastostni agenti stále musí mít)} ale také přidanými vlastnostmi, kterými předchozí typ tolik nedisponoval. Mají hlavně přidané senzory, díky nímž dokáží vyhodnocovat danou situaci v reálném čase a následně se rozhodovat k dalšímu nejvýhodnějšímu kroku. Pokud do scény vložíme dva a více agentů kteří budou na sebe reagovat, můžeme říci že každý z nich má v jisté míře svůj mozek. Ať už jednodušší \textit{(rozhodování dalšího kroku mezi zdmi)} nebo složitější \textit{(např.: agent může v danou chvíli reagovat zda-li má jít rychleji či pomaleji aby nezpůsobil kolizi s jiným agentem či agenty)}.
@@ -113,45 +113,61 @@ Jelikož byl v této práci využit tento typ simulace, tak v dalších kapitol�
 	}
 \end{figure}
 
-\subsection{Craig Reynoldův algoritmus}
+\subsection{Boidův algoritmus}
 
-Nejčastějším typem simulace založené na umělé inteligenci je Craig Reynoldův algoritmus  vytvořený v roce 1986 a oficiálně představený roku 1987 na konferenci ACM SIGGRAPH \cite{linkToACM, linkToSIGGRAPH}.
+Nejčastějším typem simulace založené na umělé inteligenci je Boidův algoritmus  vytvořený v roce 1986 Craigem Reynoldem a oficiálně představený roku 1987 na konferenci ACM SIGGRAPH \cite{linkToACM, linkToSIGGRAPH}.
 
-Nejčastěji se však setkáme s názvem Boidův algoritmus, který je odvozen od boidů \textit{(boids)} čili alternativnímu názvu agentů. Jak již bylo zmíněno výše, simulace založená na
+Název Boidův algoritmus je odvozen od boidů \textit{(zkratka z anglického bird-oid object)} což referuje na simlaci hejna ptáků. Jak již bylo zmíněno výše, simulace založená na
 umělé inteligenci obsahuje základní prvky částicové simulace, ale má také něco navíc. Výjma senzorů mají také přehled o celkové geometrii celé scény. Tzn. že každý agent \textit{(boid)} má přehled o všech agentech v celé scéně. Pokud bychom tedy maximalizovali důležitá tři pravidla tohoto principu popsané níže, znamená to, že každý iteruje s každým.
 
-Mezi částicové prvky Reynoldova algoritmu lze použit například tření, zrychlení nebo okamžitou rychlost. Reálně lze tření ještě rozdělit na tření válcove, tření způsobené protivětrem nebo pokud bychom určili jako objekt auto, můžeme použít další fyzikální vlastnosti jako točivý moment případně brzdná dráha.
+Mezi částicové prvky Boidova algoritmu lze použit například tření, zrychlení nebo okamžitou rychlost. Reálně lze tření ještě rozdělit na tření válcove, tření způsobené protivětrem nebo pokud bychom určili jako objekt auto, můžeme použít další fyzikální vlastnosti jako točivý moment případně brzdná dráha.
 
 Existuje však celá řada vylepšení která se dají s tímto algoritmem provést, například simulace chování dopravy. Ta funguje jako tzv. chování založeného na řízení \textit{(Steering behaviors)} \cite{linkToSteeringBehaviors}. 
 
 V této práci byla tato vylepšení použita čímž lze chování davu více přiblížit realitě. Přidané fyzikální veličiny jsou již zmíněné: tření, zrychlení a okamžitá rychlost.
 
 \newpage
-Následuje popis Reynoldova algoritmu, který obsahuje tři základní vlastnosti:
+Následuje popis Boidova algoritmu, který obsahuje tři základní vlastnosti:
 
 \begin{enumerate}
 	\item Separace \textit{(Separation)}
 	\item Zarovnání \textit{(Alignment)}
-	\item Koheze\footnote{Koheze je fyzikální síla držící pohromadě atomy či molekuly téže látky či tělesa (zejména
-		kapalného a pevného tělesa), pozn. upraveno \cite{linkToCohesion}}\textit{(Cohesion)}
+	\item Koheze \textit{(Cohesion)}
 \end{enumerate}
 
 \subsection{Separace}\label{sec:separace}
-Separace slouží k tomu, aby se dva a více agentů nepřiblížili příliš blízko sebe a tím vyvolali kolizi mezi sebou. Je to první a nejzákladnější vlastnost Reynoldova algoritmu bez které by nebylo možné vytvořit kompletní simulaci. 
+Separace slouží k tomu, aby se dva a více agentů nepřiblížili příliš blízko sebe a tím vyvolali kolizi mezi sebou. Je to první a nejzákladnější vlastnost Boidova algoritmu bez které by nebylo možné vytvořit kompletní simulaci. 
 
 Oddělení od ostatních agentů funguje na principu základních operací s vektory \textit{(2D nebo 3D)} a vytvoření pomyslného kruhu kolem každého agenta, který jej upozorní zda-li není příliš blízko jiného agenta. 
 
 Následující kroky provedou separaci agentů: 
 
 \begin{enumerate}
-	\item Odečtení vektoru agenta od vektoru aktuálně kontrolovaného agenta.
-	\item Normalizování výsledného vektoru z předhozího kroku.
-	\item Vydělení výsledku kroku č. 2 vzdáleností těchto dvou agentů. Výsledek se přičítá k výslednému vektoru.
-	\item Pokud je v okolí agenta více agentů se kterými koliduje, pak se na konci výsledný vektor vydělí počtem těchto agentů (viz obrázek č. \ref{fig:separationImg}).
+	\item Odečtení vektoru agenta od vektoru aktuálně kontrolovaného agenta:
+			\[ \scalebox{1.2}{$v_{sub} = v_{current} - v_{actual}$} \]
+			
+			kde \( \scalebox{1.2}{$v_{sub}$} \) je výsledný vektor, \( \scalebox{1.2}{$v_{currrent}$} \) je vektor agenta, který je právě v iteraci a \( \scalebox{1.2}{$v_{actual}$} \) je vektor aktuálně kontrolovaného agenta
+
+	\item Normalizování výsledného vektoru z předhozího kroku:
+	
+			\[ \scalebox{1.2}{$v_{norm} = \sqrt{vx_{sub}^2 + vy_{sub}^2 + vz_{sub}^2}$} \]
+			
+			kde \( \scalebox{1.2}{$v_{norm}$} \) je výsledný normalizovaný vektor \( \scalebox{1.2}{$v_{sub}$} \)
+	\item Vydělení výsledku kroku č. 2 vzdáleností těchto dvou agentů. Výsledek se přičítá k výslednému vektoru \( \scalebox{1.2}{$v_{sum}$} \). Matematický zápis pak vypadá následovně:
+			%\[ \scalebox{1.2}{$d_{x} = vx_{current} - vx_{actual}$} \]
+			%\[ \scalebox{1.2}{$d_{y} = vy_{current} - vy_{actual}$} \]
+			%\[ \scalebox{1.2}{$d_{z} = vz_{current} - vz_{actual}$} \]
+			\[ \scalebox{1.2}{$v_{distance} = \sqrt{d_x^2 + d_y^2 + d_z^2}$} \]
+			\[ \scalebox{1.2}{$v_{divide} = \frac{v_{norm}}{v_{distance}}$} \]
+			\[ \scalebox{1.2}{$v_{sum} = v_{sum} + v_{divide}$} \]
+						
+			kde \( \scalebox{1.2}{$d_{x}$} \), \( \scalebox{1.2}{$d_{y}$} \) a \( \scalebox{1.2}{$d_{z}$} \) jsou rozdíly daných souřadnic mezi agentem v iteraci a aktuálně kontrolovaným agentem, \( \scalebox{1.2}{$v_{distance}$} \) je výsledný vektor vzdálenosti mezi těmito dvěma agenty a \( \scalebox{1.2}{$v_{divide}$} \) je výsledek vydělení vektorů
+			
+	\item Pokud je v okolí agenta více agentů se kterými koliduje, pak se na konci výsledný vektor vydělí počtem těchto agentů (viz obrázek č. \ref{fig:separationImg})
 \end{enumerate}
 
-\begin{figure}[H]\centering\includegraphics[width=0.5\textwidth]{Figures/separation.jpg}\label{fig:separationImg}
-	\caption{Separace - vyhýbání se ostatním agentům (Zdroj: \cite{link2})}\label{fig:separationImg}
+\begin{figure}[H]\centering\includegraphics[width=0.4\textwidth]{Figures/separation2.jpg}\label{fig:separationImg}
+	\caption{Separace - vyhýbání se ostatním agentům}\label{fig:separationImg}
 \end{figure}
 
 \begin{lstlisting}[language=c++,label=src:Separation pseudocode,caption=Pseudokód pro separaci]
@@ -178,7 +194,7 @@ function Separation(boid paramBoid)
 \end{lstlisting}
 
 \subsection{Zarovnání}\label{sec:zarovnani}
-Dalším důležitým pravidlem pro fungování boidova algoritmu je zarovnání. Spolu se separací bez koheze má dav již základní podobu chování. 
+Dalším důležitým pravidlem pro fungování Boidova algoritmu je zarovnání. Spolu se separací bez koheze má dav již základní podobu chování. 
 
 Zarovnání má za úkol soudržnost. Všem agentům ve scéně poskytuje schopnost sladit se, jak je zobrazeno na obrázku č. \ref{fig:zarovnani}. 
 
@@ -187,25 +203,39 @@ Princip fungování je obdobný jako u separace, pokud se v blízkosti okruhu od
 Pokud bychom chtěli aplikovat zarovnání a konkretizovat průběh, musíme se držet těchto kroků:
 
 \begin{enumerate}
-	\item V cyklu, který prochází všechny agenty ve scéně se testuje vzdálenost konkrétního agenta od jiného, který je momentálně v dané iteraci cyklu pod určitým indexem. Pokud je tato vzdálenost menší než průměr kruhu, přičtou se souřadnice vektoru daného agenta k lokálnímu sumárnímu vektoru \(sum\).
-	\item Jestliže se podmínka nesplnila a tudíž sumární vektor \textit{sum} je roven nule pak se pravidlo zarovnání ukončuje. Pokud se alespoň jednou podmínka v kroku č. 1 provedla tak následují kroky:
+	\item V cyklu, který prochází všechny agenty ve scéně se testuje vzdálenost konkrétního agenta od jiného, který je momentálně v dané iteraci cyklu pod určitým indexem. Pokud je tato vzdálenost menší než průměr kruhu, přičtou se souřadnice vektoru daného agenta k lokálnímu sumárnímu vektoru \( \scalebox{1.2}{$v_{sum}$} \). Matematický zápis vypadá následovně:
+	
+		\[ \scalebox{1.2}{$v_{distance} = \sqrt{d_x^2 + d_y^2 + d_z^2}$} \]
+		\[ \scalebox{1.2}{$v_{sum} = v_{sum} + v_{divide}$} \]
+		
+		kde \( \scalebox{1.2}{$d_{x}$} \), \( \scalebox{1.2}{$d_{y}$} \) a \( \scalebox{1.2}{$d_{z}$} \) jsou rozdíly daných souřadnic mezi agentem v iteraci a aktuálně kontrolovaným agentem, \( \scalebox{1.2}{$v_{distance}$} \) je výsledný vektor vzdálenosti mezi těmito dvěma agenty
+		
+	\item Jestliže se podmínka nesplnila a tudíž sumární vektor \( \scalebox{1.2}{$v_{sum}$} \) je roven nule, pak se pravidlo zarovnání ukončuje. Pokud se alespoň jednou podmínka v kroku č. 1 provedla, tak následují kroky:
 	
 	\begin{itemize}
-		\item sumární vektor \(sum\) se vydělí skalární\footnote{Skalár je veličina, která je určená pouze svojí velikostí, tj. její hodnota je popsána jediným číslem (skalární veličiny ve fyzice jsou např. hmotnost, objem, teplota).
-		(Citace \cite{linkToScalar})} hodnotou rovné počtu splněných podmínek \\v kroku č. 1
-		\item normalizování sumárního vektoru \textit{sum}
-		\item vypočtení výsledného vektoru dle kterého se upraví směr daného agenta vzorcem \\\(vRes = sum - vel\), kde \(sum\) je sumární vektor a \(vel\) je aktuální rychlost agenta.
+		\item sumární vektor \( \scalebox{1.2}{$v_{sum}$} \) se vydělí skalární hodnotou rovné počtu splněných podmínek \\v kroku č. 1:
+		
+		\[ \scalebox{1.2}{$v_{sum} = \frac{v_{sum}}{c}$} \]
+		
+		kde \( \scalebox{1.2}{$c$} \) je počet splněných podmínek 
+		
+		\item normalizování sumárního vektoru \( \scalebox{1.2}{$v_{sum}$} \)
+		
+		\[ \scalebox{1.2}{$v_{sum} = \sqrt{vx_{sum}^2 + vy_{sum}^2 + vz_{sum}^2}$} \]
+		
+		\item vypočtení výsledného vektoru dle kterého se upraví směr daného agenta vzorcem: 
+		\[ \scalebox{1.2}{$v_{res} = v_{sum} - v_{velocity}$} \]
+		kde \( \scalebox{1.2}{$v_{sum}$} \) je sumární vektor a \( \scalebox{1.2}{$v_{velocity}$} \) je rychlost aktuálně kontrolovaného agenta.
 	\end{itemize}
 	
 \end{enumerate}
 
-\begin{figure}[H]\centering\includegraphics[width=0.5\textwidth]{Figures/alignment.jpg}
-	\caption{Zarovnání - určení směru agenta vůči průměrnému směru ostatních (Zdroj: \cite{link2})} \label{fig:zarovnani}
+\begin{figure}[H]\centering\includegraphics[width=0.4\textwidth]{Figures/alignment2.jpg}
+	\caption{Zarovnání - určení směru agenta vůči průměrnému směru ostatních} \label{fig:zarovnani}
 \end{figure}
 
 \begin{lstlisting}[language=C++,label=src:Alignment pseudocode,caption=Pseudokód pro zarovnání]
-function Alignment(boid paramBoid)
-{
+function Alignment(boid paramBoid) {
 	Vector sum
 	int count
 	
@@ -230,7 +260,8 @@ function Alignment(boid paramBoid)
 \end{lstlisting}
 
 \subsection{Koheze}\label{sec:koheze}
-Při simulaci pomocí Reynoldova algoritmu pomocí třech pravidel je koheze tím nejméně důležitým pravidlem. Pokud bychom aplikovali pouze dvě předchozí pravidla a sice separaci a zarovnání, pak by výsledek už vykazoval známky chování davu.
+Při simulaci pomocí boidových třech pravidlech je koheze\footnote{Koheze je fyzikální síla držící pohromadě atomy či molekuly téže látky či tělesa (zejména
+	kapalného a pevného tělesa), pozn. upraveno \cite{linkToCohesion}} tím nejméně důležitým pravidlem. Pokud bychom aplikovali pouze dvě předchozí pravidla a sice separaci a zarovnání, pak by výsledek už vykazoval známky chování davu.
 
 Funguje na principu spojení okolních agentů \textit{(a následně vytvoření skupiny)}, kteří zasahují do dalšího pomyslného kruhu. Aby toto pravidlo fungovalo správně a nekolidovalo s podmínkami separace pak musí platit \(constCoh > constSep\), kde \(constSep\) je maximální průměr kružnice ve které se při překročení tohoto průměru řeší podmínky separace a \(constCoh\) je maximální průměr kružnice u koheze. Pokud by podmínka byla opačná, koheze se provede špatně nebo vůbec. Průměry kružnic koheze a zarovnání však na sebe vliv nemají.
 
@@ -239,13 +270,13 @@ Ve výsledné fázi se tedy musí určit průměrná lokace mezi všemi agenty k
 Následují dvě základní operace které provedou změnu směru daného agenta k průměrné lokaci ostatních agentů, kteří jsou v jeho okruhu.
 
 \begin{enumerate}
-	\item Hlavní cyklus který prochází všechny agenty ve scéně a kontroluje vzdálenosti ostatních agentů vůči konkrétnímu agentovi. Pokud libovolný agent spadá do okruhu nějakého konkrétního, opět se přičítá k sumárnímu vektoru \(sum\) avšak ne rychlost, ale lokace blízkého agenta.
-	\item Následně se provede tentýž krok jako u zarovnání, čili sumární vektor \(sum\) se vydělí skalárem počtu splněných podmínek v kroku č. 1
+	\item Hlavní cyklus který prochází všechny agenty ve scéně a kontroluje vzdálenosti ostatních agentů vůči konkrétnímu agentovi. Pokud libovolný agent spadá do okruhu nějakého konkrétního, opět se přičítá k sumárnímu vektoru \( \scalebox{1.2}{$v_{sum}$} \) avšak ne rychlost, ale lokace blízkého agenta.
+	\item Následně se provede tentýž krok jako u zarovnání, čili sumární vektor \( \scalebox{1.2}{$v_{sum}$} \) se vydělí skalárem počtu splněných podmínek v kroku č. 1
 	
 \end{enumerate}
 
-\begin{figure}[H]\centering\includegraphics[width=0.5\textwidth]{Figures/cohesion.jpg}
-	\caption{Koheze - určení směru k průměrné lokaci okolních agentů (Zdroj: \cite{link2})}
+\begin{figure}[H]\centering\includegraphics[width=0.4\textwidth]{Figures/cohesion2.jpg}
+	\caption{Koheze - určení směru k průměrné lokaci okolních agentů}
 \end{figure}
 
 Kód v následujícím pseudokódu je obdobný jako kód zarovnání výjma řádku s normalizováním sumárního vektoru, avšak v implementační části je tento kód složitější v řádku vracení výsledné hodnoty, kdy se ještě řeší fyzikální vlastnosti.

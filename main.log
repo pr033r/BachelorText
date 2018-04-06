@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6600) (preloaded format=pdflatex 2018.2.16)  23 MAR 2018 15:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6650) (preloaded format=pdflatex 2018.4.6)  6 APR 2018 14:21
 entering extended mode
 **./main.tex
 (main.tex
@@ -2086,30 +2086,25 @@ l.76 \section{Ãšvod}
 ] [6
 
 ]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 99.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 99.
- [7
+Overfull \hbox (2.67926pt too wide) in paragraph at lines 99--100
+\T1/lmr/m/n/10.95 izace není p°íli² reálná. P°ík-lady pro vyuºití jsou typy za-
+loºené na: mag-net-ick-ých silách, bun¥£ném
+ []
+
+[7
 
 ]
-<Figures/flock_fish.png, id=283, 970.3753pt x 480.29437pt>
+<Figures/flock_fish.png, id=273, 970.3753pt x 480.29437pt>
 File: Figures/flock_fish.png Graphic file (type png)
 <use Figures/flock_fish.png>
 Package pdftex.def Info: Figures/flock_fish.png  used on input line 110.
 (pdftex.def)             Requested size: 364.19667pt x 180.26384pt.
-
-Overfull \hbox (13.05042pt too wide) in paragraph at lines 118--119
-\T1/lmr/m/n/10.95 Nej£ast¥j²ím typem sim-u-lace za-loºené na um¥lé in-teligenci
- je Craig Reynold·v al-go-rit-mus vytvo°ený
- []
-
-[8 <./Figures/flock_fish.png>]
-<Figures/separation.jpg, id=302, 437.635pt x 293.095pt>
-File: Figures/separation.jpg Graphic file (type jpg)
-<use Figures/separation.jpg>
-Package pdftex.def Info: Figures/separation.jpg  used on input line 153.
-(pdftex.def)             Requested size: 227.62206pt x 152.44604pt.
+ [8 <./Figures/flock_fish.png>] [9]
+<Figures/separation2.jpg, id=307, 648.4225pt x 686.565pt>
+File: Figures/separation2.jpg Graphic file (type jpg)
+<use Figures/separation2.jpg>
+Package pdftex.def Info: Figures/separation2.jpg  used on input line 169.
+(pdftex.def)             Requested size: 182.09486pt x 192.8026pt.
 
 (/home/adla/.miktex/texmfs/install/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
@@ -2120,205 +2115,209 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 (/home/adla/.miktex/texmfs/install/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 157.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 173.
 
 
 (/home/adla/.miktex/texmfs/install/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [9 <./Figures/separation.jpg>] [10]
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 194.
+) [10 <./Figures/separation2.jpg>]
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 216.
 
  (/home/adla/.miktex/texmfs/install/tex/latex/lm/omslmr.fd
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 194.
-<Figures/alignment.jpg, id=349, 437.635pt x 293.095pt>
-File: Figures/alignment.jpg Graphic file (type jpg)
-<use Figures/alignment.jpg>
-Package pdftex.def Info: Figures/alignment.jpg  used on input line 202.
-(pdftex.def)             Requested size: 227.62206pt x 152.44604pt.
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 216.
 
-[11 <./Figures/alignment.jpg>]
-Overfull \hbox (2.70717pt too wide) in paragraph at lines 233--234
-\T1/lmr/m/n/10.95 P°i sim-u-laci po-mocí Reynoldova al-go-ritmu po-mocí t°ech p
-ravidel je ko-heze tím ne-jmén¥ d·leºitým
- []
-
-<Figures/cohesion.jpg, id=376, 437.635pt x 293.095pt>
-File: Figures/cohesion.jpg Graphic file (type jpg)
-<use Figures/cohesion.jpg>
-Package pdftex.def Info: Figures/cohesion.jpg  used on input line 247.
-(pdftex.def)             Requested size: 227.62206pt x 152.44604pt.
-[12] [13 <./Figures/cohesion.jpg>] [14] [15
+[11]
+<Figures/alignment2.jpg, id=342, 687.56876pt x 657.45625pt>
+File: Figures/alignment2.jpg Graphic file (type jpg)
+<use Figures/alignment2.jpg>
+Package pdftex.def Info: Figures/alignment2.jpg  used on input line 233.
+(pdftex.def)             Requested size: 182.09486pt x 174.11472pt.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 264.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 264.
+ [12 <./Figures/alignment2.jpg>]
+<Figures/cohesion2.jpg, id=371, 687.56876pt x 658.46pt>
+File: Figures/cohesion2.jpg Graphic file (type jpg)
+<use Figures/cohesion2.jpg>
+Package pdftex.def Info: Figures/cohesion2.jpg  used on input line 278.
+(pdftex.def)             Requested size: 182.09486pt x 174.38055pt.
+ [13 <./Figures/cohesion2.jpg>] [14]
+[15] [16
 
 ]
-Overfull \hbox (0.20601pt too wide) in paragraph at lines 368--371
+Overfull \hbox (0.20601pt too wide) in paragraph at lines 399--402
 \T1/lmr/m/it/10.95 tmpVectorMem \T1/lmr/m/n/10.95 která slouºí jako prost°ed-ní
 k pro uchování adresy. Pak tedy m·ºeme tuto p·vodní
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 368--371
+Underfull \hbox (badness 10000) in paragraph at lines 399--402
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 374--377
-
- []
-
-[16]
-Underfull \hbox (badness 10000) in paragraph at lines 385--388
+Underfull \hbox (badness 10000) in paragraph at lines 405--408
 
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 438--440
+Underfull \hbox (badness 10000) in paragraph at lines 416--419
 
  []
 
 [18]
-<Figures/diagram2.jpg, id=519, 773.89125pt x 674.52pt>
+Underfull \hbox (badness 10000) in paragraph at lines 469--471
+
+ []
+
+[19]
+<Figures/diagram2.jpg, id=509, 773.89125pt x 674.52pt>
 File: Figures/diagram2.jpg Graphic file (type jpg)
 <use Figures/diagram2.jpg>
-Package pdftex.def Info: Figures/diagram2.jpg  used on input line 448.
+Package pdftex.def Info: Figures/diagram2.jpg  used on input line 479.
 (pdftex.def)             Requested size: 364.19667pt x 317.43614pt.
- [19 <./Figures/diagram2.jpg>]
-Overfull \hbox (3.88457pt too wide) in paragraph at lines 476--477
+ [20 <./Figures/diagram2.jpg>]
+Overfull \hbox (3.88457pt too wide) in paragraph at lines 507--508
 []\T1/lmr/m/n/10.95 Plán bu-dovy m·ºeme up-ravo-vat v souboru \T1/lmr/m/it/10.9
 5 map.txt \T1/lmr/m/n/10.95 v£etn¥ defi-nování dal²ích pa-ter a únikových
  []
 
-[20]
-Underfull \hbox (badness 10000) in paragraph at lines 492--495
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 523--526
 
  []
 
-<Figures/map.jpg, id=538, 284.06125pt x 285.065pt>
+<Figures/map.jpg, id=528, 284.06125pt x 285.065pt>
 File: Figures/map.jpg Graphic file (type jpg)
 <use Figures/map.jpg>
-Package pdftex.def Info: Figures/map.jpg  used on input line 505.
+Package pdftex.def Info: Figures/map.jpg  used on input line 536.
 (pdftex.def)             Requested size: 204.85846pt x 205.59027pt.
-<Figures/map2.jpg, id=539, 281.05pt x 283.0575pt>
+<Figures/map2.jpg, id=529, 281.05pt x 283.0575pt>
 File: Figures/map2.jpg Graphic file (type jpg)
 <use Figures/map2.jpg>
-Package pdftex.def Info: Figures/map2.jpg  used on input line 507.
+Package pdftex.def Info: Figures/map2.jpg  used on input line 538.
 (pdftex.def)             Requested size: 204.85846pt x 206.31926pt.
-[21]
-<Figures/screen5.jpg, id=545, 778.2338pt x 431.33778pt>
+[22]
+<Figures/screen5.jpg, id=535, 778.2338pt x 431.33778pt>
 File: Figures/screen5.jpg Graphic file (type jpg)
 <use Figures/screen5.jpg>
-Package pdftex.def Info: Figures/screen5.jpg  used on input line 513.
+Package pdftex.def Info: Figures/screen5.jpg  used on input line 544.
 (pdftex.def)             Requested size: 300.46277pt x 166.52956pt.
 
-Overfull \hbox (7.13747pt too wide) in paragraph at lines 517--518
+Overfull \hbox (7.13747pt too wide) in paragraph at lines 548--549
 \T1/lmr/m/it/10.95 arriveTo(...) \T1/lmr/m/n/10.95 p°e-dat správný vek-tor, kte
 rý získáme metodou \T1/lmr/m/it/10.95 getAr-riveVec-tor(...)\T1/lmr/m/n/10.95 .
  Ta vrátí výsledný
  []
 
-[22 <./Figures/map.jpg> <./Figures/map2.jpg> <./Figures/screen5.jpg>]
-Overfull \hbox (0.36754pt too wide) in paragraph at lines 544--545
+[23 <./Figures/map.jpg> <./Figures/map2.jpg> <./Figures/screen5.jpg>]
+Overfull \hbox (0.36754pt too wide) in paragraph at lines 575--576
 \T1/lmr/m/n/10.95 procházení zdí. Tento prob-lém vzniká kv·li nas-taveným kon-s
 tan-tám citlivosti u kaºdého pravidla.
  []
 
-[23]
-<Figures/buildingEscapeProblem.jpg, id=572, 253.94875pt x 290.08376pt>
+[24]
+<Figures/buildingEscapeProblem.jpg, id=562, 253.94875pt x 290.08376pt>
 File: Figures/buildingEscapeProblem.jpg Graphic file (type jpg)
 <use Figures/buildingEscapeProblem.jpg>
 Package pdftex.def Info: Figures/buildingEscapeProblem.jpg  used on input line 
-550.
+581.
 (pdftex.def)             Requested size: 113.81102pt x 130.00531pt.
- [24 <./Figures/buildingEscapeProblem.jpg>] [25]
-<Figures/fish3.jpg, id=582, 627.09282pt x 414.04688pt>
+ [25 <./Figures/buildingEscapeProblem.jpg>] [26]
+<Figures/fish3.jpg, id=573, 627.09282pt x 414.04688pt>
 File: Figures/fish3.jpg Graphic file (type jpg)
 <use Figures/fish3.jpg>
-Package pdftex.def Info: Figures/fish3.jpg  used on input line 647.
+Package pdftex.def Info: Figures/fish3.jpg  used on input line 678.
 (pdftex.def)             Requested size: 318.66948pt x 210.4156pt.
- [26 <./Figures/fish3.jpg>] [27
+ [27 <./Figures/fish3.jpg>] [28
 
 ]
-<Figures/screen1.jpg, id=600, 779.75526pt x 432.09853pt>
+<Figures/screen1.jpg, id=590, 779.75526pt x 432.09853pt>
 File: Figures/screen1.jpg Graphic file (type jpg)
 <use Figures/screen1.jpg>
-Package pdftex.def Info: Figures/screen1.jpg  used on input line 672.
+Package pdftex.def Info: Figures/screen1.jpg  used on input line 703.
 (pdftex.def)             Requested size: 409.71692pt x 227.03972pt.
-<Figures/screen4.jpg, id=601, 777.47305pt x 430.57706pt>
+<Figures/screen4.jpg, id=591, 777.47305pt x 430.57706pt>
 File: Figures/screen4.jpg Graphic file (type jpg)
 <use Figures/screen4.jpg>
-Package pdftex.def Info: Figures/screen4.jpg  used on input line 676.
+Package pdftex.def Info: Figures/screen4.jpg  used on input line 707.
 (pdftex.def)             Requested size: 409.71692pt x 226.90387pt.
-<Figures/screen3.jpg, id=602, 778.2338pt x 429.81631pt>
+<Figures/screen3.jpg, id=592, 778.2338pt x 429.81631pt>
 File: Figures/screen3.jpg Graphic file (type jpg)
 <use Figures/screen3.jpg>
-Package pdftex.def Info: Figures/screen3.jpg  used on input line 680.
+Package pdftex.def Info: Figures/screen3.jpg  used on input line 711.
 (pdftex.def)             Requested size: 409.71692pt x 226.28654pt.
- [28 <./Figures/screen1.jpg> <./Figures/screen4.jpg>]
-<Figures/fish6.jpg, id=607, 761.09344pt x 421.575pt>
+ [29 <./Figures/screen1.jpg> <./Figures/screen4.jpg>]
+<Figures/fish6.jpg, id=597, 761.09344pt x 421.575pt>
 File: Figures/fish6.jpg Graphic file (type jpg)
 <use Figures/fish6.jpg>
-Package pdftex.def Info: Figures/fish6.jpg  used on input line 684.
+Package pdftex.def Info: Figures/fish6.jpg  used on input line 715.
 (pdftex.def)             Requested size: 409.71692pt x 226.95236pt.
- [29 <./Figures/screen3.jpg> <./Figures/fish6.jpg>] [30
+ [30 <./Figures/screen3.jpg> <./Figures/fish6.jpg>] [31
 
 ]
-Overfull \hbox (4.98946pt too wide) in paragraph at lines 720--723
+Overfull \hbox (4.98946pt too wide) in paragraph at lines 751--754
 \T1/lmr/m/n/10.95 Dostupné z: []\T1/lmtt/m/n/10.95 http://www.oasys-software.co
 m/products/engineering/massmotion.html[] 
  []
 
-[31
+[32
 
 ]
-Overfull \hbox (38.66031pt too wide) in paragraph at lines 760--763
+Overfull \hbox (38.66031pt too wide) in paragraph at lines 791--794
 []\T1/lmtt/m/n/10.95 https://www.techopedia.com/definition/26860/integrated-dev
 elopment-environment-ide[] 
  []
 
-[32] [33
+[33] [34
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 826.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 826.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 857.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 857.
  (main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 826.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 826.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 857.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 857.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B755DA3718D81BA613770D44C5DC1FF2;3071.
+(rerunfilecheck)             Checksum: 354AE169967626330AB0E07A5F262F81;3023.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 826.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 857.
  ) 
 Here is how much of TeX's memory you used:
- 27390 strings out of 495203
- 459352 string characters out of 3181361
- 568674 words of memory out of 3000000
+ 27388 strings out of 495203
+ 459338 string characters out of 3181362
+ 568639 words of memory out of 3000000
  29920 multiletter control sequences out of 15000+200000
  65887 words of font info for 48 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 55i,10n,60p,1118b,3386s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/home/adla/.miktex/texmfs/install/fonts/enc/dvips/lm/lm-rm.enc}{/home/adla/.
-miktex/texmfs/install/fonts/enc/dvips/lm/lm-mathsy.enc}{/home/adla/.miktex/texm
-fs/install/fonts/enc/dvips/lm/lm-mathit.enc}{/home/adla/.miktex/texmfs/install/
-fonts/enc/dvips/lm/lm-ec.enc}</home/adla/.miktex/texmfs/install/fonts/type1/pub
-lic/lm/lmbx10.pfb></home/adla/.miktex/texmfs/install/fonts/type1/public/lm/lmbx
-12.pfb></home/adla/.miktex/texmfs/install/fonts/type1/public/lm/lmmi10.pfb></ho
-me/adla/.miktex/texmfs/install/fonts/type1/public/lm/lmr10.pfb></home/adla/.mik
-tex/texmfs/install/fonts/type1/public/lm/lmr6.pfb></home/adla/.miktex/texmfs/in
-stall/fonts/type1/public/lm/lmr8.pfb></home/adla/.miktex/texmfs/install/fonts/t
-ype1/public/lm/lmr9.pfb></home/adla/.miktex/texmfs/install/fonts/type1/public/l
-m/lmri10.pfb></home/adla/.miktex/texmfs/install/fonts/type1/public/lm/lmss12.pf
-b></home/adla/.miktex/texmfs/install/fonts/type1/public/lm/lmssbx10.pfb></home/
-adla/.miktex/texmfs/install/fonts/type1/public/lm/lmsy10.pfb></home/adla/.mikte
-x/texmfs/install/fonts/type1/public/lm/lmtt10.pfb></home/adla/.miktex/texmfs/in
-stall/fonts/type1/public/lm/lmtto10.pfb>
-Output written on main.pdf (38 pages, 3299064 bytes).
+ 55i,10n,60p,1118b,3279s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/home/adla/.miktex/texmfs/install/fonts/enc/dvips/lm/lm-ec.enc}{/home/adla/.
+miktex/texmfs/install/fonts/enc/dvips/lm/lm-mathit.enc}{/home/adla/.miktex/texm
+fs/install/fonts/enc/dvips/lm/lm-rm.enc}{/home/adla/.miktex/texmfs/install/font
+s/enc/dvips/lm/lm-mathex.enc}{/home/adla/.miktex/texmfs/install/fonts/enc/dvips
+/lm/lm-mathsy.enc}</home/adla/.miktex/texmfs/install/fonts/type1/public/lm/lmbx
+10.pfb></home/adla/.miktex/texmfs/install/fonts/type1/public/lm/lmbx12.pfb></ho
+me/adla/.miktex/texmfs/install/fonts/type1/public/lm/lmex10.pfb></home/adla/.mi
+ktex/texmfs/install/fonts/type1/public/lm/lmmi10.pfb></home/adla/.miktex/texmfs
+/install/fonts/type1/public/lm/lmmi6.pfb></home/adla/.miktex/texmfs/install/fon
+ts/type1/public/lm/lmmi8.pfb></home/adla/.miktex/texmfs/install/fonts/type1/pub
+lic/lm/lmr10.pfb></home/adla/.miktex/texmfs/install/fonts/type1/public/lm/lmr6.
+pfb></home/adla/.miktex/texmfs/install/fonts/type1/public/lm/lmr8.pfb></home/ad
+la/.miktex/texmfs/install/fonts/type1/public/lm/lmr9.pfb></home/adla/.miktex/te
+xmfs/install/fonts/type1/public/lm/lmri10.pfb></home/adla/.miktex/texmfs/instal
+l/fonts/type1/public/lm/lmss12.pfb></home/adla/.miktex/texmfs/install/fonts/typ
+e1/public/lm/lmssbx10.pfb></home/adla/.miktex/texmfs/install/fonts/type1/public
+/lm/lmsy10.pfb></home/adla/.miktex/texmfs/install/fonts/type1/public/lm/lmtt10.
+pfb></home/adla/.miktex/texmfs/install/fonts/type1/public/lm/lmtto10.pfb>
+Output written on main.pdf (39 pages, 3334311 bytes).
 PDF statistics:
- 785 PDF objects out of 1000 (max. 8388607)
- 271 named destinations out of 1000 (max. 500000)
+ 791 PDF objects out of 1000 (max. 8388607)
+ 269 named destinations out of 1000 (max. 500000)
  332 words of extra memory for PDF output out of 10000 (max. 10000000)
 
