@@ -24,7 +24,7 @@
 \contentsline {subsection}{\numberline {3.3}Probl\IeC {\'e}my p\IeC {\v r}i implementaci}{16}{subsection.3.3}
 \contentsline {subsection}{\numberline {3.4}Steering behaviors}{19}{subsection.3.4}
 \contentsline {subsection}{\numberline {3.5}T\IeC {\v r}\IeC {\'\i }dn\IeC {\'\i } diagram}{20}{subsection.3.5}
-\contentsline {subsection}{\numberline {3.6}V\IeC {\'y}sledn\IeC {\'e} aplikov\IeC {\'a}n\IeC {\'\i } pravidel}{21}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.6}V\IeC {\'y}sledn\IeC {\'e} aplikov\IeC {\'a}n\IeC {\'\i } pravidel}{20}{subsection.3.6}
 \contentsline {subsection}{\numberline {3.7}\IeC {\'U}nik z budovy}{21}{subsection.3.7}
 \contentsline {subsubsection}{\numberline {3.7.1}Probl\IeC {\'e}my p\IeC {\v r}i \IeC {\'u}niku z budovy}{24}{subsubsection.3.7.1}
 \contentsline {subsection}{\numberline {3.8}Testov\IeC {\'a}n\IeC {\'\i } \IeC {\'u}niku z budovy}{25}{subsection.3.8}

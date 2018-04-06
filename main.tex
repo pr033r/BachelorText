@@ -3,6 +3,7 @@
 % Dalsi doplnujici baliky maker
 \usepackage{subfig}		% makra pro "podobrazky" a "podtabulky"
 \usepackage{tikz}		% makra pro kresleni
+\usepackage{fancyvrb}
 
 % Zadame pozadovane vstupy pro generovani titulnich stran.
 \ThesisAuthor{Adam Lasák}
@@ -338,7 +339,7 @@ Tento algoritmus se ještě aplikuje do tzv. Flocking algoritmu, který všechny
 \section{Implementace}
 
 \subsection{Popis realizace demonstrační aplikace}
-Cílem demostrační aplikace je zrealizování a zvizualizování Craig Reynoldova algoritmu do využitelné podoby. Tento algoritmus lze aplikovat mnoha způsoby avšak byly použity dvě spodní varianty:
+Cílem demostrační aplikace je zrealizování a zvizualizování Boidova algoritmu do využitelné podoby. Tento algoritmus lze aplikovat mnoha způsoby avšak byly použity dvě spodní varianty:
 
 \begin{itemize}
 	\item Simulace úniku davu lidí z budovy podle nastavených únikových cest.
@@ -502,7 +503,7 @@ void Boids::update() {
 Po vynásobení konstantou 0.4, která slouží pro nastavení citlivosti \textit{(může a nemusí být použita, zde je nastavena po experimentech jako ideální)} následuje přidání, limitování vektoru a~vypočtení výsledné pozice. Na konci musíme vektor \textit{acceleration} vynulovat pro použití v další iteraci.
 
 \subsection{Únik z budovy}
-První část využití Reynoldova agoritmu je simulace úniku lidí z budovy podle nastavených únikových cest. Funkčně je tato část určena k tomu, aby po skončení simulace mohl uživatel zjistit, kolik času by zabralo evakuovat lidi z předem definovaného plánu budovy. V případě časově náročné evakuace může uživatel upravit plán budovy a únikové cesty tak, aby budova splňovala dané normy.
+První část využití Boidova agoritmu je simulace úniku lidí z budovy podle nastavených únikových cest. Funkčně je tato část určena k tomu, aby po skončení simulace mohl uživatel zjistit, kolik času by zabralo evakuovat lidi z předem definovaného plánu budovy. V případě časově náročné evakuace může uživatel upravit plán budovy a únikové cesty tak, aby budova splňovala dané normy.
 
 Plán budovy můžeme upravovat v souboru \textit{map.txt} včetně definování dalších pater a~únikových cest. Jelikož se jedná o textový soubor, tak každý znak reprezentuje jinou funkci. Popis funkčních znaků můžeme vidět níže:
 
@@ -533,11 +534,17 @@ Při spuštění aplikace, která vykreslí definované schéma lze scénu ovlá
 
 \begin{figure}[H]
 	\centering
-	\subfloat[ Půdorys]{\includegraphics[width=0.45\textwidth]{Figures/map.jpg}\label{fig:mapatxt}}
+	\subfloat[ Půdorys]{\includegraphics[width=0.43\textwidth]{Figures/map3.jpg}\label{fig:mapatxt}}
 	\hfill
-	\subfloat[ Patro]{\includegraphics[width=0.45\textwidth]{Figures/map2.jpg}\label{fig:mapatxt}}
+	\subfloat[ Patro]{\includegraphics[width=0.43\textwidth]{Figures/map4.jpg}\label{fig:mapatxt}}
 	\caption{Ukázka nákresu budovy v textovém souboru} \label{fig:mapatxt}
 \end{figure}
+
+		%\begin{Verbatim}[baselinestretch=0.8]
+	
+		%\end{Verbatim}
+
+
 
 Při zapnutí simulace jsou agenti v půdorysu okamžitě vedení směrem ven mimo budovu, avšak agenti v dalších patrech musí využít jiné evakuační cesty aby se dostali do spodního patra odkud můžou vyjít ven\footnote{Agenty v patře lze také směrovat rovnou ven mimo budovu, tj.~forma venkovního evakuačního schodiště. Dole v přízemí mimo budovu však musí být definován další evakuační bod (pod ``schodištěm''), jinak začnou agenti směřovat k nejbližšímu bodu, který by jinak byl v budově.}. Proto pokud se agent v patře dostane k finálnímu bodu úniku \textit{(velké písmeno)}, začne ``sestupovat'' do přízemí budovy. Sestup však zabere nějaký čas, jednak kvůli zatížení únikových cest tak samotného sestupu. Souvisí s tím také to, že agentovi v posledním patře bude sestup trvat déle než agentovi v prvním patře. Hodnotu míry opuštění budovy \textit{(konkrétněji: evakuační výtah je rychlejší než evakuační schodiště)} lze měnit v konfiguračním souboru pomocí konstanty FLOOR\_TIME\_DURATION.
 
@@ -570,7 +577,7 @@ Mimo další operace které se nachází mezi návratovou hodnotou a předchozí
 
 \subsubsection{Problémy při úniku z budovy}\label{sec:problemy-pri-uniku-z-budovy}
 
-Agenti se můžou občas dostat do problémů zejména díky špatnému návrhu budovy, nebo také kvůli nedokonalosti Reynoldova algoritmu. 
+Agenti se můžou občas dostat do problémů zejména díky špatnému návrhu budovy, nebo také kvůli nedokonalosti Boidova algoritmu. 
 
 Například pokud při úniku z budovy zapneme všechna tři pravidla, může nastat efekt procházení zdí. Tento problém vzniká kvůli nastaveným konstantám citlivosti u každého pravidla. Tyto konstanty byly nastaveny po řadě experimentů jako nejvhodnější a~jsou neměnné \textit{(kromě konstanty citlivosti úniku ESCAPE\_SENSITIVITY, kterou lze měnit v konfiguračním souboru)}. Pokud je konstanta příliš nízká, dané pravidlo by zaniklo mezi ostatními. Pokud příliš vysoká, tak by dané pravidlo překrylo ostatní. U konstanty citlivosti úniku je však občas potřebné přenastavení. Částečné řešení spočívá jen v použití separace. Dav se tedy chová jako dav skutečných lidí \textit{(každý si jde kam chce)}.
 
@@ -578,7 +585,7 @@ Další problém může nastat při generování agentů, kdy agenti vyberou jak
 
 S generováním souvisí ještě jedna věc, a sice při generování většího množství agentů na malém prostoru se může některý z nich ``zabořit'' do zdi a už se z ní nemůže dostat. 
 
-\begin{figure}[H]\centering\includegraphics[width=0.25\textwidth]{Figures/buildingEscapeProblem.jpg}\label{fig:buildingEscapeProblem1}
+\begin{figure}[H]\centering\includegraphics[width=0.25\textwidth]{Figures/buildingEscapeProblem2.jpg}\label{fig:buildingEscapeProblem1}
 	\caption{Problém uváznutí při špatném určení únikových bodů}
 	\label{fig:buildingEscapeProblem1}
 \end{figure}
@@ -669,7 +676,7 @@ Jak je patrné, tak čím více je pater, tím více klesá FPS z důvodu více 
 \newpage
 
 \subsection{Simulace hejna ryb}
-Druhý typ využití Reynoldova algoritmu je simulace hejna. V tomto případě je použita simulace ryb, ale při změně načítaného objektu v konfiguračním souboru můžeme vytvořit simulaci čehokoliv. Pro změnu scény je třeba přepsat několik parametrů, zejména pak SCENE\_TYPE na 3D. U výsledné aplikace je připraven obsah souboru \textit{configFish.cfg} pro simulaci ryb, kterým stačí přepsat obsah hlavního souboru \textit{config.cfg} bez potřeby přepisování všech důležitých parametrů.
+Druhý typ využití Boidova algoritmu je simulace hejna. V tomto případě je použita simulace ryb, ale při změně načítaného objektu v konfiguračním souboru můžeme vytvořit simulaci čehokoliv. Pro změnu scény je třeba přepsat několik parametrů, zejména pak SCENE\_TYPE na 3D. U výsledné aplikace je připraven obsah souboru \textit{configFish.cfg} pro simulaci ryb, kterým stačí přepsat obsah hlavního souboru \textit{config.cfg} bez potřeby přepisování všech důležitých parametrů.
 
 Algoritmus funguje stejně jako při úniku z budovy, výjma využití třídy \textit{MyVector2D}, která je nahrazena výpočty ve 3D třídou předka \textit{MyVector}.
 
@@ -683,7 +690,7 @@ V konfiguračním souboru můžeme nastavit počet objektů, kterým se agenti b
 U této simulace jsou hodnoty FPS přijatelné i pro slabší PC, tj. pro již zmíněné hodnoty v~tabulce č. \ref{tab:tablepc} byly hodnoty pro PC1 a PC2 cca 65 FPS a~to při počtu agentů 400.
 
 \subsubsection{Problémy při simulaci hejna}\label{sec:problemy-pri-simulace-hejna}
-U této simulace nastávají problémy ``cukání'' pokud agent začne vyhodnocovat, že se přiblížil k okraji mapy. Důvod tohoto efektu je aplikování kolize s ostatními agenty a zároveň kolize s okrajem mapy. Tento problém nebyl vyřešen ani při zkoušení různých nastavení citlivostí jednotlivých pravidel.
+U této simulace nastávají problémy ``cukání'' pokud agent začne vyhodnocovat, že se přiblížil k okraji mapy. Důvod tohoto efektu je aplikování kolize s ostatními agenty a zároveň kolize s okrajem mapy. Tento problém nebyl vyřešen ani při zkoušení různých nastavení citlivosti jednotlivých pravidel.
 
 Neplatí to však pro menší množství agentů \textit{(např.: 20 agentů na větší ploše)}. Tyto vizuální problémy nastávají při množství několika set agentů.
 
@@ -692,11 +699,11 @@ Neplatí to však pro menší množství agentů \textit{(např.: 20 agentů na 
 
 Z výsledků tabulek č. \ref{tab:tablePC1}, \ref{tab:tablePC2} a \ref{tab:tablePC3} je znatelné, že pokud je PC výkonější pak čas úniku je kratší. Toto však lze zobecnit stejnými časy díky nastavení rychlosti agentů. U PC2 byla rychlost agentů vizuálně nejblíže, kdežto u PC3 agenti ``utíkali'' z budovy nepřirozeně rychle a u PC1 šli krokovým tempem. Lze tedy říci, že realitě nejvíce odpovídají hodnoty z tabulky pro PC2.
 
-I když byly použity vylepšené techniky Reynoldova algoritmu \textit{(seek, path following)} a~vyladěná všechna tři pravidla, tak stále tento algoritmus není dokonalý (kapitoly \ref{sec:problemy-pri-uniku-z-budovy}, \ref{sec:problemy-pri-simulace-hejna}) a~pro naprosto reálnou podobu davu se musí ještě hodně vlastností a pravidel připsat.
+I když byly použity vylepšené techniky Boidova algoritmu \textit{(seek, path following)} a~vyladěná všechna tři pravidla, tak stále tento algoritmus není dokonalý (kapitoly \ref{sec:problemy-pri-uniku-z-budovy}, \ref{sec:problemy-pri-simulace-hejna}) a~pro naprosto reálnou podobu davu se musí ještě hodně vlastností a pravidel připsat.
 
 Do budoucna by bylo vhodné tato pravidla dodělat a~tím zajistit, aby agenti v~budově byli inteligentnější a~nešli přímou cestou za únikovým bodem, případně aby se rozhodovali o úniku dle sektorů budovy.
 
-I přes tyto nedostatky lze Reynoldův algoritmus efektivně aplikovat jako simulaci hejna (viditelné na obrázku č. \ref{fig:hejnoRyb}), což je také nejvyužitelnější způsob. I tak je díky své nedokonalosti a zároveň jednoduchosti nejpoužívanějším algoritmem pro simulaci davu na bázi AI.
+I přes tyto nedostatky lze Boidův algoritmus efektivně aplikovat jako simulaci hejna (viditelné na obrázku č. \ref{fig:hejnoRyb}), což je také nejvyužitelnější způsob. I tak je díky své nedokonalosti a zároveň jednoduchosti nejpoužívanějším algoritmem pro simulaci davu na bázi AI.
 
 \newpage
 
@@ -717,27 +724,27 @@ I přes tyto nedostatky lze Reynoldův algoritmus efektivně aplikovat jako simu
 \end{figure}
 
 \section{Závěr}
-Výsledkem této práce je aplikace, která má za úkol zrealizovat simulační algoritmus davu. Teoreticky byly popsány dvě varianty simulace, z níž pro realizaci byla vybrána simulace na bázi AI a pro realizaci byl vybrán Craig Reynoldův algoritmus. V první možnosti využití, a sice evakuace budovy, se Reynoldův algoritmus a jeho vylepšení neosvědčil na plno, avšak pro simulaci hejna byl vyhodnocen jako plně dostačující.
+Výsledkem této práce je aplikace, která má za úkol zrealizovat simulační algoritmus davu. Teoreticky byly popsány dvě varianty simulace, z níž pro realizaci byla vybrána simulace na bázi AI a pro realizaci byl vybrán Boidův algoritmus. V první možnosti využití, a sice evakuace budovy, se Boidův algoritmus a jeho vylepšení neosvědčil na plno, avšak pro simulaci hejna byl vyhodnocen jako plně dostačující.
 
-Aplikace nabízí dvě možnosti využití. První, jak již bylo zmíněno, je simulace úniku lidí z bodovy a druhá je využití obecného Boidova algoritmu jakožto simulace hejna (v této práci hejno ryb). U první je možnost nadefinovat si vlastní schéma budovy včetně únikových východů a~u~druhé je možnost nadefinovat počet objektů, jimiž se bude hejno vyhýbat. Uživatel si tak může vyzkoušet na obou příkladech výhody a nevýhody Reynoldova algoritmu a také vliv jednotlivých parametrů na výslednou scénu.
+Aplikace nabízí dvě možnosti využití. První, jak již bylo zmíněno, je simulace úniku lidí z bodovy a druhá je využití obecného Boidova algoritmu jakožto simulace hejna (v této práci hejno ryb). U první je možnost nadefinovat si vlastní schéma budovy včetně únikových východů a~u~druhé je možnost nadefinovat počet objektů, jimiž se bude hejno vyhýbat. Uživatel si tak může vyzkoušet na obou příkladech výhody a nevýhody Boidova algoritmu a také vliv jednotlivých parametrů na výslednou scénu.
 
 \newpage
 
 \begin{thebibliography}{99}
 	
 	\bibitem{link1} Journal of the royal society interface, 
-		\textit{Crowd behaviour during high-stress evacuations in an immersive virtual environment}, [online]. 2018 [cit. 2018-2-1]\\
+		\textit{Crowd behaviour during high-stress evacuations in an immersive virtual environment}, [online]. 2016 [cit. 2018-2-1]\\
 		Dostupné z: \href{http://rsif.royalsocietypublishing.org/content/13/122/20160414}{\texttt{http://rsif.royalsocietypublishing.org/content/13/122/20160414}}
 	
 	\bibitem{link2} Boids, 
-		\textit{Background and Update by Craig Reynolds}, [online]. 2018 [cit. 2018-2-1]\\
+		\textit{Background and Update by Craig Reynolds}, [online]. 1995 [cit. 2018-2-1]\\
 		Dostupné z: \href{https://www.red3d.com/cwr/boids/}{\texttt{https://www.red3d.com/cwr/boids/}}
 	
-	\bibitem{linkToUnrealEngineFish} Unreal Engine 4 \textit{simulace ryb}, [online]. 2018 [cit. 2018-2-1]\\
+	\bibitem{linkToUnrealEngineFish} Unreal Engine 4 \textit{simulace ryb}, [online]. 2016 [cit. 2018-2-1]\\
 		Dostupné z: \href{		http://blog.csdn.net/nosix/article/details/52859160}{\texttt{		http://blog.csdn.net/nosix/article/details/52859160}}
 	
 	\bibitem{link3} The nature of code, 
-		\textit{Chapter 6. Autonomous Agents}, [online]. 2018 [cit. 2018-2-1]\\
+		\textit{Chapter 6. Autonomous Agents}, [online]. 2012 [cit. 2018-2-1]\\
 		Dostupné z: \href{http://natureofcode.com/book/chapter-6-autonomous-agents/}{\texttt{http://natureofcode.com/book/chapter-6-autonomous-agents/}}
 
 	\bibitem{link4} Boids Pseudocode, 
@@ -745,7 +752,7 @@ Aplikace nabízí dvě možnosti využití. První, jak již bylo zmíněno, je 
 		Dostupné z: \href{http://www.kfish.org/boids/pseudocode.html}{\texttt{http://www.kfish.org/boids/pseudocode.html}}
 		
 	\bibitem{linkToSimulation} Simulace,
-		\textit{Glosář Aldebaran}, [online]. 2018 [cit. 2018-2-1]\\
+		\textit{Glosář Aldebaran}, [online]. 2007 [cit. 2018-2-1]\\
 		Dostupné z: \href{http://www.aldebaran.cz/glossary/print.php?id=1299}{\texttt{http://www.aldebaran.cz/glossary/print.php?id=1299}}
 		
 	\bibitem{linkToBuildingSimulation} Oasys,
@@ -753,7 +760,7 @@ Aplikace nabízí dvě možnosti využití. První, jak již bylo zmíněno, je 
 		Dostupné z: \href{http://www.oasys-software.com/products/engineering/massmotion.html}{\texttt{http://www.oasys-software.com/products/engineering/massmotion.html}}
 		
 	\bibitem{linkToSimulationSpace} Earthlight,
-		\textit{Spacewalk}, [online]. 2018 [cit. 2018-2-1]\\
+		\textit{Spacewalk}, [online]. [cit. 2018-2-1]\\
 		Dostupné z: \href{http://www.earthlightvr.com/spacewalk/}{\texttt{http://www.earthlightvr.com/spacewalk/}}
 		
 	\bibitem{linkToArmySimulation} FAAC Military,
@@ -765,11 +772,10 @@ Aplikace nabízí dvě možnosti využití. První, jak již bylo zmíněno, je 
 		Dostupné z: \href{https://www.techopedia.com/definition/3821/iteration}{\texttt{https://www.techopedia.com/definition/3821/iteration}}
 		
 	\bibitem{linkToACM} ACM,
-		\textit{Association for Computing Machinery}, [online]. 2018 [cit. 2018-2-1]\\
+		\textit{Association for Computing Machinery}, [online]. [cit. 2018-2-1]\\
 		Dostupné z: \href{https://www.acm.org/about-acm/what-is-acm}{\texttt{https://www.acm.org/about-acm/what-is-acm}}
 		
-	\bibitem{linkToSIGGRAPH} SIGGRAPH,
-		, [online]. 2018 [cit. 2018-2-1]\\
+	\bibitem{linkToSIGGRAPH} SIGGRAPH, [online]. 2018 [cit. 2018-2-1]\\
 		Dostupné z: \href{https://www.siggraph.org/about/what-is-acm-siggraph}{\texttt{https://www.siggraph.org/about/what-is-acm-siggraph}}
 		
 	\bibitem{linkToBachelor1} Simulace davu, Mgr. Jan Stria,\\
@@ -783,10 +789,6 @@ Aplikace nabízí dvě možnosti využití. První, jak již bylo zmíněno, je 
 	\bibitem{linkToCohesion} Kohezní síla,
 		\textit{Glosář Aldebaran}, [online]. 2018 [cit. 2018-2-1]\\
 		Dostupné z: \href{http://www.aldebaran.cz/glossary/print.php?id=1894}{\texttt{http://www.aldebaran.cz/glossary/print.php?id=1894}}
-		
-	\bibitem{linkToScalar} Katedra Mechaniky,
-		\textit{Skalár}, [online]. 2018 [cit. 2018-2-1]\\
-		Dostupné z: \href{https://www.kme.zcu.cz/kmet/bio/matskalvekt.php}{\texttt{https://www.kme.zcu.cz/kmet/bio/matskalvekt.php}}
 		
 	\bibitem{linkToIDE} Techopedia,
 		\textit{IDE}, [online]. 2018 [cit. 2018-2-4]\\
