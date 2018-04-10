@@ -502,7 +502,7 @@ void Boids::update() {
 
 Po vynásobení konstantou 0.4, která slouží pro nastavení citlivosti \textit{(může a nemusí být použita, zde je nastavena po experimentech jako ideální)} následuje přidání, limitování vektoru a~vypočtení výsledné pozice. Na konci musíme vektor \textit{acceleration} vynulovat pro použití v další iteraci.
 
-\subsection{Únik z budovy}
+\subsection{Únik z budovy}\label{sec:unik-z-budovy}
 První část využití Boidova agoritmu je simulace úniku lidí z budovy podle nastavených únikových cest. Funkčně je tato část určena k tomu, aby po skončení simulace mohl uživatel zjistit, kolik času by zabralo evakuovat lidi z předem definovaného plánu budovy. V případě časově náročné evakuace může uživatel upravit plán budovy a únikové cesty tak, aby budova splňovala dané normy.
 
 Plán budovy můžeme upravovat v souboru \textit{map.txt} včetně definování dalších pater a~únikových cest. Jelikož se jedná o textový soubor, tak každý znak reprezentuje jinou funkci. Popis funkčních znaků můžeme vidět níže:
@@ -590,6 +590,7 @@ S generováním souvisí ještě jedna věc, a sice při generování většího
 	\label{fig:buildingEscapeProblem1}
 \end{figure}
 
+V neposlední řadě můžou nastat problémy při úniku ze složitějších prostor \textit{(labyrintu)}, kde uživatel nastaví číslo úniku u hrany stěny o kterou se může agent zaseknout. V případě většího davu \textit{(okolo 300 lidí)} a úzkých prostor můžou být ti, kteří splinili podmínku a dostali se k bodu, ``vytlačeni'' ostatními a tím se dostat do situace že následující bod se nachází za zdí. 
 \subsection{Testování úniku z budovy}\label{sec:testovani-uniku-z-budovy}
 
 Testování proběhlo na PC s parametry: CPU Intel i5-2500 @ 3.3GHz, grafická karta Radeon R9 280X Dual-X, RAM 12GB. Hodnoty se můžou na jiných PC lišit.
@@ -652,6 +653,41 @@ Testy proběhly při počtu agentů 200, počtu pater 5, rychlostí agentů 3 s 
 	\end{tabular}
 \end{table}
 
+\newpage
+Další části testování proběhly nad složitějšími prostory bodovy. Jak již bylo zmíněno v kapitole \ref{sec:unik-z-budovy}, tak úník z labyrintu \textit{(složitějších prostor)} funguje na principu umisťování čísel do mapy, kdy agenti směřují od nejmenší po největší číslo a následně k finálnímu bodu F.
+\begin{figure}[H]\centering\includegraphics[width=0.35\textwidth]{Figures/map6.jpg}\label{fig:labyrinth}
+	\caption{Ukázka nákresu labyrintu}
+	\label{fig:labyrinth}
+\end{figure}
+
+Testování času úníku proběhlo na schématu, které můžeme vidět na obrázku č. \ref{fig:labyrinth}, při nastavené rychlosti na 1.5 a tření na 0.1. Srovnání výsledků s jinými patry však nelze zrealizovat, protože u této metody lze použít pouze jedno patro. 
+
+\begin{table}[H]
+	\centering
+	\caption{Tabulka naměřených hodnot - labyrint}
+	\label{tab:tablePC2}
+	\renewcommand{\arraystretch}{1.0}
+	\begin{tabular}{| c | c | c | c | c | c |}
+		\hline
+		Počet agentů & FPS před & FPS během & Čas [s]\\\hline
+		20 & 280 & 279 & 46.4\\
+		30 & 275 & 265 & 51.8\\
+		40 & 267 & 261 & 63.2\\
+		50 & 260 & 245 & 74.6\\
+		\hline
+	\end{tabular}
+\end{table}
+
+U této metody je také potřeba opomenout nastavení konstanty PATH\_TO\_FIND\_RADIUS. Pokud je radius větší, agent splní podmínku dosažení bodu když bude dále od něj. Toto nastavení je vhodné zejména pro větší prostory budov z~důvodu eliminace přímočarého pohybu k~únikovým bodům.
+
+%\begin{figure}[H]
+%	\centering
+%	\subfloat[Jednodušší labyrint]{\includegraphics[width=0.3\textwidth]{Figures/map5.jpg}\label{fig:mapalabyrinth}}
+%	\hfill
+%	\subfloat[Složitější labyrint]{\includegraphics[width=0.35\textwidth]{Figures/map6.jpg}\label{fig:mapalabyrinth}}
+%	\caption{Ukázka nákresu dvou labyrintů} \label{fig:mapalabyrinth}
+%\end{figure}
+
 %\begin{table}[H]
 %	\centering
 %	\caption{Tabulka naměřených hodnot - PC3}
@@ -702,7 +738,7 @@ Neplatí to však pro menší množství agentů \textit{(např.: 20 agentů na 
 
 I když byly použity vylepšené techniky Boidova algoritmu \textit{(seek, path following)} a~vyladěná všechna tři pravidla, tak stále tento algoritmus není dokonalý (kapitoly \ref{sec:problemy-pri-uniku-z-budovy}, \ref{sec:problemy-pri-simulace-hejna}) a~pro naprosto reálnou podobu davu se musí ještě hodně vlastností a pravidel připsat.
 
-Do budoucna by bylo vhodné tato pravidla dodělat a~tím zajistit, aby agenti v~budově byli inteligentnější a~nešli přímou cestou za únikovým bodem, případně aby se rozhodovali o úniku dle sektorů budovy.
+Do budoucna by bylo vhodné tato pravidla dodělat a~tím zajistit, aby agenti v~budově byli inteligentnější a~nešli přímou cestou za únikovým bodem, ale mohli se rozhodovat o úniku dle sektorů budovy.
 
 I přes tyto nedostatky lze Boidův algoritmus efektivně aplikovat jako simulaci hejna (viditelné na obrázku č. \ref{fig:hejnoRyb}), což je také nejvyužitelnější způsob. I tak je díky své nedokonalosti a zároveň jednoduchosti nejpoužívanějším algoritmem pro simulaci davu na bázi AI.
 
