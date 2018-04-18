@@ -4,19 +4,19 @@
 \select@language {czech}
 \select@language {english}
 \select@language {czech}
-\contentsline {figure}{\numberline {1}{\ignorespaces Uk\IeC {\'a}zka simulace hejna ryb v Unreal Enginu 4 (Zdroj: \cite {linkToUnrealEngineFish}) \relax }}{8}{figure.caption.1}
-\contentsline {figure}{\numberline {2}{\ignorespaces Separace - vyh\IeC {\'y}b\IeC {\'a}n\IeC {\'\i } se ostatn\IeC {\'\i }m agent\IeC {\r u}m\relax }}{10}{figure.caption.2}
-\contentsline {figure}{\numberline {3}{\ignorespaces Zarovn\IeC {\'a}n\IeC {\'\i } - ur\IeC {\v c}en\IeC {\'\i } sm\IeC {\v e}ru agenta v\IeC {\r u}\IeC {\v c}i pr\IeC {\r u}m\IeC {\v e}rn\IeC {\'e}mu sm\IeC {\v e}ru ostatn\IeC {\'\i }ch\relax }}{12}{figure.caption.3}
-\contentsline {figure}{\numberline {4}{\ignorespaces Koheze - ur\IeC {\v c}en\IeC {\'\i } sm\IeC {\v e}ru k pr\IeC {\r u}m\IeC {\v e}rn\IeC {\'e} lokaci okoln\IeC {\'\i }ch agent\IeC {\r u}\relax }}{13}{figure.caption.4}
-\contentsline {figure}{\numberline {5}{\ignorespaces Diagram \IeC {\v r}\IeC {\'\i }dic\IeC {\'\i }ch t\IeC {\v r}\IeC {\'\i }d\relax }}{20}{figure.caption.6}
-\contentsline {figure}{\numberline {6}{\ignorespaces Uk\IeC {\'a}zka n\IeC {\'a}kresu budovy v textov\IeC {\'e}m souboru\relax }}{22}{figure.caption.7}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces { P\IeC {\r u}dorys}}}{22}{subfigure.6.1}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces { Patro}}}{22}{subfigure.6.2}
-\contentsline {figure}{\numberline {7}{\ignorespaces Uk\IeC {\'a}zka vyrenderovan\IeC {\'e}ho p\IeC {\r u}dorysu budovy\relax }}{23}{figure.caption.8}
-\contentsline {figure}{\numberline {8}{\ignorespaces Probl\IeC {\'e}m uv\IeC {\'a}znut\IeC {\'\i } p\IeC {\v r}i \IeC {\v s}patn\IeC {\'e}m ur\IeC {\v c}en\IeC {\'\i } \IeC {\'u}nikov\IeC {\'y}ch bod\IeC {\r u}\relax }}{25}{figure.caption.9}
-\contentsline {figure}{\numberline {9}{\ignorespaces Uk\IeC {\'a}zka n\IeC {\'a}kresu labyrintu\relax }}{26}{figure.caption.11}
-\contentsline {figure}{\numberline {10}{\ignorespaces Uk\IeC {\'a}zka hejna ryb\relax }}{27}{figure.caption.13}
-\contentsline {figure}{\numberline {11}{\ignorespaces Vyrenderovan\IeC {\'a} t\IeC {\v r}\IeC {\'\i }patrov\IeC {\'a} budova\relax }}{29}{figure.caption.14}
-\contentsline {figure}{\numberline {12}{\ignorespaces Budova p\IeC {\v r}epnuta do pr\IeC {\r u}hledn\IeC {\'e}ho re\IeC {\v z}imu se zviditeln\IeC {\v e}n\IeC {\'\i }m agent\IeC {\r u} a \IeC {\'u}nikov\IeC {\'y}ch bod\IeC {\r u}\relax }}{29}{figure.caption.15}
-\contentsline {figure}{\numberline {13}{\ignorespaces Pr\IeC {\r u}hledn\IeC {\'y} re\IeC {\v z}im budovy z bo\IeC {\v c}n\IeC {\'\i } perspektivy\relax }}{30}{figure.caption.16}
-\contentsline {figure}{\numberline {14}{\ignorespaces Vyrenderovan\IeC {\'e} hejno ryb\relax }}{30}{figure.caption.17}
+\contentsline {figure}{\numberline {1}{\ignorespaces Uk\IeC {\'a}zka simulace hejna ryb v Unreal Enginu 4 (Zdroj: \cite {linkToUnrealEngineFish}) \relax }}{9}{figure.caption.1}
+\contentsline {figure}{\numberline {2}{\ignorespaces Separace - vyh\IeC {\'y}b\IeC {\'a}n\IeC {\'\i } se ostatn\IeC {\'\i }m agent\IeC {\r u}m\relax }}{11}{figure.caption.2}
+\contentsline {figure}{\numberline {3}{\ignorespaces Zarovn\IeC {\'a}n\IeC {\'\i } - ur\IeC {\v c}en\IeC {\'\i } sm\IeC {\v e}ru agenta v\IeC {\r u}\IeC {\v c}i pr\IeC {\r u}m\IeC {\v e}rn\IeC {\'e}mu sm\IeC {\v e}ru ostatn\IeC {\'\i }ch\relax }}{13}{figure.caption.3}
+\contentsline {figure}{\numberline {4}{\ignorespaces Koheze - ur\IeC {\v c}en\IeC {\'\i } sm\IeC {\v e}ru k pr\IeC {\r u}m\IeC {\v e}rn\IeC {\'e} lokaci okoln\IeC {\'\i }ch agent\IeC {\r u}\relax }}{14}{figure.caption.4}
+\contentsline {figure}{\numberline {5}{\ignorespaces Diagram \IeC {\v r}\IeC {\'\i }dic\IeC {\'\i }ch t\IeC {\v r}\IeC {\'\i }d\relax }}{21}{figure.caption.6}
+\contentsline {figure}{\numberline {6}{\ignorespaces Uk\IeC {\'a}zka n\IeC {\'a}kresu budovy v textov\IeC {\'e}m souboru\relax }}{24}{figure.caption.7}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces { P\IeC {\r u}dorys}}}{24}{subfigure.6.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces { Patro}}}{24}{subfigure.6.2}
+\contentsline {figure}{\numberline {7}{\ignorespaces Uk\IeC {\'a}zka vyrenderovan\IeC {\'e}ho p\IeC {\r u}dorysu budovy\relax }}{24}{figure.caption.8}
+\contentsline {figure}{\numberline {8}{\ignorespaces Probl\IeC {\'e}m uv\IeC {\'a}znut\IeC {\'\i } p\IeC {\v r}i \IeC {\v s}patn\IeC {\'e}m ur\IeC {\v c}en\IeC {\'\i } \IeC {\'u}nikov\IeC {\'y}ch bod\IeC {\r u}\relax }}{26}{figure.caption.9}
+\contentsline {figure}{\numberline {9}{\ignorespaces Uk\IeC {\'a}zka n\IeC {\'a}kresu labyrintu\relax }}{28}{figure.caption.11}
+\contentsline {figure}{\numberline {10}{\ignorespaces Uk\IeC {\'a}zka hejna ryb\relax }}{30}{figure.caption.13}
+\contentsline {figure}{\numberline {11}{\ignorespaces Vyrenderovan\IeC {\'a} dvoupatrov\IeC {\'a} budova\relax }}{32}{figure.caption.14}
+\contentsline {figure}{\numberline {12}{\ignorespaces Budova p\IeC {\v r}epnuta do pr\IeC {\r u}hledn\IeC {\'e}ho re\IeC {\v z}imu se zviditeln\IeC {\v e}n\IeC {\'\i }m agent\IeC {\r u} a \IeC {\'u}nikov\IeC {\'y}ch bod\IeC {\r u}\relax }}{32}{figure.caption.15}
+\contentsline {figure}{\numberline {13}{\ignorespaces Pr\IeC {\r u}hledn\IeC {\'y} re\IeC {\v z}im budovy z bo\IeC {\v c}n\IeC {\'\i } perspektivy\relax }}{33}{figure.caption.16}
+\contentsline {figure}{\numberline {14}{\ignorespaces Vyrenderovan\IeC {\'e} hejno ryb\relax }}{33}{figure.caption.17}

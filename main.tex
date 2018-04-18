@@ -61,6 +61,7 @@ This thesis focuses on the description of boid's algorithm which is the most use
 \AddAcronym{GLM}{OpenGL Mathematics - poskytuje širokou škálu matematických operací pro OpenGL}
 \AddAcronym{GPU}{Graphics processing unit – grafická karta, má svůj procesor i~výpočetní paměť}
 \AddAcronym{IDE}{Integrated Development Environment - program usnadňující práci programátorům}
+\AddAcronym{Particle System}{Definuje shluky malých částic s podobným chováním a vlastnostm}
 \AddAcronym{RAM}{Random Access Memory – operační paměť počítače}
 \AddAcronym{Realtime}{Vykreslování v reálném čase – snaha vykreslovat co nejrychleji}
 \AddAcronym{SIGGRAPH}{Special Interest Group on Computer GRAPHics and Interactive Techniques - výroční konference v počítačové grafice}
@@ -337,6 +338,7 @@ Tento algoritmus se ještě aplikuje do tzv. Flocking algoritmu, který všechny
 
 \newpage
 \section{Implementace}
+Následující sekce se zabývá použitými technologiemi a celkové implementaci aplikace v niž byla použita metoda simulace na bázi AI.
 
 \subsection{Popis realizace demonstrační aplikace}
 Cílem demonstrační aplikace je zrealizování a následné otestování Boidova algoritmu. Tento algoritmus lze aplikovat mnoha způsoby avšak byly vybrány dvě varianty:
@@ -532,6 +534,8 @@ Při spuštění aplikace, která vykreslí definované schéma lze scénu ovlá
 	\item \textbf{Mezerník} spuštění simulace, opětovným stiskem lze simulaci ukončit
 \end{itemize}
 
+Výslednou scénu lze přepnout do fullscreen režimu pomocí klávesy F případně zpět.
+
 \begin{figure}[H]
 	\centering
 	\subfloat[ Půdorys]{\includegraphics[width=0.43\textwidth]{Figures/map3.jpg}\label{fig:mapatxt}}
@@ -653,6 +657,8 @@ Testy proběhly při počtu agentů 200, počtu pater 5, rychlostí agentů 3 s 
 	\end{tabular}
 \end{table}
 
+Výsledné hodnoty jsou závislé zejména na dvou konstantách a sice ESCAPE\_SENSITIVITY, která udává přímočarost následování dalšího bodu a PATH\_TO\_FIND\_RADIUS, která indikuje velikost radiusu do kterého pokud se agent přiblíží, přesměruje se na další bod.
+
 \newpage
 Další části testování proběhly nad složitějšími prostory bodovy. Jak již bylo zmíněno v kapitole \ref{sec:unik-z-budovy}, tak úník z labyrintu \textit{(složitějších prostor)} funguje na principu umisťování čísel do mapy, kdy agenti směřují od nejmenší po největší číslo a následně k finálnímu bodu F.
 \begin{figure}[H]\centering\includegraphics[width=0.35\textwidth]{Figures/map6.jpg}\label{fig:labyrinth}
@@ -679,6 +685,38 @@ Testování času úníku proběhlo na schématu, které můžeme vidět na obr�
 \end{table}
 
 U této metody je také potřeba opomenout nastavení konstanty PATH\_TO\_FIND\_RADIUS. Pokud je radius větší, agent splní podmínku dosažení bodu když bude dále od něj. Toto nastavení je vhodné zejména pro větší prostory budov z~důvodu eliminace přímočarého pohybu k~únikovým bodům.
+
+\newpage
+\subsection{Konfigurační soubor}
+Konfigurační soubor je rozdělen do čtyř sekcí. První sekce se zaobírá nastavením základních parametrů jako pozice kamery, šířka či výška okna až po citlivost myši a nastevení scény \textit{(2D nebo 3D)}. 
+
+Druhá sekce je zaměřena na únik z budovy, kdy se nastavují důležité parametry jako \\FLOOR\_TIME\_DURATION, který zajišťuje čas, po který daný agent sestupuje z patra, \\PATH\_TO\_FIND\_RADIUS zajišťující velikost kruhu kolem únikového bodu. Pokud tedy bude kruh větší, agent začne dříve směrovat k druhému bodu.
+
+Syntaxe souboru je následující:
+
+\[JMENO\_PROMENNE=HODNOTA\]
+
+Dále následuje celkové chování agentů jako rychlost, tření, počet agentů a počet objektů kterým se budou agenti vyhýbat. Toto nastavení má vliv na celkovou scénů nejvíce.
+
+Třetí sekce nastavuje rychlost agentů, jejich velikost, velikost generačního pole ve kterém se agenti generují a hlavně důležitá pravidla jako velikost kruhu ve kterém se nachází agent se kterým bude iterovat či nastavení konstanty BOID\_DESIRED\_SEPARATION, která indikuje minimální vzdálenost agentů, kteří se přiblíží k sobě.
+
+Čtvrtá sekce je zaměřena k načítání objektů do scény. Cesta, která se udává k objektu \textit{(nejčastěji *.obj)} je relativní a tudíž musí být umístěna ve výsledném adresáři \textit{Models} ve kterém je umístěn spustitelný soubor výsledné aplikace \textit{Bachelor.exe}
+
+Komentáře jsou řešeny jako na schématu níže:
+
+
+\begin{lstlisting}[language=c++,label=src:seek,caption=Ukázka komentáře v konfiguračním souboru]
+###############################################
+# Section 2. 
+# Building escape
+###############################################
+\end{lstlisting}
+
+Řádek s komentářem je označen křížkem, který  aplikace ignoruje. Aplikaci lze spustit tak, že se jako první parametr načte jméno konfiguračního souboru. Pokud je první parametr prázdný, pak se načte obsah souboru \textit{config.cfg}. K adresáři \textit{Release} výsledné aplikace jsou přiloženy dva soubory: \textit{configEscape.cfg} a \textit{configFish.cfg}, které jsou spuštěny s parametry výsledného \\\textit{Bahelor.exe} souboru jako soubory s příponou \textit{*.bat}, a sice \textit{fishes.bat} a \textit{escape.bat}. 
+
+Pro testovací účely jsou pro uživatele vybrány tyto dva soubory, jejichž obsah parametrů konfiguračních souborů může modifikovat.
+
+\newpage
 
 %\begin{figure}[H]
 %	\centering
@@ -727,7 +765,7 @@ V konfiguračním souboru můžeme nastavit počet objektů, kterým se agenti b
 U této simulace je průměrná hodnota FPS 65 s počtem agentů 400 při parametrech PC zmíněných v kapitole \ref{sec:testovani-uniku-z-budovy}.
 
 \subsubsection{Problémy při simulaci hejna}\label{sec:problemy-pri-simulace-hejna}
-U této simulace nastávají problémy ``cukání'' pokud agent začne vyhodnocovat, že se přiblížil k okraji mapy. Důvod tohoto efektu je aplikování kolize s ostatními agenty a zároveň kolize s okrajem mapy. Tento problém nebyl vyřešen ani při zkoušení různých nastavení citlivosti jednotlivých pravidel.
+U této simulace nastávají problémy ``cukání'' pokud agent začne vyhodnocovat, že se přiblížil k okraji mapy. Důvod tohoto efektu je aplikování kolize s ostatními agenty a zároveň kolize s okrajem mapy. Tento problém byl zmírněn při nastavení různých nastavení citlivosti jednotlivých pravidel, avšak ne zcela eliminován.
 
 Neplatí to však pro menší množství agentů \textit{(např.: 20 agentů na větší ploše)}. Tyto vizuální problémy nastávají při množství několika set agentů.
 
@@ -742,17 +780,19 @@ Do budoucna by bylo vhodné tato pravidla dodělat a~tím zajistit, aby agenti v
 
 I přes tyto nedostatky lze Boidův algoritmus efektivně aplikovat jako simulaci hejna (viditelné na obrázku č. \ref{fig:hejnoRyb}), což je také nejvyužitelnější způsob. I tak je díky své nedokonalosti a zároveň jednoduchosti nejpoužívanějším algoritmem pro simulaci davu na bázi AI.
 
+Tento algoritmus je tedy plně využitelný jak ve filmovém tak v herním průmyslu v široké škále odvětví od simulace hejna ptáků po simulaci ryb v moři. V neposlední řadě by tento algoritmus bylo vhodné implementovat jako particle system \cite{linkToUnity} v různých vykreslovacích enginech.
+
 \newpage
 
-\begin{figure}[H]\centering\includegraphics[width=0.9\textwidth]{Figures/screen1.jpg}
-	\caption{Vyrenderovaná třípatrová budova}
+\begin{figure}[H]\centering\includegraphics[width=0.9\textwidth]{Figures/screen8.jpg}
+	\caption{Vyrenderovaná dvoupatrová budova}
 \end{figure}
 
-\begin{figure}[H]\centering\includegraphics[width=0.9\textwidth]{Figures/screen4.jpg}
+\begin{figure}[H]\centering\includegraphics[width=0.9\textwidth]{Figures/screen6.jpg}
 	\caption{Budova přepnuta do průhledného režimu se zviditelněním agentů a únikových bodů}
 \end{figure}
 
-\begin{figure}[H]\centering\includegraphics[width=0.9\textwidth]{Figures/screen3.jpg}
+\begin{figure}[H]\centering\includegraphics[width=0.9\textwidth]{Figures/screen7.jpg}
 	\caption{Průhledný režim budovy z boční perspektivy}
 \end{figure}
 
@@ -838,6 +878,10 @@ Aplikace nabízí dvě možnosti využití. První, jak již bylo zmíněno, je 
 	\bibitem{linkToPreIncrementation} CppReference.com,
 		\textit{Increment/decrement operators}, [online]. 2018 [cit. 2018-2-4]\\
 		Dostupné z: \href{http://en.cppreference.com/w/cpp/language/operator\_incdec}{\texttt{http://en.cppreference.com/w/cpp/language/operator\_incdec}}
+		
+	\bibitem{linkToUnity} What is a Particle System,
+		\textit{Unity 3D}, [online]. 2018 [cit. 2018-4-18]\\
+		Dostupné z: \href{https://docs.unity3d.com/Manual/PartSysWhatIs.html}{\texttt{https://docs.unity3d.com/Manual/PartSysWhatIs.html}}
 		
 	\bibitem{linkToTopIDE} Top IDE Index,
 		[online]. 2018 [cit. 2018-2-4]\\
