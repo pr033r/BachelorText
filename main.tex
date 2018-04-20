@@ -148,13 +148,13 @@ Následující kroky provedou separaci agentů:
 	\item Odečtení vektoru agenta od vektoru aktuálně kontrolovaného agenta:
 			\[ \scalebox{1.2}{$v_{sub} = v_{current} - v_{actual}$} \]
 			
-			kde \( \scalebox{1.2}{$v_{sub}$} \) je výsledný vektor, \( \scalebox{1.2}{$v_{currrent}$} \) je vektor agenta, který je právě v iteraci a \( \scalebox{1.2}{$v_{actual}$} \) je vektor aktuálně kontrolovaného agenta
+			kde \( \scalebox{1.2}{$v_{sub}$} \) je výsledný vektor, \( \scalebox{1.2}{$v_{currrent}$} \) je vektor agenta, který je právě v iteraci a \( \scalebox{1.2}{$v_{actual}$} \) je vektor aktuálně kontrolovaného agenta.
 
 	\item Normalizování výsledného vektoru z předhozího kroku:
 	
 			\[ \scalebox{1.2}{$v_{norm} = \sqrt{vx_{sub}^2 + vy_{sub}^2 + vz_{sub}^2}$} \]
 			
-			kde \( \scalebox{1.2}{$v_{norm}$} \) je výsledný normalizovaný vektor \( \scalebox{1.2}{$v_{sub}$} \)
+			kde \( \scalebox{1.2}{$v_{norm}$} \) je výsledný normalizovaný vektor \( \scalebox{1.2}{$v_{sub}$} \).
 	\item Vydělení výsledku kroku č. 2 vzdáleností těchto dvou agentů. Výsledek se přičítá k výslednému vektoru \( \scalebox{1.2}{$v_{sum}$} \). Matematický zápis pak vypadá následovně:
 			%\[ \scalebox{1.2}{$d_{x} = vx_{current} - vx_{actual}$} \]
 			%\[ \scalebox{1.2}{$d_{y} = vy_{current} - vy_{actual}$} \]
@@ -169,10 +169,10 @@ Následující kroky provedou separaci agentů:
 \end{enumerate}
 
 \begin{figure}[H]\centering\includegraphics[width=0.4\textwidth]{Figures/separation2.jpg}\label{fig:separationImg}
-	\caption{Separace - vyhýbání se ostatním agentům}\label{fig:separationImg}
+	\caption{Separace - vyhýbání se ostatním agentům (Zdroj: vlastní)}\label{fig:separationImg}
 \end{figure}
 
-\begin{lstlisting}[language=c++,label=src:Separation pseudocode,caption=Pseudokód pro separaci]
+\begin{lstlisting}[language=c++,label=src:Separation pseudocode,caption=Pseudokód pro separaci (Zdroj: vlastní)]
 function Separation(boid paramBoid)
 {
 	Vector result
@@ -210,7 +210,7 @@ Pokud bychom chtěli aplikovat zarovnání a konkretizovat průběh, musíme se 
 		\[ \scalebox{1.2}{$v_{distance} = \sqrt{d_x^2 + d_y^2 + d_z^2}$} \]
 		\[ \scalebox{1.2}{$v_{sum} = v_{sum} + v_{divide}$} \]
 		
-		kde \( \scalebox{1.2}{$d_{x}$} \), \( \scalebox{1.2}{$d_{y}$} \) a \( \scalebox{1.2}{$d_{z}$} \) jsou rozdíly daných souřadnic mezi agentem v iteraci a aktuálně kontrolovaným agentem, \( \scalebox{1.2}{$v_{distance}$} \) je výsledný vektor vzdálenosti mezi těmito dvěma agenty
+		kde \( \scalebox{1.2}{$d_{x}$} \), \( \scalebox{1.2}{$d_{y}$} \) a \( \scalebox{1.2}{$d_{z}$} \) jsou rozdíly daných souřadnic mezi agentem v iteraci a aktuálně kontrolovaným agentem, \( \scalebox{1.2}{$v_{distance}$} \) je výsledný vektor vzdálenosti mezi těmito dvěma agenty.
 		
 	\item Jestliže se podmínka nesplnila a tudíž sumární vektor \( \scalebox{1.2}{$v_{sum}$} \) je roven nule, pak se pravidlo zarovnání ukončuje. Pokud se alespoň jednou podmínka v kroku č. 1 provedla, tak následují kroky:
 	
@@ -219,9 +219,9 @@ Pokud bychom chtěli aplikovat zarovnání a konkretizovat průběh, musíme se 
 		
 		\[ \scalebox{1.2}{$v_{sum} = \frac{v_{sum}}{c}$} \]
 		
-		kde \( \scalebox{1.2}{$c$} \) je počet splněných podmínek 
+		kde \( \scalebox{1.2}{$c$} \) je počet splněných podmínek. 
 		
-		\item normalizování sumárního vektoru \( \scalebox{1.2}{$v_{sum}$} \)
+		\item normalizování sumárního vektoru \( \scalebox{1.2}{$v_{sum}$} \):
 		
 		\[ \scalebox{1.2}{$v_{sum} = \sqrt{vx_{sum}^2 + vy_{sum}^2 + vz_{sum}^2}$} \]
 		
@@ -233,10 +233,10 @@ Pokud bychom chtěli aplikovat zarovnání a konkretizovat průběh, musíme se 
 \end{enumerate}
 
 \begin{figure}[H]\centering\includegraphics[width=0.4\textwidth]{Figures/alignment2.jpg}
-	\caption{Zarovnání - určení směru agenta vůči průměrnému směru ostatních} \label{fig:zarovnani}
+	\caption{Zarovnání - určení směru agenta vůči průměrnému směru ostatních (Zdroj: vlastní)} \label{fig:zarovnani}
 \end{figure}
 
-\begin{lstlisting}[language=C++,label=src:Alignment pseudocode,caption=Pseudokód pro zarovnání]
+\begin{lstlisting}[language=C++,label=src:Alignment pseudocode,caption=Pseudokód pro zarovnání (Zdroj: vlastní)]
 function Alignment(boid paramBoid) {
 	Vector sum
 	int count
@@ -278,12 +278,12 @@ Následují dvě základní operace které provedou změnu směru daného agenta
 \end{enumerate}
 
 \begin{figure}[H]\centering\includegraphics[width=0.4\textwidth]{Figures/cohesion2.jpg}
-	\caption{Koheze - určení směru k průměrné lokaci okolních agentů}
+	\caption{Koheze - určení směru k průměrné lokaci okolních agentů (Zdroj: vlastní)}
 \end{figure}
 
 Kód v následujícím pseudokódu je obdobný jako kód zarovnání vyjma řádku s normalizováním sumárního vektoru, avšak v implementační části je tento kód složitější v řádku vracení výsledné hodnoty, kdy se ještě řeší fyzikální vlastnosti.
 
-\begin{lstlisting}[language=c++,label=src:Cohesion pseudocode,caption=Pseudokód pro kohezi]
+\begin{lstlisting}[language=c++,label=src:Cohesion pseudocode,caption=Pseudokód pro kohezi (Zdroj: vlastní)]
 function Cohesion(boid paramBoid)
 {	
 	Vector sum
@@ -315,7 +315,7 @@ Avšak pravidel je možné použít více, jak je popsáno v publikaci od Craiga
 
 Následující pseudokód ukazuje, jak lze tato pravidla aplikovat.
 
-\begin{lstlisting}[language=c++,label=src:Flocking pseudocode,caption=Pseudokód pro aplikování třech pravidel]
+\begin{lstlisting}[language=c++,label=src:Flocking pseudocode,caption=Pseudokód pro aplikování třech pravidel (Zdroj: vlastní)]
 function AllBoidsToNewPosition()
 {
 	Vector v1, v2, v3
@@ -337,8 +337,8 @@ function AllBoidsToNewPosition()
 Tento algoritmus se ještě aplikuje do tzv. Flocking algoritmu, který všechny agenty ve scéně vytváří a koordinuje jejich průběh s vizualizací.
 
 \newpage
-\section{Implementace}
-Následující sekce se zabývá použitými technologiemi a celkové implementaci aplikace v niž byla použita metoda simulace na bázi AI.
+\section{Praktická část}
+Následující sekce se zabývá použitými technologiemi a celkové implementaci aplikace v niž byla použita metoda simulace na bázi umělé inteligence \textit{(Artificial Intelligence)} zmíněné v kapitole \ref{sec:simulace-na-bazi-ai-artificial-intelligence}.
 
 \subsection{Popis realizace demonstrační aplikace}
 Cílem demonstrační aplikace je zrealizování a následné otestování Boidova algoritmu. Tento algoritmus lze aplikovat mnoha způsoby avšak byly vybrány dvě varianty:
@@ -348,7 +348,7 @@ Cílem demonstrační aplikace je zrealizování a následné otestování Boido
 	\item Simulace hejna ryb s vyhýbáním se objektu.
 \end{itemize}
 
-Vetšinu parametrů lze měnit/kombinovat v config.cfg souboru \textit{(lze i kombinovat jednotlivá tři pravidla postupným zapínáním/vypínáním)} a měnit mapu včetně únikových bodů lze v souboru map.txt, která je použitelná pouze pro první uvedený typ.
+Vetšinu parametrů lze měnit/kombinovat v konfiguračním souboru \ref{sec:spusteni-sceny} \textit{(lze i kombinovat jednotlivá tři pravidla postupným zapínáním/vypínáním)} a měnit mapu včetně únikových bodů lze v souboru map.txt přípdně si vytvořit vlastní soubor (viz kapitola \ref{sec:spusteni-sceny} - spuštění scény), která je použitelná pouze pro první uvedený typ.
 
 Při vypnutých pravidlech kromě separace se dav bude chovat stylem \textit{``každý si jde kam chce''}.
 
@@ -397,13 +397,13 @@ delete this->tmpVector;
 this->tmpVector = this->tmpVectorMem;
 \end{lstlisting}
 
-Důležitý je třetí řádek, kdy se volá metoda \textit{subTwoVector(...)}, která vrací výsledek odečtení dvou vektoru jako odkaz na nově vytvořenou paměť. Abychom zabránili nárustu paměti, musíme tento výpočet uložit do dočasné paměti \textit{tmpVector} se kterou provedeme patřičné operace a ve chvíli kdy jí už nebudeme potřebovat, tak ji smažeme.
+Důležitý je třetí řádek, kdy se volá metoda \texttt{subTwoVector(...)}, která vrací výsledek odečtení dvou vektoru jako odkaz na nově vytvořenou paměť. Abychom zabránili nárustu paměti, musíme tento výpočet uložit do dočasné paměti \textit{tmpVector} se kterou provedeme patřičné operace a ve chvíli kdy jí už nebudeme potřebovat, tak ji smažeme.
 
 Musíme však zachovat původní adresu \textit{tmpVector}. Pro tento účel slouží proměnná \\\textit{tmpVectorMem} která slouží jako prostředník pro uchování adresy. Pak tedy můžeme tuto původní adresu přiřadit zpět, v tomto případě poslední řádek kódu.
 \\\\
 Pro větší úsporu paměťi ve třídě \textit{Boids}, jejíž instance je volána v každé smyčce, tak jednotlivá pravidla i metody pro mezivýpočty používali mezi sebou stejné adresy pamětí.
 
-Aby nedocházelo k neoprávněným přístupům a záměnou adres, tak byla využita pomocná proměnná do které se dočasně uložil výsledek pravidla a pak pomocí metody \textit{set()} z třídy \textit{MyVector} šlo bezpečně nastavil hodnoty vektoru bez jakéhokoliv úniku paměti. Tento způsob byl aplikován na všechna použitá pravidla, včetně vyhýbání se zdem.
+Aby nedocházelo k neoprávněným přístupům a záměnou adres, tak byla využita pomocná proměnná do které se dočasně uložil výsledek pravidla a pak pomocí metody \texttt{set()} z třídy \textit{MyVector} šlo bezpečně nastavil hodnoty vektoru bez jakéhokoliv úniku paměti. Tento způsob byl aplikován na všechna použitá pravidla, včetně vyhýbání se zdem.
 
 Vůči 100 agentům ve scéně měla starší verze aplikace využití RAM 110 MB včetně použitých textur a objektů. Po těchto doposud zmíněných změnách bylo využití 91 MB.
 \\\\
@@ -411,7 +411,7 @@ Další vylepšení bylo lepší použití cyklů. Klasický zápis cyklu který
 \begin{lstlisting}[language=c++,label=src:classic cycle,caption=Použití klasického cyklu] 
 for (int i = 0; i < this->models->size(); i++) {...}
 \end{lstlisting}
-Dle oficiálních referencí pro C++ \cite{linkToCppReference} bylo zjištěno, že při každé iteraci cyklem se stále volá metoda \textit{size()}, která tento výkon podstatně snižuje. Řešením je uložit tuto hodnotu do proměnné a tu pak  následně porovnávat v podmínce. Dalším vylepšením je použití prefixové inkrementace proměnné \textit{i}. Toto použití je mnohem účinnější než postfixová inkrementace z důvodu, že nepoužívá dočasné úložiště a vkládání potřebného kódu na pozadí \cite{linkToPreIncrementation}. Výsledný cyklus pak vypadá takto:
+Dle oficiálních referencí pro C++ \cite{linkToCppReference} bylo zjištěno, že při každé iteraci cyklem se stále volá metoda \texttt{size()}, která tento výkon podstatně snižuje. Řešením je uložit tuto hodnotu do proměnné a tu pak  následně porovnávat v podmínce. Dalším vylepšením je použití prefixové inkrementace proměnné \textit{i}. Toto použití je mnohem účinnější než postfixová inkrementace z důvodu, že nepoužívá dočasné úložiště a vkládání potřebného kódu na pozadí \cite{linkToPreIncrementation}. Výsledný cyklus pak vypadá takto:
 \begin{lstlisting}[language=c++,label=src:optimalized cycle,caption=Použití optimalizovaného cyklu] 
 for (int i = 0, len = this->models->size(); i < len; ++i) {...}
 \end{lstlisting}
@@ -445,11 +445,11 @@ Model(const Model& model)
 \subsection{Steering behaviors}\label{sec:steering-behaviors}
 Řízení chování \cite{linkToSteeringBehaviors} již zmíněné v teoretické části bylo použito pro reálnější podobu chování celého davu.
 
-Jako první vlastnost byla použita metoda seek \textit{(hledání)} primárně použivané u Koheze při návratové hodnotě (viz kapitola \ref{sec:koheze}), kde bylo upozorněno na složitější implementační část oproti zarovnání.
+Jako první vlastnost byla použita metoda seek \textit{(hledání)} primárně použivané u Koheze při návratové hodnotě (viz kapitola \ref{sec:koheze} - kohezní síla), kde bylo upozorněno na složitější implementační část oproti zarovnání.
 
 Hledání je určeno k tomu, aby agent směřoval k nějakému cíli, tak že upravuje aktuální rychlost \textit{(velocity)}. V případě koheze je cíl průměrná lokace okolních agentů. Výsledek této operace je seek vektor.
 
-Následující kód ukazuje jak se seek vektor vypočte.
+Následující kód ukazuje jak se seek vektor vypočítá.
 
 \begin{lstlisting}[language=c++,label=src:seek,caption=Vypočtení seek vektoru]
 this->tmpVectorMem = desired->subTwoVector(v, this->location);
@@ -474,7 +474,7 @@ Následuje vypočtení samotného seek vektoru, který je roven rozdílu mezi po
 
 Další vlastností která byla použita je následování bodů \textit{(Path Following)}. V této práci slouží jako následování kontrolních bodů v budově.
 
-Po určení tohoto jednoho či více bodů na ně agent začně postupně směřovat. Při následování bodů se použivá funkce pro vypočtení seek vektoru, který je poté aplikován jako další pravidlo, tzn. k výsledné rychlosti se přičte další vektor (viz kapitola \ref{sec:aplikovani-tri-pravidel}).
+Po určení tohoto jednoho či více bodů na ně agent začně postupně směřovat. Při následování bodů se použivá funkce pro vypočtení seek vektoru, který je poté aplikován jako další pravidlo, tzn. k výsledné rychlosti se přičte další vektor (viz kapitola \ref{sec:aplikovani-tri-pravidel} - aplikování tří pravidel).
 
 \subsection{Třídní diagram}
 Pro provoz simulace a chování davu slouží tři základní a tři pomocné třídy.
@@ -483,14 +483,14 @@ Pro provoz simulace a chování davu slouží tři základní a tři pomocné t�
 	\caption{Diagram řídicích tříd}
 \end{figure}
 
-Hlavní třídou je třída Flock, která koordinuje komunikaci mezi třídou Walls a Boids. Zároveň se stará o veškeré vytváření agentů, kterým přiřažuje jednotlivé objekty ve scéně, jenž jsou vizualizovány uživateli. Také v každé iteraci volá simulační mechanismy pomocí metody \textit{run()}.
+Hlavní třídou je třída Flock, která koordinuje komunikaci mezi třídou Walls a Boids. Zároveň se stará o veškeré vytváření agentů, kterým přiřažuje jednotlivé objekty ve scéně, jenž jsou vizualizovány uživateli. Také v každé iteraci volá simulační mechanismy pomocí metody \texttt{run()}.
 
 Třída Walls vytváří zdi podle předaných dat z mapy a udržuje informace o generačních pozicích a pozicích únikových bodů. Díky tomu může třída Flock vygenerovat agenty do patřičného patra a pozice. Zároveň jsou tato data sdílena s třídou Boids, která může kontrolovat kolize se zdmi a počítat pozice únikových bodů na které má agent směřovat.
 
 Jak již bylo zmíněno v kapitole \ref{sec:problemy-pri-implementaci}, tak pro operace s vektory byla použita vlastní třída \textit{MyVector} ze které dědí třída \textit{MyVector2D} z důvodu přenositelnosti a nezávislosti algoritmu na platformě.
 
 \subsection{Výsledné aplikování pravidel}
-Všechna pravidla jsou aplikována jako součet výsledků jednotlivých pravidel \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel})}. \\V této práci k sečtení a vytvoření výsledného vektoru slouží metoda \textit{appplyForce(...))}, která přidá do výsledného vektoru \textit{acceleration} další vektor \textit{(výsledek jednoho z pravidel)}. Tento vektor je pak aplikován v metodě \textit{update()}, která nastaví agentovi novou pozici a rychlost.
+Všechna pravidla jsou aplikována jako součet výsledků jednotlivých pravidel \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel} - aplikování tří pravidel)}. V této práci k sečtení a vytvoření výsledného vektoru slouží metoda \texttt{appplyForce(...))}, která přidá do výsledného vektoru \textit{acceleration} další vektor \textit{(výsledek jednoho z pravidel)}. Tento vektor je pak aplikován v metodě \texttt{update()}, která nastaví agentovi novou pozici a rychlost.
 
 \begin{lstlisting}[language=c++,label=src:seek,caption=Nastavení výsledné pozice agenta] 
 void Boids::update() {
@@ -504,10 +504,45 @@ void Boids::update() {
 
 Po vynásobení konstantou 0.4, která slouží pro nastavení citlivosti \textit{(může a nemusí být použita, zde je nastavena po experimentech jako ideální)} následuje přidání, limitování vektoru a~vypočtení výsledné pozice. Na konci musíme vektor \textit{acceleration} vynulovat pro použití v další iteraci.
 
+\subsection{Konfigurační soubor}
+Konfigurační soubor je rozdělen do čtyř sekcí. První sekce se zaobírá nastavením základních parametrů jako pozice kamery, šířka či výška okna až po citlivost myši a nastevení scény \textit{(2D nebo 3D)}. 
+
+Druhá sekce je zaměřena na únik z budovy, kdy se nastavují důležité parametry jako \\FLOOR\_TIME\_DURATION, který zajišťuje čas, po který daný agent sestupuje z patra, \\PATH\_TO\_FIND\_RADIUS zajišťující velikost kruhu kolem únikového bodu. Pokud tedy bude kruh větší, agent začne dříve směrovat k druhému bodu.
+
+Syntaxe souboru je následující:
+
+\[JMENO\_PROMENNE=HODNOTA\]
+
+Dále následuje celkové chování agentů jako rychlost, tření, počet agentů a počet objektů kterým se budou agenti vyhýbat. Toto nastavení má vliv na celkovou scénů nejvíce.
+
+Třetí sekce nastavuje rychlost agentů, jejich velikost, velikost generačního pole ve kterém se agenti generují a hlavně důležitá pravidla jako velikost kruhu ve kterém se nachází agent se kterým bude iterovat či nastavení konstanty BOID\_DESIRED\_SEPARATION, která indikuje minimální vzdálenost agentů, kteří se přiblíží k sobě.
+
+Čtvrtá sekce je zaměřena k načítání objektů do scény. Cesta, která se udává k objektu je relativní a tudíž objekt musí být umístěn v adresáři \textit{Models}, který se nachází na stejné adresářové úrovni jako výsledný spustitelný soubor \textit{Bachelor.exe}
+
+Komentáře jsou řešeny jako ve výpisu níže:
+
+
+\begin{lstlisting}[language=c++,label=src:seek,caption=Ukázka komentáře v konfiguračním souboru]
+###############################################
+# Section 2. 
+# Building escape
+###############################################
+\end{lstlisting}
+
+K označení řádku s komentářem indikujeme pomocí křížku, který  aplikace ignoruje. 
+
+\subsection{Spuštění scény}\label{sec:spusteni-sceny}
+Aplikaci lze spustit tak, že spustitelný soubor \textit{Bachelor.exe} přijímá jako první parametr jméno konfiguračního souboru a jako druhý parametr jméno textového souboru, ve kterém je uložené schéma budovy.
+
+Pro dva typy scény \textit{(únik z budovy, simulace hejna ryb)} jsou připraveny dva konfigurační soubory: \textbf{configEscape.cfg} a \textbf{configFish.cfg}, které může uživatel modifikovat. 
+%Aplikaci lze spustit tak, že se jako první parametr načte jméno konfiguračního souboru. Pokud je první parametr prázdný, pak se načte obsah souboru \textit{config.cfg}. K adresáři \textit{Release} výsledné aplikace jsou přiloženy dva konfigurační soubory: \textit{configEscape.cfg} a \textit{configFish.cfg}, které jsou přiloženy jako parametry výsledného \textit{Bahelor.exe} souboru. Ke spuštění výsledných scén slouží soubory s příponou \textit{*.bat}, a sice \textit{fishes.bat} a \textit{escape.bat}. Připadně může uživatel měnit parametr názvu konfiguračního souboru spuštěním \textit{Bachelor.exe} z příkazové řádky.
+
+%Pro testovací účely jsou pro uživatele vybrány tyto dva soubory, jejichž obsah parametrů konfiguračních souborů může modifikovat.
+
 \subsection{Únik z budovy}\label{sec:unik-z-budovy}
 První část využití Boidova agoritmu je simulace úniku lidí z budovy podle nastavených únikových cest. Funkčně je tato část určena k tomu, aby po skončení simulace mohl uživatel zjistit, kolik času by zabralo evakuovat lidi z předem definovaného plánu budovy. V případě časově náročné evakuace může uživatel upravit plán budovy a únikové cesty tak, aby budova splňovala dané normy.
 
-Plán budovy můžeme upravovat v souboru \textit{map.txt} včetně definování dalších pater a~únikových cest. Jelikož se jedná o textový soubor, tak každý znak reprezentuje jinou funkci. Popis funkčních znaků můžeme vidět níže:
+Plán budovy můžeme upravovat v souboru \textit{map.txt}, případně využití vlastního schématu (viz kapitola \ref{sec:spusteni-sceny} - spuštění scény) včetně definování dalších pater a~únikových cest. Jelikož se jedná o textový soubor, tak každý znak reprezentuje jinou funkci. Popis funkčních znaků můžeme vidět níže:
 
 \begin{itemize}
 	\item \textbf{G} generační místo pro dav, který lze použít vícekrát v každém patře či místnostech
@@ -556,7 +591,7 @@ Při zapnutí simulace jsou agenti v půdorysu okamžitě vedení směrem ven mi
 	\caption{Ukázka vyrenderovaného půdorysu budovy}
 \end{figure}
 
-Pro následování bodů byla použita metoda \textit{arriveTo(...)} která využívá metodu \textit{seek(...)} \textit{(viz kapitola \ref{sec:steering-behaviors})}. Abychom správně určili, který agent má kam směřovat, musíme metodě\\\textit{arriveTo(...)} předat správný vektor, který získáme metodou \textit{getArriveVector(...)}. Ta vrátí výsledný vektor který je předán \textit{seek()} metodě. Výsledek je pak nový vektor, který se aplikuje jako nové pravidlo \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel})} a~tím zajistíme že agent bude směřovat na nejbližší únikový bod a~následně na finální bod. 
+Pro následování bodů byla použita metoda \texttt{arriveTo(...)} která využívá metodu \texttt{seek(...)} \textit{(viz kapitola \ref{sec:steering-behaviors} - steering behaviors)}. Abychom správně určili, který agent má kam směřovat, musíme metodě\\\texttt{arriveTo(...)} předat správný vektor, který získáme metodou \texttt{getArriveVector(...)}. Ta vrátí výsledný vektor který je předán \texttt{seek()} metodě. Výsledek je pak nový vektor, který se aplikuje jako nové pravidlo \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel} - aplikování tří pravidel)} a~tím zajistíme že agent bude směřovat na nejbližší únikový bod a~následně na finální bod. 
 
 \begin{lstlisting}[language=c++,label=src:mapSave,caption=Princip metody getArriveVector(...)]
 // getting minIndex from exitPoints...
@@ -583,7 +618,7 @@ Mimo další operace které se nachází mezi návratovou hodnotou a předchozí
 
 Agenti se můžou občas dostat do problémů zejména díky špatnému návrhu budovy, nebo také kvůli nedokonalosti Boidova algoritmu. 
 
-Například pokud při úniku z budovy zapneme všechna tři pravidla, může nastat efekt procházení zdí. Tento problém vzniká kvůli nastaveným konstantám citlivosti u každého pravidla. Tyto konstanty byly nastaveny po řadě experimentů jako nejvhodnější a~jsou neměnné \textit{(kromě konstanty citlivosti úniku ESCAPE\_SENSITIVITY, kterou lze měnit v konfiguračním souboru)}. Pokud je konstanta příliš nízká, dané pravidlo by zaniklo mezi ostatními. Pokud příliš vysoká, tak by dané pravidlo překrylo ostatní. U konstanty citlivosti úniku je však občas potřebné přenastavení. Částečné řešení spočívá jen v použití separace. Dav se tedy chová jako dav skutečných lidí \textit{(každý si jde kam chce)}.
+Například pokud při úniku z budovy zapneme všechna tři pravidla \textit{(separace, zarovnání, koheze)}, může nastat efekt procházení zdí. Tento problém vzniká kvůli nastaveným konstantám citlivosti u každého pravidla. Tyto konstanty byly nastaveny po řadě experimentů jako nejvhodnější a~jsou neměnné \textit{(kromě konstanty citlivosti úniku ESCAPE\_SENSITIVITY, kterou lze měnit v konfiguračním souboru)}. Pokud je konstanta příliš nízká, dané pravidlo by zaniklo mezi ostatními. Pokud příliš vysoká, tak by dané pravidlo překrylo ostatní. U konstanty citlivosti úniku je však občas potřebné přenastavení. Částečné řešení spočívá jen v použití separace. Dav se tedy chová jako dav skutečných lidí \textit{(každý si jde kam chce)}.
 
 Další problém může nastat při generování agentů, kdy agenti vyberou jako cestu \\k nejkratšímu bodu tu variantu, že se bod nachází za zdí či v jiné místnosti (viz obrázek č. \ref{fig:buildingEscapeProblem1}). S tím souvisí možnost zaseknutí o zeď, kdy má agent před sebou překážku za kterou je cílový bod a např.: dva bloky od něj je východ. Má však nastavenou cestu přímo na bod \textit{(přes zeď)}. Řešení takovýchto situací je však nad rámec této práce \textit{(jedná se o pokročilé techniky AI)}.
 
@@ -615,11 +650,21 @@ Testování proběhlo na PC s parametry: CPU Intel i5-2500 @ 3.3GHz, grafická k
 %	\end{tabular}
 %\end{table}
 
-Všechny části testů byly provedeny na schématu budovy s parcelou 30x17 bloků, kdy jeden blok odpovídá jednomu znaku v textovém souboru \textit{map.txt} a na 1x1 blok se vejde průměrně 5~agentů bez větších kolizí. Kompletní plán budovy se nachází v souboru \textit{mapCompleted.txt}.
+Všechny části testů byly provedeny na schématu budovy s parcelou 30x17 bloků, kdy jeden blok odpovídá jednomu znaku v textovém souboru, ve kterém je definováno schéma budovy, a na 1x1 blok se vejde průměrně 5~agentů bez větších kolizí. Kompletní plán budovy se nachází v souboru \textit{mapCompleted.txt}.
 
 Tabulka zobrazuje jaké byly hodnoty FPS při daném počtu agentů, počtu pater a složitosti budovy \textit{(počet zdí)}. Hodnoty FPS jsou odečteny před a během simulace. Poslední hodnotou je čas opuštění budovy.
 
-Testy proběhly při počtu agentů 200, počtu pater 5, rychlostí agentů 3 s maximální hodnotou tření 0.1 a nastavení míry opuštění jednoho patra na 8 sekund.
+%Testy proběhly při počtu agentů 200, počtu pater 5, rychlostí agentů 3 s maximální hodnotou tření 0.1 a nastavení míry opuštění jednoho patra na 8 sekund.
+
+Testy proběhly při:
+
+\begin{itemize}
+	\item počtu agentů 200
+	\item počtu pater 5
+	\item rychlostí agentů 3
+	\item maximální hodnotou tření 0.1 
+	\item míra opuštění jednoho patra na 8 sekund
+\end{itemize}
 
 %\begin{table}[H]
 %	\centering
@@ -687,36 +732,6 @@ Testování času úníku proběhlo na schématu, které můžeme vidět na obr�
 U této metody je také potřeba opomenout nastavení konstanty PATH\_TO\_FIND\_RADIUS. Pokud je radius větší, agent splní podmínku dosažení bodu když bude dále od něj. Toto nastavení je vhodné zejména pro větší prostory budov z~důvodu eliminace přímočarého pohybu k~únikovým bodům.
 
 \newpage
-\subsection{Konfigurační soubor}
-Konfigurační soubor je rozdělen do čtyř sekcí. První sekce se zaobírá nastavením základních parametrů jako pozice kamery, šířka či výška okna až po citlivost myši a nastevení scény \textit{(2D nebo 3D)}. 
-
-Druhá sekce je zaměřena na únik z budovy, kdy se nastavují důležité parametry jako \\FLOOR\_TIME\_DURATION, který zajišťuje čas, po který daný agent sestupuje z patra, \\PATH\_TO\_FIND\_RADIUS zajišťující velikost kruhu kolem únikového bodu. Pokud tedy bude kruh větší, agent začne dříve směrovat k druhému bodu.
-
-Syntaxe souboru je následující:
-
-\[JMENO\_PROMENNE=HODNOTA\]
-
-Dále následuje celkové chování agentů jako rychlost, tření, počet agentů a počet objektů kterým se budou agenti vyhýbat. Toto nastavení má vliv na celkovou scénů nejvíce.
-
-Třetí sekce nastavuje rychlost agentů, jejich velikost, velikost generačního pole ve kterém se agenti generují a hlavně důležitá pravidla jako velikost kruhu ve kterém se nachází agent se kterým bude iterovat či nastavení konstanty BOID\_DESIRED\_SEPARATION, která indikuje minimální vzdálenost agentů, kteří se přiblíží k sobě.
-
-Čtvrtá sekce je zaměřena k načítání objektů do scény. Cesta, která se udává k objektu \textit{(nejčastěji *.obj)} je relativní a tudíž musí být umístěna ve výsledném adresáři \textit{Models} ve kterém je umístěn spustitelný soubor výsledné aplikace \textit{Bachelor.exe}
-
-Komentáře jsou řešeny jako na schématu níže:
-
-
-\begin{lstlisting}[language=c++,label=src:seek,caption=Ukázka komentáře v konfiguračním souboru]
-###############################################
-# Section 2. 
-# Building escape
-###############################################
-\end{lstlisting}
-
-Řádek s komentářem je označen křížkem, který  aplikace ignoruje. Aplikaci lze spustit tak, že se jako první parametr načte jméno konfiguračního souboru. Pokud je první parametr prázdný, pak se načte obsah souboru \textit{config.cfg}. K adresáři \textit{Release} výsledné aplikace jsou přiloženy dva soubory: \textit{configEscape.cfg} a \textit{configFish.cfg}, které jsou spuštěny s parametry výsledného \\\textit{Bahelor.exe} souboru jako soubory s příponou \textit{*.bat}, a sice \textit{fishes.bat} a \textit{escape.bat}. 
-
-Pro testovací účely jsou pro uživatele vybrány tyto dva soubory, jejichž obsah parametrů konfiguračních souborů může modifikovat.
-
-\newpage
 
 %\begin{figure}[H]
 %	\centering
@@ -749,11 +764,11 @@ Pro testovací účely jsou pro uživatele vybrány tyto dva soubory, jejichž o
 \newpage
 
 \subsection{Simulace hejna ryb}
-Druhý typ využití Boidova algoritmu je simulace hejna. V tomto případě je použita simulace ryb, ale při změně načítaného objektu v konfiguračním souboru můžeme vytvořit simulaci hejna čehokoliv. Pro změnu scény je třeba přepsat několik parametrů, zejména pak SCENE\_TYPE na 3D. U výsledné aplikace je připraven obsah souboru \textit{configFish.cfg} pro simulaci ryb, kterým stačí přepsat obsah hlavního souboru \textit{config.cfg} bez potřeby přepisování všech důležitých parametrů.
+Druhý typ využití Boidova algoritmu je simulace hejna. V tomto případě je použita simulace ryb, ale při změně načítaného objektu v konfiguračním souboru můžeme vytvořit simulaci hejna čehokoliv. Pro změnu scény je třeba přepsat několik parametrů, zejména pak SCENE\_TYPE na 3D. U výsledné aplikace je připraven obsah souboru \textit{configFish.cfg} pro simulaci ryb. Pro výslednou scénu byly připraveny jednotlivé varianty (viz kapitola \ref{sec:spusteni-sceny} - spuštění scény)
 
 Algoritmus funguje stejně jako při úniku z budovy, výjma využití třídy \textit{MyVector2D}, která je nahrazena výpočty ve 3D třídou předka \textit{MyVector}.
 
-V konfiguračním souboru můžeme nastavit počet objektů, kterým se agenti budou vyhýbat. V případě, že se agent dostane do blízkosti objektu, pak vyhýbání funguje obdobně jako separace, akorát normalizování vektoru a vydělení vektoru počtem okolních agentů je nahrazeno vynásobení skalárem.
+V konfiguračním souboru můžeme nastavit počet objektů, kterým se agenti budou vyhýbat. V případě, že se agent dostane do blízkosti objektu, pak vyhýbání funguje obdobně jako separace, akorát normalizování vektoru a vydělení vektoru počtem okolních agentů je nahrazeno vynásobení skalárem. Můžeme také nastavit útvar, ve kterém se budou agenti pohybovat. Na výběr je sféra \textit{(sphere)} nebo kvádr \textit{(cube)}.
 
 \begin{figure}[H]\centering\includegraphics[width=0.7\textwidth]{Figures/fish4.jpg}\label{fig:fishExample}
 	\caption{Ukázka hejna ryb}
@@ -765,16 +780,16 @@ V konfiguračním souboru můžeme nastavit počet objektů, kterým se agenti b
 U této simulace je průměrná hodnota FPS 65 s počtem agentů 400 při parametrech PC zmíněných v kapitole \ref{sec:testovani-uniku-z-budovy}.
 
 \subsubsection{Problémy při simulaci hejna}\label{sec:problemy-pri-simulace-hejna}
-U této simulace nastávají problémy ``cukání'' pokud agent začne vyhodnocovat, že se přiblížil k okraji mapy. Důvod tohoto efektu je aplikování kolize s ostatními agenty a zároveň kolize s okrajem mapy. Tento problém byl zmírněn při nastavení různých nastavení citlivosti jednotlivých pravidel, avšak ne zcela eliminován.
+U této simulace nastávají problémy ``cukání'' pokud agent začne vyhodnocovat, že se přiblížil k okraji mapy. Důvod tohoto efektu je aplikování kolize s ostatními agenty a zároveň kolize s okrajem mapy. Tento problém byl zmírněn při nastavení různých citlivosti jednotlivých pravidel, avšak ne zcela eliminován.
 
-Neplatí to však pro menší množství agentů \textit{(např.: 20 agentů na větší ploše)}. Tyto vizuální problémy nastávají při množství několika set agentů.
+Pro menší množství agentů \textit{(např.: 20 agentů na větší ploše)} nebyl tento efekt tak viditelný, jako při vizualzaci několika set agentů.
 
 \newpage
 \section{Zhodnocení}
 
 %Z výsledků tabulek č. \ref{tab:tablePC1}, \ref{tab:tablePC2} a \ref{tab:tablePC3} je znatelné, že pokud je PC výkonější pak čas úniku je kratší. Toto však lze zobecnit stejnými časy díky nastavení rychlosti agentů. U PC2 byla rychlost agentů vizuálně nejblíže, kdežto u PC3 agenti ``utíkali'' z budovy nepřirozeně rychle a u PC1 šli krokovým tempem. Lze tedy říci, že realitě nejvíce odpovídají hodnoty z tabulky pro PC2.
 
-I když byly použity vylepšené techniky Boidova algoritmu \textit{(seek, path following)} a~vyladěná všechna tři pravidla, tak stále tento algoritmus není dokonalý (kapitoly \ref{sec:problemy-pri-uniku-z-budovy}, \ref{sec:problemy-pri-simulace-hejna}) a~pro naprosto reálnou podobu davu se musí ještě hodně vlastností a pravidel připsat.
+I když byly použity vylepšené techniky Boidova algoritmu \textit{(seek, path following)} a~vyladěná všechna tři pravidla \textit{(separace, zarovnání koheze)}, tak stále tento algoritmus není dokonalý (kapitoly \ref{sec:problemy-pri-uniku-z-budovy} - problémy při úniku z budovy, \ref{sec:problemy-pri-simulace-hejna} - problémy při simulaci hejna) a~pro naprosto reálnou podobu davu se musí ještě hodně vlastností a pravidel připsat.
 
 Do budoucna by bylo vhodné tato pravidla dodělat a~tím zajistit, aby agenti v~budově byli inteligentnější a~nešli přímou cestou za únikovým bodem, ale mohli se rozhodovat o úniku dle sektorů budovy.
 
