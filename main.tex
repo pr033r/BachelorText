@@ -48,7 +48,7 @@ Tato práce se zaměřuje na popis boidova algoritmu, který je dnes nejpoužív
 \CzechKeywords{Boidův algoritmus, dav, hejno, koheze, separace, zarovnání, agent}
 
 \EnglishAbstract{Many things in nature are impressive like animals which can be organized into larger and logical oriented grouping.
-In that case when we can simulate the behavior like: creating public buildings, movie projects or developing games.
+In that case when we can simulate this behavior than we can create real form of the crowd. Real use can be found in things like: creating public buildings, movie projects or developing games.
 This thesis focuses on the description of boid's algorithm which is the most used crowd simulation principle today. }
 
 \EnglishKeywords{Boid's algorithm, crowd, flock, cohesion, separation, alignment, agent}
@@ -80,7 +80,7 @@ Simulační algoritmy se používají v širokém spektru odvětví od vědy, he
 
 Pokud vezmeme v potaz stavbu či projektování budov, nabízí se další subspektra  druhů simulačních programů. Například projektant potřebuje nasimulovat jak velkou zátěž udrží hlavní nosníky, testování a simulování různých druhů materiálů či jak velké budou úniky tepla na základě pohybů osob v budově.
 
-Avšak po této základní konstrukční stránce, se musí také navrhnout optimální velikost budovy a kolik bude schopna pojmout lidí v jednom okamžiku. Kde bude vést úniková cesta v případě požáru a kolik času zabere evakuovaným lidem \textit{(davu)}, než se z budovy dostane do bezpečí. A zrovna co se bezpečnosti týče, mají simulační algoritmy nejširší využítí. V jistém slova smyslu by se dalo říci, že byly vytvořeny primárně pro tento účel \cite{link1}.
+Avšak po této základní konstrukční stránce, se musí také navrhnout optimální velikost budovy a kolik bude schopna pojmout lidí v jednom okamžiku. Kde bude vést úniková cesta v případě požáru a kolik času zabere evakuovaným lidem \textit{(davu)}, než se z budovy dostane do bezpečí. A~zrovna~co se bezpečnosti týče, mají simulační algoritmy nejširší využítí. V jistém slova smyslu by se dalo říci, že byly vytvořeny primárně pro tento účel \cite{link1}.
 
 Při těchto simulacích se tak navrhují nejlepší varianty šířky chodeb, dostupnosti k únikovým východům, přístupu k požárnímu schodišti nebo vyladění ukazatelů směru
 úniku.
@@ -115,7 +115,7 @@ Jelikož byl v této práci využit tento typ simulace, tak v dalších kapitol�
 	}
 \end{figure}
 
-\subsection{Boidův algoritmus}
+\subsection{Boidův algoritmus}\label{sec:boiduv-algoritmus}
 
 Nejčastějším typem simulace založené na umělé inteligenci je Boidův algoritmus  vytvořený v roce 1986 Craigem Reynoldem a oficiálně představený roku 1987 na konferenci ACM SIGGRAPH \cite{linkToACM, linkToSIGGRAPH}.
 
@@ -163,7 +163,7 @@ Následující kroky provedou separaci agentů:
 			\[ \scalebox{1.2}{$v_{divide} = \frac{v_{norm}}{v_{distance}}$} \]
 			\[ \scalebox{1.2}{$v_{sum} = v_{sum} + v_{divide}$} \]
 						
-			kde \( \scalebox{1.2}{$d_{x}$} \), \( \scalebox{1.2}{$d_{y}$} \) a \( \scalebox{1.2}{$d_{z}$} \) jsou rozdíly daných souřadnic mezi agentem v iteraci a aktuálně kontrolovaným agentem, \( \scalebox{1.2}{$v_{distance}$} \) je výsledný vektor vzdálenosti mezi těmito dvěma agenty a \( \scalebox{1.2}{$v_{divide}$} \) je výsledek vydělení vektorů.
+			kde \( \scalebox{1.2}{$d_{x}$} \), \( \scalebox{1.2}{$d_{y}$} \) a \( \scalebox{1.2}{$d_{z}$} \) jsou rozdíly daných souřadnic mezi agentem v iteraci a aktuálně kontrolovaným agentem, \( \scalebox{1.2}{$v_{distance}$} \) je výsledný vektor vzdálenosti mezi těmito dvěma agenty a~\( \scalebox{1.2}{$v_{divide}$} \) je výsledek vydělení vektorů.
 			
 	\item Pokud je v okolí agenta více agentů se kterými koliduje, pak se na konci výsledný vektor vydělí počtem těchto agentů (viz obrázek č. \ref{fig:separationImg}).
 \end{enumerate}
@@ -338,7 +338,7 @@ Tento algoritmus se ještě aplikuje do tzv. Flocking algoritmu, který všechny
 
 \newpage
 \section{Praktická část}
-Následující sekce se zabývá použitými technologiemi a celkové implementaci aplikace v niž byla použita metoda simulace na bázi umělé inteligence \textit{(Artificial Intelligence)} zmíněné v kapitole \ref{sec:simulace-na-bazi-ai-artificial-intelligence}.
+Následující sekce se zabývá použitými technologiemi a celkové implementaci aplikace, v niž byla použita metoda simulace na bázi umělé inteligence \textit{(Artificial Intelligence)} zmíněné v kapitole \ref{sec:simulace-na-bazi-ai-artificial-intelligence} a boidův algoritmus zmíněný v kapitole \ref{sec:boiduv-algoritmus}.
 
 \subsection{Popis realizace demonstrační aplikace}
 Cílem demonstrační aplikace je zrealizování a následné otestování Boidova algoritmu. Tento algoritmus lze aplikovat mnoha způsoby avšak byly vybrány dvě varianty:
@@ -403,7 +403,7 @@ Musíme však zachovat původní adresu \textit{tmpVector}. Pro tento účel slo
 \\\\
 Pro větší úsporu paměťi ve třídě \textit{Boids}, jejíž instance je volána v každé smyčce, tak jednotlivá pravidla i metody pro mezivýpočty používali mezi sebou stejné adresy pamětí.
 
-Aby nedocházelo k neoprávněným přístupům a záměnou adres, tak byla využita pomocná proměnná do které se dočasně uložil výsledek pravidla a pak pomocí metody \texttt{set()} z třídy \textit{MyVector} šlo bezpečně nastavil hodnoty vektoru bez jakéhokoliv úniku paměti. Tento způsob byl aplikován na všechna použitá pravidla, včetně vyhýbání se zdem.
+Aby nedocházelo k neoprávněným přístupům a záměnou adres, tak byla využita pomocná proměnná do které se dočasně uložil výsledek pravidla a pak pomocí metody \texttt{set()} z~třídy \textit{MyVector} šlo bezpečně nastavil hodnoty vektoru bez jakéhokoliv úniku paměti. Tento způsob byl aplikován na všechna použitá pravidla, včetně vyhýbání se zdem.
 
 Vůči 100 agentům ve scéně měla starší verze aplikace využití RAM 110 MB včetně použitých textur a objektů. Po těchto doposud zmíněných změnách bylo využití 91 MB.
 \\\\
@@ -467,9 +467,9 @@ delete this->tmpVectorMem;
 seekResult->limit(maxForce);
 \end{lstlisting}
 
-Nejprve se spočte lokace na kterou má agent směřovat \textit{(vektor desired)}, a nastavíme maximální zrychlení aby se na místo dostavil co nejdříve.
+Nejprve se spočte lokace na kterou má agent směřovat \textit{(vektor desired)}, a~nastavíme maximální zrychlení aby se na místo dostavil co nejdříve.
 
-Následuje vypočtení samotného seek vektoru, který je roven rozdílu mezi požadovanou a aktuální rychlostí. V poslední řadě pak musíme vektor limitovat konstantou tření \textit{(maxForce)}.
+Následuje vypočtení samotného seek vektoru, který je roven rozdílu mezi požadovanou a~aktuální rychlostí. V poslední řadě pak musíme vektor limitovat konstantou tření \textit{(maxForce)}.
 \\
 
 Další vlastností která byla použita je následování bodů \textit{(Path Following)}. V této práci slouží jako následování kontrolních bodů v budově.
@@ -489,7 +489,7 @@ Třída Walls vytváří zdi podle předaných dat z mapy a udržuje informace o
 
 Jak již bylo zmíněno v kapitole \ref{sec:problemy-pri-implementaci}, tak pro operace s vektory byla použita vlastní třída \textit{MyVector} ze které dědí třída \textit{MyVector2D} z důvodu přenositelnosti a nezávislosti algoritmu na platformě.
 
-\subsection{Výsledné aplikování pravidel}
+\subsection{Výsledné aplikování pravidel}\label{sec:vysledne-aplikovani-pravidel}
 Všechna pravidla jsou aplikována jako součet výsledků jednotlivých pravidel \textit{(viz kapitola \ref{sec:aplikovani-tri-pravidel} - aplikování tří pravidel)}. V této práci k sečtení a vytvoření výsledného vektoru slouží metoda \texttt{appplyForce(...))}, která přidá do výsledného vektoru \textit{acceleration} další vektor \textit{(výsledek jednoho z pravidel)}. Tento vektor je pak aplikován v metodě \texttt{update()}, která nastaví agentovi novou pozici a rychlost.
 
 \begin{lstlisting}[language=c++,label=src:seek,caption=Nastavení výsledné pozice agenta] 
@@ -507,7 +507,7 @@ Po vynásobení konstantou 0.4, která slouží pro nastavení citlivosti \texti
 \subsection{Konfigurační soubor}
 Konfigurační soubor je rozdělen do čtyř sekcí. První sekce se zaobírá nastavením základních parametrů jako pozice kamery, šířka či výška okna až po citlivost myši a nastevení scény \textit{(2D nebo 3D)}. 
 
-Druhá sekce je zaměřena na únik z budovy, kdy se nastavují důležité parametry jako \\FLOOR\_TIME\_DURATION, který zajišťuje čas, po který daný agent sestupuje z patra, \\PATH\_TO\_FIND\_RADIUS zajišťující velikost kruhu kolem únikového bodu. Pokud tedy bude kruh větší, agent začne dříve směrovat k druhému bodu.
+Druhá sekce je zaměřena na únik z budovy, kdy se nastavují důležité parametry jako \\FLOOR\_TIME\_DURATION, který zajišťuje čas, po který daný agent sestupuje z patra, nebo \\PATH\_TO\_FIND\_RADIUS zajišťující velikost kruhu kolem únikového bodu. Pokud tedy bude kruh větší, agent začne dříve směrovat k druhému bodu.
 
 Syntaxe souboru je následující:
 
@@ -532,9 +532,24 @@ Komentáře jsou řešeny jako ve výpisu níže:
 K označení řádku s komentářem indikujeme pomocí křížku, který  aplikace ignoruje. 
 
 \subsection{Spuštění scény}\label{sec:spusteni-sceny}
-Aplikaci lze spustit tak, že spustitelný soubor \textit{Bachelor.exe} přijímá jako první parametr jméno konfiguračního souboru a jako druhý parametr jméno textového souboru, ve kterém je uložené schéma budovy.
+Aplikaci lze spustit tak, že spustitelný soubor \textit{Boid.exe} přijímá jako první parametr jméno konfiguračního souboru a jako druhý parametr jméno textového souboru, ve kterém je uložené schéma budovy.
+
+Pokud není uveden žádný z parametrů, aplikace načte konfiguraci ze souboru \textit{config.cfg} a~schéma budovy ze souboru \textit{map.txt}.
 
 Pro dva typy scény \textit{(únik z budovy, simulace hejna ryb)} jsou připraveny dva konfigurační soubory: \textbf{configEscape.cfg} a \textbf{configFish.cfg}, které může uživatel modifikovat. 
+
+K ukázce různých scén slouží soubory s příponou \textit{*.bat}, které spouštějí aplikaci s předem definovanými parametry. K výslednému programu jsou připraveny scény:
+
+\begin{itemize}
+	\item \textbf{boid\_escape\_variant\_1.bat} - varianta úniku z vícepatrové budovy, využívá schéma \\ze~souboru~\textit{map\_variant\_escape\_1.txt}
+	\item \textbf{boid\_escape\_variant\_2.bat} - varianta úniku z vícepatrové budovy, využívá schéma \\ze~souboru~\textit{map\_variant\_escape\_2.txt}
+	\item \textbf{boid\_labyrinth\_variant\_1.bat} - varianta úniku z labyrintu, využívá schéma \\ze~souboru~\textit{map\_variant\_labyrinth\_1.txt}
+	\item \textbf{boid\_labyrinth\_variant\_2.bat} - varianta úniku z labyrintu, využívá schéma \\ze~souboru~\textit{map\_variant\_labyrinth\_2.txt}
+	\item \textbf{boid\_fishes\_variant\_1.bat} - varianta hejna ryb s kolizním objektem sféry \textit{(sphere)}
+	\item \textbf{boid\_fishes\_variant\_2sec:spusteni-sceny.bat} - varianta hejna ryb s kolizním objektem kvádru \textit{(cube)}
+\end{itemize}
+
+Informace, které byly zaznamenány pro úniky z bodov různých typů, jsou zmíněné v kapitole \ref{sec:testovani-uniku-z-budovy} - testování úniku z budovy.
 %Aplikaci lze spustit tak, že se jako první parametr načte jméno konfiguračního souboru. Pokud je první parametr prázdný, pak se načte obsah souboru \textit{config.cfg}. K adresáři \textit{Release} výsledné aplikace jsou přiloženy dva konfigurační soubory: \textit{configEscape.cfg} a \textit{configFish.cfg}, které jsou přiloženy jako parametry výsledného \textit{Bahelor.exe} souboru. Ke spuštění výsledných scén slouží soubory s příponou \textit{*.bat}, a sice \textit{fishes.bat} a \textit{escape.bat}. Připadně může uživatel měnit parametr názvu konfiguračního souboru spuštěním \textit{Bachelor.exe} z příkazové řádky.
 
 %Pro testovací účely jsou pro uživatele vybrány tyto dva soubory, jejichž obsah parametrů konfiguračních souborů může modifikovat.
@@ -542,7 +557,7 @@ Pro dva typy scény \textit{(únik z budovy, simulace hejna ryb)} jsou připrave
 \subsection{Únik z budovy}\label{sec:unik-z-budovy}
 První část využití Boidova agoritmu je simulace úniku lidí z budovy podle nastavených únikových cest. Funkčně je tato část určena k tomu, aby po skončení simulace mohl uživatel zjistit, kolik času by zabralo evakuovat lidi z předem definovaného plánu budovy. V případě časově náročné evakuace může uživatel upravit plán budovy a únikové cesty tak, aby budova splňovala dané normy.
 
-Plán budovy můžeme upravovat v souboru \textit{map.txt}, případně využití vlastního schématu (viz kapitola \ref{sec:spusteni-sceny} - spuštění scény) včetně definování dalších pater a~únikových cest. Jelikož se jedná o textový soubor, tak každý znak reprezentuje jinou funkci. Popis funkčních znaků můžeme vidět níže:
+Plán budovy můžeme upravovat v souboru \textit{map.txt}, případně využití vlastního schématu (viz kapitola \ref{sec:spusteni-sceny} - spuštění scény) včetně definování dalších pater a~únikových cest. Jelikož se jedná o~textový soubor, tak každý znak reprezentuje jinou funkci. Popis funkčních znaků můžeme vidět níže:
 
 \begin{itemize}
 	\item \textbf{G} generační místo pro dav, který lze použít vícekrát v každém patře či místnostech
@@ -566,6 +581,7 @@ Při spuštění aplikace, která vykreslí definované schéma lze scénu ovlá
 	\item \textbf{1-9} klávesou lze přepínat mezi pohledy jednotlivých pater, přičemž se neaktuální patro přepne do režimu průhlednosti
 	\item \textbf{E} přepnutí celé budovy do řežimu průhlednosti se zvýrazněním davů
 	\item \textbf{Q} opětovné vykreslení celé budovy bez režimu průhlednosti pater
+	\item \textbf{F} přepnutí do režimu celé obrazovky, opětovným stiskem lze aplikaci přepnout zpět do režimu okna
 	\item \textbf{Mezerník} spuštění simulace, opětovným stiskem lze simulaci ukončit
 \end{itemize}
 
@@ -587,7 +603,7 @@ Výslednou scénu lze přepnout do fullscreen režimu pomocí klávesy F přípa
 
 Při zapnutí simulace jsou agenti v půdorysu okamžitě vedení směrem ven mimo budovu, avšak agenti v dalších patrech musí využít jiné evakuační cesty aby se dostali do spodního patra odkud můžou vyjít ven\footnote{Agenty v patře lze také směrovat rovnou ven mimo budovu, tj.~forma venkovního evakuačního schodiště. Dole v přízemí mimo budovu však musí být definován další evakuační bod (pod ``schodištěm''), jinak začnou agenti směřovat k nejbližšímu bodu, který by jinak byl v budově.}. Proto pokud se agent v patře dostane k finálnímu bodu úniku \textit{(velké písmeno)}, začne ``sestupovat'' do přízemí budovy. Sestup však zabere nějaký čas, jednak kvůli zatížení únikových cest tak samotného sestupu. Souvisí s tím také to, že agentovi v posledním patře bude sestup trvat déle než agentovi v prvním patře. Hodnotu míry opuštění budovy \textit{(konkrétněji: evakuační výtah je rychlejší než evakuační schodiště)} lze měnit v konfiguračním souboru pomocí konstanty FLOOR\_TIME\_DURATION.
 
-\begin{figure}[H]\centering\includegraphics[width=0.66\textwidth]{Figures/screen5.jpg}
+\begin{figure}[H]\centering\includegraphics[width=0.66\textwidth]{Figures/screen9.jpg}
 	\caption{Ukázka vyrenderovaného půdorysu budovy}
 \end{figure}
 
@@ -620,7 +636,7 @@ Agenti se můžou občas dostat do problémů zejména díky špatnému návrhu 
 
 Například pokud při úniku z budovy zapneme všechna tři pravidla \textit{(separace, zarovnání, koheze)}, může nastat efekt procházení zdí. Tento problém vzniká kvůli nastaveným konstantám citlivosti u každého pravidla. Tyto konstanty byly nastaveny po řadě experimentů jako nejvhodnější a~jsou neměnné \textit{(kromě konstanty citlivosti úniku ESCAPE\_SENSITIVITY, kterou lze měnit v konfiguračním souboru)}. Pokud je konstanta příliš nízká, dané pravidlo by zaniklo mezi ostatními. Pokud příliš vysoká, tak by dané pravidlo překrylo ostatní. U konstanty citlivosti úniku je však občas potřebné přenastavení. Částečné řešení spočívá jen v použití separace. Dav se tedy chová jako dav skutečných lidí \textit{(každý si jde kam chce)}.
 
-Další problém může nastat při generování agentů, kdy agenti vyberou jako cestu \\k nejkratšímu bodu tu variantu, že se bod nachází za zdí či v jiné místnosti (viz obrázek č. \ref{fig:buildingEscapeProblem1}). S tím souvisí možnost zaseknutí o zeď, kdy má agent před sebou překážku za kterou je cílový bod a např.: dva bloky od něj je východ. Má však nastavenou cestu přímo na bod \textit{(přes zeď)}. Řešení takovýchto situací je však nad rámec této práce \textit{(jedná se o pokročilé techniky AI)}.
+Další problém může nastat při generování agentů, kdy agenti vyberou jako cestu \\k nejkratšímu bodu tu variantu, že se bod nachází za zdí či v jiné místnosti (viz obrázek č. \ref{fig:buildingEscapeProblem1}). S tím souvisí možnost zaseknutí o zeď, kdy má agent před sebou překážku za kterou je cílový bod a např.: dva bloky od něj je východ. Má však nastavenou cestu přímo na bod \textit{(přes zeď)}.
 
 S generováním souvisí ještě jedna věc, a sice při generování většího množství agentů na malém prostoru se může některý z nich ``zabořit'' do zdi a už se z ní nemůže dostat. 
 
@@ -629,7 +645,9 @@ S generováním souvisí ještě jedna věc, a sice při generování většího
 	\label{fig:buildingEscapeProblem1}
 \end{figure}
 
-V neposlední řadě můžou nastat problémy při úniku ze složitějších prostor \textit{(labyrintu)}, kde uživatel nastaví číslo úniku u hrany stěny o kterou se může agent zaseknout. V případě většího davu \textit{(okolo 300 lidí)} a úzkých prostor můžou být ti, kteří splinili podmínku a dostali se k bodu, ``vytlačeni'' ostatními a tím se dostat do situace že následující bod se nachází za zdí. 
+Dále můžou nastat problémy při úniku ze složitějších prostor \textit{(labyrintu)}, kde uživatel nastaví číslo úniku u hrany stěny o kterou se může agent zaseknout. V případě většího davu \textit{(okolo 300 lidí)} a úzkých prostor můžou být ti, kteří splinili podmínku a dostali se k bodu, ``vytlačeni'' ostatními přes zeď a tím se dostat do situace že následující bod se nachází za zdí. 
+
+V neposlední řadě s výše zmíněným problém může nastat situce, že je agent úspěšně ``vytlačen'', ale vrací se zpět na předchozí bod, který kvůli předešlé vysoké koncetraci agentů němel označen jako splněný. Částečné řešení spočívá v nastavení konstanty velikosti kruhu kolem únikového bodu pomocí konstanty PATH\_TO\_FIND\_RADIUS.
 \subsection{Testování úniku z budovy}\label{sec:testovani-uniku-z-budovy}
 
 Testování proběhlo na PC s parametry: CPU Intel i5-2500 @ 3.3GHz, grafická karta Radeon R9 280X Dual-X, RAM 12GB. Hodnoty se můžou na jiných PC lišit.
@@ -650,7 +668,7 @@ Testování proběhlo na PC s parametry: CPU Intel i5-2500 @ 3.3GHz, grafická k
 %	\end{tabular}
 %\end{table}
 
-Všechny části testů byly provedeny na schématu budovy s parcelou 30x17 bloků, kdy jeden blok odpovídá jednomu znaku v textovém souboru, ve kterém je definováno schéma budovy, a na 1x1 blok se vejde průměrně 5~agentů bez větších kolizí. Kompletní plán budovy se nachází v souboru \textit{mapCompleted.txt}.
+Všechny části testů byly provedeny na schématu budovy s parcelou 30x17 bloků, kdy jeden blok odpovídá jednomu znaku v textovém souboru, ve kterém je definováno schéma budovy, a~na 1x1 blok se vejde průměrně 5~agentů bez větších kolizí.
 
 Tabulka zobrazuje jaké byly hodnoty FPS při daném počtu agentů, počtu pater a složitosti budovy \textit{(počet zdí)}. Hodnoty FPS jsou odečteny před a během simulace. Poslední hodnotou je čas opuštění budovy.
 
@@ -768,7 +786,7 @@ Druhý typ využití Boidova algoritmu je simulace hejna. V tomto případě je 
 
 Algoritmus funguje stejně jako při úniku z budovy, výjma využití třídy \textit{MyVector2D}, která je nahrazena výpočty ve 3D třídou předka \textit{MyVector}.
 
-V konfiguračním souboru můžeme nastavit počet objektů, kterým se agenti budou vyhýbat. V případě, že se agent dostane do blízkosti objektu, pak vyhýbání funguje obdobně jako separace, akorát normalizování vektoru a vydělení vektoru počtem okolních agentů je nahrazeno vynásobení skalárem. Můžeme také nastavit útvar, ve kterém se budou agenti pohybovat. Na výběr je sféra \textit{(sphere)} nebo kvádr \textit{(cube)}.
+V konfiguračním souboru můžeme nastavit počet objektů, kterým se agenti budou vyhýbat. V případě, že se agent dostane do blízkosti objektu, pak vyhýbání funguje obdobně jako separace, akorát normalizování vektoru a vydělení vektoru počtem okolních agentů je nahrazeno vynásobení skalárem. Můžeme také nastavit útvar, ve kterém se budou agenti pohybovat. Na výběr je sféra \textit{(sphere)}, nebo kvádr \textit{(cube)} nastavitelné pomocí konstanty BOID\_SPACE\_TYPE.
 
 \begin{figure}[H]\centering\includegraphics[width=0.7\textwidth]{Figures/fish4.jpg}\label{fig:fishExample}
 	\caption{Ukázka hejna ryb}
@@ -777,25 +795,29 @@ V konfiguračním souboru můžeme nastavit počet objektů, kterým se agenti b
 
 %U této simulace jsou hodnoty FPS přijatelné i pro slabší PC, tj. pro již zmíněné hodnoty v~tabulce č. \ref{tab:tablepc} byly hodnoty pro PC1 a PC2 cca 65 FPS a~to při počtu agentů 400.
 
-U této simulace je průměrná hodnota FPS 65 s počtem agentů 400 při parametrech PC zmíněných v kapitole \ref{sec:testovani-uniku-z-budovy}.
+U této simulace je průměrná hodnota FPS 65 s počtem agentů 400 při parametrech PC zmíněných v kapitole \ref{sec:testovani-uniku-z-budovy} - testování úniku z budovy.
 
 \subsubsection{Problémy při simulaci hejna}\label{sec:problemy-pri-simulace-hejna}
-U této simulace nastávají problémy ``cukání'' pokud agent začne vyhodnocovat, že se přiblížil k okraji mapy. Důvod tohoto efektu je aplikování kolize s ostatními agenty a zároveň kolize s okrajem mapy. Tento problém byl zmírněn při nastavení různých citlivosti jednotlivých pravidel, avšak ne zcela eliminován.
+U této simulace nastávají problémy ``cukání'' pokud agent začne vyhodnocovat, že se přiblížil k okraji mapy. Důvod tohoto efektu je aplikování kolize s ostatními agenty a zároveň kolize s~okrajem mapy. Tento problém byl zmírněn při nastavení různých citlivosti jednotlivých pravidel.
 
 Pro menší množství agentů \textit{(např.: 20 agentů na větší ploše)} nebyl tento efekt tak viditelný, jako při vizualzaci několika set agentů.
+
+Nějvětší problémy nastávaly při nastavování konstant jako např: konstanty pro jednotlivá pravidla, kdy při špatném nastavení pohyb agentů neodpovídal realitě.
 
 \newpage
 \section{Zhodnocení}
 
 %Z výsledků tabulek č. \ref{tab:tablePC1}, \ref{tab:tablePC2} a \ref{tab:tablePC3} je znatelné, že pokud je PC výkonější pak čas úniku je kratší. Toto však lze zobecnit stejnými časy díky nastavení rychlosti agentů. U PC2 byla rychlost agentů vizuálně nejblíže, kdežto u PC3 agenti ``utíkali'' z budovy nepřirozeně rychle a u PC1 šli krokovým tempem. Lze tedy říci, že realitě nejvíce odpovídají hodnoty z tabulky pro PC2.
 
-I když byly použity vylepšené techniky Boidova algoritmu \textit{(seek, path following)} a~vyladěná všechna tři pravidla \textit{(separace, zarovnání koheze)}, tak stále tento algoritmus není dokonalý (kapitoly \ref{sec:problemy-pri-uniku-z-budovy} - problémy při úniku z budovy, \ref{sec:problemy-pri-simulace-hejna} - problémy při simulaci hejna) a~pro naprosto reálnou podobu davu se musí ještě hodně vlastností a pravidel připsat.
+I když byly použity vylepšené techniky Boidova algoritmu (seek, path following) a~vyladěná všechna tři pravidla (separace, zarovnání, koheze), tak stále tento algoritmus není dokonalý (kapitoly \ref{sec:problemy-pri-uniku-z-budovy} - problémy při úniku z budovy, \ref{sec:problemy-pri-simulace-hejna} - problémy při simulaci hejna). Jako hlavní problém byl vyhodnocen stav, kdy se v dané scéně musí nastavit důležité konstaty (viz níže) citlivosti tak, aby pohyb agentů byl reálný.
 
-Do budoucna by bylo vhodné tato pravidla dodělat a~tím zajistit, aby agenti v~budově byli inteligentnější a~nešli přímou cestou za únikovým bodem, ale mohli se rozhodovat o úniku dle sektorů budovy.
+Největší problémy nastavování konstant citlivostí, konkrétněji pěti hlavních (citlivosti jednotlivých tří pravidel, vyhýbání se okraje kolizních zdí a celková citlivost v metodě \texttt{update()}, viz kapitola \ref{sec:vysledne-aplikovani-pravidel} - výsledné aplikování pravidel), nastávaly u scény se simulací hejna ryb, kdy při špatném nastavení konstant byl pohyb přímočarý, tzn: změna směrového vektoru byla provedena okamžitě a ne plynule.
+%Do budoucna by bylo vhodné tato pravidla dodělat a~tím zajistit, aby agenti v~budově byli inteligentnější a~nešli přímou cestou za únikovým bodem, ale mohli se rozhodovat o úniku dle sektorů budovy.
 
-I přes tyto nedostatky lze Boidův algoritmus efektivně aplikovat jako simulaci hejna (viditelné na obrázku č. \ref{fig:hejnoRyb}), což je také nejvyužitelnější způsob. I tak je díky své nedokonalosti a zároveň jednoduchosti nejpoužívanějším algoritmem pro simulaci davu na bázi AI.
+I přes tyto nedostatky lze Boidův algoritmus efektivně aplikovat jako simulaci jakéhokoliv hejna (v této práci hejna ryb viditelné na obrázku č. \ref{fig:hejnoRyb}), což je také nejvyužitelnější způsob. 
+%Přesto je díky své nedokonalosti a zároveň jednoduchosti nejpoužívanějším algoritmem pro simulaci davu na bázi AI.
 
-Tento algoritmus je tedy plně využitelný jak ve filmovém tak v herním průmyslu v široké škále odvětví od simulace hejna ptáků po simulaci ryb v moři. V neposlední řadě by tento algoritmus bylo vhodné implementovat jako particle system \cite{linkToUnity} v různých vykreslovacích enginech.
+%Tento algoritmus je tedy plně využitelný jak ve filmovém tak v herním průmyslu v široké škále odvětví od simulace hejna ptáků po simulaci ryb v moři. 
 
 \newpage
 
@@ -816,9 +838,9 @@ Tento algoritmus je tedy plně využitelný jak ve filmovém tak v herním prům
 \end{figure}
 
 \section{Závěr}
-Výsledkem této práce je aplikace, která má za úkol zrealizovat simulační algoritmus davu. Teoreticky byly popsány dvě varianty simulace, z níž pro realizaci byla vybrána simulace na bázi AI a~pro realizaci byl vybrán Boidův algoritmus. V první možnosti využití, a sice evakuace budovy, se Boidův algoritmus a~jeho vylepšení neosvědčil na plno, avšak pro simulaci hejna byl vyhodnocen jako plně dostačující.
+Výsledkem této práce je aplikace, která má za úkol zrealizovat simulační algoritmus davu. Teoreticky byly popsány dvě varianty simulace (částicová simulace a simulace na bázi AI - umělé inteligence), z níž pro realizaci byla vybrána simulace na bázi AI a~pro implementaci byl vybrán Boidův algoritmus. V první možnosti využití v případě evakuace budovy se Boidův algoritmus a~jeho vylepšení neosvědčil na plno, avšak pro simulaci hejna byl vyhodnocen jako plně dostačující a využitelný v mnoha odvětví.
 
-Aplikace nabízí dvě možnosti využití. První, jak již bylo zmíněno, je simulace úniku lidí z bodovy a druhá je využití obecného Boidova algoritmu jakožto simulace hejna (v této práci hejno ryb). U první je možnost nadefinovat si vlastní schéma budovy včetně únikových východů a~u~druhé je možnost nadefinovat počet objektů, jimiž se bude hejno vyhýbat. Uživatel si tak může vyzkoušet na obou příkladech výhody a nevýhody Boidova algoritmu a také vliv jednotlivých parametrů na výslednou scénu.
+Aplikace nabízí dvě možnosti využití. První, jak již bylo zmíněno, je simulace úniku lidí z bodovy a druhá je využití obecného Boidova algoritmu jakožto simulace hejna (v této práci hejno ryb). U první varianty je možnost nadefinovat si vlastní schéma budovy včetně únikových východů a~u~druhé je možnost nadefinovat počet objektů, jimiž se bude hejno vyhýbat a~typ kolizního objektu, ve kterém se hejno pohybuje, a sice sféra (sphere) nebo krychle (cube). Uživatel si tak může vyzkoušet na obou příkladech výhody a nevýhody Boidova algoritmu a~také vliv jednotlivých parametrů na výslednou scénu.
 
 \newpage
 
@@ -899,10 +921,6 @@ Aplikace nabízí dvě možnosti využití. První, jak již bylo zmíněno, je 
 		\textit{Increment/decrement operators}, [online]. 2018 [cit. 2018-2-4]\\
 		Dostupné z: \href{http://en.cppreference.com/w/cpp/language/operator\_incdec}{\texttt{http://en.cppreference.com/w/cpp/language/operator\_incdec}}
 		
-	\bibitem{linkToUnity} What is a Particle System,
-		\textit{Unity 3D}, [online]. 2018 [cit. 2018-4-18]\\
-		Dostupné z: \href{https://docs.unity3d.com/Manual/PartSysWhatIs.html}{\texttt{https://docs.unity3d.com/Manual/PartSysWhatIs.html}}
-		
 	\bibitem{linkToTopIDE} Top IDE Index,
 		[online]. 2018 [cit. 2018-2-4]\\
 		Dostupné z: \href{https://pypl.github.io/IDE.html}{\texttt{https://pypl.github.io/IDE.html}}
@@ -947,7 +965,7 @@ Aplikace nabízí dvě možnosti využití. První, jak již bylo zmíněno, je 
 
 
 \appendix
-\section{Přílohy}
+\section*{Přílohy}
 
 Součástí přiloženého CD je:
 

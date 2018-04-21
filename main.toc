@@ -1,32 +1,32 @@
-\babel@toc {slovak}{}
-\babel@toc {czech}{}
-\babel@toc {czech}{}
-\babel@toc {czech}{}
-\babel@toc {english}{}
-\babel@toc {czech}{}
-\contentsline {section}{Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek a symbol\IeC {\r u}}{3}{Doc-Start}
-\contentsline {section}{Seznam obr\'azk\r {u}}{4}{Doc-Start}
-\contentsline {section}{Seznam tabulek}{5}{Doc-Start}
-\contentsline {section}{Seznam v\IeC {\'y}pis\IeC {\r u} zdrojov\IeC {\'e}ho k\IeC {\'o}du}{6}{Doc-Start}
-\contentsline {section}{\numberline {1}\IeC {\'U}vod}{7}{section.1}
-\contentsline {section}{\numberline {2}Simulace}{8}{section.2}
-\contentsline {subsection}{\numberline {2.1}Simulace davu}{8}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}\IeC {\v C}\IeC {\'a}sticov\IeC {\'a} simulace}{8}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Simulace na b\IeC {\'a}zi AI (Artificial Intelligence)}{8}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Boid\IeC {\r u}v algoritmus}{9}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Separace}{10}{subsection.2.5}
-\contentsline {subsection}{\numberline {2.6}Zarovn\IeC {\'a}n\IeC {\'\i }}{12}{subsection.2.6}
-\contentsline {subsection}{\numberline {2.7}Koheze}{14}{subsection.2.7}
-\contentsline {subsection}{\numberline {2.8}Aplikov\IeC {\'a}n\IeC {\'\i } t\IeC {\v r}\IeC {\'\i } pravidel}{15}{subsection.2.8}
-\contentsline {section}{\numberline {3}Praktick\IeC {\'a} \IeC {\v c}\IeC {\'a}st}{17}{section.3}
-\contentsline {subsection}{\numberline {3.1}Popis realizace demonstra\IeC {\v c}n\IeC {\'\i } aplikace}{17}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Pou\IeC {\v z}it\IeC {\'e} technologie}{17}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Probl\IeC {\'e}my p\IeC {\v r}i implementaci}{17}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Steering behaviors}{20}{subsection.3.4}
-\contentsline {subsection}{\numberline {3.5}T\IeC {\v r}\IeC {\'\i }dn\IeC {\'\i } diagram}{21}{subsection.3.5}
-\contentsline {subsection}{\numberline {3.6}V\IeC {\'y}sledn\IeC {\'e} aplikov\IeC {\'a}n\IeC {\'\i } pravidel}{22}{subsection.3.6}
-\contentsline {subsection}{\numberline {3.7}Konfigura\IeC {\v c}n\IeC {\'\i } soubor}{22}{subsection.3.7}
-\contentsline {subsection}{\numberline {3.8}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } sc\IeC {\'e}ny}{23}{subsection.3.8}
+\select@language {slovak}
+\select@language {czech}
+\select@language {czech}
+\select@language {czech}
+\select@language {english}
+\select@language {czech}
+\contentsline {section}{Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek a symbol\IeC {\r u}}{2}{Doc-Start}
+\contentsline {section}{Seznam obr\'azk\r {u}}{3}{Doc-Start}
+\contentsline {section}{Seznam tabulek}{4}{Doc-Start}
+\contentsline {section}{Seznam v\IeC {\'y}pis\IeC {\r u} zdrojov\IeC {\'e}ho k\IeC {\'o}du}{5}{Doc-Start}
+\contentsline {section}{\numberline {1}\IeC {\'U}vod}{6}{section.1}
+\contentsline {section}{\numberline {2}Simulace}{7}{section.2}
+\contentsline {subsection}{\numberline {2.1}Simulace davu}{7}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}\IeC {\v C}\IeC {\'a}sticov\IeC {\'a} simulace}{7}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Simulace na b\IeC {\'a}zi AI (Artificial Intelligence)}{7}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Boid\IeC {\r u}v algoritmus}{8}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Separace}{9}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Zarovn\IeC {\'a}n\IeC {\'\i }}{11}{subsection.2.6}
+\contentsline {subsection}{\numberline {2.7}Koheze}{13}{subsection.2.7}
+\contentsline {subsection}{\numberline {2.8}Aplikov\IeC {\'a}n\IeC {\'\i } t\IeC {\v r}\IeC {\'\i } pravidel}{14}{subsection.2.8}
+\contentsline {section}{\numberline {3}Praktick\IeC {\'a} \IeC {\v c}\IeC {\'a}st}{16}{section.3}
+\contentsline {subsection}{\numberline {3.1}Popis realizace demonstra\IeC {\v c}n\IeC {\'\i } aplikace}{16}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Pou\IeC {\v z}it\IeC {\'e} technologie}{16}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Probl\IeC {\'e}my p\IeC {\v r}i implementaci}{16}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Steering behaviors}{19}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}T\IeC {\v r}\IeC {\'\i }dn\IeC {\'\i } diagram}{20}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}V\IeC {\'y}sledn\IeC {\'e} aplikov\IeC {\'a}n\IeC {\'\i } pravidel}{21}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.7}Konfigura\IeC {\v c}n\IeC {\'\i } soubor}{21}{subsection.3.7}
+\contentsline {subsection}{\numberline {3.8}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } sc\IeC {\'e}ny}{22}{subsection.3.8}
 \contentsline {subsection}{\numberline {3.9}\IeC {\'U}nik z budovy}{23}{subsection.3.9}
 \contentsline {subsubsection}{\numberline {3.9.1}Probl\IeC {\'e}my p\IeC {\v r}i \IeC {\'u}niku z budovy}{26}{subsubsection.3.9.1}
 \contentsline {subsection}{\numberline {3.10}Testov\IeC {\'a}n\IeC {\'\i } \IeC {\'u}niku z budovy}{27}{subsection.3.10}
@@ -35,5 +35,4 @@
 \contentsline {section}{\numberline {4}Zhodnocen\IeC {\'\i }}{31}{section.4}
 \contentsline {section}{\numberline {5}Z\IeC {\'a}v\IeC {\v e}r}{34}{section.5}
 \contentsline {section}{Reference}{35}{section.5}
-\contentsline {section}{P\IeC {\v r}\IeC {\'\i }lohy}{37}{section.5}
-\contentsline {section}{\numberline {A}P\IeC {\v r}\IeC {\'\i }lohy}{38}{appendix.A}
+\contentsline {section}{P\IeC {\v r}\IeC {\'\i }lohy}{36}{section.5}
