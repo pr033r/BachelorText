@@ -545,8 +545,8 @@ K ukázce různých scén slouží soubory s příponou \textit{*.bat}, které s
 	\item \textbf{boid\_escape\_variant\_2.bat} - varianta úniku z vícepatrové budovy, využívá schéma \\ze~souboru~\textit{map\_variant\_escape\_2.txt}
 	\item \textbf{boid\_labyrinth\_variant\_1.bat} - varianta úniku z labyrintu, využívá schéma \\ze~souboru~\textit{map\_variant\_labyrinth\_1.txt}
 	\item \textbf{boid\_labyrinth\_variant\_2.bat} - varianta úniku z labyrintu, využívá schéma \\ze~souboru~\textit{map\_variant\_labyrinth\_2.txt}
-	\item \textbf{boid\_fishes\_variant\_1.bat} - varianta hejna ryb s kolizním objektem sféry \textit{(sphere)}
-	\item \textbf{boid\_fishes\_variant\_2sec:spusteni-sceny.bat} - varianta hejna ryb s kolizním objektem kvádru \textit{(cube)}
+	\item \textbf{boid\_fishes\_variant\_1.bat} - varianta hejna ryb s kolizním objektem kvádru \textit{(cube)}
+	\item \textbf{boid\_fishes\_variant\_2.bat} - varianta hejna ryb s kolizním objektem sféry \textit{(sphere)}
 \end{itemize}
 
 Informace, které byly zaznamenány pro úniky z bodov různých typů, jsou zmíněné v kapitole \ref{sec:testovani-uniku-z-budovy} - testování úniku z budovy.
@@ -668,17 +668,18 @@ Testování proběhlo na PC s parametry: CPU Intel i5-2500 @ 3.3GHz, grafická k
 %	\end{tabular}
 %\end{table}
 
-Všechny části testů byly provedeny na schématu budovy s parcelou 30x17 bloků, kdy jeden blok odpovídá jednomu znaku v textovém souboru, ve kterém je definováno schéma budovy, a~na 1x1 blok se vejde průměrně 5~agentů bez větších kolizí.
+Všechny části testů byly provedeny na schématech budov s parcelami první budovy 30x17 bloků a~druhé budovy 30x21, kdy jeden blok odpovídá jednomu znaku v textovém souboru, ve kterém je definováno schéma budovy, a~na 1x1 blok se vejde průměrně 5~agentů bez větších kolizí.
 
 Tabulka zobrazuje jaké byly hodnoty FPS při daném počtu agentů, počtu pater a složitosti budovy \textit{(počet zdí)}. Hodnoty FPS jsou odečteny před a během simulace. Poslední hodnotou je čas opuštění budovy.
 
 %Testy proběhly při počtu agentů 200, počtu pater 5, rychlostí agentů 3 s maximální hodnotou tření 0.1 a nastavení míry opuštění jednoho patra na 8 sekund.
 
-Testy proběhly při:
+První část testů proběhla nad schématem budovy, které je dostupné ve výsledném adresáři v~souboru s~názvem \textit{map\_variant\_escape\_1.txt}.
+
+Testy proběhly při natavených hodnotách:
 
 \begin{itemize}
 	\item počtu agentů 200
-	\item počtu pater 5
 	\item rychlostí agentů 3
 	\item maximální hodnotou tření 0.1 
 	\item míra opuštění jednoho patra na 8 sekund
@@ -704,8 +705,8 @@ Testy proběhly při:
 
 \begin{table}[H]
 	\centering
-	\caption{Tabulka naměřených hodnot}
-	\label{tab:tablePC2}
+	\caption{Tabulka naměřených hodnot - schéma 1}
+	\label{tab:tableTesting1}
 	\renewcommand{\arraystretch}{1.0}
 	\begin{tabular}{| c | c | c | c | c | c |}
 		\hline
@@ -721,9 +722,38 @@ Testy proběhly při:
 \end{table}
 
 Výsledné hodnoty jsou závislé zejména na dvou konstantách a sice ESCAPE\_SENSITIVITY, která udává přímočarost následování dalšího bodu a PATH\_TO\_FIND\_RADIUS, která indikuje velikost radiusu do kterého pokud se agent přiblíží, přesměruje se na další bod.
+\\
+\\
+Další testy proběhly nad schématem uloženého v souboru \textit{map\_variant\_escape\_2.txt}.
 
-\newpage
-Další části testování proběhly nad složitějšími prostory bodovy. Jak již bylo zmíněno v kapitole \ref{sec:unik-z-budovy}, tak úník z labyrintu \textit{(složitějších prostor)} funguje na principu umisťování čísel do mapy, kdy agenti směřují od nejmenší po největší číslo a následně k finálnímu bodu F.
+\begin{table}[H]
+	\centering
+	\caption{Tabulka naměřených hodnot - schéma 2}
+	\label{tab:tableTesting2}
+	\renewcommand{\arraystretch}{1.0}
+	\begin{tabular}{| c | c | c | c | c | c |}
+		\hline
+		Pater  & Únikových bodů & Počet zdí & FPS před & FPS během & Čas [s]\\\hline
+		0 & 8 & 172 & 102 & 99 & 57.5\\
+		1 & 10 & 362 & 86 &  84 & 235.2\\
+		2 & 16 & 547 & 57 & 57 & 186.6\\
+		3 & 22 & 732 & 46 & 38 & 164.5\\
+		4 & 28 & 917 & 49 & 49 & 170.9\\
+		5 & 34 & 1102 & 44 & 43 & 169.1\\
+		\hline
+	\end{tabular}
+\end{table}
+
+Kompletní plány budov lze nalézt v souborech: \textit{map\_completed\_variant\_1.txt} \\a \textit{map\_completed\_variant\_1.txt}.
+
+Jak je patrné z grafu na obrázku č. \ref{fig:buildingEscapeGraph}, tak v prvním patře druhého schématu byl únik z~budovy časově náročnější z důvodu použití jednoho únikového bodu. Dále však bylo toto schéma, co se času úniku týče lepší, neboť schéma obsahuje jednodušší prostory budovy a~lepší návrhy únikových bodů.
+
+\begin{figure}[H]\centering\includegraphics[width=0.75\textwidth]{Figures/graph.jpg}\label{fig:buildingEscapeGraph}
+	\caption{Graf závislosti času úniku na počtu pater }
+	\label{fig:buildingEscapeGraph}
+\end{figure}
+
+Další části testování proběhly nad složitějšími prostory bodovy o parcele 23x12. Jak již bylo zmíněno v kapitole \ref{sec:unik-z-budovy} - únik z budovy, tak úník z labyrintu \textit{(složitějších prostor)} funguje na principu umisťování čísel do mapy, kdy agenti směřují od nejmenší po největší číslo a následně k finálnímu bodu F.
 \begin{figure}[H]\centering\includegraphics[width=0.35\textwidth]{Figures/map6.jpg}\label{fig:labyrinth}
 	\caption{Ukázka nákresu labyrintu}
 	\label{fig:labyrinth}
@@ -748,6 +778,8 @@ Testování času úníku proběhlo na schématu, které můžeme vidět na obr�
 \end{table}
 
 U této metody je také potřeba opomenout nastavení konstanty PATH\_TO\_FIND\_RADIUS. Pokud je radius větší, agent splní podmínku dosažení bodu když bude dále od něj. Toto nastavení je vhodné zejména pro větší prostory budov z~důvodu eliminace přímočarého pohybu k~únikovým bodům.
+
+Ve výsledném adresáři jsou připraveny soubory \textit{boid\_labyrinth\_variant\_1.bat} \\a \textit{boid\_labyrinth\_variant\_2.bat}, kdy první zmíněný spouští scénu s početem agentů 20 a~druhý s~početem 50. Při spuštění druhé varianty lze spatřit efekt zaboření do zdi, případně vytlačení agenta ostatními, díky velkému počtu agentů na malém prostoru, zmíněné v kapitole\\ \ref{sec:problemy-pri-uniku-z-budovy}~-~problémy při úniku z budovy.
 
 \newpage
 
@@ -798,11 +830,11 @@ V konfiguračním souboru můžeme nastavit počet objektů, kterým se agenti b
 U této simulace je průměrná hodnota FPS 65 s počtem agentů 400 při parametrech PC zmíněných v kapitole \ref{sec:testovani-uniku-z-budovy} - testování úniku z budovy.
 
 \subsubsection{Problémy při simulaci hejna}\label{sec:problemy-pri-simulace-hejna}
-U této simulace nastávají problémy ``cukání'' pokud agent začne vyhodnocovat, že se přiblížil k okraji mapy. Důvod tohoto efektu je aplikování kolize s ostatními agenty a zároveň kolize s~okrajem mapy. Tento problém byl zmírněn při nastavení různých citlivosti jednotlivých pravidel.
+U této simulace nastávají problémy ``cukání'' pokud agent začne vyhodnocovat, že se přiblížil k~okraji mapy. Důvod tohoto efektu je aplikování kolize s ostatními agenty a zároveň kolize s~okrajem mapy. Tento problém byl zmírněn při nastavení různých citlivostí jednotlivých pravidel.
 
-Pro menší množství agentů \textit{(např.: 20 agentů na větší ploše)} nebyl tento efekt tak viditelný, jako při vizualzaci několika set agentů.
+Pro menší množství agentů \textit{(např.: 20 agentů na větší ploše)}, nebyl tento efekt tak viditelný, jako při vizualzaci několika set agentů.
 
-Nějvětší problémy nastávaly při nastavování konstant jako např: konstanty pro jednotlivá pravidla, kdy při špatném nastavení pohyb agentů neodpovídal realitě.
+Nějvětší problémy nastávaly při nastavování konstant jako např: konstanty pro jednotlivá pravidla, kdy při špatném nastavení pohybu agentů chování neodpovídalo realitě.
 
 \newpage
 \section{Zhodnocení}
