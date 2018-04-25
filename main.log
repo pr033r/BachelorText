@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.1.22)  23 APR 2018 22:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.1.22)  25 APR 2018 15:32
 entering extended mode
 **./main.tex
 (main.tex
@@ -1773,6 +1773,9 @@ Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix
 LaTeX Warning: Label `fig:separationImg' multiply defined.
 
 
+LaTeX Warning: Label `fig:buildingEscapeGraph2' multiply defined.
+
+
 LaTeX Warning: Label `src:seek' multiply defined.
 
 
@@ -2063,7 +2066,7 @@ l.78 \section{Ãšvod}
 ] [7
 
 ]
-<Figures/flock_fish.png, id=284, 970.3753pt x 480.29437pt>
+<Figures/flock_fish.png, id=286, 970.3753pt x 480.29437pt>
 File: Figures/flock_fish.png Graphic file (type png)
 <use Figures/flock_fish.png>
 Package pdftex.def Info: Figures/flock_fish.png  used on input line 112. on inp
@@ -2071,7 +2074,7 @@ ut line 112.
 Package pdftex.def Info: Requested size: 364.19667pt x 180.26384pt on input lin
 e 112.
  [8 <./Figures/flock_fish.png>] [9]
-<Figures/separation2.jpg, id=318, 648.4225pt x 686.565pt>
+<Figures/separation2.jpg, id=320, 648.4225pt x 686.565pt>
 File: Figures/separation2.jpg Graphic file (type jpg)
 <use Figures/separation2.jpg>
 Package pdftex.def Info: Figures/separation2.jpg  used on input line 171. on in
@@ -2102,7 +2105,7 @@ File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 218.
  [11]
-<Figures/alignment2.jpg, id=353, 687.56876pt x 657.45625pt>
+<Figures/alignment2.jpg, id=355, 687.56876pt x 657.45625pt>
 File: Figures/alignment2.jpg Graphic file (type jpg)
 <use Figures/alignment2.jpg>
 Package pdftex.def Info: Figures/alignment2.jpg  used on input line 235. on inp
@@ -2114,7 +2117,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 266.
  [12 <./Figures/alignment2.jpg>]
-<Figures/cohesion2.jpg, id=382, 687.56876pt x 658.46pt>
+<Figures/cohesion2.jpg, id=384, 687.56876pt x 658.46pt>
 File: Figures/cohesion2.jpg Graphic file (type jpg)
 <use Figures/cohesion2.jpg>
 Package pdftex.def Info: Figures/cohesion2.jpg  used on input line 280. on inpu
@@ -2124,159 +2127,166 @@ e 280.
  [13 <./Figures/cohesion2.jpg>] [14] [15] [16
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 402--405
+<Figures/graph2.jpg, id=469, 654.19406pt x 245.41687pt>
+File: Figures/graph2.jpg Graphic file (type jpg)
+<use Figures/graph2.jpg>
+Package pdftex.def Info: Figures/graph2.jpg  used on input line 386. on input l
+ine 386.
+Package pdftex.def Info: Requested size: 318.66948pt x 119.54755pt on input lin
+e 386.
+ [17 <./Figures/graph2.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 407--410
 
  []
 
-[17]
-Underfull \hbox (badness 10000) in paragraph at lines 408--411
+
+Underfull \hbox (badness 10000) in paragraph at lines 413--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 419--422
+Underfull \hbox (badness 10000) in paragraph at lines 424--427
 
  []
 
-[18]
-Underfull \hbox (badness 10000) in paragraph at lines 472--474
+[18] [19]
+Underfull \hbox (badness 10000) in paragraph at lines 477--479
 
  []
 
-[19]
-<Figures/diagram2.jpg, id=524, 773.89125pt x 674.52pt>
+[20]
+<Figures/diagram2.jpg, id=533, 773.89125pt x 674.52pt>
 File: Figures/diagram2.jpg Graphic file (type jpg)
 <use Figures/diagram2.jpg>
-Package pdftex.def Info: Figures/diagram2.jpg  used on input line 482. on input
- line 482.
+Package pdftex.def Info: Figures/diagram2.jpg  used on input line 488. on input
+ line 488.
 Package pdftex.def Info: Requested size: 364.19667pt x 317.43614pt on input lin
-e 482.
- [20 <./Figures/diagram2.jpg>] [21] [22]
-Underfull \hbox (badness 10000) in paragraph at lines 576--579
+e 488.
+ [21 <./Figures/diagram2.jpg>] [22] [23]
+Underfull \hbox (badness 10000) in paragraph at lines 582--585
 
  []
 
-[23]
-<Figures/map3.jpg, id=557, 824.07875pt x 862.22125pt>
+[24]
+<Figures/map3.jpg, id=565, 824.07875pt x 862.22125pt>
 File: Figures/map3.jpg Graphic file (type jpg)
 <use Figures/map3.jpg>
-Package pdftex.def Info: Figures/map3.jpg  used on input line 592. on input lin
-e 592.
+Package pdftex.def Info: Figures/map3.jpg  used on input line 598. on input lin
+e 598.
 Package pdftex.def Info: Requested size: 195.75163pt x 204.80598pt on input lin
-e 592.
-<Figures/map4.jpg, id=558, 828.09375pt x 863.225pt>
+e 598.
+<Figures/map4.jpg, id=566, 828.09375pt x 863.225pt>
 File: Figures/map4.jpg Graphic file (type jpg)
 <use Figures/map4.jpg>
-Package pdftex.def Info: Figures/map4.jpg  used on input line 594. on input lin
-e 594.
+Package pdftex.def Info: Figures/map4.jpg  used on input line 600. on input lin
+e 600.
 Package pdftex.def Info: Requested size: 195.75163pt x 204.05653pt on input lin
-e 594.
- [24 <./Figures/map3.jpg> <./Figures/map4.jpg>]
-<Figures/screen9.jpg, id=567, 1445.4pt x 826.58812pt>
+e 600.
+<Figures/screen9.jpg, id=568, 1445.4pt x 826.58812pt>
 File: Figures/screen9.jpg Graphic file (type jpg)
 <use Figures/screen9.jpg>
-Package pdftex.def Info: Figures/screen9.jpg  used on input line 606. on input 
-line 606.
+Package pdftex.def Info: Figures/screen9.jpg  used on input line 612. on input 
+line 612.
 Package pdftex.def Info: Requested size: 300.46277pt x 171.82285pt on input lin
-e 606.
- [25 <./Figures/screen9.jpg>]
-<Figures/buildingEscapeProblem2.jpg, id=586, 461.725pt x 597.23125pt>
+e 612.
+ [25 <./Figures/map3.jpg> <./Figures/map4.jpg>] [26 <./Figures/screen9.jpg>]
+<Figures/buildingEscapeProblem2.jpg, id=595, 461.725pt x 597.23125pt>
 File: Figures/buildingEscapeProblem2.jpg Graphic file (type jpg)
 <use Figures/buildingEscapeProblem2.jpg>
 Package pdftex.def Info: Figures/buildingEscapeProblem2.jpg  used on input line
- 643. on input line 643.
+ 649. on input line 649.
 Package pdftex.def Info: Requested size: 113.81102pt x 147.21144pt on input lin
-e 643.
- [26] [27 <./Figures/buildingEscapeProblem2.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 724--728
+e 649.
+ [27 <./Figures/buildingEscapeProblem2.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 730--734
 
  []
 
-<Figures/graph.jpg, id=598, 944.02687pt x 495.35063pt>
+[28]
+<Figures/graph.jpg, id=606, 944.02687pt x 495.35063pt>
 File: Figures/graph.jpg Graphic file (type jpg)
 <use Figures/graph.jpg>
-Package pdftex.def Info: Figures/graph.jpg  used on input line 751. on input li
-ne 751.
+Package pdftex.def Info: Figures/graph.jpg  used on input line 757. on input li
+ne 757.
 Package pdftex.def Info: Requested size: 341.43307pt x 179.15752pt on input lin
-e 751.
-[28]
-<Figures/map6.jpg, id=604, 376.40625pt x 421.575pt>
+e 757.
+<Figures/map6.jpg, id=608, 376.40625pt x 421.575pt>
 File: Figures/map6.jpg Graphic file (type jpg)
 <use Figures/map6.jpg>
-Package pdftex.def Info: Figures/map6.jpg  used on input line 757. on input lin
-e 757.
+Package pdftex.def Info: Figures/map6.jpg  used on input line 763. on input lin
+e 763.
 Package pdftex.def Info: Requested size: 159.33821pt x 178.46262pt on input lin
-e 757.
- [29 <./Figures/graph.jpg> <./Figures/map6.jpg>]
-Overfull \hbox (0.97179pt too wide) in paragraph at lines 780--781
+e 763.
+ [29 <./Figures/graph.jpg>]
+Overfull \hbox (0.97179pt too wide) in paragraph at lines 786--787
 []\T1/lmr/m/n/10.95 U této me-tody je také po-t°eba opo-me-nout na-sta-vení kon
 -stanty PATH_TO_FIND_RADIUS.
  []
 
-[30]
-<Figures/fish4.jpg, id=616, 762.59906pt x 421.575pt>
-File: Figures/fish4.jpg Graphic file (type jpg)
-<use Figures/fish4.jpg>
-Package pdftex.def Info: Figures/fish4.jpg  used on input line 823. on input li
-ne 823.
-Package pdftex.def Info: Requested size: 318.66948pt x 176.1597pt on input line
- 823.
- [31 <./Figures/fish4.jpg>] [32
+[30 <./Figures/map6.jpg>]
+<Figures/new_fish3.jpg, id=620, 1108.8928pt x 729.47531pt>
+File: Figures/new_fish3.jpg Graphic file (type jpg)
+<use Figures/new_fish3.jpg>
+Package pdftex.def Info: Figures/new_fish3.jpg  used on input line 829. on inpu
+t line 829.
+Package pdftex.def Info: Requested size: 318.66948pt x 209.6279pt on input line
+ 829.
+ [31 <./Figures/new_fish3.jpg>] [32] [33
 
 ]
-<Figures/screen8.jpg, id=632, 1445.4pt x 859.71187pt>
+<Figures/screen8.jpg, id=640, 1445.4pt x 859.71187pt>
 File: Figures/screen8.jpg Graphic file (type jpg)
 <use Figures/screen8.jpg>
-Package pdftex.def Info: Figures/screen8.jpg  used on input line 856. on input 
-line 856.
+Package pdftex.def Info: Figures/screen8.jpg  used on input line 862. on input 
+line 862.
 Package pdftex.def Info: Requested size: 409.71692pt x 243.6955pt on input line
- 856.
-<Figures/screen6.jpg, id=633, 1445.4pt x 870.25125pt>
+ 862.
+<Figures/screen6.jpg, id=641, 1445.4pt x 870.25125pt>
 File: Figures/screen6.jpg Graphic file (type jpg)
 <use Figures/screen6.jpg>
-Package pdftex.def Info: Figures/screen6.jpg  used on input line 860. on input 
-line 860.
+Package pdftex.def Info: Figures/screen6.jpg  used on input line 866. on input 
+line 866.
 Package pdftex.def Info: Requested size: 409.71692pt x 246.68301pt on input lin
-e 860.
-<Figures/screen7.jpg, id=634, 1445.4pt x 796.47563pt>
+e 866.
+<Figures/screen7.jpg, id=642, 1445.4pt x 796.47563pt>
 File: Figures/screen7.jpg Graphic file (type jpg)
 <use Figures/screen7.jpg>
-Package pdftex.def Info: Figures/screen7.jpg  used on input line 864. on input 
-line 864.
+Package pdftex.def Info: Figures/screen7.jpg  used on input line 870. on input 
+line 870.
 Package pdftex.def Info: Requested size: 409.71692pt x 225.77043pt on input lin
-e 864.
- [33 <./Figures/screen8.jpg> <./Figures/screen6.jpg>]
-<Figures/fish6.jpg, id=639, 761.09344pt x 421.575pt>
-File: Figures/fish6.jpg Graphic file (type jpg)
-<use Figures/fish6.jpg>
-Package pdftex.def Info: Figures/fish6.jpg  used on input line 868. on input li
-ne 868.
-Package pdftex.def Info: Requested size: 409.71692pt x 226.95236pt on input lin
-e 868.
- [34 <./Figures/screen7.jpg> <./Figures/fish6.jpg>] [35
+e 870.
+ [34 <./Figures/screen8.jpg> <./Figures/screen6.jpg>]
+<Figures/new_fish4.jpg, id=647, 1220.30907pt x 849.92531pt>
+File: Figures/new_fish4.jpg Graphic file (type jpg)
+<use Figures/new_fish4.jpg>
+Package pdftex.def Info: Figures/new_fish4.jpg  used on input line 874. on inpu
+t line 874.
+Package pdftex.def Info: Requested size: 409.71692pt x 285.36545pt on input lin
+e 874.
+ [35 <./Figures/screen7.jpg> <./Figures/new_fish4.jpg>] [36
 
 ]
-Overfull \hbox (4.98946pt too wide) in paragraph at lines 881--884
+Overfull \hbox (4.98946pt too wide) in paragraph at lines 887--890
 \T1/lmr/m/n/10.95 Dostupné z: []\T1/lmtt/m/n/10.95 http://www.oasys-software.co
 m/products/engineering/massmotion.html[] 
  []
 
-[36
+[37
 
 ]
-Overfull \hbox (38.66031pt too wide) in paragraph at lines 944--947
+Overfull \hbox (38.66031pt too wide) in paragraph at lines 950--953
 []\T1/lmtt/m/n/10.95 https://www.techopedia.com/definition/26860/integrated-dev
 elopment-environment-ide[] 
  []
 
-[37] [38
+[38] [39
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1010.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1010.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1016.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1016.
  (main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1010.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1010.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1016.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1016.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: BBC239EB1D90E2546C2EF59278E3C564;3352.
@@ -2284,13 +2294,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1010.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1016.
  ) 
 Here is how much of TeX's memory you used:
- 27754 strings out of 493312
- 462938 string characters out of 3138902
- 576575 words of memory out of 3000000
- 30513 multiletter control sequences out of 15000+200000
+ 27762 strings out of 493312
+ 463129 string characters out of 3138902
+ 587679 words of memory out of 3000000
+ 30518 multiletter control sequences out of 15000+200000
  65887 words of font info for 48 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,10n,60p,1118b,3283s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2311,9 +2321,9 @@ s/type1/public/lm/lmri10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm
 /Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Program Files/Mi
 KTeX 2.9/fonts/type1/public/lm/lmtt10.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
 pe1/public/lm/lmtto10.pfb>
-Output written on main.pdf (43 pages, 5790554 bytes).
+Output written on main.pdf (44 pages, 5975591 bytes).
 PDF statistics:
- 834 PDF objects out of 1000 (max. 8388607)
- 280 named destinations out of 1000 (max. 500000)
- 350 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 842 PDF objects out of 1000 (max. 8388607)
+ 282 named destinations out of 1000 (max. 500000)
+ 355 words of extra memory for PDF output out of 10000 (max. 10000000)
 

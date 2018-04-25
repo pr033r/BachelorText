@@ -12,7 +12,7 @@
 
 \EnglishThesisTitle{Crowd Simulation}
 
-\SubmissionDate{1. dubna 2018}
+\SubmissionDate{26. dubna 2018}
 
 % Pokud nechceme nikomu dekovat makro zapoznamkujeme.
 \Thanks{Tímto bych rád poděkoval svému vedoucímu, Ing. Martinu Němcovi, Ph.D., za poskytnuté \newline
@@ -380,8 +380,13 @@ První problém nastal kvůli paměťovým nárokům. Důvod byl v obrovském n�
 	\end{tabular}
 \end{table}
 
-Jak je patrné z hodnot, tak od druhé minuty nárust paměti stoupá takřka exponenciálně. Důvod tak rychlého nárustu byl ten, že jak se postupně k sobě agenti přibližovali, začínalo se aplikovat více pravidel, které ještě neměly optimalizované operace s pamětma. Tzn. nejdříve se začaly aplikovat pravidla s větším průměrem \textit{(buď koheze nebo zarovnání)} kružnice, ale když byli agenti blízko sebe, každému se vyhodnocovala všechna paměťově neoptimalizovaná pravidla.
+Jak je patrné z hodnot, tak od druhé minuty nárust paměti stoupá takřka exponenciálně, jak můžeme vidět na obrázku č. \ref{fig:buildingEscapeGraph2}. Důvod tak rychlého nárustu byl ten, že jak se postupně k~sobě agenti přibližovali, začínalo se aplikovat více pravidel, které ještě neměly optimalizované operace s pamětma. Tzn. nejdříve se začaly aplikovat pravidla s větším průměrem \textit{(buď koheze nebo zarovnání)} kružnice, ale když byli agenti blízko sebe, každému se vyhodnocovala všechna paměťově neoptimalizovaná pravidla.
 Po pěti minutách byl nárust tak obrovský, že hodnota FPS klesla na 10. 
+
+\begin{figure}[H]\centering\includegraphics[width=0.7\textwidth]{Figures/graph2.jpg}\label{fig:buildingEscapeGraph2}
+	\caption{Graf závislosti paměťového růstu na čase}
+	\label{fig:buildingEscapeGraph2}
+\end{figure}
 
 Pro veškeré výpočetní operace s vektory byla vytvořena třída \textit{MyVector} z níž dědí třída \textit{MyVector2D}, která je využita pro pohyb davu v budově. První zmíněná je určená pro hejno. Důvod využití vlastní třídy je přenositelnost a nezávislost algoritmu na platformě. Všechny důležité třídy využívají k vytvoření scény pouze nativní knihovny C++.
 
@@ -476,6 +481,7 @@ Další vlastností která byla použita je následování bodů \textit{(Path F
 
 Po určení tohoto jednoho či více bodů na ně agent začně postupně směřovat. Při následování bodů se použivá funkce pro vypočtení seek vektoru, který je poté aplikován jako další pravidlo, tzn. k výsledné rychlosti se přičte další vektor (viz kapitola \ref{sec:aplikovani-tri-pravidel} - aplikování tří pravidel).
 
+\newpage
 \subsection{Třídní diagram}
 Pro provoz simulace a chování davu slouží tři základní a tři pomocné třídy.
 
@@ -820,7 +826,7 @@ Algoritmus funguje stejně jako při úniku z budovy, výjma využití třídy \
 
 V konfiguračním souboru můžeme nastavit počet objektů, kterým se agenti budou vyhýbat. V případě, že se agent dostane do blízkosti objektu, pak vyhýbání funguje obdobně jako separace, akorát normalizování vektoru a vydělení vektoru počtem okolních agentů je nahrazeno vynásobení skalárem. Můžeme také nastavit útvar, ve kterém se budou agenti pohybovat. Na výběr je sféra \textit{(sphere)}, nebo kvádr \textit{(cube)} nastavitelné pomocí konstanty BOID\_SPACE\_TYPE.
 
-\begin{figure}[H]\centering\includegraphics[width=0.7\textwidth]{Figures/fish4.jpg}\label{fig:fishExample}
+\begin{figure}[H]\centering\includegraphics[width=0.7\textwidth]{Figures/new_fish3.jpg}\label{fig:fishExample}
 	\caption{Ukázka hejna ryb}
 	\label{fig:fishExample}
 \end{figure}
@@ -865,8 +871,8 @@ I přes tyto nedostatky lze Boidův algoritmus efektivně aplikovat jako simulac
 	\caption{Průhledný režim budovy z boční perspektivy}
 \end{figure}
 
-\begin{figure}[H]\centering\includegraphics[width=0.9\textwidth]{Figures/fish6.jpg}\label{fig:hejnoRyb}
-	\caption{Vyrenderované hejno ryb}\label{fig:hejnoRyb}
+\begin{figure}[H]\centering\includegraphics[width=0.9\textwidth]{Figures/new_fish4.jpg}\label{fig:hejnoRyb}
+	\caption{Vyrenderované hejno ryb s vyhnutím se objektu}\label{fig:hejnoRyb}
 \end{figure}
 
 \section{Závěr}
